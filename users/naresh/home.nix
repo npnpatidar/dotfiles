@@ -15,6 +15,8 @@
   # release notes.
   home.stateVersion = "23.05"; # Please read the comment before changing.
 
+  # imports = [ plasma-manager.homeManagerModules.plasma-manager ];
+
   programs.gpg = {
     enable = true;
   };
@@ -29,7 +31,7 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
-    alacritty
+    librewolf
     screenfetch
     konsole
     rnix-lsp
@@ -39,6 +41,59 @@
     git-crypt
     gnupg
     pinentry-qt
+    # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    wget
+    authenticator
+    autojump
+    bash-completion
+    btop
+    cryptomator
+    ferdium
+    fsearch
+    git
+    kdeconnect
+    libreoffice
+    masterpdfeditor
+    neofetch
+    nethogs
+    ntfs3g
+    p7zip
+    rclone
+    scrcpy
+    syncthing
+    yt-dlp
+    thefuck
+    vscode
+    vlc
+    zoxide
+    spectacle
+    docker
+    #		simplenote
+    joplin
+    qemu
+    ventoy
+    starship
+
+    feh
+    python3.pkgs.pip
+    xdg-desktop-portal-gtk
+
+    nextcloud-client
+    qownnotes
+    python3Full
+
+    notepadqq
+    android-tools
+    libimobiledevice
+    ifuse
+    # tgpt
+    #gnome packages 
+    # gnome.adwaita-icon-theme
+    gnome.gnome-boxes
+    # gnomeExtensions.appindicator
+
+
+
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
@@ -121,7 +176,7 @@
     au = "~/.dotfiles/apply-users.sh";
   };
 
-
+  nixpkgs.config.allowUnfree = true;
   # programs.plasma = {
   #   enable = true;
 

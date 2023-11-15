@@ -62,7 +62,10 @@
   # 	};
   # };
 
+ # Enable KDE Connect
+  programs.kdeconnect.enable = true;
 
+  
   # Syncthign Settings
   services = {
     syncthing = {
@@ -158,8 +161,7 @@
   };
 
 
-  # Enable KDE Connect
-  programs.kdeconnect.enable = true;
+
 
   # Script run at boot to start nextdns service 
   # systemd.timers."boot_script_for_root" = {
@@ -356,58 +358,11 @@
   # $ nix search wget
   # environment.systemPackages =( with pkgs; [
   environment.systemPackages = with pkgs; [
-    librewolf # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    wget
+
     appimage-run
-    authenticator
     auto-cpufreq
-    autojump
-    bash-completion
-    btop
-    cryptomator
-    ferdium
-    fsearch
-    git
-    kdeconnect
-    libreoffice
-    masterpdfeditor
-    neofetch
-    nethogs
-    ntfs3g
-    p7zip
-    rclone
-    scrcpy
-    syncthing
-    yt-dlp
-    thefuck
-    vscode
-    vlc
-    zoxide
-    spectacle
-    docker
-    #		simplenote
-    joplin
-    qemu
-    ventoy
-    starship
     flatpak
-    feh
-    python3.pkgs.pip
-    xdg-desktop-portal-gtk
-    appimage-run
-    nextcloud-client
-    qownnotes
-    python3Full
     nextdns
-    notepadqq
-    android-tools
-    libimobiledevice
-    ifuse
-    # tgpt
-    #gnome packages 
-    # gnome.adwaita-icon-theme
-    gnome.gnome-boxes
-    # gnomeExtensions.appindicator
 
 
   ]; #) ++ ([ (import ./filen-desktop.nix) ]);
