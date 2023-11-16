@@ -137,7 +137,7 @@
     # '';
   };
 
-    # You can also manage environment variables but you will have to manually
+  # You can also manage environment variables but you will have to manually
   # source
   #
   #  ~/.nix-profile/etc/profile.d/hm-session-vars.sh
@@ -154,21 +154,7 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-  # Zsh 
-  # programs.bash.enable = false;
-  # programs.zoxide.enable = true;
-  # programs.zsh.history.ignoreAllDups = true;
-  # programs.zsh.oh-my-zsh.plugins = [
-  #   "git"
-  #   "sudo"
-  # ];
-  # programs.zoxide.enableZshIntegration = true;
-  # programs.zsh.enableAutosuggestions = true;
-  # programs.zsh.enableCompletion = true;
-  # programs.zsh.antidote.enable = true;
-  # # programs.zsh.oh-my-zsh = true;
-  # programs.zsh.enable = true;
-
+  # git setting
   programs.git = {
     enable = true;
     userName = "npnpatidar";
@@ -176,6 +162,9 @@
   };
 
 
+  # zsh settings
+  programs.zoxide.enable = true;
+  programs.zoxide.enableZshIntegration = true;
   programs.zsh = {
     enable = true;
     enableAutosuggestions = true;
@@ -216,6 +205,10 @@
       cnd = "code ~/.dotfiles";
       as = "~/.dotfiles/apply-system.sh";
       au = "~/.dotfiles/apply-users.sh";
+      lst = "lsd -lag --tree --group-directories-first --icon-theme unicode";
+      lsa = "lsd  -lag --group-directories-first --icon-theme unicode";
+      ls = "lsd  --icon-theme unicode ";
+
     };
 
     completionInit = ""; # speed up zsh start time
@@ -241,13 +234,13 @@
 
       any-nix-shell zsh --info-right | source /dev/stdin
 
+ 
+
 
     '';
     zplug = {
       enable = true;
       plugins = [
-        # { name = "colorls";}
-        # { name = "zsh-users/zsh-autosuggestions"; } # Simple plugin installation
         { name = "romkatv/powerlevel10k"; tags = [ as:theme depth:1 ]; } # Installations with additional options. For the list of options, please refer to Zplug README.
       ];
     };
@@ -269,6 +262,9 @@
 
   programs.direnv.enable = true;
   nixpkgs.config.allowUnfree = true;
+
+
+
   # programs.plasma = {
   #   enable = true;
 
