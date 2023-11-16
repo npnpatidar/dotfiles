@@ -89,7 +89,7 @@
     libimobiledevice
     ifuse
     antidote
-    # tgpt
+    tgpt
     #gnome packages 
     # gnome.adwaita-icon-theme
     gnome.gnome-boxes
@@ -98,6 +98,9 @@
     zsh-autosuggestions
     # z
     # gnomeExtensions.appindicator
+    lsd
+    fira-code
+    fira-code-symbols
 
 
 
@@ -134,7 +137,7 @@
     # '';
   };
 
-  # You can also manage environment variables but you will have to manually
+    # You can also manage environment variables but you will have to manually
   # source
   #
   #  ~/.nix-profile/etc/profile.d/hm-session-vars.sh
@@ -166,11 +169,18 @@
   # # programs.zsh.oh-my-zsh = true;
   # programs.zsh.enable = true;
 
+  programs.git = {
+    enable = true;
+    userName = "npnpatidar";
+    userEmail = "7de6dkm1@duck.com";
+  };
+
 
   programs.zsh = {
     enable = true;
     enableAutosuggestions = true;
     enableCompletion = true;
+    syntaxHighlighting.enable = true;
     dotDir = ".config/zsh";
 
     sessionVariables = {
@@ -236,18 +246,19 @@
     zplug = {
       enable = true;
       plugins = [
+        # { name = "colorls";}
         # { name = "zsh-users/zsh-autosuggestions"; } # Simple plugin installation
         { name = "romkatv/powerlevel10k"; tags = [ as:theme depth:1 ]; } # Installations with additional options. For the list of options, please refer to Zplug README.
       ];
     };
 
-    plugins = [
-    
-      {
-        name = "fast-syntax-highlighting";
-        src = "${pkgs.zsh-fast-syntax-highlighting}/share/zsh/site-functions";
-      }
-    ];
+    # plugins = [
+
+    # {
+    #         name = "fast-syntax-highlighting";
+    #         src = "${pkgs.zsh-fast-syntax-highlighting}/share/zsh/site-functions";
+    #       }
+    #     ];
   };
 
   home.file.".p10k.zsh" = {
