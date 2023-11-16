@@ -1,4 +1,16 @@
 { config, pkgs, ... }:
+# let
+#   plasma-manager = pkgs.fetchFromGitHub {
+#     owner = "pjones";
+#     repo = "plasma-manager";
+#     rev = "16c437e43a0e049b15c9bfd37295f6e978ea995";
+#     sha256 = "sha256-dOnnzfqd/PCf1K3USKq2PqSGKmIqkr/SD7zHb1yoAyw=";
+#   };
+# in
+
+# let
+#   plasmaManagerModule = import (fetchTarball plasma-manager.url) {};
+# in
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -27,6 +39,9 @@
   };
 
   # imports = [ plasma-manager.homeManagerModules.plasma-manager ];
+  # imports = [
+  #     (plasma-manager + "/modules")
+  #   ];
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
