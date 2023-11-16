@@ -31,6 +31,8 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
+    zsh
+    oh-my-zsh
     librewolf
     screenfetch
     konsole
@@ -86,10 +88,15 @@
     android-tools
     libimobiledevice
     ifuse
+    antidote
     # tgpt
     #gnome packages 
     # gnome.adwaita-icon-theme
     gnome.gnome-boxes
+    direnv
+    any-nix-shell
+    zsh-autosuggestions
+    # z
     # gnomeExtensions.appindicator
 
 
@@ -144,38 +151,112 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
-  programs.bash.enable = true;
-  programs.bash.shellAliases = {
-    c = "clear";
-    sn = "sudo nano";
-    htop = "btop";
-    h = "history | grep $1";
-    rebash = " source ~/.bashrc";
-    e = "exit";
-    ti = "tgpt -i";
-    mlc = "cd /home/naresh/Data/Sync_M_L_C && ls";
-    ml = "cd /home/naresh/Data/Sync_M_L && ls";
-    lc = "cd /home/naresh/Data/Sync_L_C && ls";
-    nl = "cd /home/naresh/Data/Sync_N_Laptop && ls";
-    mydoc = "cd /home/naresh/Data/Sync_M_L/Documents/MyDoc/ && ls";
-    docs = "cd /home/naresh/Data/Sync_M_L/Documents/ && ls";
-    ch = "function _curlcheat() { curl cheat.sh/'$1' } _curlcheat";
-    net = "sudo nethogs";
-    ".." = "cd ..";
-    "..." = "cd ../..";
-    "...." = "cd ../../..";
-    zd = "zoxide add '$(pwd)'";
-    doc_backup = "rclone sync /home/naresh/Data/Sync_M_L/Documents/ /home/naresh/.local/share/Cryptomator/mnt/EncryptedDocuments/   --verbose ";
-    snc = "nano ~/.dotfiles/system/configuration.nix";
-    snm = "nano ~/.dotfiles/users/naresh/home.nix";
-    snr = "sudo nixos-rebuild";
-    nos = "nix --extra-experimental-features 'nix-command flakes' search nixpkgs";
-    note = "notepadqq";
-    cnd = "code ~/.dotfiles";
-    as = "~/.dotfiles/apply-system.sh";
-    au = "~/.dotfiles/apply-users.sh";
+  # Zsh 
+  # programs.bash.enable = false;
+  # programs.zoxide.enable = true;
+  # programs.zsh.history.ignoreAllDups = true;
+  # programs.zsh.oh-my-zsh.plugins = [
+  #   "git"
+  #   "sudo"
+  # ];
+  # programs.zoxide.enableZshIntegration = true;
+  # programs.zsh.enableAutosuggestions = true;
+  # programs.zsh.enableCompletion = true;
+  # programs.zsh.antidote.enable = true;
+  # # programs.zsh.oh-my-zsh = true;
+  # programs.zsh.enable = true;
+
+
+  programs.zsh = {
+    enable = true;
+    enableAutosuggestions = true;
+    enableCompletion = true;
+    dotDir = ".config/zsh";
+
+    sessionVariables = {
+      EDITOR = "nano";
+    };
+
+    shellAliases = {
+      c = "clear";
+      sn = "sudo nano";
+      htop = "btop";
+      h = "history | grep $1";
+      rebash = " source ~/.bashrc";
+      e = "exit";
+      ti = "tgpt -i";
+      mlc = "cd /home/naresh/Data/Sync_M_L_C && ls";
+      ml = "cd /home/naresh/Data/Sync_M_L && ls";
+      lc = "cd /home/naresh/Data/Sync_L_C && ls";
+      nl = "cd /home/naresh/Data/Sync_N_Laptop && ls";
+      mydoc = "cd /home/naresh/Data/Sync_M_L/Documents/MyDoc/ && ls";
+      docs = "cd /home/naresh/Data/Sync_M_L/Documents/ && ls";
+      ch = "function _curlcheat() { curl cheat.sh/'$1' } _curlcheat";
+      net = "sudo nethogs";
+      ".." = "cd ..";
+      "..." = "cd ../..";
+      "...." = "cd ../../..";
+      zd = "zoxide add '$(pwd)'";
+      doc_backup = "rclone sync /home/naresh/Data/Sync_M_L/Documents/ /home/naresh/.local/share/Cryptomator/mnt/EncryptedDocuments/   --verbose ";
+      snc = "nano ~/.dotfiles/system/configuration.nix";
+      snm = "nano ~/.dotfiles/users/naresh/home.nix";
+      snr = "sudo nixos-rebuild";
+      nos = "nix --extra-experimental-features 'nix-command flakes' search nixpkgs";
+      note = "notepadqq";
+      cnd = "code ~/.dotfiles";
+      as = "~/.dotfiles/apply-system.sh";
+      au = "~/.dotfiles/apply-users.sh";
+    };
+
+    completionInit = ""; # speed up zsh start time
+
+    initExtraFirst = ''
+      zmodload zsh/zprof
+    '';
+
+    initExtra = ''
+      # be more bashy
+      setopt interactive_comments bashautolist nobeep nomenucomplete \
+             noautolist extended_glob
+
+      ## include config generated via "p10k configure" manually;
+      ## zplug cannot edit home manager's zshrc file.
+
+      [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+      findup () {
+        # uses zsh extended globbing, https://unix.stackexchange.com/a/64164
+        echo (../)#$1(:a)
+      }
+
+      any-nix-shell zsh --info-right | source /dev/stdin
+
+
+    '';
+    zplug = {
+      enable = true;
+      plugins = [
+        # { name = "zsh-users/zsh-autosuggestions"; } # Simple plugin installation
+        { name = "romkatv/powerlevel10k"; tags = [ as:theme depth:1 ]; } # Installations with additional options. For the list of options, please refer to Zplug README.
+      ];
+    };
+
+    plugins = [
+    
+      {
+        name = "fast-syntax-highlighting";
+        src = "${pkgs.zsh-fast-syntax-highlighting}/share/zsh/site-functions";
+      }
+    ];
   };
 
+  home.file.".p10k.zsh" = {
+    source = ./.p10k.zsh;
+    executable = true;
+  };
+
+
+  programs.direnv.enable = true;
   nixpkgs.config.allowUnfree = true;
   # programs.plasma = {
   #   enable = true;
