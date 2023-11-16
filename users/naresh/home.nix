@@ -1,4 +1,5 @@
 { config, pkgs, ... }:
+
 # let
 #   plasma-manager = pkgs.fetchFromGitHub {
 #     owner = "pjones";
@@ -6,10 +7,6 @@
 #     rev = "16c437e43a0e049b15c9bfd37295f6e978ea995";
 #     sha256 = "sha256-dOnnzfqd/PCf1K3USKq2PqSGKmIqkr/SD7zHb1yoAyw=";
 #   };
-# in
-
-# let
-#   plasmaManagerModule = import (fetchTarball plasma-manager.url) {};
 # in
 
 {
@@ -38,84 +35,77 @@
     pinentryFlavor = "qt";
   };
 
-  # imports = [ plasma-manager.homeManagerModules.plasma-manager ];
-  # imports = [
-  #     (plasma-manager + "/modules")
-  #   ];
-
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
     zsh
     oh-my-zsh
     librewolf
-    screenfetch
+    # screenfetch
     konsole
     rnix-lsp
-    ibus
-    ibus-engines.m17n
+    # ibus
+    # ibus-engines.m17n
     git
     git-crypt
     gnupg
     pinentry-qt
-    # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
-    authenticator
-    autojump
-    bash-completion
-    btop
-    cryptomator
-    ferdium
+    # authenticator
+    # autojump
+    # bash-completion
+    # btop
+    # cryptomator
+    # ferdium
     fsearch
     git
     kdeconnect
-    libreoffice
-    masterpdfeditor
+    # libreoffice
+    # masterpdfeditor
     neofetch
-    nethogs
-    ntfs3g
-    p7zip
-    rclone
-    scrcpy
-    syncthing
-    yt-dlp
-    thefuck
+    # nethogs
+    # ntfs3g
+    # p7zip
+    # rclone
+    # scrcpy
+    # syncthing
+    # yt-dlp
+    # thefuck
     vscode
-    vlc
+    # vlc
     zoxide
-    spectacle
-    docker
+    # spectacle
+    # docker
     #		simplenote
-    joplin
+    # joplin
     qemu
-    ventoy
-    starship
+    # ventoy
+    # starship
 
     feh
     python3.pkgs.pip
     xdg-desktop-portal-gtk
 
-    nextcloud-client
+    # nextcloud-client
     qownnotes
     python3Full
 
     notepadqq
-    android-tools
+    # android-tools
     libimobiledevice
     ifuse
-    antidote
+    # antidote
     tgpt
     #gnome packages 
     # gnome.adwaita-icon-theme
-    gnome.gnome-boxes
+    # gnome.gnome-boxes
     direnv
     any-nix-shell
     zsh-autosuggestions
-    # z
     # gnomeExtensions.appindicator
     lsd
-    fira-code
-    fira-code-symbols
+    # fira-code
+    # fira-code-symbols
 
 
 
@@ -248,10 +238,6 @@
       }
 
       any-nix-shell zsh --info-right | source /dev/stdin
-
- 
-
-
     '';
     zplug = {
       enable = true;
@@ -260,13 +246,6 @@
       ];
     };
 
-    # plugins = [
-
-    # {
-    #         name = "fast-syntax-highlighting";
-    #         src = "${pkgs.zsh-fast-syntax-highlighting}/share/zsh/site-functions";
-    #       }
-    #     ];
   };
 
   home.file.".p10k.zsh" = {
@@ -277,8 +256,6 @@
 
   programs.direnv.enable = true;
   nixpkgs.config.allowUnfree = true;
-
-
 
   # programs.plasma = {
   #   enable = true;

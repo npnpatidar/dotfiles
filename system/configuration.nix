@@ -20,9 +20,16 @@
     package = pkgs.nixFlakes;
     extraOptions = "experimental-features = nix-command flakes";
   };
+
   # Networking
-  networking.hostName = "nixos"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  networking = {
+    hostName = "nixos";
+    networkmanager.enable = true;
+    # networking.useDHCP = true;
+    # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+
+  };
+
 
   # nvidia support 
   hardware.opengl = {
@@ -62,10 +69,10 @@
   # 	};
   # };
 
- # Enable KDE Connect
+
+  # Enable KDE Connect
   programs.kdeconnect.enable = true;
 
-  
   # Syncthign Settings
   services = {
     syncthing = {
@@ -97,6 +104,233 @@
     };
   };
 
+
+  # Adguard DNS 
+  services.dnscrypt-proxy2 = {
+    enable = true;
+    settings = {
+      ipv6_servers = true;
+      require_dnssec = true;
+
+      sources.public-resolvers = {
+        urls = [
+          "https://raw.githubusercontent.com/DNSCrypt/dnscrypt-resolvers/master/v3/public-resolvers.md"
+          "https://download.dnscrypt.info/resolvers-list/v3/public-resolvers.md"
+        ];
+        cache_file = "/var/lib/dnscrypt-proxy2/public-resolvers.md";
+        minisign_key = "RWQf6LRCGA9i53mlYecO4IzT51TGPpvWucNSCh1CBM0QTaLn73Y7GFO3";
+      };
+
+      server_names = [ "adguard-dns-doh" ];
+    };
+  };
+
+
+
+
+  # Configure network proxy if necessary
+  # networking.proxy.default = "http://user:password@proxy:port/";
+  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+
+
+  # Set your time zone.
+  time.timeZone = "Asia/Kolkata";
+
+  # Select internationalisation properties.
+  i18n.defaultLocale = "en_IN";
+
+  i18n.extraLocaleSettings = {
+    LC_ADDRESS = "en_IN";
+    LC_IDENTIFICATION = "en_IN";
+    LC_MEASUREMENT = "en_IN";
+    LC_MONETARY = "en_IN";
+    LC_NAME = "en_IN";
+    LC_NUMERIC = "en_IN";
+    LC_PAPER = "en_IN";
+    LC_TELEPHONE = "en_IN";
+    LC_TIME = "en_IN";
+  };
+
+  # Enable the X11 windowing system.
+  # services.xserver.enable = true;
+
+  # Enable the KDE Plasma Desktop Environment.
+
+  services.xserver.displayManager.sddm.enable = true;
+  services.xserver.desktopManager.plasma5.enable = true;
+
+  environment.plasma5.excludePackages = with pkgs.libsForQt5; [
+    elisa
+    gwenview
+    okular
+    oxygen
+    khelpcenter
+    plasma-browser-integration
+    print-manager
+    kate
+    ark
+  ];
+
+  xdg.portal = {
+    enable = true;
+    wlr.enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ]; # enable this in KDE
+  };
+
+  # Enable Gnome Desktop Environment.
+  # services.xserver.displayManager.gdm.enable = true;
+  # services.xserver.desktopManager.gnome.enable = true;
+  # services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
+
+  # environment.gnome.excludePackages = (with pkgs; [
+  # 	gnome-photos
+  # 	gnome-tour
+  # 	gnome-text-editor
+  # 	xterm
+  # ]) ++ (with pkgs.gnome; [
+  # 	cheese # webcam tool
+  # 	gnome-music
+  # 	gnome-terminal
+  # 	gedit # text editor
+  # 	epiphany # web browser
+  # 	geary # email reader
+  # 	evince # document viewer
+  # 	gnome-characters
+  # 	totem # video player
+  # 	tali # poker game
+  # 	iagno # go game
+  # 	hitori # sudoku game
+  # 	atomix # puzzle game
+  # 	gnome-clocks
+  # 	gnome-weather
+  # 	gnome-maps
+  # 	gnome-contacts
+  # 	simple-scan
+  # 	gnome-system-monitor
+  # 	gnome-software
+  # 	gnome-calendar
+  # 	eog
+  # ]);
+
+
+
+
+  # Configure keymap in X11 and touchpad support
+  services.xserver = {
+    enable = true;
+    layout = "us";
+    xkbVariant = "";
+    libinput = {
+      enable = true;
+      touchpad = {
+        tappingDragLock = false;
+        naturalScrolling = true;
+      };
+    };
+  };
+
+  # Enable Apple devices support
+  services.usbmuxd.enable = true;
+
+
+  # Enable CUPS to print documents.
+  services.printing.enable = true;
+
+  # Bluetooth
+  hardware.bluetooth.enable = true; # enables support for Bluetooth
+  hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
+
+  # Enable sound with pipewire.
+  sound.enable = true;
+  hardware.pulseaudio.enable = false;
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    # If you want to use JACK applications, uncomment this
+    # jack.enable = true;
+
+    # use the example session manager (no others are packaged yet so this is enabled by default,
+    # no need to redefine it in your config for now)
+    # media-session.enable = true;
+  };
+
+  # Enable touchpad support (enabled default in most desktopManager).
+  #	services.xserver.libinput.enable = true;
+  # services.xserver.libinput = {
+  #   enable = true;
+  #   touchpad = {
+  #     tappingDragLock = false;
+  #     naturalScrolling = true;
+  #   };
+  # };
+  # Define a user account. Don't forget to set a password with ‘passwd’.
+  users.users.naresh = {
+    isNormalUser = true;
+    initialPassword = "naresh";
+    description = "naresh";
+    extraGroups = [ "networkmanager" "wheel" "kvm" "input" "disk" "libvirtd" ];
+    createHome = true;
+    home = "/home/naresh";
+  };
+
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
+
+  # List packages installed in system profile. To search, run:
+  # $ nix search wget
+
+  environment.systemPackages = with pkgs; [
+    appimage-run
+    auto-cpufreq
+    flatpak
+    # nextdns
+  ];
+
+
+
+  # Some programs need SUID wrappers, can be configured further or are
+  # started in user sessions.
+  # programs.mtr.enable = true;
+  # programs.gnupg.agent = {
+  #   enable = true;
+  #   enableSSHSupport = true;
+  # };
+
+  # List services that you want to enable:
+  virtualisation.libvirtd.enable = true;
+  
+  # enable flatpak support
+  services.flatpak.enable = true;
+  services.dbus.enable = true;
+
+
+  # Enable the OpenSSH daemon.
+  # services.openssh.enable = true;
+
+  # Open ports in the firewall.
+  # networking.firewall.allowedTCPPorts = [ ... ];
+  # networking.firewall.allowedUDPPorts = [ ... ];
+  # Or disable the firewall altogether.
+  # networking.firewall.enable = false;
+
+
+
+  # Update nixos
+  system.autoUpgrade = {
+    #		enable = true;
+    allowReboot = false;
+    channel = "https://channels.nixos.org/nixos-unstable";
+  };
+  # This value determines the NixOS release from which the default
+  # settings for stateful data, like file locations and database versions
+  # on your system were taken. It‘s perfectly fine and recommended to leave
+  # this value at the release version of the first install of this system.
+  # Before changing this value read the documentation for this option
+  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
+  system.stateVersion = "23.05"; # Did you read the comment?
 
   #nextdns service 
   # services.nextdns = {
@@ -138,28 +372,6 @@
   # networking.dhcpcd.extraConfig = "nohook resolv.conf";
   # networking.networkmanager.dns = "none";
   # services.resolved.enable = false;
-
-
-  # Adguard DNS 
-  services.dnscrypt-proxy2 = {
-    enable = true;
-    settings = {
-      ipv6_servers = true;
-      require_dnssec = true;
-
-      sources.public-resolvers = {
-        urls = [
-          "https://raw.githubusercontent.com/DNSCrypt/dnscrypt-resolvers/master/v3/public-resolvers.md"
-          "https://download.dnscrypt.info/resolvers-list/v3/public-resolvers.md"
-        ];
-        cache_file = "/var/lib/dnscrypt-proxy2/public-resolvers.md";
-        minisign_key = "RWQf6LRCGA9i53mlYecO4IzT51TGPpvWucNSCh1CBM0QTaLn73Y7GFO3";
-      };
-
-      server_names = [ "adguard-dns-doh" ];
-    };
-  };
-
 
 
 
@@ -204,209 +416,5 @@
   #         };
   # };
 
-
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-  # Enable networking
-  networking.networkmanager.enable = true;
-  # networking.useDHCP = true;
-  # Set your time zone.
-  time.timeZone = "Asia/Kolkata";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_IN";
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_IN";
-    LC_IDENTIFICATION = "en_IN";
-    LC_MEASUREMENT = "en_IN";
-    LC_MONETARY = "en_IN";
-    LC_NAME = "en_IN";
-    LC_NUMERIC = "en_IN";
-    LC_PAPER = "en_IN";
-    LC_TELEPHONE = "en_IN";
-    LC_TIME = "en_IN";
-  };
-
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-  # Enable the KDE Plasma Desktop Environment.
-
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
-
-  environment.plasma5.excludePackages = with pkgs.libsForQt5; [
-    elisa
-    gwenview
-    okular
-    oxygen
-    khelpcenter
-    plasma-browser-integration
-    print-manager
-    kate
-    ark
-  ];
-
-  xdg.portal = {
-    enable = true;
-    wlr.enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ]; # enable this in KDE
-  };
-
-  # Enable Gnome Desktop Environment.
-  # services.xserver.displayManager.gdm.enable = true;
-  # services.xserver.desktopManager.gnome.enable = true;
-
-  # environment.gnome.excludePackages = (with pkgs; [
-  # 	gnome-photos
-  # 	gnome-tour
-  # 	gnome-text-editor
-  # 	xterm
-  # ]) ++ (with pkgs.gnome; [
-  # 	cheese # webcam tool
-  # 	gnome-music
-  # 	gnome-terminal
-  # 	gedit # text editor
-  # 	epiphany # web browser
-  # 	geary # email reader
-  # 	evince # document viewer
-  # 	gnome-characters
-  # 	totem # video player
-  # 	tali # poker game
-  # 	iagno # go game
-  # 	hitori # sudoku game
-  # 	atomix # puzzle game
-  # 	gnome-clocks
-  # 	gnome-weather
-  # 	gnome-maps
-  # 	gnome-contacts
-  # 	simple-scan
-  # 	gnome-system-monitor
-  # 	gnome-software
-  # 	gnome-calendar
-  # 	eog
-  # ]);
-
-  # services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
-
-
-  # Configure keymap in X11
-  services.xserver = {
-    layout = "us";
-    xkbVariant = "";
-  };
-
-  # Enable Apple devices support
-  services.usbmuxd.enable = true;
-
-
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-
-  # Bluetooth
-  hardware.bluetooth.enable = true; # enables support for Bluetooth
-  hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
-
-  # Enable sound with pipewire.
-  sound.enable = true;
-  hardware.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    # jack.enable = true;
-
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    # media-session.enable = true;
-  };
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  #	services.xserver.libinput.enable = true;
-  services.xserver.libinput = {
-    enable = true;
-    touchpad = {
-      tappingDragLock = false;
-      naturalScrolling = true;
-    };
-  };
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.naresh = {
-    isNormalUser = true;
-    description = "naresh";
-    extraGroups = [ "networkmanager" "wheel" "kvm" "input" "disk" "libvirtd" ];
-    createHome = true;
-    home = "/home/naresh";
-    # 	packages = with pkgs; [
-    #     	firefox
-    #   		kate
-    # 		thunderbird
-    # 	];
-  };
-
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  # environment.systemPackages =( with pkgs; [
-  environment.systemPackages = with pkgs; [
-
-    appimage-run
-    auto-cpufreq
-    flatpak
-    nextdns
-
-
-  ]; #) ++ ([ (import ./filen-desktop.nix) ]);
-
-
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
-  # List services that you want to enable:
-  virtualisation.libvirtd.enable = true;
-  # enable flatpak support
-  services.flatpak.enable = true;
-  services.dbus.enable = true;
-
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
-
-
-
-  # Update nixos
-  system.autoUpgrade = {
-    #		enable = true;
-    allowReboot = false;
-    channel = "https://channels.nixos.org/nixos-unstable";
-  };
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "23.05"; # Did you read the comment?
 
 }
