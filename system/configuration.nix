@@ -167,7 +167,6 @@
     khelpcenter
     plasma-browser-integration
     print-manager
-    kate
     ark
   ];
 
@@ -277,15 +276,15 @@
   };
 
   # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
+#   nixpkgs.config.allowUnfree = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
 
   environment.systemPackages = with pkgs; [
-    appimage-run
-    auto-cpufreq
-    flatpak
+#     appimage-run
+#     auto-cpufreq
+#     flatpak
     # nextdns
   ];
 

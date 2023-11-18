@@ -38,60 +38,66 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
+    appimage-run
+    auto-cpufreq
+    flatpak
     zsh
     oh-my-zsh
     librewolf
-    # screenfetch
+    screenfetch
     konsole
     rnix-lsp
     # ibus
-    # ibus-engines.m17n
+    ibus-engines.m17n
     git
     git-crypt
     gnupg
     pinentry-qt
     wget
-    # authenticator
+    authenticator
     # autojump
     # bash-completion
     # btop
-    # cryptomator
-    # ferdium
+    cryptomator
+    ferdium
     fsearch
     git
-    kdeconnect
-    # libreoffice
-    # masterpdfeditor
+#   kdeconnect
+    libreoffice
+    masterpdfeditor4
     neofetch
-    # nethogs
-    # ntfs3g
-    # p7zip
-    # rclone
+    nethogs
+    ntfs3g
+    p7zip
+    rclone
     # scrcpy
-    # syncthing
-    # yt-dlp
-    # thefuck
-    vscode
-    # vlc
+    syncthing
+#   yt-dlp
+    thefuck
+    vscodium-fhs
+    vlc
     zoxide
     # spectacle
-    # docker
-    #		simplenote
+  # docker
+ #  simplenote
     # joplin
     qemu
     # ventoy
     # starship
+    appimage-run
+    auto-cpufreq
+    flatpak
 
     feh
     python3.pkgs.pip
     xdg-desktop-portal-gtk
 
-    # nextcloud-client
+    nextcloud-client
     qownnotes
     python3Full
 
     notepadqq
-    # android-tools
+    android-tools
     libimobiledevice
     ifuse
     # antidote
@@ -106,6 +112,7 @@
     lsd
     # fira-code
     # fira-code-symbols
+
 
 
 
