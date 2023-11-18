@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, plasma-manager, ... }:
 
 
 {
@@ -95,9 +95,6 @@
     # fira-code
     # fira-code-symbols
     nixpkgs-fmt
-
-
-
 
   ];
 
@@ -208,6 +205,8 @@
 
   programs.direnv.enable = true;
   nixpkgs.config.allowUnfree = true;
+
+  imports = [ ./resources/plasma-manager/plasma.nix ];
 
 }
 

@@ -9,8 +9,15 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+   plasma-manager.url = "github:pjones/plasma-manager";
+    plasma-manager.inputs.nixpkgs.follows = "nixpkgs";
+    plasma-manager.inputs.home-manager.follows = "home-manager";
+
+
+
   };
-  outputs = { nixpkgs, home-manager, ... }:
+  outputs = { nixpkgs, home-manager,plasma-manager, ... }:
 
     let
       system = "x86_64-linux";
@@ -28,15 +35,18 @@
 
           modules = [
 
-          ./system/configuration.nix
-      #  .system/hardware-configuration.nix
-             home-manager.nixosModules.home-manager {
-               home-manager.useGlobalPkgs = true;
-               home-manager.useUserPackages = true;
-               home-manager.users.naresh = {
-                 imports = [ ./users/naresh/home.nix
-            ];
+            ./system/configuration.nix
+            #  .system/hardware-configuration.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.naresh = {
+                imports = [
+                  ./users/naresh/home.nix
+                ];
               };
+              home-manager.sharedModules = [ plasma-manager.homeManagerModules.plasma-manager ];
             }
           ];
         };
