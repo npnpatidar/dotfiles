@@ -11,10 +11,11 @@
       ./hardware-configuration.nix
     ];
 
-  
+
   # Bootloader.
-  boot.loader={systemd-boot.enable = true;
-  efi.canTouchEfiVariables = true;
+  boot.loader = {
+    systemd-boot.enable = true;
+    efi.canTouchEfiVariables = true;
   };
   # Enable experimental Features
   nix = {
@@ -152,16 +153,16 @@
     LC_TIME = "en_IN";
   };
 
-i18n.inputMethod = {
+  i18n.inputMethod = {
     enabled = "fcitx5";
     fcitx5.addons = with pkgs; [
-        # fcitx5-qt5
-        # fcitx5-qt6
-        # fcitx5-qt4
-        fcitx5-gtk
-        fcitx5-m17n
+      # fcitx5-qt5
+      # fcitx5-qt6
+      # fcitx5-qt4
+      fcitx5-gtk
+      fcitx5-m17n
     ];
-};
+  };
 
   # Enable the X11 windowing system.
   # services.xserver.enable = true;
@@ -223,9 +224,6 @@ i18n.inputMethod = {
   # 	eog
   # ]);
 
-
-
-
   # Configure keymap in X11 and touchpad support
   services.xserver = {
     enable = true;
@@ -260,7 +258,7 @@ i18n.inputMethod = {
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
- 
+
   };
 
   programs.zsh.enable = true;
@@ -276,23 +274,19 @@ i18n.inputMethod = {
     shell = pkgs.zsh;
   };
 
- 
   environment.systemPackages = with pkgs; [
-#     appimage-run
-#     auto-cpufreq
-#     flatpak
+    #     appimage-run
+    #     auto-cpufreq
+    #     flatpak
     # nextdns
   ];
 
-
-
   # List services that you want to enable:
   virtualisation.libvirtd.enable = true;
-  
+
   # enable flatpak support
   services.flatpak.enable = true;
   services.dbus.enable = true;
-
 
   # Update nixos
   system.autoUpgrade = {
@@ -308,6 +302,5 @@ i18n.inputMethod = {
   # 	enable = true;
   # 	arguments = [ "-config" "ec4ca1" "-cache-size" "10MB" "-listen" "0.0.0.0:53" ];
   # };
-
 
 }

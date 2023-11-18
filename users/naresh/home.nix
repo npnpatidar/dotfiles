@@ -20,7 +20,7 @@
     pinentryFlavor = "qt";
   };
 
- 
+
   home.packages = with pkgs; [
     appimage-run
     auto-cpufreq
@@ -45,8 +45,8 @@
     cryptomator
     ferdium
     fsearch
-    
-#   kdeconnect
+
+    #   kdeconnect
     libreoffice
     masterpdfeditor4
     neofetch
@@ -56,14 +56,14 @@
     rclone
     # scrcpy
     syncthing
-#   yt-dlp
+    #   yt-dlp
     thefuck
     vscodium-fhs
     vlc
     zoxide
     # spectacle
-  # docker
- #  simplenote
+    # docker
+    #  simplenote
     # joplin
     qemu
     # ventoy
@@ -101,17 +101,15 @@
 
   ];
 
-  home.file = {
-  
-  };
+  home.file = { };
 
-  
+
   home.sessionVariables = {
     # EDITOR = "emacs";
   };
 
   programs.home-manager.enable = true;
- 
+
   programs.git = {
     enable = true;
     userName = "npnpatidar";
@@ -157,13 +155,13 @@
       zd = "zoxide add $(pwd)";
       doc_backup = "rclone sync /home/naresh/Data/Sync_M_L/Documents/ /home/naresh/.local/share/Cryptomator/mnt/EncryptedDocuments/   --verbose ";
       snc = "nano ~/dotfiles/system/configuration.nix";
-      snm = "nano ~/dotfiles/users/naresh/home.nix";
-   
+      snh = "nano ~/dotfiles/users/naresh/home.nix";
+
       nos = "nix --extra-experimental-features 'nix-command flakes' search nixpkgs";
       note = "notepadqq";
       cnd = "codium ~/dotfiles";
-      as = "cd ~/dotfiles && ~/dotfiles/apply-system.sh";
-      re = "cd ~/dotfiles && ~/dotfiles/apply-rebuild.sh";
+      as = "cd ~/dotfiles/scripts && ~/dotfiles/scripts/apply-system.sh";
+      re = "cd ~/dotfiles/scripts && ~/dotfiles/scripts/apply-rebuild.sh";
       lst = "lsd -lag --tree --group-directories-first --icon-theme unicode";
       lsa = "lsd  -lag --group-directories-first --icon-theme unicode";
       ls = "lsd  --icon-theme unicode ";
