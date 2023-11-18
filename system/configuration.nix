@@ -47,18 +47,19 @@
     open = false;
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.production;
+
+    prime = {
+      # 	offload =                            # run program as nvidia-offload  glxgears
+      # 		{
+      # 			enable = true;
+      # 			enableOffloadCmd = true;
+      #  };
+      sync.enable = true;
+      intelBusId = "PCI:0:2:0";
+      nvidiaBusId = "PCI:1:0:0";
+    };
   };
 
-  hardware.nvidia.prime = {
-    # 	offload =                            # run program as nvidia-offload  glxgears
-    # 		{
-    # 			enable = true;
-    # 			enableOffloadCmd = true;
-    #  };
-    sync.enable = true;
-    intelBusId = "PCI:0:2:0";
-    nvidiaBusId = "PCI:1:0:0";
-  };
 
   # specialisation = {      #special on-the-go mode which  enable offload mode 
   # 	on-the-go.configuration = {      
@@ -139,30 +140,33 @@
   time.timeZone = "Asia/Kolkata";
 
   # Select internationalisation properties.
-  i18n.defaultLocale = "en_IN";
+  i18n = {
+    defaultLocale = "en_IN";
+    extraLocaleSettings = {
+      LC_ADDRESS = "en_IN";
+      LC_IDENTIFICATION = "en_IN";
+      LC_MEASUREMENT = "en_IN";
+      LC_MONETARY = "en_IN";
+      LC_NAME = "en_IN";
+      LC_NUMERIC = "en_IN";
+      LC_PAPER = "en_IN";
+      LC_TELEPHONE = "en_IN";
+      LC_TIME = "en_IN";
+    };
+    inputMethod = {
+      enabled = "fcitx5";
+      fcitx5.addons = with pkgs; [
+        # fcitx5-qt5
+        # fcitx5-qt6
+        # fcitx5-qt4
+        fcitx5-gtk
+        fcitx5-m17n
+      ];
+    };
 
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_IN";
-    LC_IDENTIFICATION = "en_IN";
-    LC_MEASUREMENT = "en_IN";
-    LC_MONETARY = "en_IN";
-    LC_NAME = "en_IN";
-    LC_NUMERIC = "en_IN";
-    LC_PAPER = "en_IN";
-    LC_TELEPHONE = "en_IN";
-    LC_TIME = "en_IN";
+
   };
 
-  i18n.inputMethod = {
-    enabled = "fcitx5";
-    fcitx5.addons = with pkgs; [
-      # fcitx5-qt5
-      # fcitx5-qt6
-      # fcitx5-qt4
-      fcitx5-gtk
-      fcitx5-m17n
-    ];
-  };
 
   # Enable the X11 windowing system.
   # services.xserver.enable = true;

@@ -3,14 +3,13 @@
 
 {
 
-  home.username = "naresh";
-  home.homeDirectory = "/home/naresh";
+  home = {
+    username = "naresh";
+    homeDirectory = "/home/naresh";
 
 
-  home.stateVersion = "23.05"; # Please read the comment before changing.
-
-  # imports = [ plasma-manager.homeManagerModules.plasma-manager ];
-
+    stateVersion = "23.05";
+  }; # Just don't change 
   programs.gpg = {
     enable = true;
   };
@@ -98,8 +97,6 @@
 
   ];
 
-  home.file = { };
-
 
   home.sessionVariables = {
     # EDITOR = "emacs";
@@ -115,8 +112,10 @@
 
 
   # zsh settings
-  programs.zoxide.enable = true;
-  programs.zoxide.enableZshIntegration = true;
+  programs.zoxide = {
+    enable = true;
+    enableZshIntegration = true;
+  };
   # defaultUserShell = pkgs.zsh;
   programs.zsh = {
     enable = true;
