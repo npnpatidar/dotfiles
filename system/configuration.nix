@@ -166,7 +166,7 @@
 
 
   };
-
+  services.xserver.xkbOptions = "rupeesign:e";
 
   # Enable the X11 windowing system.
   # services.xserver.enable = true;
@@ -279,6 +279,8 @@
   };
 
   environment.systemPackages = with pkgs; [
+
+    # (import ./resources/appimage/thorium.nix)
     #     appimage-run
     #     auto-cpufreq
     #     flatpak
@@ -307,4 +309,53 @@
   # 	arguments = [ "-config" "ec4ca1" "-cache-size" "10MB" "-listen" "0.0.0.0:53" ];
   # };
 
-}
+
+
+  nix = {
+    settings.auto-optimise-store = true;
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 3d";
+        };
+    };
+
+#  videoDrivers = [ "modesetting" "nvidia" ];
+
+#     libinput.enable = true;
+    # Tried to configure the touchpad here, but this crashes xserver:
+    # inputClassSections = [''
+    #   Identifier "Synaptics TM3471-020"
+    #   Driver "libinput"
+    #   MatchIsTouchpad "on"
+    #   Device "/dev/input/event*"
+    #   Option "AccelProfille"        "adaptive,flat"
+    #   Option "ClickMethod"          "buttonareas,clickfinger"
+    #   Option "DisableWhileTyping"   "true"
+    #   Option "HorizontalScrolling"  "true"
+    #   Option "LeftHanded"           "false"
+    #   Option "MiddleEmulation"      "false"
+    #   Option "NaturalScrolling"     "false"
+    #   Option "ScrollMethod"         "twofinger,edge"
+    #   Option "SendEventsMode"       "enabled"
+    #   Option "Tapping"              "true"
+    #   Option "TappingDrag"          "true"
+    # ''];
+#   };
+
+
+# boot.kernelParams = [ "psmouse.synaptics_intertouch=0" ];
+
+
+
+
+
+
+
+
+
+
+
+
+
+  }
