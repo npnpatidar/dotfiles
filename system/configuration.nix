@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, lib, pkgs,... }:
+{ config, lib, pkgs, ... }:
 
 {
   imports =
@@ -281,6 +281,7 @@
 
   environment.systemPackages = with pkgs; [
     (import ./resources/appimage/thorium.nix { inherit pkgs; })
+    (import ./resources/appimage/filen-desktop.nix { inherit pkgs; })
 
     #     appimage-run
     #     auto-cpufreq
@@ -318,37 +319,34 @@
       automatic = true;
       dates = "weekly";
       options = "--delete-older-than 3d";
-        };
     };
+  };
 
-#  videoDrivers = [ "modesetting" "nvidia" ];
+  #  videoDrivers = [ "modesetting" "nvidia" ];
 
-#     libinput.enable = true;
-    # Tried to configure the touchpad here, but this crashes xserver:
-    # inputClassSections = [''
-    #   Identifier "Synaptics TM3471-020"
-    #   Driver "libinput"
-    #   MatchIsTouchpad "on"
-    #   Device "/dev/input/event*"
-    #   Option "AccelProfille"        "adaptive,flat"
-    #   Option "ClickMethod"          "buttonareas,clickfinger"
-    #   Option "DisableWhileTyping"   "true"
-    #   Option "HorizontalScrolling"  "true"
-    #   Option "LeftHanded"           "false"
-    #   Option "MiddleEmulation"      "false"
-    #   Option "NaturalScrolling"     "false"
-    #   Option "ScrollMethod"         "twofinger,edge"
-    #   Option "SendEventsMode"       "enabled"
-    #   Option "Tapping"              "true"
-    #   Option "TappingDrag"          "true"
-    # ''];
-#   };
-
-
-# boot.kernelParams = [ "psmouse.synaptics_intertouch=0" ];
+  #     libinput.enable = true;
+  # Tried to configure the touchpad here, but this crashes xserver:
+  # inputClassSections = [''
+  #   Identifier "Synaptics TM3471-020"
+  #   Driver "libinput"
+  #   MatchIsTouchpad "on"
+  #   Device "/dev/input/event*"
+  #   Option "AccelProfille"        "adaptive,flat"
+  #   Option "ClickMethod"          "buttonareas,clickfinger"
+  #   Option "DisableWhileTyping"   "true"
+  #   Option "HorizontalScrolling"  "true"
+  #   Option "LeftHanded"           "false"
+  #   Option "MiddleEmulation"      "false"
+  #   Option "NaturalScrolling"     "false"
+  #   Option "ScrollMethod"         "twofinger,edge"
+  #   Option "SendEventsMode"       "enabled"
+  #   Option "Tapping"              "true"
+  #   Option "TappingDrag"          "true"
+  # ''];
+  #   };
 
 
-
+  # boot.kernelParams = [ "psmouse.synaptics_intertouch=0" ];
 
 
 
@@ -359,4 +357,7 @@
 
 
 
-  }
+
+
+
+}

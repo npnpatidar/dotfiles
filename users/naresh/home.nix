@@ -21,6 +21,7 @@
 
 
   home.packages = with pkgs; [
+    # ark
     appimage-run
     auto-cpufreq
     flatpak
@@ -51,7 +52,8 @@
     neofetch
     nethogs
     ntfs3g
-    p7zip
+    # p7zip
+    fuse-7z-ng
     rclone
     # scrcpy
     syncthing
