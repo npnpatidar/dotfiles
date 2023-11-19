@@ -2,14 +2,13 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, lib, pkgs,ubports-installer, ... }:
+{ config, lib, pkgs,... }:
 
 {
   imports =
     [
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./resources/appimage/ubports.nix
     ];
 
 
@@ -281,7 +280,7 @@
 
   environment.systemPackages =  [
 
-  ubports-installer
+
     #     appimage-run
     #     auto-cpufreq
     #     flatpak

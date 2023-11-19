@@ -16,14 +16,11 @@
       inputs.home-manager.follows = "home-manager";
     };
 
-
-
-ubports-installer.url = "github:jakehamilton/config";
-
+    thorium.url = "github:Alex313031/Thorium";
 
   };
 
-  outputs = { nixpkgs, home-manager, plasma-manager,ubports-installer , ... }:
+  outputs = { nixpkgs, home-manager, plasma-manager, thorium ,... }:
 
     let
       system = "x86_64-linux";
@@ -40,9 +37,8 @@ ubports-installer.url = "github:jakehamilton/config";
           inherit system pkgs;
 
           modules = [
-
+            ./system/resources/appimage/thorium.nix
             ./system/configuration.nix
-            ubports-installer.packages.${pkgs.system}
             home-manager.nixosModules.home-manager
             {
               home-manager = {
