@@ -9,6 +9,7 @@
     [
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./resources/appimage/thorium.nix
     ];
 
 
@@ -39,6 +40,7 @@
     driSupport = true;
     driSupport32Bit = true;
   };
+
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.nvidia = {
     modesetting.enable = true;
@@ -278,8 +280,9 @@
     shell = pkgs.zsh;
   };
 
-  environment.systemPackages =  [
+  environment.systemPackages = with pkgs; [
 
+thorium-117.0.5938.157
 
     #     appimage-run
     #     auto-cpufreq
