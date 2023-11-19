@@ -65,8 +65,10 @@
     vscodium-fhs
     vlc
     zoxide
+    conda
     # spectacle
-    # docker
+    docker
+    docker-compose
     #  simplenote
     # joplin
     qemu
@@ -90,7 +92,7 @@
     tgpt
     #gnome packages 
     # gnome.adwaita-icon-theme
-    # gnome.gnome-boxes
+    gnome.gnome-boxes
     direnv
     any-nix-shell
     # zsh-autosuggestions
