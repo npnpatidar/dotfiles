@@ -280,9 +280,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-    (import ./resources/appimage/thorium.nix { inherit pkgs; })
-    (import ./resources/appimage/filen-desktop.nix { inherit pkgs; })
-
     #     appimage-run
     #     auto-cpufreq
     #     flatpak

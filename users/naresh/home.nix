@@ -21,7 +21,10 @@
 
 
   home.packages = with pkgs; [
-    # ark
+
+    (import ../../resources/appimage/thorium.nix { inherit pkgs; })
+    (import ../../resources/appimage/filen-desktop.nix { inherit pkgs; })
+    ark
     appimage-run
     auto-cpufreq
     flatpak
@@ -52,7 +55,7 @@
     neofetch
     nethogs
     ntfs3g
-    # p7zip
+    p7zip
     fuse-7z-ng
     rclone
     # scrcpy
@@ -199,7 +202,7 @@
   };
 
   home.file.".p10k.zsh" = {
-    source = ./.p10k.zsh;
+    source = ./resources/power10k/.p10k.zsh;
     executable = true;
   };
 
