@@ -2,13 +2,14 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs,ubports-installer, ... }:
 
 {
   imports =
     [
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./resources/appimage/ubports.nix
     ];
 
 
@@ -278,9 +279,9 @@
     shell = pkgs.zsh;
   };
 
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages =  [
 
-    # (import ./resources/appimage/thorium.nix)
+  ubports-installer
     #     appimage-run
     #     auto-cpufreq
     #     flatpak

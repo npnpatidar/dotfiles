@@ -17,9 +17,13 @@
     };
 
 
+
+ubports-installer.url = "github:jakehamilton/config";
+
+
   };
 
-  outputs = { nixpkgs, home-manager, plasma-manager, ... }:
+  outputs = { nixpkgs, home-manager, plasma-manager,ubports-installer , ... }:
 
     let
       system = "x86_64-linux";
@@ -38,6 +42,7 @@
           modules = [
 
             ./system/configuration.nix
+            ubports-installer.packages.${pkgs.system}
             home-manager.nixosModules.home-manager
             {
               home-manager = {
