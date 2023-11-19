@@ -16,12 +16,10 @@
       inputs.home-manager.follows = "home-manager";
     };
 
-    # thorium.url = "github:Alex313031/Thorium";
 
   };
 
   outputs = { nixpkgs, home-manager, plasma-manager ,... }:
-  # outputs = { nixpkgs, home-manager, plasma-manager ,thorium,... }:
 
     let
       system = "x86_64-linux";
@@ -38,7 +36,6 @@
           inherit system pkgs;
 
           modules = [
-            # ./system/resources/appimage/thorium.nix
             ./system/configuration.nix
             home-manager.nixosModules.home-manager
             {

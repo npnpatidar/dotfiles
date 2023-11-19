@@ -9,7 +9,6 @@
     [
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      # ./resources/appimage/thorium.nix
     ];
 
 
@@ -281,10 +280,7 @@
   };
 
   environment.systemPackages = with pkgs; [
-
-# thorium-117.0.5938.157
-#  (import ./resources/appimage/thorium.nix { inherit pkgs; })
-  ((import ./resources/appimage/thorium.nix) { inherit pkgs lib; })
+    (import ./resources/appimage/thorium.nix { inherit pkgs; })
 
     #     appimage-run
     #     auto-cpufreq
