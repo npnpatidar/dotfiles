@@ -1,18 +1,20 @@
-{ pkgs, lib, ... }:
+# thorium.nix
+
+{ lib, fetchurl, appimageTools, ... }:
 
 let
-   pname = "thorium";
+  pname = "thorium";
   version = "117.0.5938.157";
   name = "${pname}-${version}";
 
-  src = pkgs.fetchurl {
-     url = "https://github.com/Alex313031/thorium/releases/download/M${version}/Thorium_Browser_${version}_x64.AppImage";
-   sha256 = "sha256-dlfClBbwSkQg4stKZdSgNg3EFsWksoI21cxRG5SMrOM=";
+  src = fetchurl {
+    url = "https://github.com/Alex313031/thorium/releases/download/M${version}/Thorium_Browser_${version}_x64.AppImage";
+    sha256 = "sha256-dlfClBbwSkQg4stKZdSgNg3EFsWksoI21cxRG5SMrOM=";
   };
 
-  appimageContents = pkgs.appimageTools.extractType2 { inherit name src; };
+  appimageContents = appimageTools.extractType2 { inherit name src; };
 in
-pkgs.appimageTools.wrapType2 rec {
+appimageTools.wrapType2 rec {
   inherit name src;
 
   extraInstallCommands = ''
@@ -21,8 +23,8 @@ pkgs.appimageTools.wrapType2 rec {
 
     install -m 444 -D ${appimageContents}/${pname}.png $out/share/icons/hicolor/512x512/apps/${pname}.png
 
-    substituteInPlace $out/share/applications/${pname}.desktop \
-    	--replace 'Exec=AppRun --no-sandbox %U' 'Exec=${pname} %U'
+    lib.substituteInPlace $out/share/applications/${pname}.desktop \
+      --replace 'Exec=AppRun --no-sandbox %U' "Exec=${pname} %U"
   '';
 
   meta = with lib; {
