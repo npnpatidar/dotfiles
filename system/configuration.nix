@@ -9,6 +9,9 @@
     [
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./kde_config.nix
+      # ./gnome_config.nix
+      ./nvidia.nix
     ];
 
 
@@ -32,46 +35,6 @@
 
   };
 
-
-  # nvidia support 
-  hardware.opengl = {
-    enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
-  };
-
-  services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.nvidia = {
-    modesetting.enable = true;
-    powerManagement.enable = false;
-    powerManagement.finegrained = false;
-    open = false;
-    nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.production;
-
-    prime = {
-      # 	offload =                            # run program as nvidia-offload  glxgears
-      # 		{
-      # 			enable = true;
-      # 			enableOffloadCmd = true;
-      #  };
-      sync.enable = true;
-      intelBusId = "PCI:0:2:0";
-      nvidiaBusId = "PCI:1:0:0";
-    };
-  };
-
-
-  # specialisation = {      #special on-the-go mode which  enable offload mode 
-  # 	on-the-go.configuration = {      
-  # 		system.nixos.tags = [ "on-the-go" ];
-  # 		hardware.nvidia = {
-  # 			prime.offload.enable = lib.mkForce true;
-  # 			prime.offload.enableOffloadCmd = lib.mkForce true;
-  # 			prime.sync.enable = lib.mkForce false;
-  # 	 };
-  # 	};
-  # };
 
 
   # Enable KDE Connect
@@ -172,62 +135,7 @@
   # Enable the X11 windowing system.
   # services.xserver.enable = true;
 
-  # Enable the KDE Plasma Desktop Environment.
 
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
-
-  environment.plasma5.excludePackages = with pkgs.libsForQt5; [
-    elisa
-    gwenview
-    okular
-    oxygen
-    khelpcenter
-    plasma-browser-integration
-    print-manager
-    ark
-  ];
-
-  xdg.portal = {
-    enable = true;
-    wlr.enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ]; # enable this in KDE
-  };
-
-  # Enable Gnome Desktop Environment.
-  # services.xserver.displayManager.gdm.enable = true;
-  # services.xserver.desktopManager.gnome.enable = true;
-  # services.udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
-
-  # environment.gnome.excludePackages = (with pkgs; [
-  # 	gnome-photos
-  # 	gnome-tour
-  # 	gnome-text-editor
-  # 	xterm
-  # ]) ++ (with pkgs.gnome; [
-  # 	cheese # webcam tool
-  # 	gnome-music
-  # 	gnome-terminal
-  # 	gedit # text editor
-  # 	epiphany # web browser
-  # 	geary # email reader
-  # 	evince # document viewer
-  # 	gnome-characters
-  # 	totem # video player
-  # 	tali # poker game
-  # 	iagno # go game
-  # 	hitori # sudoku game
-  # 	atomix # puzzle game
-  # 	gnome-clocks
-  # 	gnome-weather
-  # 	gnome-maps
-  # 	gnome-contacts
-  # 	simple-scan
-  # 	gnome-system-monitor
-  # 	gnome-software
-  # 	gnome-calendar
-  # 	eog
-  # ]);
 
   # Configure keymap in X11 and touchpad support
   services.xserver = {
