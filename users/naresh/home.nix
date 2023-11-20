@@ -164,7 +164,8 @@
       note = "notepadqq";
       cnd = "codium ~/dotfiles";
       as = "cd ~/dotfiles/scripts && ~/dotfiles/scripts/apply-system.sh";
-      re = "cd ~/dotfiles/scripts && ~/dotfiles/scripts/apply-rebuild.sh";
+      ad = "cd ~/dotfiles/scripts && ~/dotfiles/scripts/apply-dry-build.sh";
+      at = "cd ~/dotfiles/scripts && ~/dotfiles/scripts/apply-test.sh";
       lst = "lsd -lag --tree --group-directories-first --icon-theme unicode";
       lsa = "lsd  -lag --group-directories-first --icon-theme unicode";
       ls = "lsd  --icon-theme unicode ";

@@ -244,7 +244,10 @@
   };
 
   # Enable Apple devices support
-  services.usbmuxd.enable = true;
+  # services.usbmuxd = {
+  #   enable = true;
+  #   package = pkgs.usbmuxd;
+  # };
 
 
   # Enable CUPS to print documents.
@@ -273,7 +276,7 @@
     isNormalUser = true;
     initialPassword = "naresh";
     description = "naresh";
-    extraGroups = [ "networkmanager" "wheel" "kvm" "input" "disk" "libvirtd" ];
+    extraGroups = [ "networkmanager" "wheel" "kvm" "input" "disk" "libvirtd" "usbmux" ];
     createHome = true;
     home = "/home/naresh";
     shell = pkgs.zsh;
@@ -284,6 +287,9 @@
     #     auto-cpufreq
     #     flatpak
     # nextdns
+    # systemd
+    # usbmuxd
+    # usbmuxd2
   ];
 
   # List services that you want to enable:
