@@ -16,10 +16,16 @@
 
 
   # Bootloader.
-  boot.loader = {
-    systemd-boot.enable = true;
-    efi.canTouchEfiVariables = true;
+
+  boot = {
+
+    supportedFilesystems = [ "ntfs" ];
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
   };
+  
   # Enable experimental Features
   nix = {
     package = pkgs.nixFlakes;
@@ -198,6 +204,7 @@
     # systemd
     # usbmuxd
     # usbmuxd2
+    ntfs3g
   ];
 
   # List services that you want to enable:
