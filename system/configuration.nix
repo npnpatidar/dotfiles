@@ -9,9 +9,11 @@
     [
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./kde_config.nix
-      # ./gnome_config.nix
-      ./nvidia.nix
+      ./desktop_config/kde_config.nix
+      # ./desktop_config/gnome_config.nix
+      ./nvidia/nvidia.nix
+      ./syncthing/syncthing.nix
+      ./dns_config/dns_config.nix
     ];
 
 
@@ -25,12 +27,12 @@
       efi.canTouchEfiVariables = true;
     };
   };
-  
+
   # Enable experimental Features
-  nix = {
-    package = pkgs.nixFlakes;
-    extraOptions = "experimental-features = nix-command flakes";
-  };
+  # nix = {
+  #   package = pkgs.nixFlakes;
+  #   extraOptions = "experimental-features = nix-command flakes";
+  # };
 
   # Networking
   networking = {
@@ -45,58 +47,7 @@
 
   # Enable KDE Connect
   programs.kdeconnect.enable = true;
-
-  # Syncthign Settings
-  services = {
-    syncthing = {
-      enable = true;
-      user = "naresh";
-      dataDir = "/home/naresh/Data/Sync_M_L/";
-      configDir = "/home/naresh/.config/syncthing";
-      overrideDevices = true; # overrides any devices added or deleted through the WebUI
-      overrideFolders = true; # overrides any folders added or deleted through the WebUI
-      settings.devices = {
-        "RMX3312" = { id = "TYHX2SD-7KN5PCE-DMUV7F6-T5I22IU-5XJNC2A-JUAWJCK-M74C276-U6PNGAA"; };
-        #  "device2" = { id = "DEVICE-ID-GOES-HERE"; };
-      };
-      settings.folders = {
-        "knuao-1ygcm" = {
-          # Name of folder in Syncthing, also the folder ID
-          path = "/home/naresh/Documents"; # Which folder to add to Syncthing
-          devices = [ "RMX3312" ]; # Which devices to share the folder with
-        };
-        "tpz2c-x9q93" = {
-          path = "/home/naresh/Data/Sync_M_L";
-          devices = [ "RMX3312" ];
-        };
-        "7snbs-p6fiq" = {
-          path = "/home/naresh/Data/Sync_M_L_C";
-          devices = [ "RMX3312" ];
-        };
-      };
-    };
-  };
-
-
-  # Adguard DNS 
-  services.dnscrypt-proxy2 = {
-    enable = true;
-    settings = {
-      ipv6_servers = true;
-      require_dnssec = true;
-
-      sources.public-resolvers = {
-        urls = [
-          "https://raw.githubusercontent.com/DNSCrypt/dnscrypt-resolvers/master/v3/public-resolvers.md"
-          "https://download.dnscrypt.info/resolvers-list/v3/public-resolvers.md"
-        ];
-        cache_file = "/var/lib/dnscrypt-proxy2/public-resolvers.md";
-        minisign_key = "RWQf6LRCGA9i53mlYecO4IzT51TGPpvWucNSCh1CBM0QTaLn73Y7GFO3";
-      };
-
-      server_names = [ "adguard-dns-doh" ];
-    };
-  };
+  programs.zsh.enable = true;
 
 
 
@@ -136,7 +87,7 @@
 
 
   };
-  services.xserver.xkbOptions = "rupeesign:e";
+
 
   # Enable the X11 windowing system.
   # services.xserver.enable = true;
@@ -148,6 +99,7 @@
     enable = true;
     layout = "us";
     xkbVariant = "";
+    xkbOptions = "rupeesign:e";
     libinput = {
       enable = true;
       touchpad = {
@@ -183,7 +135,6 @@
 
   };
 
-  programs.zsh.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.naresh = {
@@ -204,6 +155,9 @@
     # systemd
     # usbmuxd
     # usbmuxd2
+
+    #     (import ./appimage/thorium.nix { inherit pkgs; })
+    # (import ./appimage/filen-desktop.nix { inherit pkgs; })
   ];
 
   # List services that you want to enable:
@@ -222,15 +176,13 @@
 
   system.stateVersion = "23.05"; # Did you read the comment?
 
-  #nextdns service 
-  # services.nextdns = {
-  # 	enable = true;
-  # 	arguments = [ "-config" "ec4ca1" "-cache-size" "10MB" "-listen" "0.0.0.0:53" ];
-  # };
 
 
 
   nix = {
+
+    package = pkgs.nixFlakes;
+    extraOptions = "experimental-features = nix-command flakes";
     settings.auto-optimise-store = true;
     gc = {
       automatic = true;
@@ -266,7 +218,36 @@
   # boot.kernelParams = [ "psmouse.synaptics_intertouch=0" ];
 
 
+#power management
+powerManagement.enable = true;
+services.thermald.enable = true;
 
+services.auto-cpufreq.enable = true;
+services.auto-cpufreq.settings = {
+  battery = {
+     governor = "powersave";
+     turbo = "never";
+  };
+  charger = {
+     governor = "performance";
+     turbo = "auto";
+  };
+};
+# services.tlp = {
+#       enable = true;
+#       settings = {
+#         CPU_SCALING_GOVERNOR_ON_AC = "performance";
+#         CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+
+#         CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
+#         CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
+
+#         CPU_MIN_PERF_ON_AC = 0;
+#         CPU_MAX_PERF_ON_AC = 100;
+#         CPU_MIN_PERF_ON_BAT = 0;
+#         CPU_MAX_PERF_ON_BAT = 20;
+#       };
+# };
 
 
 }
