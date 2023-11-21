@@ -204,7 +204,6 @@
     # systemd
     # usbmuxd
     # usbmuxd2
-    ntfs3g
   ];
 
   # List services that you want to enable:
