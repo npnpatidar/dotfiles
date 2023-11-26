@@ -3,12 +3,8 @@
 
 {
 
-  imports = [
-    ./zsh_config/zsh_config.nix
-    ./plasma-manager/plasma.nix
-    ./applications/applications.nix
-
-
+  imports = [  
+    ./packages
   ];
 
 
@@ -27,13 +23,9 @@
     pinentryFlavor = "qt";
   };
 
-
-
-
   home.sessionVariables = {
     # EDITOR = "emacs";
   };
-
 
   programs.home-manager.enable = true;
 
@@ -43,14 +35,8 @@
     userEmail = "7de6dkm1@duck.com";
   };
 
-
-
-
-
-
   programs.direnv.enable = true;
   nixpkgs.config.allowUnfree = true;
-
 
 }
 

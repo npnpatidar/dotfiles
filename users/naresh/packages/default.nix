@@ -2,10 +2,16 @@
 
 
 
+  imports = [  
+    ./plasma-manager.nix
+    ./vscode.nix
+    ./zsh/zsh.nix
+  ];
+
   home.packages = with pkgs; [
 
-    (import ../../../system/appimage/thorium.nix { inherit pkgs; })
-    (import ../../../system/appimage/filen-desktop.nix { inherit pkgs; })
+    (import ./thorium.nix { inherit pkgs; })
+    (import ./filen-desktop.nix { inherit pkgs; })
 
     ark
     appimage-run

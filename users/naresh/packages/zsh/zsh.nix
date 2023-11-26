@@ -90,7 +90,7 @@
 
 
   home.file.".p10k.zsh" = {
-    source = ../power10k/.p10k.zsh;
+    source = ./.p10k.zsh;
     executable = true;
   };
 
