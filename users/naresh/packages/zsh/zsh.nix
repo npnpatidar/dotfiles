@@ -34,7 +34,7 @@
       nl = "cd /home/naresh/Data/Sync_N_Laptop && ls";
       mydoc = "cd /home/naresh/Data/Sync_M_L/Documents/MyDoc/ && ls";
       docs = "cd /home/naresh/Data/Sync_M_L/Documents/ && ls";
-      ch = "function _curlcheat() { curl cheat.sh '$1' } _curlcheat";
+      ch = "cht.sh";
       net = "sudo nethogs";
       ".." = "cd ..";
       "..." = "cd ../..";
@@ -43,16 +43,20 @@
       doc_backup = "rclone sync /home/naresh/Data/Sync_M_L/Documents/ /home/naresh/.local/share/Cryptomator/mnt/EncryptedDocuments/   --verbose ";
       snc = "nano ~/dotfiles/system/configuration.nix";
       snh = "nano ~/dotfiles/users/naresh/home.nix";
-
+      code = "codium";
       nos = "nix --extra-experimental-features 'nix-command flakes' search nixpkgs";
       note = "notepadqq";
       cnd = "codium ~/dotfiles";
+      ab = "cd ~/dotfiles/scripts && ~/dotfiles/scripts/apply-boot.sh";
       as = "cd ~/dotfiles/scripts && ~/dotfiles/scripts/apply-system.sh";
       ad = "cd ~/dotfiles/scripts && ~/dotfiles/scripts/apply-dry-build.sh";
       at = "cd ~/dotfiles/scripts && ~/dotfiles/scripts/apply-test.sh";
       lst = "lsd -lag --tree --group-directories-first --icon-theme unicode";
       lsa = "lsd  -lag --group-directories-first --icon-theme unicode";
       ls = "lsd  --icon-theme unicode ";
+      list-gen = "sudo nix-env --list-generations --profile /nix/var/nix/profiles/system";
+      delete-gen = "sudo nix-env --delete-generations --profile /nix/var/nix/profiles/system";
+      clear-boot = "sudo /run/current-system/bin/switch-to-configuration boot";
 
     };
 
