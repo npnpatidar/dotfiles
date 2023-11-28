@@ -5,6 +5,20 @@
 { config, lib, pkgs, ... }:
 
 {
+
+  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.packageOverrides = pkgs: {
+    nur = import builtins.fetchTarball
+      {
+        url = "https://github.com/nix-community/NUR/archive/master.tar.gz";
+        sha256 = "sha256:0plki2yk02zcvyw7vynqhag6g1kl5qcicj8dvzfjx5p3p82yilkk";
+      }
+      {
+        inherit pkgs;
+      };
+  };
+
+
   imports =
     [
       # Include the results of the hardware scan.
@@ -14,6 +28,7 @@
       ./nvidia/nvidia.nix
       ./syncthing/syncthing.nix
       ./dns_config/dns_config.nix
+      # ./stylix.nix
     ];
 
 
@@ -147,18 +162,20 @@
     shell = pkgs.zsh;
   };
 
-  environment.systemPackages = with pkgs; [
-    #     appimage-run
-    #     auto-cpufreq
-    #     flatpak
-    # nextdns
-    # systemd
-    # usbmuxd
-    # usbmuxd2
 
-    #     (import ./appimage/thorium.nix { inherit pkgs; })
-    # (import ./appimage/filen-desktop.nix { inherit pkgs; })
-  ];
+  # environment.systemPackages = [ config.nur.repos.mic92.hello-nur ];
+  # environment.systemPackages = with pkgs; [
+  #     appimage-run
+  #     auto-cpufreq
+  #     flatpak
+  # nextdns
+  # systemd
+  # usbmuxd
+  # usbmuxd2
+
+  #     (import ./appimage/thorium.nix { inherit pkgs; })
+  # (import ./appimage/filen-desktop.nix { inherit pkgs; })
+  # ];
 
   # List services that you want to enable:
   virtualisation.libvirtd.enable = true;
@@ -218,36 +235,35 @@
   # boot.kernelParams = [ "psmouse.synaptics_intertouch=0" ];
 
 
-#power management
-powerManagement.enable = true;
-services.thermald.enable = true;
+  #power management
+  powerManagement.enable = true;
+  services.thermald.enable = true;
 
-services.auto-cpufreq.enable = true;
-services.auto-cpufreq.settings = {
-  battery = {
-     governor = "powersave";
-     turbo = "never";
+  services.auto-cpufreq.enable = true;
+  services.auto-cpufreq.settings = {
+    battery = {
+      governor = "powersave";
+      turbo = "never";
+    };
+    charger = {
+      governor = "performance";
+      turbo = "auto";
+    };
   };
-  charger = {
-     governor = "performance";
-     turbo = "auto";
-  };
-};
-# services.tlp = {
-#       enable = true;
-#       settings = {
-#         CPU_SCALING_GOVERNOR_ON_AC = "performance";
-#         CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+  # services.tlp = {
+  #       enable = true;
+  #       settings = {
+  #         CPU_SCALING_GOVERNOR_ON_AC = "performance";
+  #         CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
 
-#         CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
-#         CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
+  #         CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
+  #         CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
 
-#         CPU_MIN_PERF_ON_AC = 0;
-#         CPU_MAX_PERF_ON_AC = 100;
-#         CPU_MIN_PERF_ON_BAT = 0;
-#         CPU_MAX_PERF_ON_BAT = 20;
-#       };
-# };
-
+  #         CPU_MIN_PERF_ON_AC = 0;
+  #         CPU_MAX_PERF_ON_AC = 100;
+  #         CPU_MIN_PERF_ON_BAT = 0;
+  #         CPU_MAX_PERF_ON_BAT = 20;
+  #       };
+  # };
 
 }

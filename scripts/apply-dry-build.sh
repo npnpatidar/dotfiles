@@ -1,4 +1,4 @@
 #! /bin/sh
 pushd ~/dotfiles
-sudo nixos-rebuild dry-build --flake .#naresh
+sudo nixos-rebuild dry-build --flake .#naresh --show-trace
 popd

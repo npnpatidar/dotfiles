@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ config, pkgs,... }: {
 
 
 
@@ -6,13 +6,15 @@
     ./plasma-manager.nix
     ./vscode.nix
     ./zsh/zsh.nix
+    ./librewolf.nix
   ];
 
   home.packages = with pkgs; [
 
     (import ./thorium.nix { inherit pkgs; })
     (import ./filen-desktop.nix { inherit pkgs; })
-
+    comma
+    neovim
     ark
     appimage-run
     # auto-cpufreq
