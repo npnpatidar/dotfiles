@@ -1,4 +1,4 @@
 #! /bin/sh
 pushd ~/dotfiles
-sudo nixos-rebuild switch --flake .#naresh --show-trace
+sudo nixos-rebuild switch --flake .#naresh --show-trace --option eval-cache false
 popd

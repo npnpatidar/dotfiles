@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nur.url = "github:nix-community/NUR";
-    # stylix.url = "github:danth/stylix";
+stylix.url = "github:danth/stylix";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -16,7 +16,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, nur, home-manager, plasma-manager, ... }:
+  outputs = { self, nixpkgs, nur, home-manager, plasma-manager,stylix, ... }:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
@@ -55,7 +55,7 @@
                       ./users/naresh/home.nix
                     ];
                   };
-                  sharedModules = [ plasma-manager.homeManagerModules.plasma-manager ];
+                  sharedModules = [ plasma-manager.homeManagerModules.plasma-manager stylix.homeManagerModules.stylix];
                 };
               }
             ];
