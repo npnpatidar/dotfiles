@@ -28,7 +28,7 @@
       ./nvidia/nvidia.nix
       ./syncthing/syncthing.nix
       ./dns_config/dns_config.nix
-      # ./stylix.nix
+      ./docker/docker.nix
     ];
 
 
@@ -125,10 +125,10 @@
   };
 
   # Enable Apple devices support
-  # services.usbmuxd = {
-  #   enable = true;
-  #   package = pkgs.usbmuxd;
-  # };
+  services.usbmuxd = {
+    enable = true;
+    package = pkgs.usbmuxd2;
+  };
 
 
   # Enable CUPS to print documents.

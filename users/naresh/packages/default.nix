@@ -13,6 +13,7 @@
 
     (import ./thorium.nix { inherit pkgs; })
     (import ./filen-desktop.nix { inherit pkgs; })
+    (import ./xdm-app.nix {inherit pkgs;})
     comma
     neovim
     ark
@@ -39,7 +40,8 @@
     cryptomator
     ferdium
     fsearch
-
+    android-studio
+    
     #   kdeconnect
     libreoffice
     masterpdfeditor4
@@ -92,7 +94,11 @@
     # fira-code
     # fira-code-symbols
     nixpkgs-fmt
-
+    cht-sh
+    htop
+    btop
+    uget-integrator
+    uget
   ];
 
 }

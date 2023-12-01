@@ -4,7 +4,6 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nur.url = "github:nix-community/NUR";
-stylix.url = "github:danth/stylix";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -16,7 +15,7 @@ stylix.url = "github:danth/stylix";
     };
   };
 
-  outputs = { self, nixpkgs, nur, home-manager, plasma-manager,stylix, ... }:
+  outputs = { self, nixpkgs, nur, home-manager, plasma-manager,... }:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
@@ -39,8 +38,8 @@ stylix.url = "github:danth/stylix";
                   };
                 in
                 {
-                  imports = [ nur-no-pkgs.repos.iopq.modules.xraya ];
-                  services.xraya.enable = true;
+                  # imports = [ nur-no-pkgs.repos.iopq.modules.xraya ];
+                  # services.xraya.enable = true;
                 })
               ./system/configuration.nix
 
@@ -55,7 +54,7 @@ stylix.url = "github:danth/stylix";
                       ./users/naresh/home.nix
                     ];
                   };
-                  sharedModules = [ plasma-manager.homeManagerModules.plasma-manager stylix.homeManagerModules.stylix];
+                  sharedModules = [ plasma-manager.homeManagerModules.plasma-manager ];
                 };
               }
             ];
