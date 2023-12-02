@@ -16,11 +16,13 @@
 
 pkgs.stdenv.mkDerivation rec {
   pname = "xdapp";
-  version = "8.0.29";
+  version = "8.0.26";
 
   src = pkgs.fetchurl {
-    url = "https://github.com/subhra74/xdm/releases/download/8.0.29/xdman_gtk_8.0.29_amd64.deb";
-    hash = "sha256-Nlm7LbAlHI3w+lAeUxhf0Dx7Fde1jCKitguTFEtrnhE=";
+    url = "https://github.com/subhra74/xdm/releases/download/8.0.26/xdman_gtk_8.0.26_amd64.deb";
+    hash = "sha256-FykAFy0e2YdaBbLBdMSLBzh+G9Gzlzl5wxtpkV9qYL8=";
+    # url = "https://github.com/subhra74/xdm/releases/download/8.0.29/xdman_gtk_8.0.29_amd64.deb";
+    # hash = "sha256-Nlm7LbAlHI3w+lAeUxhf0Dx7Fde1jCKitguTFEtrnhE=";
   };
 
   unpackPhase = "dpkg-deb -x $src .";
@@ -68,11 +70,12 @@ pkgs.stdenv.mkDerivation rec {
   '';
 
   meta = with pkgs.lib; {
-    description = "A smart and fast internet download manager";
-    homepage = "https://www.freedownloadmanager.org";
-    license = licenses.free;
+    description = "Powerful download accelerator and video downloader";
+    homepage = "https://github.com/subhra74/xdm";
+    license = licenses.gpl2Only;
     platforms = [ "x86_64-linux" ];
-    sourceProvenance = with sourceTypes; [ binaryNativeCode ];
+    mainProgram = "xdm";
     maintainers = with maintainers; [ ];
   };
+
 }

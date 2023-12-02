@@ -35,7 +35,6 @@
   # Bootloader.
 
   boot = {
-
     supportedFilesystems = [ "ntfs" ];
     loader = {
       systemd-boot.enable = true;
@@ -53,9 +52,9 @@
   networking = {
     hostName = "nixos";
     networkmanager.enable = true;
+    # nameservers = ["45.90.28.242" "45.90.30.242"];
     # networking.useDHCP = true;
     # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
   };
 
 

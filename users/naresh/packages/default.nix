@@ -97,8 +97,11 @@
     cht-sh
     htop
     btop
-    uget-integrator
-    uget
+    dpkg
+    nix-init
+    ripgrep
+    steam-run
+    distrobox
   ];
 
 }

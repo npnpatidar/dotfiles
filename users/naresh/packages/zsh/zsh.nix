@@ -23,7 +23,7 @@
     shellAliases = {
       c = "clear";
       sn = "sudo nano";
-      htop = "btop";
+      htop = "btop --utf-force";
       h = "history | grep $1";
       rebash = " source ~/.bashrc";
       e = "exit";
@@ -98,5 +98,5 @@
     executable = true;
   };
 
-# shell = pkgs.zsh;
+  # shell = pkgs.zsh;
 }

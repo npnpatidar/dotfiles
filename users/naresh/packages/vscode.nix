@@ -15,8 +15,8 @@
       {
         name = "codeium";
         publisher = "codeium";
-        version = "1.4.20";
-        sha256 = "sha256-3k5hgpV+wVnHMhVk+oJrGaZ+RjXhfIZIa3PdvPelc1Y=";
+        version = "1.4.23";
+        sha256 = "sha256-HZpBZy6n8YBOA2t4klccqlGISzEq3MjOBVjPECOdBcI=";
       }
       {
         name = "nix-ide";
@@ -24,7 +24,7 @@
         version = "0.2.2";
         sha256 = "sha256-jwOM+6LnHyCkvhOTVSTUZvgx77jAg6hFCCpBqY8AxIg=";
       }
-      
+
     ];
   };
 }

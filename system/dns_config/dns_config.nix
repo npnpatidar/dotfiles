@@ -18,15 +18,25 @@
       };
 
       server_names = [ "adguard-dns-doh" ];
+      # server_names = [ "nextdns-ipv6" ];
     };
   };
 
 
-  #nextdns service 
+  # nextdns service
   # services.nextdns = {
-  # 	enable = true;
-  # 	arguments = [ "-config" "ec4ca1" "-cache-size" "10MB" "-listen" "0.0.0.0:53" ];
+  #   enable = true;
+  #   arguments = [ "-config" "ec4ca1" "-cache-size" "10MB" "-listen" "0.0.0.0:53" ];
   # };
 
-
+  services.resolved = {
+    enable = true;
+    extraConfig = ''
+            DNS=45.90.28.0#ec4ca1.dns.nextdns.io
+            DNS=2a07:a8c0::#ec4ca1.dns.nextdns.io
+            DNS=45.90.30.0#ec4ca1.dns.nextdns.io
+            DNS=2a07:a8c1::#ec4ca1.dns.nextdns.io
+            DNSOverTLS=yes
+            '';
+  };
 }
