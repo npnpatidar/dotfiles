@@ -1,0 +1,325 @@
+# Generated via dconf2nix: https://github.com/gvolpe/dconf2nix
+{ lib, ... }:
+
+with lib.hm.gvariant;
+
+{
+  dconf.settings = {
+    "com/belmoussaoui/Authenticator" = {
+      keyrings-migrated = true;
+    };
+
+    "org/gnome/control-center" = {
+      last-panel = "keyboard";
+      window-state = mkTuple [ 980 640 ];
+    };
+
+    "org/gnome/desktop/a11y/magnifier" = {
+      mag-factor = 11.0;
+    };
+
+    "org/gnome/desktop/app-folders" = {
+      folder-children = [ "Utilities" "YaST" "Pardus" "LibreOffice" ];
+    };
+
+    "org/gnome/desktop/app-folders/folders/Pardus" = {
+      categories = [ "X-Pardus-Apps" ];
+      name = "X-Pardus-Apps.directory";
+      translate = true;
+    };
+    "org/gnome/desktop/app-folders/folders/LibreOffice" = {
+      apps = [ "startcenter.desktop" "base.desktop" "calc.desktop" "draw.desktop" "impress.desktop" "math.desktop" "writer.desktop" ];
+      categories = [ "X-GNOME-LibreOffice" ];
+      name = "LibreOffice";
+      translate = true;
+    };
+    "org/gnome/desktop/app-folders/folders/Utilities" = {
+      apps = [ "gnome-abrt.desktop" "gnome-system-log.desktop" "nm-connection-editor.desktop" "org.gnome.baobab.desktop" "org.gnome.Connections.desktop" "org.gnome.DejaDup.desktop" "org.gnome.Dictionary.desktop" "org.gnome.DiskUtility.desktop" "org.gnome.Evince.desktop" "org.gnome.FileRoller.desktop" "org.gnome.fonts.desktop" "org.gnome.Loupe.desktop" "org.gnome.seahorse.Application.desktop" "org.gnome.tweaks.desktop" "org.gnome.Usage.desktop" "vinagre.desktop" "ca.desrt.dconf-editor.desktop" "org.gnome.Extensions.desktop" ];
+      categories = [ "X-GNOME-Utilities" ];
+      name = "X-GNOME-Utilities.directory";
+      translate = true;
+    };
+
+    "org/gnome/desktop/app-folders/folders/YaST" = {
+      categories = [ "X-SuSE-YaST" ];
+      name = "suse-yast.directory";
+      translate = true;
+    };
+
+    "org/gnome/desktop/background" = {
+      primary-color = "#3a4ba0";
+      secondary-color = "#2f302f";
+    };
+
+    "org/gnome/desktop/input-sources" = {
+      mru-sources = [ (mkTuple [ "xkb" "us" ]) ];
+      sources = [ (mkTuple [ "xkb" "us" ]) ];
+      xkb-options = [ "rupeesign:e" ];
+    };
+
+    "org/gnome/desktop/interface" = {
+      clock-format = "12h";
+      color-scheme = "prefer-dark";
+      cursor-theme = "Nordic-cursors";
+      enable-hot-corners = true;
+      font-antialiasing = "grayscale";
+      font-hinting = "slight";
+      gtk-theme = "Nordic-Polar";
+      icon-theme = "Nordic-bluish";
+      show-battery-percentage = true;
+    };
+
+    "org/gnome/desktop/notifications" = {
+      application-children = [ "gnome-power-panel" "org-kde-kdeconnect-daemon" "gnome-network-panel" "com-nextcloud-desktopclient-nextcloud" ];
+    };
+
+    "org/gnome/desktop/notifications/application/com-nextcloud-desktopclient-nextcloud" = {
+      application-id = "com.nextcloud.desktopclient.nextcloud.desktop";
+    };
+
+    "org/gnome/desktop/notifications/application/gnome-network-panel" = {
+      application-id = "gnome-network-panel.desktop";
+    };
+
+    "org/gnome/desktop/notifications/application/gnome-power-panel" = {
+      application-id = "gnome-power-panel.desktop";
+    };
+
+    "org/gnome/desktop/notifications/application/org-kde-kdeconnect-daemon" = {
+      application-id = "org.kde.kdeconnect.daemon.desktop";
+    };
+
+    "org/gnome/desktop/peripherals/touchpad" = {
+      tap-to-click = true;
+      two-finger-scrolling-enabled = true;
+    };
+
+    "org/gnome/desktop/privacy" = {
+      disable-camera = true;
+      disable-microphone = true;
+      old-files-age = mkUint32 30;
+      recent-files-max-age = -1;
+      remove-old-temp-files = true;
+      remove-old-trash-files = true;
+    };
+
+    "org/gnome/desktop/screensaver" = {
+      color-shading-type = "solid";
+      picture-options = "zoom";
+      picture-uri = "file:///nix/store/l6mx02l80z4xzzq3my6qh4zjcr62q1ib-simple-blue-2016-02-19/share/backgrounds/nixos/nix-wallpaper-simple-blue.png";
+      primary-color = "#3a4ba0";
+      secondary-color = "#2f302f";
+    };
+
+    "org/gnome/desktop/search-providers" = {
+      sort-order = [ "org.gnome.Contacts.desktop" "org.gnome.Documents.desktop" "org.gnome.Nautilus.desktop" ];
+    };
+
+    "org/gnome/desktop/session" = {
+      idle-delay = mkUint32 300;
+    };
+
+    "org/gnome/desktop/wm/keybindings" = {
+      activate-window-menu = [ ];
+      begin-move = [ "<Super>m" ];
+      begin-resize = [ "<Super>r" ];
+      close = [ "<Super>q" ];
+      cycle-group = [ ];
+      cycle-group-backward = [ ];
+      cycle-panels = [ ];
+      cycle-panels-backward = [ ];
+      cycle-windows = [ ];
+      cycle-windows-backward = [ ];
+      lower = [ "<Super>Down" ];
+      maximize = [ ];
+      minimize = [ ];
+      move-to-monitor-down = [ ];
+      move-to-monitor-left = [ ];
+      move-to-monitor-right = [ ];
+      move-to-monitor-up = [ ];
+      move-to-workspace-1 = [ "<Shift><Super>1" ];
+      move-to-workspace-2 = [ "<Shift><Super>2" ];
+      move-to-workspace-3 = [ "<Shift><Super>3" ];
+      move-to-workspace-4 = [ "<Shift><Super>4" ];
+      move-to-workspace-last = [ ];
+      move-to-workspace-left = [ "<Shift><Super>Left" ];
+      move-to-workspace-right = [ "<Shift><Super>Right" ];
+      panel-run-dialog = [ "<Super>c" ];
+      switch-applications = [ "<Alt>Tab" ];
+      switch-applications-backward = [ "<Shift><Alt>Tab" ];
+      switch-group = [ "<Super>Tab" ];
+      switch-group-backward = [ "<Shift><Super>Tab" ];
+      switch-panels = [ ];
+      switch-panels-backward = [ ];
+      switch-to-workspace-1 = [ ];
+      switch-to-workspace-last = [ ];
+      switch-to-workspace-left = [ "<Super>Left" ];
+      switch-to-workspace-right = [ "<Super>Right" ];
+      toggle-fullscreen = [ "<Shift><Alt>space" ];
+      toggle-maximized = [ "<Super>Up" ];
+      unmaximize = [ ];
+    };
+
+    "org/gnome/desktop/wm/preferences" = {
+      button-layout = "appmenu:minimize,maximize,close";
+      focus-mode = "sloppy";
+      workspace-names = [ "M" "B" "F" "T" ];
+      auto-raise = true;
+      focus-new-windows = true;
+    };
+
+    "org/gnome/evolution-data-server" = {
+      migrated = true;
+    };
+
+    "org/gnome/meld" = {
+      custom-font = "FiraCode Nerd Font 14";
+      highlight-current-line = true;
+      highlight-syntax = true;
+      ignore-blank-lines = true;
+      prefer-dark-theme = true;
+      show-line-numbers = true;
+      show-overviewmap = true;
+      style-scheme = "tango";
+      use-system-font = false;
+      vc-left-is-local = true;
+      wrap-mode = "none";
+    };
+
+    "org/gnome/mutter" = {
+      edge-tiling = true;
+    };
+
+    "org/gnome/mutter/keybindings" = {
+      toggle-tiled-left = [ "<Control>Left" ];
+      toggle-tiled-right = [ "<Control>Right" ];
+    };
+
+    "org/gnome/mutter/wayland/keybindings" = {
+      restore-shortcuts = [ ];
+    };
+
+    "org/gnome/nautilus/icon-view" = {
+      captions = [ "size" "detailed_type" "date_modified" ];
+    };
+
+    "org/gnome/nautilus/preferences" = {
+      default-folder-viewer = "icon-view";
+      migrated-gtk-settings = true;
+      search-filter-time-type = "last_modified";
+    };
+
+    "org/gnome/nautilus/window-state" = {
+      initial-size = mkTuple [ 890 550 ];
+      maximized = true;
+    };
+
+    "org/gnome/settings-daemon/plugins/media-keys" = {
+      custom-keybindings = [ "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/" "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/" "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/" "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/" ];
+      help = [ ];
+      home = [ ];
+      www = [ "<Super>b" ];
+    };
+
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
+      binding = "<Super>f";
+      command = "fsearch";
+      name = "FSearch";
+    };
+
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
+      binding = "<Super>x";
+      command = "kitty";
+      name = "kitty";
+    };
+
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2" = {
+      binding = "<Super>e";
+      command = "nautilus";
+      name = "nautilus";
+    };
+
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3" = {
+      binding = "<Super>z";
+      command = "qownnotes";
+      name = "Qownotes";
+    };
+
+    "org/gnome/shell" = {
+      command-history = [ "nvim" "qownnotes" "code" "codium" ];
+      disable-user-extensions = false;
+      enabled-extensions = [ "user-theme@gnome-shell-extensions.gcampax.github.com" "dash-to-panel@jderose9.github.com" "pano@elhan.io" "appindicatorsupport@rgcjonas.gmail.com" "netspeedsimplified@prateekmedia.extension" "gsconnect@andyholmes.github.io" "blur-my-shell@aunetx" "panel-date-format@keiii.github.com" ];
+      favorite-apps = [ "thorium-browser.desktop" "librewolf.desktop" "org.gnome.Nautilus.desktop" "kitty.desktop" ];
+      last-selected-power-profile = "power-saver";
+      welcome-dialog-last-shown-version = "45.1";
+    };
+
+    "org/gnome/shell/extensions/dash-to-panel" = {
+      appicon-margin = 0;
+      appicon-padding = 2;
+      available-monitors = [ 0 ];
+      group-apps = false;
+      group-apps-use-fixed-width = false;
+      hide-overview-on-startup = true;
+      hot-keys = true;
+      overview-click-to-exit = true;
+      panel-element-positions = "\n{\"0\":[{\"element\":\"showAppsButton\",\"visible\":true,\"position\":\"stackedTL\"},\n{\"element\":\"activitiesButton\",\"visible\":true,\"position\":\"stackedTL\"},\n{\"element\":\"leftBox\",\"visible\":true,\"position\":\"stackedTL\"},\n{\"element\":\"taskbar\",\"visible\":true,\"position\":\"stackedTL\"},\n{\"element\":\"centerBox\",\"visible\":true,\"position\":\"stackedBR\"},\n{\"element\":\"rightBox\",\"visible\":true,\"position\":\"stackedBR\"},\n{\"element\":\"dateMenu\",\"visible\":true,\"position\":\"stackedBR\"},\n{\"element\":\"systemMenu\",\"visible\":true,\"position\":\"stackedBR\"},\n{\"element\":\"desktopButton\",\"visible\":true,\"position\":\"stackedBR\"}]}\n\n";
+      primary-monitor = 0;
+      show-apps-icon-side-padding = 0;
+      status-icon-padding = 1;
+      tray-padding = 2;
+    };
+
+    "org/gnome/shell/extensions/netspeedsimplified" = {
+      iconstoright = false;
+      isvertical = true;
+      minwidth = 3.0;
+      mode = 3;
+      restartextension = true;
+      shortenunits = true;
+      togglebool = false;
+    };
+
+    "org/gnome/shell/extensions/panel-date-format" = {
+      format = "%I:%M %p%n%a %d.%m";
+    };
+
+    "org/gnome/shell/extensions/pano" = {
+      history-length = 500;
+      hovered-item-border-color = "rgb (255, 0,0)";
+    };
+
+    "org/gnome/shell/extensions/user-theme" = {
+      name = "Nordic-Polar";
+    };
+
+    "org/gnome/shell/keybindings" = {
+      screenshot = [ "Print" ];
+      screenshot-window = [ "<Super>Print" ];
+      show-screen-recording-ui = [ "<Shift><Control>Print" ];
+      show-screenshot-ui = [ "<Control>Print" ];
+      switch-to-application-1 = [ ];
+      toggle-message-tray = [ ];
+    };
+
+    "org/gnome/tweaks" = {
+      show-extensions-notice = false;
+    };
+
+    "org/gtk/settings/file-chooser" = {
+      date-format = "regular";
+      location-mode = "path-bar";
+      show-hidden = false;
+      show-size-column = true;
+      show-type-column = true;
+      sidebar-width = 175;
+      sort-column = "name";
+      sort-directories-first = false;
+      sort-order = "ascending";
+      type-format = "category";
+      window-position = mkTuple [ 0 0 ];
+      window-size = mkTuple [ 1600 814 ];
+    };
+
+  };
+}
