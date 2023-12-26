@@ -21,7 +21,7 @@
 
     shellAliases = {
       cd = "z";
-     # nvim = "steam-run nvim";
+      # nvim = "steam-run nvim";
       c = "clear";
       sn = "sudo nano";
       htop = "btop --utf-force";
@@ -61,7 +61,8 @@
       delete-gen = "sudo nix-env --delete-generations --profile /nix/var/nix/profiles/system";
       clear-boot = "sudo /run/current-system/bin/switch-to-configuration boot";
       arch = "distrobox enter arch";
-      git-merge-test = "git checkout main && git pull origin main && git merge test && git push origin main && git checkout test";
+      git-merge-test = "git checkout work && git pull origin work && git merge test && git push origin work && git checkout test";
+      git-merge-work = "git checkout main && git pull origin main && git merge work && git push origin main && git checkout work";
       gdt = "meld .";
       fzf = "fzf --preview 'bat --color=always --style=numbers --line-range=:500 {}'";
     };
