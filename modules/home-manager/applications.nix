@@ -27,7 +27,7 @@
 
     #Coding
     vscodium-fhs
-    android-studio
+    # android-studio
     meld # for git difftool
 
     #Cloud Storage

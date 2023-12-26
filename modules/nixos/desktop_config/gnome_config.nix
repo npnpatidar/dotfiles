@@ -50,6 +50,7 @@
     custom-hot-corners-extended
     gsconnect
     panel-date-format
+    noannoyance-fork
     # prime-helper
     # gpu-profile-selector
 
