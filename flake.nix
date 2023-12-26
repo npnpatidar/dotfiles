@@ -22,9 +22,13 @@
       url = "github:t184256/nix-on-droid";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-index-database = {
+      url = "github:Mic92/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, nur, home-manager, nixvim, nix-on-droid, ... } @ inputs:
+  outputs = { self, nixpkgs, nur, home-manager, nixvim, nix-on-droid, nix-index-database, ... } @ inputs:
     let
 
       inherit (self) outputs;
@@ -67,7 +71,10 @@
                   };
 
                   extraSpecialArgs = { inherit inputs outputs; };
-                  sharedModules = [ nixvim.homeManagerModules.nixvim ];
+                  sharedModules = [
+                    nixvim.homeManagerModules.nixvim
+                    nix-index-database.hmModules.nix-index
+                  ];
                 };
               }
             ];
