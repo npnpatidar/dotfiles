@@ -74,21 +74,24 @@
     '';
 
     initExtra = ''
-      # be more bashy
-      setopt interactive_comments bashautolist nobeep nomenucomplete \
-             noautolist extended_glob
+       # be more bashy
+       setopt interactive_comments bashautolist nobeep nomenucomplete \
+              noautolist extended_glob
 
-      ## include config generated via "p10k configure" manually;
-      ## zplug cannot edit home manager's zshrc file.
+       ## include config generated via "p10k configure" manually;
+       ## zplug cannot edit home manager's zshrc file.
 
-      [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+       [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-      findup () {
-        # uses zsh extended globbing, https://unix.stackexchange.com/a/64164
-        echo (../)#$1(:a)
-      }
+       findup () {
+         # uses zsh extended globbing, https://unix.stackexchange.com/a/64164
+         echo (../)#$1(:a)
+       }
 
-      any-nix-shell zsh --info-right | source /dev/stdin
+       any-nix-shell zsh --info-right | source /dev/stdin
+
+
+      source ${pkgs.nix-index}/etc/profile.d/command-not-found.sh
     '';
     zplug = {
       enable = true;

@@ -55,8 +55,7 @@
 
   programs.direnv.enable = true;
   nixpkgs.config.allowUnfree = true;
-
-
+  programs.nix-index.enable = true;
 
 
 
