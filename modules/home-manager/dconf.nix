@@ -75,11 +75,11 @@ with lib.hm.gvariant;
     "org/gnome/desktop/interface" = {
       clock-format = "12h";
       color-scheme = "prefer-dark";
-      cursor-theme = "Nordic-cursors";
+      # cursor-theme = "Nordic-cursors";
       enable-hot-corners = true;
       font-antialiasing = "grayscale";
       font-hinting = "slight";
-      gtk-theme = "Nordic-Polar-standard-buttons";
+      # gtk-theme = "Nordic-Polar-standard-buttons";
       icon-theme = "Nordic-bluish";
       show-battery-percentage = true;
       toolkit-accessibility = false;
@@ -353,9 +353,9 @@ with lib.hm.gvariant;
       hovered-item-border-color = "rgb (255, 0,0)";
     };
 
-    "org/gnome/shell/extensions/user-theme" = {
-      name = "Nordic-Polar-standard-buttons";
-    };
+    # "org/gnome/shell/extensions/user-theme" = {
+    #   name = "Nordic-Polar-standard-buttons";
+    # };
 
     "org/gnome/shell/keybindings" = {
       screenshot = [ "Print" ];

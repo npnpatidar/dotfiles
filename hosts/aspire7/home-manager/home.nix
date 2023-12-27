@@ -16,6 +16,7 @@
     ../../../modules/home-manager/xdg.nix
     ../../../modules/home-manager/masterpdfeditor.nix
     ../../../modules/home-manager/cryptomator.nix
+    ../../../modules/home-manager/stylix.nix
   ];
 
   nixpkgs = {

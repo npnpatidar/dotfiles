@@ -13,7 +13,7 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
+    stylix.url = "github:danth/stylix";
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     # nixvim.url = "github:pta2002/nixvim";
     nixneovimplugins.url = "github:jooooscha/nixpkgs-vim-extra-plugins";
@@ -28,7 +28,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, nur, home-manager, nixvim, nix-on-droid, nix-index-database, ... } @ inputs:
+  outputs = { self, nixpkgs, nur, home-manager, nixvim, nix-on-droid, nix-index-database, stylix, ... } @ inputs:
     let
 
       inherit (self) outputs;
@@ -74,6 +74,7 @@
                   sharedModules = [
                     nixvim.homeManagerModules.nixvim
                     nix-index-database.hmModules.nix-index
+                    stylix.homeManagerModules.stylix
                   ];
                 };
               }
