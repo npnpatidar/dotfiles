@@ -5,6 +5,19 @@ with lib.hm.gvariant;
 
 {
   dconf.settings = {
+    "apps/seahorse/listing" = {
+      keyrings-selected = [ "gnupg://" ];
+    };
+
+    "apps/seahorse/windows/key-manager" = {
+      height = 476;
+      width = 600;
+    };
+
+    "ca/desrt/dconf-editor" = {
+      show-warning = false;
+    };
+
     "com/belmoussaoui/Authenticator" = {
       keyrings-migrated = true;
     };
@@ -131,28 +144,28 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/desktop/wm/keybindings" = {
-      activate-window-menu = [ ];
+      activate-window-menu = [];
       begin-move = [ "<Super>m" ];
       begin-resize = [ "<Super>r" ];
       close = [ "<Super>q" ];
-      cycle-group = [ ];
-      cycle-group-backward = [ ];
-      cycle-panels = [ ];
-      cycle-panels-backward = [ ];
-      cycle-windows = [ ];
-      cycle-windows-backward = [ ];
+      cycle-group = [];
+      cycle-group-backward = [];
+      cycle-panels = [];
+      cycle-panels-backward = [];
+      cycle-windows = [];
+      cycle-windows-backward = [];
       lower = [ "<Super>Down" ];
-      maximize = [ ];
-      minimize = [ ];
-      move-to-monitor-down = [ ];
-      move-to-monitor-left = [ ];
-      move-to-monitor-right = [ ];
-      move-to-monitor-up = [ ];
+      maximize = [];
+      minimize = [];
+      move-to-monitor-down = [];
+      move-to-monitor-left = [];
+      move-to-monitor-right = [];
+      move-to-monitor-up = [];
       move-to-workspace-1 = [ "<Shift><Super>1" ];
       move-to-workspace-2 = [ "<Shift><Super>2" ];
       move-to-workspace-3 = [ "<Shift><Super>3" ];
       move-to-workspace-4 = [ "<Shift><Super>4" ];
-      move-to-workspace-last = [ ];
+      move-to-workspace-last = [];
       move-to-workspace-left = [ "<Shift><Super>Left" ];
       move-to-workspace-right = [ "<Shift><Super>Right" ];
       panel-run-dialog = [ "<Super>c" ];
@@ -160,15 +173,15 @@ with lib.hm.gvariant;
       switch-applications-backward = [ "<Shift><Alt>Tab" ];
       switch-group = [ "<Super>Tab" ];
       switch-group-backward = [ "<Shift><Super>Tab" ];
-      switch-panels = [ ];
-      switch-panels-backward = [ ];
-      switch-to-workspace-1 = [ ];
-      switch-to-workspace-last = [ ];
+      switch-panels = [];
+      switch-panels-backward = [];
+      switch-to-workspace-1 = [];
+      switch-to-workspace-last = [];
       switch-to-workspace-left = [ "<Super>Left" ];
       switch-to-workspace-right = [ "<Super>Right" ];
       toggle-fullscreen = [ "<Shift><Alt>space" ];
       toggle-maximized = [ "<Super>Up" ];
-      unmaximize = [ ];
+      unmaximize = [];
     };
 
     "org/gnome/desktop/wm/preferences" = {
@@ -213,11 +226,16 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/mutter/wayland/keybindings" = {
-      restore-shortcuts = [ ];
+      restore-shortcuts = [];
     };
 
     "org/gnome/nautilus/icon-view" = {
       captions = [ "size" "detailed_type" "date_modified" ];
+    };
+
+    "org/gnome/nautilus/list-view" = {
+      default-column-order = [ "name" "size" "detailed_type" "type" "owner" "group" "permissions" "where" "date_modified" "date_modified_with_time" "date_accessed" "date_created" "recency" ];
+      default-visible-columns = [ "name" "size" "detailed_type" "owner" "date_modified" "date_accessed" "date_created" ];
     };
 
     "org/gnome/nautilus/preferences" = {
@@ -233,8 +251,8 @@ with lib.hm.gvariant;
 
     "org/gnome/settings-daemon/plugins/media-keys" = {
       custom-keybindings = [ "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/" "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/" "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/" "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/" ];
-      help = [ ];
-      home = [ ];
+      help = [];
+      home = [];
       www = [ "<Super>b" ];
     };
 
@@ -265,6 +283,7 @@ with lib.hm.gvariant;
     "org/gnome/shell" = {
       command-history = [ "nvim" "qownnotes" "code" "codium" ];
       disable-user-extensions = false;
+      disabled-extensions = [ "dash-to-dock@micxgx.gmail.com" ];
       enabled-extensions = [ "user-theme@gnome-shell-extensions.gcampax.github.com" "dash-to-panel@jderose9.github.com" "pano@elhan.io" "appindicatorsupport@rgcjonas.gmail.com" "netspeedsimplified@prateekmedia.extension" "gsconnect@andyholmes.github.io" "blur-my-shell@aunetx" "panel-date-format@keiii.github.com" "noannoyance-fork@vrba.dev" ];
       favorite-apps = [ "thorium-browser.desktop" "librewolf.desktop" "org.gnome.Nautilus.desktop" "kitty.desktop" ];
       last-selected-power-profile = "power-saver";
@@ -275,16 +294,28 @@ with lib.hm.gvariant;
       appicon-margin = 0;
       appicon-padding = 2;
       available-monitors = [ 0 ];
+      dot-position = "BOTTOM";
       group-apps = false;
       group-apps-use-fixed-width = false;
       hide-overview-on-startup = true;
       hot-keys = true;
+      hotkeys-overlay-combo = "TEMPORARILY";
+      leftbox-padding = -1;
       overview-click-to-exit = true;
-      panel-element-positions = "n{\"0\":[{\"element\":\"showAppsButton\",\"visible\":true,\"position\":\"stackedTL\"},n{\"element\":\"activitiesButton\",\"visible\":true,\"position\":\"stackedTL\"},n{\"element\":\"leftBox\",\"visible\":true,\"position\":\"stackedTL\"},n{\"element\":\"taskbar\",\"visible\":true,\"position\":\"stackedTL\"},n{\"element\":\"centerBox\",\"visible\":true,\"position\":\"stackedBR\"},n{\"element\":\"rightBox\",\"visible\":true,\"position\":\"stackedBR\"},n{\"element\":\"dateMenu\",\"visible\":true,\"position\":\"stackedBR\"},n{\"element\":\"systemMenu\",\"visible\":true,\"position\":\"stackedBR\"},n{\"element\":\"desktopButton\",\"visible\":true,\"position\":\"stackedBR\"}]}nn";
+      panel-anchors = ''
+        {"0":"MIDDLE"}
+      '';
+      panel-lengths = ''
+        {"0":100}
+      '';
+      panel-sizes = ''
+        {"0":48}
+      '';
       primary-monitor = 0;
       show-apps-icon-side-padding = 0;
       status-icon-padding = 1;
       tray-padding = 2;
+      window-preview-title-position = "TOP";
     };
 
     "org/gnome/shell/extensions/gsconnect" = {
@@ -303,6 +334,7 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/shell/extensions/netspeedsimplified" = {
+      fontmode = 0;
       iconstoright = false;
       isvertical = true;
       minwidth = 3.0;
@@ -330,8 +362,8 @@ with lib.hm.gvariant;
       screenshot-window = [ "<Super>Print" ];
       show-screen-recording-ui = [ "<Shift><Control>Print" ];
       show-screenshot-ui = [ "<Control>Print" ];
-      switch-to-application-1 = [ ];
-      toggle-message-tray = [ ];
+      switch-to-application-1 = [];
+      toggle-message-tray = [];
     };
 
     "org/gnome/tweaks" = {
@@ -339,7 +371,18 @@ with lib.hm.gvariant;
     };
 
     "org/gtk/gtk4/settings/file-chooser" = {
+      date-format = "regular";
+      location-mode = "path-bar";
       show-hidden = false;
+      show-size-column = true;
+      show-type-column = true;
+      sidebar-width = 140;
+      sort-column = "name";
+      sort-directories-first = true;
+      sort-order = "ascending";
+      type-format = "category";
+      view-type = "list";
+      window-size = mkTuple [ 859 326 ];
     };
 
     "org/gtk/settings/file-chooser" = {

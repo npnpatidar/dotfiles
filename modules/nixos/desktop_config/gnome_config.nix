@@ -42,6 +42,7 @@
   ]) ++ (with pkgs.gnomeExtensions;[
     appindicator
     dash-to-panel
+    dash-to-dock
     blur-my-shell
     net-speed-simplified
     user-themes
