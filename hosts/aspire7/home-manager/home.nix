@@ -13,7 +13,7 @@
     ../../../modules/home-manager/bat.nix
     ../../../modules/home-manager/applications.nix
     ../../../modules/home-manager/geary.nix
-    ../../../modules/home-manager/remove_desktop_icons.nix
+    ../../../modules/home-manager/xdg.nix
     ../../../modules/home-manager/masterpdfeditor.nix
     ../../../modules/home-manager/cryptomator.nix
   ];
