@@ -79,7 +79,7 @@ with lib.hm.gvariant;
       enable-hot-corners = true;
       font-antialiasing = "grayscale";
       font-hinting = "slight";
-      gtk-theme = "Nordic-Polar";
+      gtk-theme = "Nordic-Polar-standard-buttons";
       icon-theme = "Nordic-bluish";
       show-battery-percentage = true;
       toolkit-accessibility = false;
@@ -144,28 +144,28 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/desktop/wm/keybindings" = {
-      activate-window-menu = [];
+      activate-window-menu = [ ];
       begin-move = [ "<Super>m" ];
       begin-resize = [ "<Super>r" ];
       close = [ "<Super>q" ];
-      cycle-group = [];
-      cycle-group-backward = [];
-      cycle-panels = [];
-      cycle-panels-backward = [];
-      cycle-windows = [];
-      cycle-windows-backward = [];
+      cycle-group = [ ];
+      cycle-group-backward = [ ];
+      cycle-panels = [ ];
+      cycle-panels-backward = [ ];
+      cycle-windows = [ ];
+      cycle-windows-backward = [ ];
       lower = [ "<Super>Down" ];
-      maximize = [];
-      minimize = [];
-      move-to-monitor-down = [];
-      move-to-monitor-left = [];
-      move-to-monitor-right = [];
-      move-to-monitor-up = [];
+      maximize = [ ];
+      minimize = [ ];
+      move-to-monitor-down = [ ];
+      move-to-monitor-left = [ ];
+      move-to-monitor-right = [ ];
+      move-to-monitor-up = [ ];
       move-to-workspace-1 = [ "<Shift><Super>1" ];
       move-to-workspace-2 = [ "<Shift><Super>2" ];
       move-to-workspace-3 = [ "<Shift><Super>3" ];
       move-to-workspace-4 = [ "<Shift><Super>4" ];
-      move-to-workspace-last = [];
+      move-to-workspace-last = [ ];
       move-to-workspace-left = [ "<Shift><Super>Left" ];
       move-to-workspace-right = [ "<Shift><Super>Right" ];
       panel-run-dialog = [ "<Super>c" ];
@@ -173,15 +173,15 @@ with lib.hm.gvariant;
       switch-applications-backward = [ "<Shift><Alt>Tab" ];
       switch-group = [ "<Super>Tab" ];
       switch-group-backward = [ "<Shift><Super>Tab" ];
-      switch-panels = [];
-      switch-panels-backward = [];
-      switch-to-workspace-1 = [];
-      switch-to-workspace-last = [];
+      switch-panels = [ ];
+      switch-panels-backward = [ ];
+      switch-to-workspace-1 = [ ];
+      switch-to-workspace-last = [ ];
       switch-to-workspace-left = [ "<Super>Left" ];
       switch-to-workspace-right = [ "<Super>Right" ];
       toggle-fullscreen = [ "<Shift><Alt>space" ];
       toggle-maximized = [ "<Super>Up" ];
-      unmaximize = [];
+      unmaximize = [ ];
     };
 
     "org/gnome/desktop/wm/preferences" = {
@@ -226,7 +226,7 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/mutter/wayland/keybindings" = {
-      restore-shortcuts = [];
+      restore-shortcuts = [ ];
     };
 
     "org/gnome/nautilus/icon-view" = {
@@ -251,8 +251,8 @@ with lib.hm.gvariant;
 
     "org/gnome/settings-daemon/plugins/media-keys" = {
       custom-keybindings = [ "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/" "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/" "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/" "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/" ];
-      help = [];
-      home = [];
+      help = [ ];
+      home = [ ];
       www = [ "<Super>b" ];
     };
 
@@ -354,7 +354,7 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/shell/extensions/user-theme" = {
-      name = "Nordic-Polar";
+      name = "Nordic-Polar-standard-buttons";
     };
 
     "org/gnome/shell/keybindings" = {
@@ -362,8 +362,8 @@ with lib.hm.gvariant;
       screenshot-window = [ "<Super>Print" ];
       show-screen-recording-ui = [ "<Shift><Control>Print" ];
       show-screenshot-ui = [ "<Control>Print" ];
-      switch-to-application-1 = [];
-      toggle-message-tray = [];
+      switch-to-application-1 = [ ];
+      toggle-message-tray = [ ];
     };
 
     "org/gnome/tweaks" = {
