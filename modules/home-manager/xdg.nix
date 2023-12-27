@@ -7,7 +7,7 @@
     extraConfig = {
       XDG_VMSHARE_DIR = "${config.home.homeDirectory}/VMShare";
       XDG_DESKTOP_DIR = "${config.home.homeDirectory}/Desktop";
-      XDG_DOWNLOAD_DIR = "${config.home.homeDirectory}/Download";
+      XDG_DOWNLOAD_DIR = "${config.home.homeDirectory}/Downloads";
       XDG_TEMPLATES_DIR = "${config.home.homeDirectory}/Templates";
       XDG_PUBLICSHARE_DIR = "${config.home.homeDirectory}/Public";
       XDG_DOCUMENTS_DIR = "${config.home.homeDirectory}/Documents";
@@ -33,9 +33,7 @@
       "application/x-extension-xht" = "librewolf.desktop";
     };
     defaultApplications = {
-      "image/png" = [ "feh.desktop" ];
-      "image/jpeg" = [ "feh.desktop" ];
-      "image/gif" = [ "feh.desktop" ];
+      "image/*" = [ "feh.desktop" ];
       "application/pdf" = [ "masterpdfeditor5.desktop" ];
       "text/plain" = [ "notepadqq.desktop" ];
       "inode/directory" = [ "nautilus.desktop" ];
@@ -49,6 +47,9 @@
       "application/xhtml+xml" = [ "librewolf.desktop" ];
       "application/x-extension-xhtml" = [ "librewolf.desktop" ];
       "application/x-extension-xht" = [ "librewolf.desktop" ];
+      "audio/*" = [ "vlc.desktop" ];
+      "video/*" = [ "vlc.desktop" ];
+
     };
   };
 
