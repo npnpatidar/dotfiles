@@ -6,7 +6,7 @@
 
   };
   # dconf.nix is created by command: 
-  #  dconf dump / | dconf2nix > ~/dotfiles/users/naresh/packages/dconf.nix
+  #dconf dump / | dconf2nix > ~/dotfiles/modules/home-manager/dconf.nix
   imports = [ ./dconf.nix ];
 
 

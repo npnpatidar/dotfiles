@@ -10,8 +10,8 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/control-center" = {
-      last-panel = "keyboard";
-      window-state = mkTuple [ 980 640 ];
+      last-panel = "network";
+      window-state = mkTuple [ 980 640 false ];
     };
 
     "org/gnome/desktop/a11y/magnifier" = {
@@ -22,17 +22,19 @@ with lib.hm.gvariant;
       folder-children = [ "Utilities" "YaST" "Pardus" "LibreOffice" ];
     };
 
-    "org/gnome/desktop/app-folders/folders/Pardus" = {
-      categories = [ "X-Pardus-Apps" ];
-      name = "X-Pardus-Apps.directory";
-      translate = true;
-    };
     "org/gnome/desktop/app-folders/folders/LibreOffice" = {
       apps = [ "startcenter.desktop" "base.desktop" "calc.desktop" "draw.desktop" "impress.desktop" "math.desktop" "writer.desktop" ];
       categories = [ "X-GNOME-LibreOffice" ];
       name = "LibreOffice";
       translate = true;
     };
+
+    "org/gnome/desktop/app-folders/folders/Pardus" = {
+      categories = [ "X-Pardus-Apps" ];
+      name = "X-Pardus-Apps.directory";
+      translate = true;
+    };
+
     "org/gnome/desktop/app-folders/folders/Utilities" = {
       apps = [ "gnome-abrt.desktop" "gnome-system-log.desktop" "nm-connection-editor.desktop" "org.gnome.baobab.desktop" "org.gnome.Connections.desktop" "org.gnome.DejaDup.desktop" "org.gnome.Dictionary.desktop" "org.gnome.DiskUtility.desktop" "org.gnome.Evince.desktop" "org.gnome.FileRoller.desktop" "org.gnome.fonts.desktop" "org.gnome.Loupe.desktop" "org.gnome.seahorse.Application.desktop" "org.gnome.tweaks.desktop" "org.gnome.Usage.desktop" "vinagre.desktop" "ca.desrt.dconf-editor.desktop" "org.gnome.Extensions.desktop" ];
       categories = [ "X-GNOME-Utilities" ];
@@ -67,6 +69,7 @@ with lib.hm.gvariant;
       gtk-theme = "Nordic-Polar";
       icon-theme = "Nordic-bluish";
       show-battery-percentage = true;
+      toolkit-accessibility = false;
     };
 
     "org/gnome/desktop/notifications" = {
@@ -85,8 +88,16 @@ with lib.hm.gvariant;
       application-id = "gnome-power-panel.desktop";
     };
 
+    "org/gnome/desktop/notifications/application/masterpdfeditor5" = {
+      application-id = "masterpdfeditor5.desktop";
+    };
+
     "org/gnome/desktop/notifications/application/org-kde-kdeconnect-daemon" = {
       application-id = "org.kde.kdeconnect.daemon.desktop";
+    };
+
+    "org/gnome/desktop/peripherals/keyboard" = {
+      numlock-state = true;
     };
 
     "org/gnome/desktop/peripherals/touchpad" = {
@@ -161,11 +172,11 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/desktop/wm/preferences" = {
+      auto-raise = true;
       button-layout = "appmenu:minimize,maximize,close";
       focus-mode = "sloppy";
-      workspace-names = [ "M" "B" "F" "T" ];
-      auto-raise = true;
       focus-new-windows = true;
+      workspace-names = [ "M" "B" "F" "T" ];
     };
 
     "org/gnome/evolution-data-server" = {
@@ -184,6 +195,12 @@ with lib.hm.gvariant;
       use-system-font = false;
       vc-left-is-local = true;
       wrap-mode = "none";
+    };
+
+    "org/gnome/meld/window-state" = {
+      height = 302;
+      is-maximized = true;
+      width = 1025;
     };
 
     "org/gnome/mutter" = {
@@ -263,11 +280,26 @@ with lib.hm.gvariant;
       hide-overview-on-startup = true;
       hot-keys = true;
       overview-click-to-exit = true;
-      panel-element-positions = "\n{\"0\":[{\"element\":\"showAppsButton\",\"visible\":true,\"position\":\"stackedTL\"},\n{\"element\":\"activitiesButton\",\"visible\":true,\"position\":\"stackedTL\"},\n{\"element\":\"leftBox\",\"visible\":true,\"position\":\"stackedTL\"},\n{\"element\":\"taskbar\",\"visible\":true,\"position\":\"stackedTL\"},\n{\"element\":\"centerBox\",\"visible\":true,\"position\":\"stackedBR\"},\n{\"element\":\"rightBox\",\"visible\":true,\"position\":\"stackedBR\"},\n{\"element\":\"dateMenu\",\"visible\":true,\"position\":\"stackedBR\"},\n{\"element\":\"systemMenu\",\"visible\":true,\"position\":\"stackedBR\"},\n{\"element\":\"desktopButton\",\"visible\":true,\"position\":\"stackedBR\"}]}\n\n";
+      panel-element-positions = "n{\"0\":[{\"element\":\"showAppsButton\",\"visible\":true,\"position\":\"stackedTL\"},n{\"element\":\"activitiesButton\",\"visible\":true,\"position\":\"stackedTL\"},n{\"element\":\"leftBox\",\"visible\":true,\"position\":\"stackedTL\"},n{\"element\":\"taskbar\",\"visible\":true,\"position\":\"stackedTL\"},n{\"element\":\"centerBox\",\"visible\":true,\"position\":\"stackedBR\"},n{\"element\":\"rightBox\",\"visible\":true,\"position\":\"stackedBR\"},n{\"element\":\"dateMenu\",\"visible\":true,\"position\":\"stackedBR\"},n{\"element\":\"systemMenu\",\"visible\":true,\"position\":\"stackedBR\"},n{\"element\":\"desktopButton\",\"visible\":true,\"position\":\"stackedBR\"}]}nn";
       primary-monitor = 0;
       show-apps-icon-side-padding = 0;
       status-icon-padding = 1;
       tray-padding = 2;
+    };
+
+    "org/gnome/shell/extensions/gsconnect" = {
+      devices = [ "76d73ac2_4e35_4ce4_9d7e_a0b78497a587" ];
+      id = "12d003d4-ae21-4916-97ef-9da204f137ea";
+      name = "nixos";
+    };
+
+    "org/gnome/shell/extensions/gsconnect/device/76d73ac2_4e35_4ce4_9d7e_a0b78497a587" = {
+      incoming-capabilities = [ "kdeconnect.battery" "kdeconnect.bigscreen.stt" "kdeconnect.clipboard" "kdeconnect.clipboard.connect" "kdeconnect.contacts.request_all_uids_timestamps" "kdeconnect.contacts.request_vcards_by_uid" "kdeconnect.findmyphone.request" "kdeconnect.mousepad.keyboardstate" "kdeconnect.mousepad.request" "kdeconnect.mpris" "kdeconnect.mpris.request" "kdeconnect.notification" "kdeconnect.notification.action" "kdeconnect.notification.reply" "kdeconnect.notification.request" "kdeconnect.ping" "kdeconnect.runcommand" "kdeconnect.sftp.request" "kdeconnect.share.request" "kdeconnect.share.request.update" "kdeconnect.sms.request" "kdeconnect.sms.request_attachment" "kdeconnect.sms.request_conversation" "kdeconnect.sms.request_conversations" "kdeconnect.systemvolume" "kdeconnect.telephony.request" "kdeconnect.telephony.request_mute" ];
+      last-connection = "lan://192.168.12.194:1716";
+      name = "Naresh's Phone";
+      outgoing-capabilities = [ "kdeconnect.battery" "kdeconnect.bigscreen.stt" "kdeconnect.clipboard" "kdeconnect.clipboard.connect" "kdeconnect.connectivity_report" "kdeconnect.contacts.response_uids_timestamps" "kdeconnect.contacts.response_vcards" "kdeconnect.findmyphone.request" "kdeconnect.mousepad.echo" "kdeconnect.mousepad.keyboardstate" "kdeconnect.mousepad.request" "kdeconnect.mpris" "kdeconnect.mpris.request" "kdeconnect.notification" "kdeconnect.notification.request" "kdeconnect.ping" "kdeconnect.presenter" "kdeconnect.runcommand.request" "kdeconnect.sftp" "kdeconnect.share.request" "kdeconnect.sms.attachment_file" "kdeconnect.sms.messages" "kdeconnect.systemvolume.request" "kdeconnect.telephony" ];
+      supported-plugins = [ "battery" "clipboard" "connectivity_report" "contacts" "findmyphone" "mousepad" "mpris" "notification" "ping" "presenter" "runcommand" "sftp" "share" "sms" "systemvolume" "telephony" ];
+      type = "phone";
     };
 
     "org/gnome/shell/extensions/netspeedsimplified" = {
@@ -304,6 +336,10 @@ with lib.hm.gvariant;
 
     "org/gnome/tweaks" = {
       show-extensions-notice = false;
+    };
+
+    "org/gtk/gtk4/settings/file-chooser" = {
+      show-hidden = false;
     };
 
     "org/gtk/settings/file-chooser" = {
