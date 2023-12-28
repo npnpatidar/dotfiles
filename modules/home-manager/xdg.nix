@@ -37,7 +37,7 @@
       "image/*" = [ "feh.desktop" ];
       "application/pdf" = [ "masterpdfeditor5.desktop" ];
       "text/plain" = [ "notepadqq.desktop" ];
-      "inode/directory" = [ "nautilus.desktop" ];
+      "inode/directory" = [ "org.gnome.Nautilus.desktop" ];
       "x-scheme-handler/http" = [ "librewolf.desktop" ];
       "x-scheme-handler/https" = [ "librewolf.desktop" ];
       "x-scheme-handler/chrome" = [ "librewolf.desktop" ];
