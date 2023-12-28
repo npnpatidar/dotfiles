@@ -1,8 +1,34 @@
 { config, pkgs, lib, ... }:
-
 {
   stylix = {
-    image = ../home-manager/nix.png;
+    # image = ./nix.png;
+
+    image =
+      (
+        pkgs.fetchFromGitHub
+          {
+            owner = "NixOS";
+            repo = "nixos-artwork";
+            rev = "e3a74d1c40086393f2b1b9f218497da2db0ff3ae";
+            sha256 = "sha256-9MRBDosbxEXNUWRimzBcyfmYtSQ/2GAliYUqA8A8GkY=";
+            sparseCheckout = [ "wallpapers" ];
+          } + "/wallpapers" + "/nix-wallpaper-dracula.png"
+      );
+
+    base16Scheme =
+      (
+        pkgs.fetchFromGitHub
+          {
+            owner = "tinted-theming";
+            repo = "base16-schemes";
+            rev = "2b6f2d0677216ddda50c9cabd6ee70fae4665f81";
+            sha256 = "sha256-VTczZi1C4WSzejpTFbneMonAdarRLtDnFehVxWs6ad0=";
+          } + "/nord.yaml"
+      );
+
+
+
+
     polarity = "dark";
     fonts = {
       serif = {
