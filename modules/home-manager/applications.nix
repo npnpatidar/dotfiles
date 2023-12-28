@@ -123,5 +123,6 @@
     nodejs_21
     gnumake
     tldr
+    git-graph
   ];
 }

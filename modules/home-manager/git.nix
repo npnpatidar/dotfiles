@@ -21,7 +21,7 @@
       d = "diff";
       ds = "diff --staged";
       dt = "difftool";
-
+      l = "log --graph --abbrev-commit --decorate --date=relative --all";
     };
     extraConfig = {
       diff = { tool = "meld"; };
