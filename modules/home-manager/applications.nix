@@ -124,5 +124,6 @@
     gnumake
     tldr
     git-graph
+    preload
   ];
 }
