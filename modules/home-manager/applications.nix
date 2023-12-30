@@ -38,8 +38,7 @@
 
     #Notes 
     qownnotes
-    notepadqq
-
+    gnome-text-editor
 
     #Documents
     libreoffice

@@ -44,7 +44,7 @@
       doc_backup = "rclone sync /home/naresh/Data/Sync_M_L/Documents/ /home/naresh/.local/share/Cryptomator/mnt/EncryptedDocuments/   --verbose ";
       code = "codium";
       nos = "nix --extra-experimental-features 'nix-command flakes' search nixpkgs";
-      note = "notepadqq";
+      note = "gnome-text-editor";
       vnd = "nvim ~/dotfiles";
       ab = "cd ~/dotfiles/scripts && ~/dotfiles/scripts/apply-boot.sh";
       as = "cd ~/dotfiles/scripts && ~/dotfiles/scripts/apply-system.sh";
