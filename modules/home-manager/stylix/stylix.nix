@@ -23,7 +23,7 @@
             repo = "base16-schemes";
             rev = "2b6f2d0677216ddda50c9cabd6ee70fae4665f81";
             sha256 = "sha256-VTczZi1C4WSzejpTFbneMonAdarRLtDnFehVxWs6ad0=";
-          } + "/nord.yaml"
+          } + "/ocean.yaml"
       );
 
 
@@ -55,7 +55,7 @@
       };
     };
     opacity = {
-      terminal = 0.90;
+      terminal = 0.97;
       applications = 0.90;
       popups = 0.50;
       desktop = 0.90;

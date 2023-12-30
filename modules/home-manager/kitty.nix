@@ -12,16 +12,23 @@
       enableBashIntegration = true;
       enableZshIntegration = true;
     };
-
+    settings = {
+      background_opacity = "0.95";
+      copy_on_select = true;
+    };
 
   };
 
 
   programs.mcfly = {
     enable = true;
-    enableBashIntegration = true;
+
     enableZshIntegration = true;
+    enableBashIntegration = true;
     fuzzySearchFactor = 3;
     keyScheme = "vim";
   };
 }
+
+
+
