@@ -50,6 +50,7 @@
       as = "cd ~/dotfiles/scripts && ~/dotfiles/scripts/apply-system.sh";
       ad = "cd ~/dotfiles/scripts && ~/dotfiles/scripts/apply-dry-build.sh";
       at = "cd ~/dotfiles/scripts && ~/dotfiles/scripts/apply-test.sh";
+      au = "cd ~/dotfiles/scripts && ~/dotfiles/scripts/apply-users.sh";
       buildvm = "cd ~/dotfiles/scripts && ~/dotfiles/scripts/create-vm.sh";
       runvm = "$(readlink -f ~/dotfiles/result/bin/run-nixos-vm)";
       vm = "cd ~/dotfiles/scripts && ~/dotfiles/scripts/create-vm.sh  && $(readlink -f ~/dotfiles/result/bin/run-nixos-vm)";

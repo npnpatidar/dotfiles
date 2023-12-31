@@ -53,6 +53,8 @@
     fsearch
     (import ../../pkgs/xdm-app.nix { inherit pkgs; })
     gnome.gnome-boxes
+    newsflash
+    # bitwarden
 
 
     #   CLI Apps 

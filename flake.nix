@@ -88,7 +88,20 @@
         ];
       };
 
+      homeConfigurations = {
+        # FIXME replace with your username@hostname
+        "naresh" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
+          extraSpecialArgs = { inherit inputs outputs; };
+          modules = [
+            ./hosts/aspire7/home-manager/home.nix
+            nixvim.homeManagerModules.nixvim
+            nix-index-database.hmModules.nix-index
+            stylix.homeManagerModules.stylix
+          ];
 
+        };
+      };
 
 
       nixosConfigurations = {
@@ -133,6 +146,48 @@
 
         };
       };
+
+      nixosConfigurations =
+        {
+          aspireM = nixpkgs.lib.nixosSystem {
+            system = "x86_64-linux";
+            modules = [
+              { nixpkgs.overlays = [ nur.overlay ]; }
+              ({ pkgs, ... }:
+                let
+                  nur-no-pkgs = import nur {
+                    nurpkgs = import nixpkgs { system = "x86_64-linux"; };
+                  };
+                in
+                {
+                  # imports = [ nur-no-pkgs.repos.iopq.modules.xraya ];
+                  # services.xraya.enable = true;
+                })
+              ./hosts/aspire7/nixos/configuration.nix
+
+              nur.nixosModules.nur
+              home-manager.nixosModules.home-manager
+              # {
+              #   home-manager = {
+              #     # useGlobalPkgs = true;
+              #     useUserPackages = true;
+              #     users.naresh = {
+              #       imports = [
+              #         ./hosts/aspire7/home-manager/home.nix
+              #       ];
+              #     };
+              #
+              #     extraSpecialArgs = { inherit inputs outputs; };
+              #     sharedModules = [
+              #       nixvim.homeManagerModules.nixvim
+              #       nix-index-database.hmModules.nix-index
+              #       stylix.homeManagerModules.stylix
+              #     ];
+              #   };
+              # }
+            ];
+          };
+        };
 
 
 

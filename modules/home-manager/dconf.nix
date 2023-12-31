@@ -49,7 +49,7 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/desktop/app-folders/folders/Utilities" = {
-      apps = [ "gnome-abrt.desktop" "gnome-system-log.desktop" "nm-connection-editor.desktop" "org.gnome.baobab.desktop" "org.gnome.Connections.desktop" "org.gnome.DejaDup.desktop" "org.gnome.Dictionary.desktop" "org.gnome.DiskUtility.desktop" "org.gnome.Evince.desktop" "org.gnome.FileRoller.desktop" "org.gnome.fonts.desktop" "org.gnome.Loupe.desktop" "org.gnome.seahorse.Application.desktop" "org.gnome.tweaks.desktop" "org.gnome.Usage.desktop" "vinagre.desktop" "ca.desrt.dconf-editor.desktop" "org.gnome.Extensions.desktop" "nvidia-settings.desktop" ];
+      apps = [ "gnome-abrt.desktop" "gnome-system-log.desktop" "nm-connection-editor.desktop" "org.gnome.baobab.desktop" "org.gnome.Connections.desktop" "org.gnome.DejaDup.desktop" "org.gnome.Dictionary.desktop" "org.gnome.DiskUtility.desktop" "org.gnome.Evince.desktop" "org.gnome.FileRoller.desktop" "org.gnome.fonts.desktop" "org.gnome.Loupe.desktop" "org.gnome.seahorse.Application.desktop" "org.gnome.tweaks.desktop" "org.gnome.Usage.desktop" "vinagre.desktop" "ca.desrt.dconf-editor.desktop" "org.gnome.Extensions.desktop" "nvidia-settings.desktop" "nixos-manual.desktop" ];
       categories = [ "X-GNOME-Utilities" ];
       name = "X-GNOME-Utilities.directory";
       translate = true;
@@ -322,6 +322,7 @@ with lib.hm.gvariant;
       devices = [ "76d73ac2_4e35_4ce4_9d7e_a0b78497a587" ];
       id = "12d003d4-ae21-4916-97ef-9da204f137ea";
       name = "nixos";
+      show-indicators = true;
     };
 
     "org/gnome/shell/extensions/gsconnect/device/76d73ac2_4e35_4ce4_9d7e_a0b78497a587" = {

@@ -1,4 +1,4 @@
 #! /bin/sh
-pushd ~/.dotfiles
-home-manager switch -f ./users/naresh/home.nix
+pushd ~/dotfiles
+home-manager switch --flake ~/dotfiles
 popd
