@@ -46,7 +46,11 @@
 
     #Artificial Intelligence
     ollama
+    oterm
     # (import ./ollama { inherit pkgs; })
+
+    #mindmap 
+    freeplane
 
     #miscellaneious
     authenticator

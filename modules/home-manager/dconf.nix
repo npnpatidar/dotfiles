@@ -32,13 +32,20 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/desktop/app-folders" = {
-      folder-children = [ "Utilities" "YaST" "Pardus" "LibreOffice" ];
+      folder-children = [ "Utilities" "YaST" "Pardus" "LibreOffice" "gnome" ];
     };
 
     "org/gnome/desktop/app-folders/folders/LibreOffice" = {
       apps = [ "startcenter.desktop" "base.desktop" "calc.desktop" "draw.desktop" "impress.desktop" "math.desktop" "writer.desktop" ];
       categories = [ "X-GNOME-LibreOffice" ];
       name = "LibreOffice";
+      translate = true;
+    };
+
+    "org/gnome/desktop/app-folders/folders/gnome" = {
+      apps = [ "org.gnome.gnome-latex.desktop" "re.sonny.Tangram.desktop" "io.gitlab.news_flash.NewsFlash.desktop" "org.gnome.Boxes.desktop" "org.gnome.TextEditor.desktop" ];
+      categories = [ "X-GNome-gnome" ];
+      name = "X-GNome-gnome.directory";
       translate = true;
     };
 
