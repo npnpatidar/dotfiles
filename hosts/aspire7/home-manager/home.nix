@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ config, inputs, ... }:
 {
   imports = [
     ../../../modules/home-manager/kitty.nix
@@ -21,6 +21,7 @@
     ../../../modules/home-manager/fcitx5/fcitx5.nix
   ];
 
+  modules.home-manager.bat.enable = true;
   nixpkgs = {
     overlays =
       # builtins.attrValues outputs.overlays

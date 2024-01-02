@@ -45,7 +45,7 @@ with lib.hm.gvariant;
     "org/gnome/desktop/app-folders/folders/gnome" = {
       apps = [ "org.gnome.gnome-latex.desktop" "re.sonny.Tangram.desktop" "io.gitlab.news_flash.NewsFlash.desktop" "org.gnome.Boxes.desktop" "org.gnome.TextEditor.desktop" ];
       categories = [ "X-GNome-gnome" ];
-      name = "X-GNome-gnome.directory";
+      name = "gnome";
       translate = true;
     };
 

@@ -1,26 +1,44 @@
-{ config, pkgs, ... }:
+{ lib, pkgs, config, ... }:
+with lib;
+let
+  cfg = config.modules.home-manager.bat;
+in
 {
-  programs.zsh.shellAliases = {
-    "-g -- --help" = "--help 2>&1 | bat --language=help --style=plain";
-    "-g -- -h" = "-h 2>&1 | bat --language=help --style=plain";
-
-    cat = "bat";
-    rg = "batgrep";
-    ripgrep = "batgrep";
-    man = "batman";
+  options.modules.home-manager.bat = {
+    enable = mkEnableOption false;
   };
 
-  programs.bat = {
-    enable = true;
-    config = {
-      map-syntax = [
-      ];
-      pager = "less -FR";
-      theme = "ansi";
+  config = mkIf cfg.enable {
 
-
+    programs.zsh.shellAliases = {
+      "-g -- --help" = "--help 2>&1 | bat --language=help --style=plain";
+      "-g -- -h" = "-h 2>&1 | bat --language=help --style=plain";
+      cat = "bat";
+      rg = "batgrep";
+      ripgrep = "batgrep";
+      man = "batman";
     };
 
-    extraPackages = with pkgs.bat-extras;[ batdiff batgrep batman batwatch ];
+    programs.bat = {
+      enable = true;
+      config = {
+        map-syntax = [
+        ];
+        pager = "less -FR";
+        theme = "ansi";
+      };
+      extraPackages = with pkgs.bat-extras;[ batdiff batgrep batman batwatch ];
+    };
   };
 }
+
+
+
+
+
+
+
+
+
+
+

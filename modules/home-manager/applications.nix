@@ -80,7 +80,7 @@
     comma
     fontconfig
     zlib
-    bat
+    # bat
     appimage-run
     btop
     flatpak
