@@ -18,7 +18,7 @@
     ../../../modules/home-manager/cryptomator.nix
     ../../../modules/home-manager/stylix/stylix.nix
     ../../../modules/home-manager/latex.nix
-    ../../../modules/home-manager/fcitx5.nix
+    ../../../modules/home-manager/fcitx5/fcitx5.nix
   ];
 
   nixpkgs = {
