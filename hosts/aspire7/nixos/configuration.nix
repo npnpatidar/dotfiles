@@ -42,7 +42,7 @@
 
 
   programs.zsh.enable = true;
-  programs.geary.enable = true;
+  # programs.geary.enable = true;
 
 
 

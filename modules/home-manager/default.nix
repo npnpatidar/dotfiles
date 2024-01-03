@@ -1,0 +1,25 @@
+{ config, pkgs, ... }:
+{
+  imports = [
+    ./kitty.nix
+    ./vscode.nix
+    ./zsh/zsh.nix
+    ./librewolf.nix
+    ./gnome_settings.nix
+    ./neovim.nix
+    #./nvim
+    ./ranger.nix
+    ./git.nix
+    ./bat.nix
+    ./applications.nix
+    ./geary.nix
+    ./xdg.nix
+    ./masterpdfeditor.nix
+    ./cryptomator.nix
+    ./stylix/stylix.nix
+    ./latex.nix
+    ./fcitx5/fcitx5.nix
+    ./qutebrowser.nix
+  ];
+
+}

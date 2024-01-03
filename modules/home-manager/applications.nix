@@ -26,13 +26,10 @@
 
 
     #Coding
-    vscodium-fhs
     # android-studio
-    meld # for git difftool
 
     #Cloud Storage
     nextcloud-client
-    cryptomator
     syncthing
     (import ../../pkgs/filen-desktop.nix { inherit pkgs; })
 
@@ -42,7 +39,6 @@
 
     #Documents
     libreoffice
-    masterpdfeditor
 
     #Artificial Intelligence
     ollama
@@ -66,7 +62,6 @@
     mc
     onefetch
     yank
-    gh
     nb
     nvitop
     dconf2nix
@@ -80,7 +75,6 @@
     comma
     fontconfig
     zlib
-    # bat
     appimage-run
     btop
     flatpak
@@ -104,7 +98,6 @@
     conda
     docker
     docker-compose
-    python3.pkgs.pip
     xdg-desktop-portal-gtk
     python3Full
     android-tools
@@ -120,7 +113,6 @@
     nix-init
     ripgrep
     distrobox
-    lazygit
     wl-clipboard
     llama-cpp
     fzf
@@ -128,7 +120,6 @@
     nodejs_21
     gnumake
     tldr
-    git-graph
     preload
   ];
 }

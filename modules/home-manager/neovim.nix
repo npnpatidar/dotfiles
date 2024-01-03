@@ -1,15 +1,22 @@
-{ pkgs, config, lib, ... }:
-
+{ lib, pkgs, config, ... }:
+with lib;
+let
+  cfg = config.modules.home-manager.neovim;
+in
 {
+  options.modules.home-manager.neovim = {
+    enable = mkEnableOption false;
+  };
+
+  config = mkIf cfg.enable {
 
 
+    programs.nixvim = {
+      enable = true;
+      package = pkgs.neovim-unwrapped;
 
-  programs.nixvim = {
-    enable = true;
-    package = pkgs.neovim-unwrapped;
 
-
-    extraConfigLua = ''
+      extraConfigLua = ''
 
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -345,5 +352,6 @@ vim.g.neoformat_enabled_nix = {'nixfmt'}
 
     '';
 
+    };
   };
 }

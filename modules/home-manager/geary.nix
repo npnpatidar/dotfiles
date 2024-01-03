@@ -1,9 +1,20 @@
-{ ... }:
+{ lib, pkgs, config, ... }:
+with lib;
+let
+  cfg = config.modules.home-manager.geary;
+in
 {
+  options.modules.home-manager.geary = {
+    enable = mkEnableOption false;
+  };
 
+  config = mkIf cfg.enable {
 
-  home.file.".config/geary/user-style.css" = {
-    text = ''
+    home.packages = [
+      pkgs.gnome.geary
+    ];
+    home.file.".config/geary/user-style.css" = {
+      text = ''
      
     :root *:not(a) {
         color: #eeeeec !important;
@@ -12,5 +23,6 @@
     }
 
      '';
+    };
   };
 }
