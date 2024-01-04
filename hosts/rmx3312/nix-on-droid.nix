@@ -61,11 +61,18 @@
     config =
       { config, lib, pkgs, ... }:
       {
-        imports = [ ../../modules/home-manager ];
+        imports = [
+          ../../modules/home-manager/git.nix
+          ../../modules/home-manager/zsh/zsh.nix
+          ../../modules/home-manager/ranger.nix
+          ../../modules/home-manager/bat.nix
+        ];
 
         modules.home-manager = {
           git.enable = true;
           zsh.enable = true;
+          ranger.enable = true;
+          bat.enable = true;
         };
         home = {
           username = "nix-on-droid";
