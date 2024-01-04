@@ -50,6 +50,8 @@
     perl
     gcc
     zig
+    nix-index
+    busybox
   ];
   environment.etcBackupExtension = ".bak";
   system.stateVersion = "23.05";
