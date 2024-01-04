@@ -11,12 +11,12 @@ in
   config = mkIf cfg.enable {
 
 
-    programs.nixvim = {
+    programs.neovim = {
       enable = true;
       package = pkgs.neovim-unwrapped;
 
 
-      extraConfigLua = ''
+      extraLuaConfig = ''
 
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
