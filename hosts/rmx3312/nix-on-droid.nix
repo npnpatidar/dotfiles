@@ -11,10 +11,6 @@
     ncdu
     mc
     onefetch
-    yank
-    nb
-    nvitop
-    dconf2nix
     python311Packages.howdoi
     # steam-run
     unzip
@@ -22,7 +18,6 @@
     tree-sitter
     comma
     fontconfig
-    zlib
     btop
     bash
     screenfetch
@@ -34,7 +29,6 @@
     neofetch
     nethogs
     p7zip
-    fuse-7z-ng
     # scrcpy
     #   yt-dlp
     zoxide
