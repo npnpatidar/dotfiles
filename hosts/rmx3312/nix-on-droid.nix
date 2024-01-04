@@ -48,7 +48,7 @@
     ripgrep
     fzf
     tldr
-
+    lazygit
   ];
   environment.etcBackupExtension = ".bak";
   system.stateVersion = "23.05";
