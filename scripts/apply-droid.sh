@@ -1,4 +1,4 @@
 #! /bin/sh
 pushd ~/dotfiles
-nix-on-droid switch --flake .#rms3312
+nix-on-droid switch --flake .#rmx3312
 popd
