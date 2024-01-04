@@ -76,7 +76,7 @@
           screenfetch
         ];
         # insert home-manager config
-        user.shell = "${pkgs.zsh}/bin/zsh";
+        # user.shell = "${pkgs.zsh}/bin/zsh";
         programs.home-manager.enable = true;
 
       };
