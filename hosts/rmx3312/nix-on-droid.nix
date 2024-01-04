@@ -24,7 +24,11 @@
       {
         # Read the changelog before changing this value
         home.stateVersion = "23.05";
-
+        home.packages = with pkgs; [
+          lunarvim
+          eza
+          screenfetch
+        ];
         # insert home-manager config
       };
   };
