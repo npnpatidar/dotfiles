@@ -45,6 +45,7 @@
     curl
     zsh
     starship
+    openssh
   ];
   environment.etcBackupExtension = ".bak";
   system.stateVersion = "23.05";
@@ -62,7 +63,7 @@
       {
         imports = [ ../../modules/home-manager ];
 
-        config.modules.home-manager = {
+        modules.home-manager = {
           git.enable = true;
           zsh.enable = true;
         };
