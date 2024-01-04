@@ -4,7 +4,6 @@
   environment.packages = with pkgs; [
     lunarvim
     git
-    btop
     bat
     nano
     neofetch
@@ -18,7 +17,7 @@
     tree-sitter
     comma
     fontconfig
-    btop
+    htop
     bash
     screenfetch
     rnix-lsp
@@ -43,6 +42,9 @@
     fzf
     tldr
     lazygit
+    curl
+    zsh
+    starship
   ];
   environment.etcBackupExtension = ".bak";
   system.stateVersion = "23.05";
@@ -58,7 +60,12 @@
     config =
       { config, lib, pkgs, ... }:
       {
-        # Read the changelog before changing this value
+        imports = [ ../../modules/home-manager ];
+
+        config.modules.home-manager = {
+          git.enable = true;
+          zsh.enable = true;
+        };
         home = {
           username = "nix-on-droid";
           homeDirectory = "/data/data/com.termux.nix/files/home";
