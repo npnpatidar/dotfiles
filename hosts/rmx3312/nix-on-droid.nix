@@ -66,7 +66,7 @@
       {
         # Read the changelog before changing this value
         home = {
-          username = "naresh";
+          username = "nix-on-droid";
           homeDirectory = "/data/data/com.termux.nix/files/home";
           stateVersion = "23.05";
         };
