@@ -18,7 +18,6 @@
     comma
     fontconfig
     htop
-    bash
     screenfetch
     rnix-lsp
     git
@@ -51,7 +50,7 @@
     gcc
     zig
     nix-index
-    busybox
+  utillinux
   ];
   environment.etcBackupExtension = ".bak";
   system.stateVersion = "23.05";
