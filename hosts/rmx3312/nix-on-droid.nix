@@ -52,6 +52,15 @@
   nix.extraOptions = ''
     experimental-features = nix-command flakes
   '';
+  terminal.font =
+    let
+      firacode = pkgs.nerdfonts.override {
+        fonts = [ "FiraCode" ];
+      };
+      fontPath = "share/fonts/truetype/NerdFonts/FiraCodeNerdFontMono-Regular.ttf";
+    in
+    "${firacode}/${fontPath}";
+  user.shell = "${pkgs.zsh}/bin/zsh";
   # Configure home-manager
   home-manager = {
 
