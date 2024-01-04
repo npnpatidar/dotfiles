@@ -77,6 +77,7 @@ in
         git-merge-work = "git checkout main && git pull origin main && git merge work && git push origin main && git checkout work";
         gdt = "meld .";
         fzf = "fzf --preview 'bat --color=always --style=numbers --line-range=:500 {}'";
+        das = "cd ~/dotfiles && git pull origin test && cd scripts && ./apply-droid.sh";
       };
 
       completionInit = ""; # speed up zsh start time
