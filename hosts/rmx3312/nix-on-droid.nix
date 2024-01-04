@@ -8,6 +8,46 @@
     bat
     nano
     neofetch
+    ncdu
+    mc
+    onefetch
+    yank
+    nb
+    nvitop
+    dconf2nix
+    python311Packages.howdoi
+    # steam-run
+    unzip
+    fd
+    tree-sitter
+    comma
+    fontconfig
+    zlib
+    btop
+    bash
+    screenfetch
+    rnix-lsp
+    git
+    git-crypt
+    gnupg
+    wget
+    neofetch
+    nethogs
+    p7zip
+    fuse-7z-ng
+    # scrcpy
+    #   yt-dlp
+    zoxide
+    tgpt
+    direnv
+    nixpkgs-fmt
+    eza
+    nixfmt
+    cht-sh
+    nix-init
+    ripgrep
+    fzf
+    tldr
 
   ];
   environment.etcBackupExtension = ".bak";
@@ -39,14 +79,6 @@
         user.shell = "${pkgs.zsh}/bin/zsh";
         programs.home-manager.enable = true;
 
-        naresh.shell = {
-          enable = true;
-          username = "rmx3312";
-          hostname = "rmx3312";
-          atuin = true;
-          direnv = true;
-          zoxide = true;
-        };
       };
   };
 }
