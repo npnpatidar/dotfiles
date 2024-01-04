@@ -21,6 +21,7 @@
     nix-on-droid = {
       url = "github:t184256/nix-on-droid";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
     };
     nix-index-database = {
       url = "github:Mic92/nix-index-database";
@@ -83,6 +84,7 @@
         };
 
       nixOnDroidConfigurations.rmx3312 = nix-on-droid.lib.nixOnDroidConfiguration {
+        system = "aarch64-linux";
         modules = [
           ./hosts/rmx3312/nix-on-droid.nix
         ];
