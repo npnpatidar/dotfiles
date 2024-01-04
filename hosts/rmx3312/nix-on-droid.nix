@@ -48,6 +48,8 @@
     openssh
     any-nix-shell
     perl
+    gcc
+    zig
   ];
   environment.etcBackupExtension = ".bak";
   system.stateVersion = "23.05";
