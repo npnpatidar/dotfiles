@@ -2,7 +2,7 @@
 {
 
   environment.packages = with pkgs; [
-    lunarvim
+    # lunarvim
     git
     bat
     nano
@@ -46,6 +46,8 @@
     zsh
     starship
     openssh
+    any-nix-shell
+    perl
   ];
   environment.etcBackupExtension = ".bak";
   system.stateVersion = "23.05";
@@ -96,7 +98,31 @@
         # insert home-manager config
         # user.shell = "${pkgs.zsh}/bin/zsh";
         programs.home-manager.enable = true;
+        programs.neovim = {
+          enable = true;
+          package = pkgs.neovim-nightly;
+          # defaultEditor = true;
 
+          viAlias = true;
+          vimAlias = true;
+          vimdiffAlias = true;
+
+          withPython3 = false;
+          withNodeJs = false;
+          withRuby = false;
+
+          # neovimRcContent = "";
+
+          extraPackages = with pkgs; [
+            tree-sitter
+            rnix-lsp
+            vimPlugins.LazyVim
+            # sumneko-lua-language-server
+            # stylua
+            # texlab
+            # rust-analyzer
+          ];
+        };
       };
   };
 }
