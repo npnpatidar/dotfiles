@@ -50,7 +50,7 @@
     gcc
     zig
     cargo
-    pinentry-tty
+    pinentry
     nix-index
     utillinux
     bash
@@ -107,6 +107,16 @@
           eza
           screenfetch
         ];
+
+        # programs.gpg = {
+        #   enable = true;
+        # };
+        services.gpg-agent = {
+          enable = true;
+          pinentryFlavor = "tty";
+        };
+
+
       };
   };
 }
