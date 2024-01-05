@@ -74,12 +74,13 @@ in
         delete-gen = "sudo nix-env --delete-generations --profile /nix/var/nix/profiles/system";
         clear-boot = "sudo /run/current-system/bin/switch-to-configuration boot";
         arch = "distrobox enter arch";
+        git-merge-droid ="git checkout test && git pull origin test && git merge droid && git push origin test && git checkout droid";
         git-merge-test = "git checkout work && git pull origin work && git merge test && git push origin work && git checkout test";
         git-merge-work = "git checkout main && git pull origin main && git merge work && git push origin main && git checkout work";
         gdt = "meld .";
         fzf = "fzf --preview 'bat --color=always --style=numbers --line-range=:500 {}'";
         das = "cd ~/dotfiles && git pull origin test && cd scripts && ./apply-droid.sh";
-        uas = "cd ~/dotfiles && git add . && git commit -m 'auto droid' && git push origin test && cd scripts && ./apply-droid.sh";
+        uas = "cd ~/dotfiles && git add . && git commit -m 'auto droid' && git push origin droid && cd scripts && ./apply-droid.sh";
       };
 
       completionInit = ""; # speed up zsh start time
