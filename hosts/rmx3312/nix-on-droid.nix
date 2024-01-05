@@ -48,13 +48,14 @@
     any-nix-shell
     perl
     gcc
-    yank
     zig
+
     nix-index
   utillinux
   bash
   gnumake
   rclone
+  ffsend
   # busybox
   ];
   environment.etcBackupExtension = ".bak";
