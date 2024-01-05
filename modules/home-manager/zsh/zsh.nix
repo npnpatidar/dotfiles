@@ -22,7 +22,6 @@ in
       enableCompletion = true;
       syntaxHighlighting.enable = true;
       dotDir = ".config/zsh";
-      defaultKeymap = "vicmd";
       sessionVariables = {
         EDITOR = "nvim";
       };
@@ -38,6 +37,14 @@ in
           "sudo"
         ];
       };
+      zsh-abbr = {
+        enable = true;
+        abbreviations = {
+          e = "exit";
+        };
+      };
+
+
       shellAliases = {
         cd = "z";
         # nvim = "steam-run nvim";

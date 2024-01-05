@@ -76,6 +76,7 @@ in
         #   gnome.enable = true;
         #   gtk.enable = true;
         #   vscode.enable = true;
+        vim.enable = false;
         kitty.enable = false;
       };
     };

@@ -121,5 +121,10 @@
     gnumake
     tldr
     preload
+    thefuck
+    curl
+    rclone
+    ffsend
+
   ];
 }

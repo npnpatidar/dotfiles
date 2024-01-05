@@ -46,13 +46,6 @@
 
   programs.zsh = {
     enable = true;
-    zsh-abbr = {
-      enable = true;
-      enableZshIntegration = true;
-      abbreviations = {
-        e = "exit";
-      };
-    };
   };
 
   # Set your time zone.
