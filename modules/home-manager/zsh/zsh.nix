@@ -4,6 +4,7 @@ let
   cfg = config.modules.home-manager.zsh;
   alias-abbr = {
     cd = "z";
+    r = "ranger";
     # nvim = "steam-run nvim";
     c = "clear";
     sn = "sudo nano";
@@ -38,7 +39,7 @@ let
     lsa = "ls -a";
     lsl = "ls -l";
     lsla = "lsl -a";
-    ls = "eza -Fgh --group-directories-first --git --git-ignore --icons --color-scale all --hyperlink";
+    ls = "eza -Fgh --group-directories-first --git --icons --color-scale all --hyperlink";
     list-gen = "sudo nix-env --list-generations --profile /nix/var/nix/profiles/system";
     delete-gen = "sudo nix-env --delete-generations --profile /nix/var/nix/profiles/system";
     clear-boot = "sudo /run/current-system/bin/switch-to-configuration boot";

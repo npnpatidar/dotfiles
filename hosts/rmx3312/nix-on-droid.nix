@@ -2,7 +2,6 @@
 {
 
   environment.packages = with pkgs; [
-    # lunarvim
     git
     bat
     nano
@@ -11,7 +10,6 @@
     mc
     onefetch
     python311Packages.howdoi
-    # steam-run
     unzip
     fd
     tree-sitter
@@ -27,7 +25,6 @@
     neofetch
     nethogs
     p7zip
-    # scrcpy
     #   yt-dlp
     zoxide
     tgpt
@@ -58,7 +55,6 @@
     rclone
     ffsend
     thefuck
-    # busybox
   ];
   environment.etcBackupExtension = ".bak";
   system.stateVersion = "23.05";
@@ -74,10 +70,7 @@
     in
     "${firacode}/${fontPath}";
   user.shell = "${pkgs.zsh}/bin/zsh";
-  # Configure home-manager
   home-manager = {
-
-
     backupFileExtension = "hm-bak";
     useGlobalPkgs = true;
     config =
@@ -108,15 +101,10 @@
           screenfetch
         ];
 
-        # programs.gpg = {
-        #   enable = true;
-        # };
         services.gpg-agent = {
           enable = true;
           pinentryFlavor = "tty";
         };
-
-
       };
   };
 }
