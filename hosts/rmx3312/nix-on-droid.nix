@@ -53,6 +53,7 @@
   utillinux
   bash
   gnumake
+  rclone
   # busybox
   ];
   environment.etcBackupExtension = ".bak";
