@@ -22,22 +22,22 @@ in
       enableCompletion = true;
       syntaxHighlighting.enable = true;
       dotDir = ".config/zsh";
-
+      defaultKeymap = "vicmd";
       sessionVariables = {
         EDITOR = "nvim";
       };
-oh-my-zsh ={
-    enable= true;
-    plugins =[
-    "thefuck" 
-    "git"
-    "fzf"
-    "colored-man-pages"
-    "extract"
-    "copybuffer"
-    ];
-  };
-
+      oh-my-zsh = {
+        enable = true;
+        plugins = [
+          "thefuck"
+          "git"
+          "fzf"
+          "colored-man-pages"
+          "extract"
+          "copybuffer"
+          "sudo"
+        ];
+      };
       shellAliases = {
         cd = "z";
         # nvim = "steam-run nvim";
@@ -84,7 +84,7 @@ oh-my-zsh ={
         delete-gen = "sudo nix-env --delete-generations --profile /nix/var/nix/profiles/system";
         clear-boot = "sudo /run/current-system/bin/switch-to-configuration boot";
         arch = "distrobox enter arch";
-        git-merge-droid ="git checkout test && git pull origin test && git merge droid && git push origin test && git checkout droid";
+        git-merge-droid = "git checkout test && git pull origin test && git merge droid && git push origin test && git checkout droid";
         git-merge-test = "git checkout work && git pull origin work && git merge test && git push origin work && git checkout test";
         git-merge-work = "git checkout main && git pull origin main && git merge work && git push origin main && git checkout work";
         gdt = "meld .";
@@ -133,11 +133,12 @@ oh-my-zsh ={
       source = ./.p10k.zsh;
       executable = true;
     };
-    
-    programs.atuin ={
-        enable =true;
-        enableZshIntegration =true;
-      };
+
+    programs.atuin = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+
     # shell = pkgs.zsh;
   };
 }

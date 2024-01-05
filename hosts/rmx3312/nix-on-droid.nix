@@ -49,15 +49,16 @@
     perl
     gcc
     zig
+    cargo
 
     nix-index
-  utillinux
-  bash
-  gnumake
-  rclone
-  ffsend
-  thefuck
-  # busybox
+    utillinux
+    bash
+    gnumake
+    rclone
+    ffsend
+    thefuck
+    # busybox
   ];
   environment.etcBackupExtension = ".bak";
   system.stateVersion = "23.05";

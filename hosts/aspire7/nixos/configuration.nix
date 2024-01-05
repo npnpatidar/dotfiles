@@ -41,10 +41,19 @@
     ];
 
 
-  programs.zsh.enable = true;
   # programs.geary.enable = true;
 
 
+  programs.zsh = {
+    enable = true;
+    zsh-abbr = {
+      enable = true;
+      enableZshIntegration = true;
+      abbreviations = {
+        e = "exit";
+      };
+    };
+  };
 
   # Set your time zone.
   time.timeZone = "Asia/Kolkata";
