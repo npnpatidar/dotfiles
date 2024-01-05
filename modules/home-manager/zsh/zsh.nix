@@ -26,7 +26,17 @@ in
       sessionVariables = {
         EDITOR = "nvim";
       };
-
+oh-my-zsh ={
+    enable= true;
+    plugins =[
+    "thefuck" 
+    "git"
+    "fzf"
+    "colored-man-pages"
+    "extract"
+    "copybuffer"
+    ];
+  };
 
       shellAliases = {
         cd = "z";
@@ -79,7 +89,7 @@ in
         git-merge-work = "git checkout main && git pull origin main && git merge work && git push origin main && git checkout work";
         gdt = "meld .";
         fzf = "fzf --preview 'bat --color=always --style=numbers --line-range=:500 {}'";
-        das = "cd ~/dotfiles && git pull origin test && cd scripts && ./apply-droid.sh";
+        das = "cd ~/dotfiles && git pull origin droid && cd scripts && ./apply-droid.sh";
         uas = "cd ~/dotfiles && git add . && git commit -m 'auto droid' && git push origin droid && cd scripts && ./apply-droid.sh";
       };
 
@@ -123,7 +133,11 @@ in
       source = ./.p10k.zsh;
       executable = true;
     };
-
+    
+    programs.atuin ={
+        enable =true;
+        enableZshIntegration =true;
+      };
     # shell = pkgs.zsh;
   };
 }

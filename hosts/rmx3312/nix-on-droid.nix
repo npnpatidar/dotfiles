@@ -56,6 +56,7 @@
   gnumake
   rclone
   ffsend
+  thefuck
   # busybox
   ];
   environment.etcBackupExtension = ".bak";
