@@ -51,6 +51,9 @@
     zig
     nix-index
   utillinux
+  bash
+  gnumake
+  # busybox
   ];
   environment.etcBackupExtension = ".bak";
   system.stateVersion = "23.05";
