@@ -144,7 +144,10 @@ in
       enable = true;
       enableZshIntegration = true;
     };
-
+    programs.hstr = {
+      enable = true;
+      enableZshIntegration = true;
+    };
     # shell = pkgs.zsh;
   };
 }

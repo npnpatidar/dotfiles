@@ -50,7 +50,7 @@
     gcc
     zig
     cargo
-
+    pinentry-tty
     nix-index
     utillinux
     bash
