@@ -84,7 +84,7 @@
         };
 
       nixOnDroidConfigurations.rmx3312 = nix-on-droid.lib.nixOnDroidConfiguration {
-        config = ./hosts/rmx3312/nix-on-droid.nix;
+        modules = [ ./hosts/rmx3312/nix-on-droid.nix ];
         pkgs = import nixpkgs {
           system = "aarch64-linux";
           config.allowUnfree = true;
