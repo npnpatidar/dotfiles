@@ -62,16 +62,6 @@
   nixpkgs.config.allowUnfree = true;
   programs.nix-index.enable = true;
 
-  programs.zsh = {
-    # zsh-abbr = {
-    #   enable = true;
-    #   abbreviations = {
-    #     e = "exit";
-    #   };
-    # };
-
-  };
-
 
 
 
