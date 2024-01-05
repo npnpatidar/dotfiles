@@ -48,6 +48,7 @@
     any-nix-shell
     perl
     gcc
+    yank
     zig
     nix-index
   utillinux
