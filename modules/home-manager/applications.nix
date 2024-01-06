@@ -57,6 +57,39 @@
     # bitwarden
 
 
+    (nerdfonts.override { fonts = [ "FiraCode" "FiraMono" "DroidSansMono" "Hack" "Hasklig" "Meslo" "UbuntuMono" ]; })
+
+    git-lfs
+    curl
+    dos2unix
+    screen
+    peco #querying input
+    jq
+    yq
+    nil #  nix LSP
+    ripgrep #recursive search fs for a regex
+    neofetch
+    pstree
+    zip
+    unrar
+    unzip
+    w3m
+    lazygit
+    ghq
+    btop
+    powertop
+    poppler_utils #pdf conversions
+    ttygif
+    gifsicle
+    rclone
+    cryfs
+    cht-sh
+    perl536Packages.EmailOutlookMessage
+    cz-cli
+
+    # linkrec
+
+    # nix-alien
     #   CLI Apps 
     ncdu
     mc
@@ -127,5 +160,8 @@
     rclone
     ffsend
 
+
   ];
+
+
 }

@@ -25,18 +25,14 @@ in
         background_opacity = "0.95";
         copy_on_select = true;
       };
+      keybindings = {
+        "ctrl+alt+d" = "launch --location=hsplit --copy-env";
+        "ctrl+alt+r" = "launch --location=vsplit --copy-env";
+      };
 
     };
 
 
-    programs.mcfly = {
-      enable = true;
-
-      enableZshIntegration = true;
-      enableBashIntegration = true;
-      fuzzySearchFactor = 3;
-      keyScheme = "vim";
-    };
   };
 }
 

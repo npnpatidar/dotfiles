@@ -21,6 +21,7 @@
     ranger.enable = true;
     vscode.enable = true;
     xdg.enable = true;
+    tmux.enable = false;
 
   };
   nixpkgs = {

@@ -51,6 +51,7 @@ let
     fzf = "fzf --preview 'bat --color=always --style=numbers --line-range=:500 {}'";
     das = "cd ~/dotfiles && git pull origin droid && cd scripts && ./apply-droid.sh";
     uas = "cd ~/dotfiles && git add . && git commit -m 'auto droid' && git push origin droid && cd scripts && ./apply-droid.sh";
+    tm = "tmux new-session -t $(basename $(pwd))";
   };
 
 
@@ -62,17 +63,19 @@ in
 
   config = mkIf cfg.enable {
     # zsh settings
-
-    programs.zoxide = {
-      enable = true;
-      enableZshIntegration = true;
-    };
     # defaultUserShell = pkgs.zsh;
     programs.zsh = {
       enable = true;
       enableAutosuggestions = true;
       enableCompletion = true;
       syntaxHighlighting.enable = true;
+      history = {
+        share = true; # false -> every terminal has it's own history
+        size = 9999999; # Number of history lines to keep.
+        save = 9999999; # Number of history lines to save.
+        ignoreDups = true; # Do not enter command lines into the history list if they are duplicates of the previous event.
+        extended = true; # Save timestamp into the history file.
+      };
       dotDir = ".config/zsh";
       sessionVariables = {
         EDITOR = "nvim";
@@ -87,7 +90,8 @@ in
           "extract"
           "copybuffer"
           "sudo"
-          "tmux"
+          "ssh-agent"
+          "bgnotify"
         ];
       };
       zsh-abbr = {
@@ -141,7 +145,10 @@ in
       source = ./.p10k.zsh;
       executable = true;
     };
-
+    programs.zoxide = {
+      enable = true;
+      enableZshIntegration = true;
+    };
     programs.atuin = {
       enable = true;
       enableZshIntegration = true;
@@ -150,7 +157,21 @@ in
       enable = true;
       enableZshIntegration = true;
     };
+    programs.fzf = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+    programs.direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+      enableZshIntegration = true;
+    };
     # shell = pkgs.zsh;
+    # fonts.fontconfig.enable = true;
   };
+
+
+
+
 }
 

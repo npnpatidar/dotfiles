@@ -20,6 +20,7 @@
     ./latex.nix
     ./fcitx5/fcitx5.nix
     ./qutebrowser.nix
+    ./tmux.nix
   ];
 
 }

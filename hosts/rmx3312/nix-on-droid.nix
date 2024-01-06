@@ -92,6 +92,7 @@
           ranger.enable = true;
           bat.enable = true;
           neovim.enable = true;
+          tmux.enable = true;
         };
         home = {
           username = "nix-on-droid";
