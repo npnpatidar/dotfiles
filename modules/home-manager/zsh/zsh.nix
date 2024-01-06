@@ -87,6 +87,7 @@ in
           "extract"
           "copybuffer"
           "sudo"
+          "tmux"
         ];
       };
       zsh-abbr = {

@@ -123,6 +123,7 @@
     preload
     thefuck
     curl
+    tmux
     rclone
     ffsend
 

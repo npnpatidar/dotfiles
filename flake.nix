@@ -88,6 +88,9 @@
         pkgs = import nixpkgs {
           system = "aarch64-linux";
           config.allowUnfree = true;
+          config.permittedInsecurePackages = [
+            "tightvnc-1.3.10"
+          ];
         };
       };
 

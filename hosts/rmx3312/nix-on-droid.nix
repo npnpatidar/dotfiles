@@ -55,6 +55,8 @@
     rclone
     ffsend
     thefuck
+    python3
+    tmux
   ];
   environment.etcBackupExtension = ".bak";
   system.stateVersion = "23.05";
@@ -101,6 +103,7 @@
           screenfetch
         ];
 
+        programs.direnv.enable = true;
         services.gpg-agent = {
           enable = true;
           pinentryFlavor = "tty";
