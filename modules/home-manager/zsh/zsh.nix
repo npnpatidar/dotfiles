@@ -166,8 +166,6 @@ in
       nix-direnv.enable = true;
       enableZshIntegration = true;
     };
-    # shell = pkgs.zsh;
-    # fonts.fontconfig.enable = true;
   };
 
 

@@ -10,7 +10,7 @@ in
 
   config = mkIf cfg.enable {
     home.packages = with pkgs;[
-
+      hub
       meld # for git difftool
       git-graph
       lazygit
