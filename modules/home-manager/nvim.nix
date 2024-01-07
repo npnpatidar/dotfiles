@@ -10,30 +10,26 @@ in
 
   config = mkIf cfg.enable {
 
- programs.neovim =
-    {
-      enable = true;
-      viAlias = true;
-      vimAlias = true;
-      vimdiffAlias = true;
-      withNodeJs = false;
-      withPython3 = true;
+    home.file.".config/nvim" =
+      {
+        source = pkgs.fetchFromGitHub {
+          owner = "LazyVim";
+          repo = "starter";
+          rev = "master";
+          hash = "sha256-gE2tRpglA0SxxjGN+uKwkwdR5YurvjVGf8SRKkW0E1U=";
+        };
+      };
 
-      plugins = with pkgs.vimPlugins; [
-        {
-          plugin = lazy-nvim;
-          type = "lua";
-          config = ''
-            require("core")
+    programs.nixvim= {
 
-            require("lazy").setup({ { import = "plugins" } , 
-            })
-          '';
-        }
+       enable = true;
+      
 
-	LazyVim
-      ];
+  }
 
-    };
+        ];
+      };
+
+
   };
 }

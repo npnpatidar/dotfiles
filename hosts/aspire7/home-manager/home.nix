@@ -17,12 +17,12 @@
     latex.enable = true;
     librewolf.enable = true;
     masterpdfeditor.enable = true;
-    neovim.enable = true;
+    neovim.enable = false;
     ranger.enable = true;
     vscode.enable = true;
     xdg.enable = true;
     tmux.enable = false;
-
+    nvim.enable = true;
   };
   nixpkgs = {
     overlays =
