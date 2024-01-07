@@ -26,7 +26,7 @@ in
           config = ''
             require("core")
 
-            require("lazy").setup({ { import = "plugins" } }, 
+            require("lazy").setup({ { import = "plugins" } , 
             })
           '';
         }
