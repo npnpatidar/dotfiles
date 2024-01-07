@@ -93,9 +93,9 @@
           zsh.enable = true;
           ranger.enable = true;
           bat.enable = true;
-          neovim.enable = false;
+          neovim.enable = true;
           tmux.enable = true;
-          nvim.enable = true;
+          nvim.enable = false;
         };
         home = {
           username = "nix-on-droid";
