@@ -52,6 +52,9 @@ let
     das = "cd ~/dotfiles && git pull origin droid && cd scripts && ./apply-droid.sh";
     uas = "cd ~/dotfiles && git add . && git commit -m 'auto droid' && git push origin droid && cd scripts && ./apply-droid.sh";
     tm = "tmux new-session -t $(basename $(pwd))";
+    np = "nix-shell -p";
+    nei = "nix-env -i";
+    nee = "nix-env -e";
   };
 
 
