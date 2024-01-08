@@ -58,6 +58,7 @@
     python3
     tmux
     ollama
+    oterm
   ];
   environment.etcBackupExtension = ".bak";
   system.stateVersion = "23.05";
