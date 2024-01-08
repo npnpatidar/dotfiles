@@ -60,6 +60,8 @@
     ollama
     oterm
   ];
+
+  time.timeZone = "Asia/Kolkata";
   environment.etcBackupExtension = ".bak";
   system.stateVersion = "23.05";
   nix.extraOptions = ''
