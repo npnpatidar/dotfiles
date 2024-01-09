@@ -20,15 +20,13 @@ in
         };
       };
 
-    programs.nixvim= {
+    programs.nixvim = {
 
-       enable = true;
-      
+      enable = true;
 
-  }
 
-        ];
-      };
+    };
+
 
 
   };
