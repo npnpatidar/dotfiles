@@ -65,6 +65,7 @@
     xplr
     yazi
     termimage
+    helix
 
     gpg-tui
     # Read the changelog before changing this value
