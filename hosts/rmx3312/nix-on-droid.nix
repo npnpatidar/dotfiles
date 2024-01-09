@@ -57,7 +57,26 @@
     thefuck
     python3
     tmux
+    ollama
+    oterm
+    termdbms
+    python311Packages.pudb
+    ttyper
+    xplr
+    yazi
+    termimage
+    helix
+    bitwarden-cli
+    poppler
+
+    gpg-tui
+    # Read the changelog before changing this value
+    # home.stateVersion = "23.05";
+
+    # insert home-manager config
   ];
+
+  time.timeZone = "Asia/Kolkata";
   environment.etcBackupExtension = ".bak";
   system.stateVersion = "23.05";
   nix.extraOptions = ''
