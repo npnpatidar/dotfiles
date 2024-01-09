@@ -55,6 +55,7 @@ let
     np = "nix-shell -p";
     nei = "nix-env -i";
     nee = "nix-env -e";
+    y = "yazi";
   };
 
 

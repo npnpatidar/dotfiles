@@ -27,6 +27,8 @@ in
     home.file."ranger_rc_conf" = {
       text = ''
         default_linemode devicons
+        set preview_images true
+
       '';
       target = ".config/ranger/rc.conf";
     };
