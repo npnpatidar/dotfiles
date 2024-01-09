@@ -105,6 +105,7 @@
           ../../modules/home-manager/neovim.nix
           ../../modules/home-manager/tmux.nix
           ../../modules/home-manager/nvim.nix
+          ../../modules/home-manager/file-manager.nix
         ];
 
         modules.home-manager = {

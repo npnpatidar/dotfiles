@@ -161,7 +161,6 @@
     ffsend
     python311Packages.pudb
     ttyper
-    yazi
     gpg-tui
     termdbms
     helix
