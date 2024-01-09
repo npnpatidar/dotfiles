@@ -61,6 +61,10 @@
     oterm
     termdbms
     python311Packages.pudb
+    ttyper
+    xplr
+    yazi
+    termimage
 
     gpg-tui
     # Read the changelog before changing this value

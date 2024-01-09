@@ -160,6 +160,9 @@
     rclone
     ffsend
     python311Packages.pudb
+    ttyper
+    xplr
+    yazi
     gpg-tui
     termdbms
 
