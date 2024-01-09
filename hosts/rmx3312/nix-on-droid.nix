@@ -66,6 +66,8 @@
     yazi
     termimage
     helix
+    bitwarden-cli
+    poppler
 
     gpg-tui
     # Read the changelog before changing this value
