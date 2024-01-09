@@ -159,7 +159,9 @@
     tmux
     rclone
     ffsend
-
+    python311Packages.pudb
+    gpg-tui
+    termdbms
 
   ];
 

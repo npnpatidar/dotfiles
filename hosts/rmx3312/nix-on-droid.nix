@@ -59,6 +59,14 @@
     tmux
     ollama
     oterm
+    termdbms
+    python311Packages.pudb
+
+    gpg-tui
+    # Read the changelog before changing this value
+    # home.stateVersion = "23.05";
+
+    # insert home-manager config
   ];
 
   time.timeZone = "Asia/Kolkata";
