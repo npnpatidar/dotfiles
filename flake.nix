@@ -27,9 +27,17 @@
       url = "github:Mic92/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    arkenfox = {
+      url = "github:dwarfmaster/arkenfox-nixos";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    firefox-addons = {
+      url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
+    };
   };
 
-  outputs = { self, nixpkgs, nur, home-manager, nixvim, nix-on-droid, nix-index-database, stylix, ... } @ inputs:
+  outputs = { self, nixpkgs, nur, home-manager, nixvim, nix-on-droid, nix-index-database, stylix, arkenfox, ... } @ inputs:
     let
 
       inherit (self) outputs;
@@ -76,6 +84,7 @@
                     nixvim.homeManagerModules.nixvim
                     nix-index-database.hmModules.nix-index
                     stylix.homeManagerModules.stylix
+                    arkenfox.hmModules.default
                   ];
                 };
               }

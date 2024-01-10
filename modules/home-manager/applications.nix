@@ -166,6 +166,8 @@
     helix
     bitwarden-cli
     zathura
+    lazydocker
+    glow
 
   ];
 
