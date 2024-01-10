@@ -103,7 +103,7 @@
           ../../modules/home-manager/bat.nix
           ../../modules/home-manager/neovim.nix
           ../../modules/home-manager/tmux.nix
-          ../../modules/home-manager/nvim.nix
+          # ../../modules/home-manager/nvim.nix
           ../../modules/home-manager/yazi.nix
         ];
 
@@ -114,7 +114,7 @@
           bat.enable = true;
           neovim.enable = true;
           tmux.enable = true;
-          nvim.enable = false;
+          # nvim.enable = false;
           yazi.enable = true;
         };
         home = {
