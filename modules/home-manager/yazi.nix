@@ -51,12 +51,12 @@ in
           { on = [ "<PageDown>" ]; exec = "arrow 100%"; desc = "Move cursor down one page"; }
 
           { on = [ "h" ]; exec = [ "leave" "escape --visual --select" ]; desc = "Go back to the parent directory"; }
-          # { on = [ "l" ]; exec = [ "enter" "escape --visual --select" ]; desc = "Enter the child directory"; }
-          {
-            on = [ "l" ];
-            exec = "plugin --sync smart-enter";
-            desc = "Enter the child directory, or open the file";
-          }
+          { on = [ "l" ]; exec = [ "enter" "escape --visual --select" ]; desc = "Enter the child directory"; }
+          # {
+          #   on = [ "l" ];
+          #   exec = "plugin --sync smart-enter";
+          #   desc = "Enter the child directory, or open the file";
+          # }
           {
             on = [ "H" ];
             exec = "back";
@@ -130,18 +130,18 @@ in
           { on = [ "N" ]; exec = "find_arrow --previous"; desc = "Go to previous found file"; }
 
           # Sorting
-          { on = [ "" "m" ]; exec = "sort modified --dir-first"; desc = "Sort by modified time"; }
-          { on = [ "" "M" ]; exec = "sort modified --reverse --dir-first"; desc = "Sort by modified time (reverse)"; }
-          { on = [ "" "c" ]; exec = "sort created --dir-first"; desc = "Sort by created time"; }
-          { on = [ "" "C" ]; exec = "sort created --reverse --dir-first"; desc = "Sort by created time (reverse)"; }
-          { on = [ "" "e" ]; exec = "sort extension --dir-first"; desc = "Sort by extension"; }
-          { on = [ "" "E" ]; exec = "sort extension --reverse --dir-first"; desc = "Sort by extension (reverse)"; }
-          { on = [ "" "a" ]; exec = "sort alphabetical --dir-first"; desc = "Sort alphabetically"; }
-          { on = [ "" "A" ]; exec = "sort alphabetical --reverse --dir-first"; desc = "Sort alphabetically (reverse)"; }
-          { on = [ "" "n" ]; exec = "sort natural --dir-first"; desc = "Sort naturally"; }
-          { on = [ "" "N" ]; exec = "sort natural --reverse --dir-first"; desc = "Sort naturally (reverse)"; }
-          { on = [ "" "s" ]; exec = "sort size --dir-first"; desc = "Sort by size"; }
-          { on = [ "" "S" ]; exec = "sort size --reverse --dir-first"; desc = "Sort by size (reverse)"; }
+          { on = [ "," "m" ]; exec = "sort modified --dir-first"; desc = "Sort by modified time"; }
+          { on = [ "," "M" ]; exec = "sort modified --reverse --dir-first"; desc = "Sort by modified time (reverse)"; }
+          { on = [ "," "c" ]; exec = "sort created --dir-first"; desc = "Sort by created time"; }
+          { on = [ "," "C" ]; exec = "sort created --reverse --dir-first"; desc = "Sort by created time (reverse)"; }
+          { on = [ "," "e" ]; exec = "sort extension --dir-first"; desc = "Sort by extension"; }
+          { on = [ "," "E" ]; exec = "sort extension --reverse --dir-first"; desc = "Sort by extension (reverse)"; }
+          { on = [ "," "a" ]; exec = "sort alphabetical --dir-first"; desc = "Sort alphabetically"; }
+          { on = [ "," "A" ]; exec = "sort alphabetical --reverse --dir-first"; desc = "Sort alphabetically (reverse)"; }
+          { on = [ "," "n" ]; exec = "sort natural --dir-first"; desc = "Sort naturally"; }
+          { on = [ "," "N" ]; exec = "sort natural --reverse --dir-first"; desc = "Sort naturally (reverse)"; }
+          { on = [ "," "s" ]; exec = "sort size --dir-first"; desc = "Sort by size"; }
+          { on = [ "," "S" ]; exec = "sort size --reverse --dir-first"; desc = "Sort by size (reverse)"; }
 
           # Tabs
           { on = [ "t" ]; exec = "tab_create --current"; desc = "Create a new tab using the current path"; }

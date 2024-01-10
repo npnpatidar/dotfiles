@@ -23,7 +23,6 @@
     ./tmux.nix
     ./nvim.nix
     ./yazi.nix
-    ./file-manager.nix
   ];
 
 }

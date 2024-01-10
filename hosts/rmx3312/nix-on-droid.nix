@@ -63,7 +63,6 @@
     python311Packages.pudb
     ttyper
     xplr
-    yazi
     termimage
     helix
     bitwarden-cli
@@ -105,7 +104,7 @@
           ../../modules/home-manager/neovim.nix
           ../../modules/home-manager/tmux.nix
           ../../modules/home-manager/nvim.nix
-          ../../modules/home-manager/file-manager.nix
+          ../../modules/home-manager/yazi.nix
         ];
 
         modules.home-manager = {
@@ -116,6 +115,7 @@
           neovim.enable = true;
           tmux.enable = true;
           nvim.enable = false;
+          yazi.enable = true;
         };
         home = {
           username = "nix-on-droid";

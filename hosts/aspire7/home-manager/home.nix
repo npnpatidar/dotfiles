@@ -23,7 +23,7 @@
     xdg.enable = true;
     tmux.enable = false;
     nvim.enable = false;
-    yazi.enable = false;
+    yazi.enable = true;
   };
   nixpkgs = {
     overlays =

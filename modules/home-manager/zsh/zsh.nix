@@ -94,7 +94,7 @@ in
           "extract"
           "copybuffer"
           "sudo"
-          "ssh-agent"
+          # "ssh-agent"
           "bgnotify"
         ];
       };
