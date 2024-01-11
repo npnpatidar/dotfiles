@@ -62,11 +62,9 @@
     termdbms
     python311Packages.pudb
     ttyper
-    xplr
     termimage
     helix
     bitwarden-cli
-    poppler
 
     gpg-tui
     # Read the changelog before changing this value
