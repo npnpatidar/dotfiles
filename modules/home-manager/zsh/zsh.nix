@@ -5,6 +5,7 @@ let
   alias-abbr = {
     cd = "z";
     r = "ranger";
+    rd = "rm -rf ";
     # nvim = "steam-run nvim";
     c = "clear";
     sn = "sudo nano";
