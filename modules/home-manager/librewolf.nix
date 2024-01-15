@@ -1,12 +1,9 @@
-{ inputs, lib, pkgs, config, ... }:
+{ lib, pkgs, config, ... }:
 with lib;
 let
   cfg = config.modules.home-manager.librewolf;
 in
 {
-  imports = [
-    inputs.nur.nixosModules.nur
-  ];
 
   options.modules.home-manager.librewolf = {
     enable = mkEnableOption false;
@@ -14,17 +11,6 @@ in
 
   config = mkIf cfg.enable {
 
-    home.file.".librewolf/profiles.ini".text = ''
-      [Profile0]
-      Name=default
-      IsRelative=1
-      Path=chayleaf
-      Default=1
-
-      [General]
-      StartWithLastProfile=1
-      Version=2
-    '';
 
     programs.firefox = {
       enable = true;
@@ -33,16 +19,21 @@ in
         wmClass = "LibreWolf";
         libName = "librewolf";
       };
-      profiles.chayleaf = {
-        name = "chayleaf";
-        path = "../../.librewolf/chayleaf";
-        extensions = (with config.nur.repos.rycee.firefox-addons; [
-          libredirect
-          skip-redirect
-          bitwarden
-          tridactyl
-        ]);
-
+      policies = {
+        ExtensionSettings = with builtins;
+          let extension = shortId: uuid: {
+            name = uuid;
+            value = {
+              install_url = "https://addons.mozilla.org/en-US/firefox/downloads/latest/${shortId}/latest.xpi";
+              installation_mode = "normal_installed";
+            };
+          };
+          in
+          listToAttrs [
+            (extension "tabliss" "extension@tabliss.io")
+            (extension "clearurls" "{74145f27-f039-47ce-a470-a662b129930a}")
+            (extension "bitwarden-password-manager" "{446900e4-71c2-419f-a6a7-df9c091e268b}")
+          ];
       };
     };
   };
