@@ -58,7 +58,7 @@
     python3
     tmux
     ollama
-    oterm
+    # oterm
     termdbms
     python311Packages.pudb
     ttyper

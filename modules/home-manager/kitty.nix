@@ -12,9 +12,9 @@ in
     programs.kitty = {
       enable = true;
       font = {
-        name = "FiraCode";
-        size = 13;
-        package = pkgs.nerdfonts.override { fonts = [ "FiraCode" ]; };
+        name = lib.mkDefault "FiraCode";
+        size = lib.mkDefault 13;
+        # package = pkgs.nerdfonts.override { fonts = [ "FiraCode" ]; };
       };
       theme = "Tokyo Night Storm";
       shellIntegration = {
@@ -22,7 +22,7 @@ in
         enableZshIntegration = true;
       };
       settings = {
-        background_opacity = "0.95";
+        background_opacity = lib.mkDefault "0.95";
         copy_on_select = true;
       };
       keybindings = {

@@ -42,7 +42,7 @@
 
     #Artificial Intelligence
     ollama
-    oterm
+    # oterm
     # (import ./ollama { inherit pkgs; })
 
     #mindmap 
