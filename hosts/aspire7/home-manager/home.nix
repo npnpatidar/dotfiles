@@ -15,7 +15,7 @@
     git.enable = true;
     kitty.enable = true;
     latex.enable = true;
-    # librewolf.enable = true;
+    librewolf.enable = true;
     masterpdfeditor.enable = true;
     neovim.enable = true;
     ranger.enable = true;
