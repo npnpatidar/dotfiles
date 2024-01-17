@@ -14,10 +14,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     stylix.url = "github:danth/stylix";
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    # neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     # nixvim.url = "github:pta2002/nixvim";
-    nixneovimplugins.url = "github:jooooscha/nixpkgs-vim-extra-plugins";
-    codeium.url = "github:Exafunction/codeium.nvim";
+    # nixneovimplugins.url = "github:jooooscha/nixpkgs-vim-extra-plugins";
+    # codeium.url = "github:Exafunction/codeium.nvim";
     nix-on-droid = {
       url = "github:t184256/nix-on-droid";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -27,17 +27,17 @@
       url = "github:Mic92/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    arkenfox = {
-      url = "github:dwarfmaster/arkenfox-nixos";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # arkenfox = {
+    #   url = "github:dwarfmaster/arkenfox-nixos";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
-    firefox-addons = {
-      url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
-    };
+    # firefox-addons = {
+    #   url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
+    # };
   };
 
-  outputs = { self, nixpkgs, nur, home-manager, nixvim, nix-on-droid, nix-index-database, stylix, arkenfox, ... } @ inputs:
+  outputs = { self, nixpkgs, nur, home-manager, nix-on-droid, nix-index-database, stylix, nixvim, ... } @ inputs:
     let
 
       inherit (self) outputs;
@@ -84,7 +84,6 @@
                     nixvim.homeManagerModules.nixvim
                     nix-index-database.hmModules.nix-index
                     stylix.homeManagerModules.stylix
-                    arkenfox.hmModules.default
                   ];
                 };
               }
@@ -110,7 +109,6 @@
           extraSpecialArgs = { inherit inputs outputs; };
           modules = [
             ./hosts/aspire7/home-manager/home.nix
-            nixvim.homeManagerModules.nixvim
             nix-index-database.hmModules.nix-index
             stylix.homeManagerModules.stylix
           ];
@@ -151,7 +149,6 @@
 
                 extraSpecialArgs = { inherit inputs outputs; };
                 sharedModules = [
-                  nixvim.homeManagerModules.nixvim
                   nix-index-database.hmModules.nix-index
                   stylix.homeManagerModules.stylix
                 ];
