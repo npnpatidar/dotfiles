@@ -4,7 +4,8 @@
     ./kitty.nix
     ./vscode.nix
     ./zsh/zsh.nix
-    ./librewolf.nix
+    # ./librewolf.nix
+    ./firefox.nix
     ./gnome_settings.nix
     ./neovim.nix
     #./nvim
