@@ -165,7 +165,6 @@
     gpg-tui
     termdbms
     bitwarden-cli
-    zathura
     lazydocker
     glow
     openssl

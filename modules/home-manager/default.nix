@@ -23,6 +23,7 @@
     ./tmux.nix
     ./nvim.nix
     ./yazi.nix
+    ./zathura.nix
   ];
 
 }
