@@ -55,6 +55,7 @@
     gnome.gnome-boxes
     newsflash
     # bitwarden
+    inkscape-with-extensions
 
 
     (nerdfonts.override { fonts = [ "FiraCode" "FiraMono" "DroidSansMono" "Hack" "Hasklig" "Meslo" "UbuntuMono" ]; })
@@ -163,7 +164,6 @@
     ttyper
     gpg-tui
     termdbms
-    helix
     bitwarden-cli
     zathura
     lazydocker
