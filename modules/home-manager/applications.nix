@@ -168,6 +168,7 @@
     zathura
     lazydocker
     glow
+    openssl
 
   ];
 
