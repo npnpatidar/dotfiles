@@ -57,6 +57,7 @@ let
     nei = "nix-env -i";
     nee = "nix-env -e";
     y = "yazi";
+    lg = "lazygit";
   };
 
 

@@ -52,6 +52,7 @@
     gsconnect
     panel-date-format
     noannoyance-fork
+    syncthing-indicator
     # prime-helper
     # gpu-profile-selector
 

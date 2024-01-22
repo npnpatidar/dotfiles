@@ -24,18 +24,19 @@
     tmux.enable = false;
     nvim.enable = false;
     yazi.enable = true;
+    zathura.enable = true;
   };
   nixpkgs = {
     overlays =
       # builtins.attrValues outputs.overlays
       # ++
       [
-        inputs.nixneovimplugins.overlays.default
+        # inputs.nixneovimplugins.overlays.default
         inputs.nur.overlay
         # inputs.attic.overlays.default
-        inputs.neovim-nightly-overlay.overlay
+        # inputs.neovim-nightly-overlay.overlay
         # inputs.nixgl.overlay
-        inputs.codeium.overlays."x86_64-linux".default
+        # inputs.codeium.overlays."x86_64-linux".default
       ];
   };
   home = {
