@@ -63,7 +63,6 @@
     python311Packages.pudb
     ttyper
     termimage
-    helix
     bitwarden-cli
 
     gpg-tui
