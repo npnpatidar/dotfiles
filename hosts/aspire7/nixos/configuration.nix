@@ -24,7 +24,7 @@
       #  "${builtins.fetchTarball "https://github.com/nix-community/disko/archive/master.tar.gz"}/module.nix"
       # ./aspire7_disko.nix
       ../../../modules/nixos/desktop_config/gnome_config.nix
-      ../../../modules/nixos/nvidia.nix
+      # ../../../modules/nixos/nvidia.nix
       ../../../modules/nixos/syncthing.nix
       ../../../modules/nixos/dns_config.nix
       ../../../modules/nixos/docker.nix

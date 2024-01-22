@@ -24,6 +24,8 @@
     ./nvim.nix
     ./yazi.nix
     ./zathura.nix
+    ./sioyek.nix
+    ./joplin.nix
   ];
 
 }
