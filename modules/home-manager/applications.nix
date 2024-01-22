@@ -34,7 +34,6 @@
     (import ../../pkgs/filen-desktop.nix { inherit pkgs; })
 
     #Notes 
-    qownnotes
     gnome-text-editor
 
     #Documents
