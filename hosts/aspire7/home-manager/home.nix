@@ -24,7 +24,9 @@
     tmux.enable = false;
     nvim.enable = false;
     yazi.enable = true;
-    zathura.enable = true;
+    zathura.enable = false;
+    sioyek.enable = true;
+    joplin.enable = true;
   };
   nixpkgs = {
     overlays =
