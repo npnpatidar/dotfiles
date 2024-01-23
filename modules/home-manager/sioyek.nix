@@ -13,11 +13,30 @@ in
     home.packages = [
       pkgs.sioyek
     ];
-    home.file.".config/sioyek/prefs_user.config".text =''
-       default_dark_mode 1
+    home.file.".config/sioyek/prefs_user.config".text = ''
+      startup_commands    toggle_custom_color
+      super_fast_search 1
+      custom_background_color #2e3440
+      custom_text_color #eceff4
+      page_separator_color #2e3440
+      #search_highlight_color #ebcb8b
+      status_bar_color #2e3440
+      status_bar_text_color #eceff4
+      ui_text_color #eceff4
+      ui_selected_text_color #eceff4
+      ui_background_color #3b4252
+      ui_selected_background_color #4c566a
+      background_color #2e3440
+      visual_mark_color 0.29803923 0.3372549 0.41568628 0.2
+      #text_highlight_color #4c566a
+      link_highlight_color #81a1c1
+      synctex_highlight_color #bf616a
     '';
-    home.file.".config/sioyek/keys_user.config".text =''
-       toggle_dark_mode x
+    home.file.".config/sioyek/keys_user.config".text = ''
+      toggle_dark_mode x
+      zoom_in =
+      zoom_out -
+      fit_to_page_width w
     '';
     xdg.desktopEntries = {
       "sioyek" = {
@@ -25,6 +44,6 @@ in
         name = "sioyek";
         settings.NoDisplay = "false";
       };
-  };
+    };
   };
 }
