@@ -13,10 +13,18 @@ in
     home.packages = [
       pkgs.sioyek
     ];
-    # home.file.".config/sioyek/settings.json" = {
-    #   # source = "../../../.secrets/Master PDF Editor 5.conf";
-    #   source = ../../.secrets + "/sioyek.json";
-    #   # executable = true;
-    # };
+    home.file.".config/sioyek/prefs_user.config".text =''
+       default_dark_mode 1
+    '';
+    home.file.".config/sioyek/keys_user.config".text =''
+       toggle_dark_mode x
+    '';
+    xdg.desktopEntries = {
+      "sioyek" = {
+        exec = "sioyek --new-window";
+        name = "sioyek";
+        settings.NoDisplay = "false";
+      };
+  };
   };
 }

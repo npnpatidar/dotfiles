@@ -45,7 +45,7 @@ in
       };
       defaultApplications = {
         "image/*" = [ "feh.desktop" ];
-        "application/pdf" = [ "org.pwmt.zathura.desktop" "masterpdfeditor5.desktop" ];
+        "application/pdf" = [ "sioyek.desktop" "org.pwmt.zathura.desktop" "masterpdfeditor5.desktop" ];
         "text/plain" = [ "notepadqq.desktop" ];
         "inode/directory" = [ "org.gnome.Nautilus.desktop" ];
         "x-scheme-handler/http" = [ "librewolf.desktop" ];
