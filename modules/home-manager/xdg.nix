@@ -46,7 +46,7 @@ in
       defaultApplications = {
         "image/*" = [ "feh.desktop" ];
         "application/pdf" = [ "sioyek.desktop" "org.pwmt.zathura.desktop" "masterpdfeditor5.desktop" ];
-        "text/plain" = [ "notepadqq.desktop" ];
+        "text/plain" = [ "org.gnome.TextEditor.desktop" ];
         "inode/directory" = [ "org.gnome.Nautilus.desktop" ];
         "x-scheme-handler/http" = [ "librewolf.desktop" ];
         "x-scheme-handler/https" = [ "librewolf.desktop" ];

@@ -331,6 +331,24 @@ in
           show_symlink = true;
         };
 
+        open = {
+          rules = [
+            {
+              mime = "application/pdf";
+              use = "pdf";
+            }
+          ];
+        };
+
+        opener = {
+          pdf = [
+            {
+              exec = ''sioyek --new-window "$@" '';
+              block = false;
+            }
+          ];
+
+        };
         preview = {
           tab_size = 2;
           max_width = 600;
@@ -346,16 +364,24 @@ in
 
     xdg.configFile."yazi/plugins/smart-enter.yazi/init.lua".text = ''
 
-return {
-	entry = function()
-		local h = cx.active.current.hovered
-		ya.manager_emit(h and h.cha.is_dir and "enter" or "open", {})
-	end,
-}
+                return
+                {
+                  entry = function
+                    ()
+                      local
+                      h =
+                    cx.active.current.hovered
+                    ya.manager_emit
+                    (h and h.cha.is_dir and "enter" or "open",
+                    { })
+                  end,
+                  }
 
-    '';
+                  '';
   };
 }
+
+
 
 
 
