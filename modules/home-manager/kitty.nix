@@ -33,11 +33,10 @@ in
       };
 
     };
-    home.file."kitty_config".source = pkgs.fetchurl {
+    home.file.".config/kitty/config.py".source = pkgs.fetchurl {
       url = "https://raw.githubusercontent.com/ershov/kitty_config/main/config.py";
       sha256 = "sha256-NhEBQ757IiFwn92yKxxxwcnTF7jkLv2BRhHJCl7oTvg=";
     };
-    home.file."kitty_config".target = ".config/kitty/config.py";
 
   };
 }

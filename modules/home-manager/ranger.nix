@@ -15,23 +15,17 @@ in
       ranger
 
     ];
-    home.file."ranger_devicons" = {
-      source = builtins.fetchGit {
-        url = "https://github.com/alexanderjeurissen/ranger_devicons";
-        rev = "de64ab26fb581c00a803381d522c6b3e48b79415";
-      };
-      target = ".config/ranger/plugins/ranger_devicons";
+    home.file. ".config/ranger/plugins/ranger_devicons".source = builtins.fetchGit {
+      url = "https://github.com/alexanderjeurissen/ranger_devicons";
+      rev = "de64ab26fb581c00a803381d522c6b3e48b79415";
     };
 
 
-    home.file."ranger_rc_conf" = {
-      text = ''
-        default_linemode devicons
-        set preview_images true
+    home.file.".config/ranger/rc.conf".text = ''
+      default_linemode devicons
+      set preview_images true
 
-      '';
-      target = ".config/ranger/rc.conf";
-    };
+    '';
   };
 }
 

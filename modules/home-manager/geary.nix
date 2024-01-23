@@ -13,8 +13,7 @@ in
     home.packages = [
       pkgs.gnome.geary
     ];
-    home.file.".config/geary/user-style.css" = {
-      text = ''
+    home.file.".config/geary/user-style.css".text = ''
      
     :root *:not(a) {
         color: #eeeeec !important;
@@ -23,6 +22,5 @@ in
     }
 
      '';
-    };
   };
 }

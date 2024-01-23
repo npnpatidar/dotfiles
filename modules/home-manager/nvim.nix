@@ -10,15 +10,13 @@ in
 
   config = mkIf cfg.enable {
 
-    home.file.".config/nvim" =
-      {
-        source = pkgs.fetchFromGitHub {
-          owner = "LazyVim";
-          repo = "starter";
-          rev = "master";
-          hash = "sha256-gE2tRpglA0SxxjGN+uKwkwdR5YurvjVGf8SRKkW0E1U=";
-        };
-      };
+    home.file.".config/nvim".source = pkgs.fetchFromGitHub {
+      owner = "LazyVim";
+      repo = "starter";
+      rev = "master";
+      hash = "sha256-gE2tRpglA0SxxjGN+uKwkwdR5YurvjVGf8SRKkW0E1U=";
+    };
+
 
     programs.nixvim = {
 
