@@ -32,7 +32,6 @@ let
     		],
     		"visible": true
     	},
-    	"editor.keyboardMode": "vim",
     	"theme": 6,
     	"themeAutoDetect": true,
     	"preferredLightTheme": 6,
@@ -71,13 +70,8 @@ in
       pkgs.joplin
       pkgs.joplin-desktop
     ];
-    home.file.".config/joplin/settings.json".text = settings;
-    home.file.".config/joplin-desktop/settings.json".text = settings;
+    xdg.configFile."joplin/settings.json".text = settings;
+    xdg.configFile."joplin-desktop/settings.json".text = settings;
 
-    # {
-    #   # source = "../../../.secrets/Master PDF Editor 5.conf";
-    #   source = ../../.secrets + "/joplin.json";
-    #   # executable = true;
-    # };
   };
 }
