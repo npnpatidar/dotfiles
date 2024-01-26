@@ -40,8 +40,9 @@ in
     '';
     xdg.desktopEntries = {
       "sioyek" = {
-        exec = "sioyek --new-window";
-        name = "sioyek";
+        exec = "sioyek --new-window %f";
+        icon = "sioyek-icon-linux";
+        name = "Sioyek";
         settings.NoDisplay = "false";
       };
     };

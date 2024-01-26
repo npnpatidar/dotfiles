@@ -13,6 +13,6 @@ in
     home.packages = [
       pkgs.cryptomator
     ];
-    home.file.".config/Cryptomator/settings.json".source = ../../.secrets + "/Cryptomator.json";
+    home.file.".config/Cryptomator/settings.json".source = config.lib.file.mkOutOfStoreSymlink ../../.secrets + "/Cryptomator.json";
   };
 }
