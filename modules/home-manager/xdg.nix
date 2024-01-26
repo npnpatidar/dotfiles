@@ -145,6 +145,12 @@ in
         name = "Neovim wrapper";
         settings.NoDisplay = "true";
       };
+      "thorium-browser" = {
+        exec = "thorium --no-default-browser-check %U";
+        name = "Thorium Browser";
+        settings.NoDisplay = "false";
+        icon = "thorium-browser";
+      };
     };
   };
 
