@@ -1,0 +1,25 @@
+{
+  "sidebar_selection": {
+    "FeedList": [
+      {
+        "Feed": {
+          "feed_id": "1646",
+          "category_id": "180",
+          "sort_index": 1
+        }
+      },
+      "Latest  News , Latest News Live and Breaking News Today  | The Hindu"
+    ]
+  },
+  "article_list_mode": "Unread",
+  "search_term": null,
+  "prefer_scraped_content": true,
+  "visible_article_id": "1866844",
+  "window_size": [
+    1200,
+    650
+  ],
+  "maximized": false,
+  "article_view_visible": true,
+  "article_view_zoom": 1.0
+}

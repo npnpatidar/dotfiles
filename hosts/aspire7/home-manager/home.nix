@@ -27,6 +27,7 @@
     zathura.enable = false;
     sioyek.enable = true;
     joplin.enable = true;
+    mpv.enable = true;
   };
   nixpkgs = {
     overlays =

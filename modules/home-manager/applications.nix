@@ -23,7 +23,7 @@
     # Media
     vlc
     feh
-
+    sxiv
 
     #Coding
     # android-studio
@@ -55,7 +55,8 @@
     newsflash
     # bitwarden
     inkscape-with-extensions
-
+    ouch
+    imv
 
     (nerdfonts.override { fonts = [ "FiraCode" "FiraMono" "DroidSansMono" "Hack" "Hasklig" "Meslo" "UbuntuMono" ]; })
 

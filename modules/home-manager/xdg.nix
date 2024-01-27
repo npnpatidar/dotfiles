@@ -31,21 +31,21 @@ in
     xdg.configFile."mimeapps.list".force = true;
     xdg.mimeApps = {
       enable = true;
-      associations.added = {
-        "x-scheme-handler/http" = "librewolf.desktop";
-        "x-scheme-handler/https" = "librewolf.desktop";
-        "x-scheme-handler/chrome" = "librewolf.desktop";
-        "text/html" = "librewolf.desktop";
-        "application/x-extension-htm" = "librewolf.desktop";
-        "application/x-extension-html" = "librewolf.desktop";
-        "application/x-extension-shtml" = "librewolf.desktop";
-        "application/xhtml+xml" = "librewolf.desktop";
-        "application/x-extension-xhtml" = "librewolf.desktop";
-        "application/x-extension-xht" = "librewolf.desktop";
-      };
+      # associations.added = {
+      #   "x-scheme-handler/http" = "librewolf.desktop";
+      #   "x-scheme-handler/https" = "librewolf.desktop";
+      #   "x-scheme-handler/chrome" = "librewolf.desktop";
+      #   "text/html" = "librewolf.desktop";
+      #   "application/x-extension-htm" = "librewolf.desktop";
+      #   "application/x-extension-html" = "librewolf.desktop";
+      #   "application/x-extension-shtml" = "librewolf.desktop";
+      #   "application/xhtml+xml" = "librewolf.desktop";
+      #   "application/x-extension-xhtml" = "librewolf.desktop";
+      #   "application/x-extension-xht" = "librewolf.desktop";
+      # };
       defaultApplications = {
-        "image/*" = [ "feh.desktop" ];
-        "application/pdf" = [ "sioyek.desktop" "org.pwmt.zathura.desktop" "masterpdfeditor5.desktop" ];
+        "image/*" = [ "imv.desktop" ];
+        "application/pdf" = [ "sioyek.desktop" ];
         "text/plain" = [ "org.gnome.TextEditor.desktop" ];
         "inode/directory" = [ "org.gnome.Nautilus.desktop" ];
         "x-scheme-handler/http" = [ "librewolf.desktop" ];
@@ -58,8 +58,8 @@ in
         "application/xhtml+xml" = [ "librewolf.desktop" ];
         "application/x-extension-xhtml" = [ "librewolf.desktop" ];
         "application/x-extension-xht" = [ "librewolf.desktop" ];
-        "audio/*" = [ "vlc.desktop" ];
-        "video/*" = [ "vlc.desktop" ];
+        "audio/*" = [ "mpv.desktop" ];
+        "video/*" = [ "mpv.desktop" ];
 
       };
     };

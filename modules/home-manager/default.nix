@@ -26,6 +26,7 @@
     ./zathura.nix
     ./sioyek.nix
     ./joplin.nix
+    ./mpv.nix
   ];
 
 }

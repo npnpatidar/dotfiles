@@ -66,8 +66,8 @@ in
 
           { on = [ "<A-k>" ]; exec = "seek -5"; desc = "Seek up 5 units in the preview"; }
           { on = [ "<A-j>" ]; exec = "seek 5"; desc = "Seek down 5 units in the preview"; }
-          { on = [ "<A-PageUp>" ]; exec = "seek -5"; desc = "Seek up 5 units in the preview"; }
-          { on = [ "<A-PageDown>" ]; exec = "seek 5"; desc = "Seek down 5 units in the preview"; }
+          { on = [ "<A-Up>" ]; exec = "seek -5"; desc = "Seek up 5 units in the preview"; }
+          { on = [ "<A-Down>" ]; exec = "seek 5"; desc = "Seek down 5 units in the preview"; }
 
           { on = [ "<Up>" ]; exec = "arrow -1"; desc = "Move cursor up"; }
           { on = [ "<Down>" ]; exec = "arrow 1"; desc = "Move cursor down"; }
@@ -331,24 +331,79 @@ in
           show_symlink = true;
         };
 
-        open = {
-          rules = [
-            {
-              mime = "application/pdf";
-              use = "pdf";
-            }
-          ];
-        };
-
-        opener = {
-          pdf = [
-            {
-              exec = ''sioyek --new-window "$@" '';
-              block = false;
-            }
-          ];
-
-        };
+        # open = {
+        #   rules = [
+        #     {
+        #       mime = "application/pdf";
+        #       use = "pdf";
+        #     }
+        #     {
+        #       mime = "text/*";
+        #       use = [ "edit" "reveal" ];
+        #     }
+        #     {
+        #       mime = "image/*";
+        #       use = [ "image" "reveal" ];
+        #     }
+        #     {
+        #       mime = "video/*";
+        #       use = [ "play" "reveal" ];
+        #     }
+        #     {
+        #       mime = "application/json";
+        #       use = [ "edit" "reveal" ];
+        #     }
+        #     {
+        #       mime = "*";
+        #       use = [ "edit" "open" "reveal" ];
+        #     }
+        #
+        #     {
+        #       mime = "inode/directory";
+        #       use = [ "folder" ];
+        #     }
+        #   ];
+        # };
+        #
+        # opener = {
+        #   pdf = [
+        #     {
+        #       exec = ''sioyek --new-window "$@" '';
+        #       block = false;
+        #     }
+        #   ];
+        #   folder = [
+        #     {
+        #       exec = ''nautilus "$@" '';
+        #       block = false;
+        #     }
+        #   ];
+        #   text = [
+        #     {
+        #       exec = ''nvim "$@" '';
+        #       block = false;
+        #     }
+        #   ];
+        #   image = [
+        #     {
+        #       exec = ''feh "$@" '';
+        #       block = false;
+        #     }
+        #   ];
+        #   video = [
+        #     {
+        #       exec = ''mpv "$@" '';
+        #       block = false;
+        #     }
+        #   ];
+        #   reveal = [
+        #     {
+        #       exec = ''${pkgs.exiftool}/bin/exiftool "$1";'';
+        #       block = false;
+        #     }
+        #   ];
+        #
+        # };
         preview = {
           tab_size = 2;
           max_width = 600;
