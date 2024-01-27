@@ -22,8 +22,6 @@
 
     # Media
     vlc
-    feh
-    sxiv
 
     #Coding
     # android-studio

@@ -44,7 +44,7 @@ in
       #   "application/x-extension-xht" = "librewolf.desktop";
       # };
       defaultApplications = {
-        "image/*" = [ "imv.desktop" ];
+        "image/*" = [ "imv-dir.desktop" ];
         "application/pdf" = [ "sioyek.desktop" ];
         "text/plain" = [ "org.gnome.TextEditor.desktop" ];
         "inode/directory" = [ "org.gnome.Nautilus.desktop" ];
