@@ -28,6 +28,7 @@
     sioyek.enable = true;
     joplin.enable = true;
     mpv.enable = true;
+    imv.enable = true;
   };
   nixpkgs = {
     overlays =

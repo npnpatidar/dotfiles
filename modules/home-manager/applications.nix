@@ -22,6 +22,7 @@
 
     # Media
     vlc
+    monophony
 
     #Coding
     # android-studio

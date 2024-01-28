@@ -27,6 +27,7 @@
     ./sioyek.nix
     ./joplin.nix
     ./mpv.nix
+    ./imv.nix
   ];
 
 }
