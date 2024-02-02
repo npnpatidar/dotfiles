@@ -61,6 +61,7 @@ let
     ras = "yazi ~/Data/Sync_M_L_C/Study/RAS";
     js = "joplin sync && joplin e2ee decrypt";
     j = "joplin";
+    zl = "zellij";
   };
 
 

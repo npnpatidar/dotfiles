@@ -110,7 +110,7 @@
           ranger.enable = true;
           bat.enable = true;
           neovim.enable = true;
-          tmux.enable = true;
+          tmux.enable = false;
           # nvim.enable = false;
           yazi.enable = true;
         };

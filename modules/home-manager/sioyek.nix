@@ -34,6 +34,7 @@ in
     '';
     home.file.".config/sioyek/keys_user.config".text = ''
       toggle_dark_mode x
+      toggle_custom_color c
       zoom_in =
       zoom_out -
       fit_to_page_width w

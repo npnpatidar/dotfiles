@@ -86,7 +86,7 @@
     cht-sh
     perl536Packages.EmailOutlookMessage
     cz-cli
-
+    zellij
     # linkrec
 
     # nix-alien
