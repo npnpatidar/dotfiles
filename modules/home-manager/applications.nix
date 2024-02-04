@@ -37,6 +37,7 @@
 
     #Documents
     libreoffice
+    anki
 
     #Artificial Intelligence
     ollama
