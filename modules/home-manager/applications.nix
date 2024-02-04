@@ -2,9 +2,6 @@
   home.packages = with pkgs; [
 
 
-    # Fonts
-    (nerdfonts.override { fonts = [ "FiraCode" ]; })
-
     # Browsers 
     (import ../../pkgs/thorium.nix { inherit pkgs; })
     tangram
@@ -58,7 +55,6 @@
     ouch
     imv
 
-    (nerdfonts.override { fonts = [ "FiraCode" "FiraMono" "DroidSansMono" "Hack" "Hasklig" "Meslo" "UbuntuMono" ]; })
 
     git-lfs
     curl
