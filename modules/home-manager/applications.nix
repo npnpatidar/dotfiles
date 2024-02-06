@@ -1,7 +1,6 @@
 { inputs, outputs, config, pkgs, ... }: {
   home.packages = with pkgs; [
 
-
     # Browsers 
     (import ../../pkgs/thorium.nix { inherit pkgs; })
     tangram
@@ -31,6 +30,7 @@
 
     #Notes 
     gnome-text-editor
+    xournalpp
 
     #Documents
     libreoffice
@@ -48,6 +48,7 @@
     authenticator
     fsearch
     (import ../../pkgs/xdm-app.nix { inherit pkgs; })
+    (import ../../pkgs/xp-pen.nix { inherit pkgs; })
     gnome.gnome-boxes
     newsflash
     # bitwarden
