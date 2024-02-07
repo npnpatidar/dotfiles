@@ -11,6 +11,7 @@ let
     sn = "sudo nano";
     htop = "btop --utf-force";
     e = "exit";
+    q = "exit";
     ti = "tgpt -i";
     mlc = "cd /home/naresh/Data/Sync_M_L_C && ls";
     ml = "cd /home/naresh/Data/Sync_M_L && ls";
@@ -40,7 +41,7 @@ let
     lsa = "ls -a";
     lsl = "ls -l";
     lsla = "lsl -a";
-    ls = "eza -Fgh --group-directories-first --git --icons --color-scale all --hyperlink";
+    ls = "eza -gh --group-directories-first --git --icons --color-scale all --hyperlink";
     list-gen = "sudo nix-env --list-generations --profile /nix/var/nix/profiles/system";
     delete-gen = "sudo nix-env --delete-generations --profile /nix/var/nix/profiles/system";
     clear-boot = "sudo /run/current-system/bin/switch-to-configuration boot";

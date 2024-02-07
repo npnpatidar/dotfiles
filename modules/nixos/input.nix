@@ -29,9 +29,11 @@
   # Configure keymap in X11 and touchpad support
   services.xserver = {
     enable = true;
-    layout = "us";
-    xkbVariant = "";
-    xkbOptions = "rupeesign:e";
+    xkb = {
+      layout = "us";
+      variant = "";
+      options = "rupeesign:e";
+    };
     libinput = {
       enable = true;
       touchpad = {
