@@ -48,7 +48,6 @@
     authenticator
     fsearch
     (import ../../pkgs/xdm-app.nix { inherit pkgs; })
-    (import ../../pkgs/xp-pen.nix { inherit pkgs; })
     gnome.gnome-boxes
     newsflash
     # bitwarden
