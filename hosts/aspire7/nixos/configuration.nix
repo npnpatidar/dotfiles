@@ -59,6 +59,7 @@
   hardware.bluetooth.enable = true; # enables support for Bluetooth
   hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
 
+  hardware.opentabletdriver.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.naresh = {
@@ -95,7 +96,22 @@
 
 
 
+  fonts = {
+    enableDefaultPackages = true;
+    packages = with pkgs; [
+      nerdfonts
+      lohit-fonts.devanagari
+      noto-fonts
+    ];
 
-
+    fontconfig = {
+      enable = true;
+      defaultFonts = {
+        serif = [ "FiraCode Nerd Font" "Lohit Devanagari" ];
+        sansSerif = [ "FiraCode Nerd Font" "Lohit Devanagari" ];
+        monospace = [ "FiraCode Nerd Font Mono" "Lohit Devanagari" ];
+      };
+    };
+  };
 
 }

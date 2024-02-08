@@ -1,10 +1,6 @@
 { inputs, outputs, config, pkgs, ... }: {
   home.packages = with pkgs; [
 
-
-    # Fonts
-    (nerdfonts.override { fonts = [ "FiraCode" ]; })
-
     # Browsers 
     (import ../../pkgs/thorium.nix { inherit pkgs; })
     tangram
@@ -34,9 +30,11 @@
 
     #Notes 
     gnome-text-editor
+    xournalpp
 
     #Documents
     libreoffice
+    anki
 
     #Artificial Intelligence
     ollama
@@ -57,7 +55,6 @@
     ouch
     imv
 
-    (nerdfonts.override { fonts = [ "FiraCode" "FiraMono" "DroidSansMono" "Hack" "Hasklig" "Meslo" "UbuntuMono" ]; })
 
     git-lfs
     curl

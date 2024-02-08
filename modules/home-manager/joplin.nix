@@ -2,6 +2,7 @@
 with lib;
 let
   cfg = config.modules.home-manager.joplin;
+
   settings = ''
     {
     	"$schema": "https://joplinapp.org/schema/settings.json",
@@ -38,9 +39,9 @@ let
     	"preferredDarkTheme": 6,
     	"style.editor.fontSize": 20,
     	"editor": "/etc/profiles/per-user/naresh/bin/nvim",
-    	"sync.target": 5,
-    	"sync.5.path": "https://nch.pl/remote.php/dav/files/s2nw9rov",
-    	"sync.5.username": "s2nw9rov@duck.com",
+    	"sync.target": 2,
+    	"sync.5.path": "https://nch.pl/remote.php/webdav/.joplin",
+    	"sync.5.username": "s2nw9rov",
     	"clipperServer.autoStart": true,
     	"locale": "en_US",
     	"timeFormat": "h:mm A",
@@ -54,10 +55,14 @@ let
     		"order": false
     	},
     	"notes.sortOrder.field": "user_created_time",
-    	"editor.spellcheckBeta": true
+    	"editor.spellcheckBeta": true,
+    	"sync.2.path": "/home/naresh/Data/nextcloud/.joplin/"
     }
 
+
+
   '';
+
 in
 {
   options.modules.home-manager.joplin = {
