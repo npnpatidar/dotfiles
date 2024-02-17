@@ -37,6 +37,7 @@
       ../../../modules/nixos/input.nix
       ../../../modules/nixos/nix_related.nix
       ../../../modules/nixos/apple.nix
+      # ../../../modules/nixos/fingerprint.nix
       ./hardware-configuration.nix
     ];
 
