@@ -38,7 +38,7 @@
 
     #Artificial Intelligence
     ollama
-    # oterm
+    oterm
     # (import ./ollama { inherit pkgs; })
 
     #mindmap 
@@ -164,7 +164,11 @@
     lazydocker
     glow
     openssl
-
+    russ
+    tuifeed
+    systemctl-tui
+    nvtop-intel
+    newsboat
   ];
 
 
