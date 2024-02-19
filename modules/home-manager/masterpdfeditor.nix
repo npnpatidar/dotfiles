@@ -9,10 +9,12 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.packages = [
-      pkgs.masterpdfeditor
+    home.packages = with pkgs; [
+      # masterpdfeditor
+      # masterpdfeditor4
+      (import ../../pkgs/masterpdfeditor.nix { inherit pkgs; })
     ];
-    home.file.".config/Code Industry/Master PDF Editor 5.conf".source = ../../.secrets + "/Master PDF Editor 5.conf";
-    # home.file.".config/Code Industry/Master PDF Editor 5.conf".source = config.lib.file.mkOutOfStoreSymlink ../../.secrets + "/Master PDF Editor 5.conf";
+    # home.file.".config/Code Industry/Master PDF Editor 5.conf".source = ../../.secrets + "/Master PDF Editor 5.conf";
+    home.file.".config/Code Industry/Master PDF Editor 5.conf".source = config.lib.file.mkOutOfStoreSymlink ../../.secrets + "/Master PDF Editor 5.conf";
   };
 }
