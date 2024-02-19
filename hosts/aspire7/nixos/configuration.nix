@@ -95,7 +95,7 @@
   services.flatpak.enable = true;
   services.dbus.enable = true;
 
-
+  # programs.steam.enable = true;
 
   fonts = {
     enableDefaultPackages = true;
