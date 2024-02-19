@@ -4,6 +4,7 @@
   virtualisation = {
     docker = {
       enable = true;
+      enableNvidia = true;
     };
     oci-containers = {
       backend = "docker";
@@ -11,7 +12,7 @@
   };
 
   virtualisation.oci-containers.containers.archlinux = {
-    autoStart = true;
+    autoStart = false;
     image = "archlinux:latest";
     cmd = [ "/usr/bin/env" "TERM=xterm-256color" "/usr/bin/bash" ];
   };
