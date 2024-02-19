@@ -30,7 +30,6 @@
 
     #Notes 
     gnome-text-editor
-    xournalpp
 
     #Documents
     libreoffice
