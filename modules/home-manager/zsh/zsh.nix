@@ -95,7 +95,7 @@ in
         enable = true;
         plugins = [
           "thefuck"
-          "git"
+          # "git"
           "fzf"
           "colored-man-pages"
           "extract"
