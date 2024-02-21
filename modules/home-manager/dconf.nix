@@ -188,28 +188,28 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/desktop/wm/keybindings" = {
-      activate-window-menu = [];
+      activate-window-menu = [ ];
       begin-move = [ "<Super>m" ];
       begin-resize = [ "<Super>r" ];
       close = [ "<Super>q" ];
-      cycle-group = [];
-      cycle-group-backward = [];
-      cycle-panels = [];
-      cycle-panels-backward = [];
-      cycle-windows = [];
-      cycle-windows-backward = [];
+      cycle-group = [ ];
+      cycle-group-backward = [ ];
+      cycle-panels = [ ];
+      cycle-panels-backward = [ ];
+      cycle-windows = [ ];
+      cycle-windows-backward = [ ];
       lower = [ "<Super>Down" ];
-      maximize = [];
-      minimize = [];
-      move-to-monitor-down = [];
-      move-to-monitor-left = [];
-      move-to-monitor-right = [];
-      move-to-monitor-up = [];
+      maximize = [ ];
+      minimize = [ ];
+      move-to-monitor-down = [ ];
+      move-to-monitor-left = [ ];
+      move-to-monitor-right = [ ];
+      move-to-monitor-up = [ ];
       move-to-workspace-1 = [ "<Shift><Super>1" ];
       move-to-workspace-2 = [ "<Shift><Super>2" ];
       move-to-workspace-3 = [ "<Shift><Super>3" ];
       move-to-workspace-4 = [ "<Shift><Super>4" ];
-      move-to-workspace-last = [];
+      move-to-workspace-last = [ ];
       move-to-workspace-left = [ "<Shift><Super>Left" ];
       move-to-workspace-right = [ "<Shift><Super>Right" ];
       panel-run-dialog = [ "<Super>c" ];
@@ -217,15 +217,15 @@ with lib.hm.gvariant;
       switch-applications-backward = [ "<Shift><Alt>Tab" ];
       switch-group = [ "<Super>Tab" ];
       switch-group-backward = [ "<Shift><Super>Tab" ];
-      switch-panels = [];
-      switch-panels-backward = [];
-      switch-to-workspace-1 = [];
-      switch-to-workspace-last = [];
+      switch-panels = [ ];
+      switch-panels-backward = [ ];
+      switch-to-workspace-1 = [ ];
+      switch-to-workspace-last = [ ];
       switch-to-workspace-left = [ "<Super>Left" ];
       switch-to-workspace-right = [ "<Super>Right" ];
       toggle-fullscreen = [ "<Shift><Alt>space" ];
       toggle-maximized = [ "<Super>Up" ];
-      unmaximize = [];
+      unmaximize = [ ];
     };
 
     "org/gnome/desktop/wm/preferences" = {
@@ -270,7 +270,7 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/mutter/wayland/keybindings" = {
-      restore-shortcuts = [];
+      restore-shortcuts = [ ];
     };
 
     "org/gnome/nautilus/icon-view" = {
@@ -295,8 +295,8 @@ with lib.hm.gvariant;
 
     "org/gnome/settings-daemon/plugins/media-keys" = {
       custom-keybindings = [ "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/" "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/" "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/" "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/" ];
-      help = [];
-      home = [];
+      help = [ ];
+      home = [ ];
       www = [ "<Super>b" ];
     };
 
@@ -309,23 +309,23 @@ with lib.hm.gvariant;
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
       binding = "<Super>x";
       command = "kitty";
-      name = "kitty";
+      name = "Kitty";
     };
 
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2" = {
       binding = "<Super>e";
       command = "nautilus";
-      name = "nautilus";
+      name = "Nautilus";
     };
 
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3" = {
-      binding = "<Super>z";
-      command = "qownnotes";
-      name = "Qownotes";
+      binding = "<Super>j";
+      command = "joplin-desktop";
+      name = "Joplin";
     };
 
     "org/gnome/shell" = {
-      command-history = [ "nvim" "qownnotes" "code" "codium" ];
+      command-history = [ "nvim" "joplin-desktop" "code" "codium" ];
       disable-user-extensions = false;
       disabled-extensions = [ "dash-to-dock@micxgx.gmail.com" ];
       enabled-extensions = [ "user-theme@gnome-shell-extensions.gcampax.github.com" "dash-to-panel@jderose9.github.com" "pano@elhan.io" "appindicatorsupport@rgcjonas.gmail.com" "netspeedsimplified@prateekmedia.extension" "gsconnect@andyholmes.github.io" "blur-my-shell@aunetx" "panel-date-format@keiii.github.com" "noannoyance-fork@vrba.dev" "gtk4-ding@smedius.gitlab.com" "tiling-assistant@leleat-on-github" ];
@@ -420,19 +420,19 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/shell/extensions/tiling-assistant" = {
-      activate-layout0 = [];
-      activate-layout1 = [];
-      activate-layout2 = [];
-      activate-layout3 = [];
-      activate-layout4 = [];
-      activate-layout5 = [];
-      activate-layout6 = [];
+      activate-layout0 = [ ];
+      activate-layout1 = [ ];
+      activate-layout2 = [ ];
+      activate-layout3 = [ ];
+      activate-layout4 = [ ];
+      activate-layout5 = [ ];
+      activate-layout6 = [ ];
       active-window-hint = 2;
       active-window-hint-color = "rgb(143,161,179)";
-      auto-tile = [];
-      center-window = [];
-      debugging-free-rects = [];
-      debugging-show-tiled-rects = [];
+      auto-tile = [ ];
+      center-window = [ ];
+      debugging-free-rects = [ ];
+      debugging-show-tiled-rects = [ ];
       default-move-mode = 0;
       dynamic-keybinding-behavior = 0;
       enable-advanced-experimental-features = true;
@@ -441,33 +441,33 @@ with lib.hm.gvariant;
       last-version-installed = 44;
       low-performance-move-mode = false;
       maximize-with-gap = true;
-      restore-window = [];
+      restore-window = [ ];
       restore-window-size-on = 1;
-      search-popup-layout = [];
+      search-popup-layout = [ ];
       show-layout-panel-indicator = true;
       single-screen-gap = 10;
       tile-bottom-half = [ "<Shift><Alt>KP_Down" ];
-      tile-bottom-half-ignore-ta = [];
+      tile-bottom-half-ignore-ta = [ ];
       tile-bottomleft-quarter = [ "<Shift><Alt>KP_End" ];
-      tile-bottomleft-quarter-ignore-ta = [];
+      tile-bottomleft-quarter-ignore-ta = [ ];
       tile-bottomright-quarter = [ "<Shift><Alt>KP_Next" ];
-      tile-bottomright-quarter-ignore-ta = [];
+      tile-bottomright-quarter-ignore-ta = [ ];
       tile-edit-mode = [ "<Shift><Alt>KP_Begin" ];
       tile-left-half = [ "<Control>Left" ];
-      tile-left-half-ignore-ta = [];
+      tile-left-half-ignore-ta = [ ];
       tile-maximize = [ "<Super>Up" "<Super>KP_5" ];
-      tile-maximize-horizontally = [];
-      tile-maximize-vertically = [];
+      tile-maximize-horizontally = [ ];
+      tile-maximize-vertically = [ ];
       tile-right-half = [ "<Control>Right" ];
-      tile-right-half-ignore-ta = [];
+      tile-right-half-ignore-ta = [ ];
       tile-top-half = [ "<Shift><Alt>KP_Up" ];
-      tile-top-half-ignore-ta = [];
+      tile-top-half-ignore-ta = [ ];
       tile-topleft-quarter = [ "<Shift><Alt>KP_Home" ];
-      tile-topleft-quarter-ignore-ta = [];
+      tile-topleft-quarter-ignore-ta = [ ];
       tile-topright-quarter = [ "<Shift><Alt>KP_Page_Up" ];
-      tile-topright-quarter-ignore-ta = [];
-      toggle-always-on-top = [];
-      toggle-tiling-popup = [];
+      tile-topright-quarter-ignore-ta = [ ];
+      toggle-always-on-top = [ ];
+      toggle-tiling-popup = [ ];
       window-gap = 10;
     };
 
@@ -480,8 +480,8 @@ with lib.hm.gvariant;
       screenshot-window = [ "<Super>Print" ];
       show-screen-recording-ui = [ "<Shift><Control>Print" ];
       show-screenshot-ui = [ "<Control>Print" ];
-      switch-to-application-1 = [];
-      toggle-message-tray = [];
+      switch-to-application-1 = [ ];
+      toggle-message-tray = [ ];
     };
 
     "org/gnome/tweaks" = {
