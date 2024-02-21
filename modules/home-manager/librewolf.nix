@@ -30,6 +30,7 @@ let
         (extension "imagus" "{00000f2a-7cde-4f20-83ed-434fcb420d71}")
         (extension "omnivore" "save-extension@omnivore.app")
         (extension "midnight-lizard-quantum" "{8fbc7259-8015-4172-9af1-20e1edfbbd3a}")
+        (extension "joplin-web-clipper" "{8419486a-54e9-11e8-9401-ac9e17909436}")
       ];
     AppAutoUpdate = false;
   };
