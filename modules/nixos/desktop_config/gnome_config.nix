@@ -55,7 +55,11 @@
     syncthing-indicator
     # prime-helper
     # gpu-profile-selector
-
+    lock-keys
+    tiling-assistant # 'tiling-assistant@leleat-on-github'
+    # forge    # "forge@jmmaranan.com"
+    pop-shell #pop-shell@system76.com
+    gtk4-desktop-icons-ng-ding #'gtk4-ding@smedius.gitlab.com
   ]);
 
 
