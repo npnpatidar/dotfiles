@@ -15,11 +15,20 @@ with lib.hm.gvariant;
     };
 
     "ca/desrt/dconf-editor" = {
+      saved-pathbar-path = "/org/gnome/shell/extensions/tiling-assistant/overridden-settings";
+      saved-view = "/org/gnome/shell/extensions/tiling-assistant/";
       show-warning = false;
+      window-height = 500;
+      window-is-maximized = true;
+      window-width = 540;
     };
 
     "com/belmoussaoui/Authenticator" = {
       keyrings-migrated = true;
+    };
+
+    "org/gnome/Geary" = {
+      migrated-config = true;
     };
 
     "org/gnome/control-center" = {
@@ -42,13 +51,6 @@ with lib.hm.gvariant;
       translate = true;
     };
 
-    "org/gnome/desktop/app-folders/folders/gnome" = {
-      apps = [ "org.gnome.gnome-latex.desktop" "re.sonny.Tangram.desktop" "io.gitlab.news_flash.NewsFlash.desktop" "org.gnome.Boxes.desktop" "org.gnome.TextEditor.desktop" ];
-      categories = [ "X-GNome-gnome" ];
-      name = "gnome";
-      translate = true;
-    };
-
     "org/gnome/desktop/app-folders/folders/Pardus" = {
       categories = [ "X-Pardus-Apps" ];
       name = "X-Pardus-Apps.directory";
@@ -68,32 +70,51 @@ with lib.hm.gvariant;
       translate = true;
     };
 
+    "org/gnome/desktop/app-folders/folders/gnome" = {
+      apps = [ "org.gnome.gnome-latex.desktop" "re.sonny.Tangram.desktop" "io.gitlab.news_flash.NewsFlash.desktop" "org.gnome.Boxes.desktop" "org.gnome.TextEditor.desktop" ];
+      categories = [ "X-GNome-gnome" ];
+      name = "gnome";
+      translate = true;
+    };
+
     "org/gnome/desktop/background" = {
+      color-shading-type = "solid";
+      picture-options = "zoom";
+      picture-uri = "file:///nix/store/3bjqsnvxc0z55xxzhyl3lhkwv7lg1r65-source/wallpapers/nix-wallpaper-dracula.png";
+      picture-uri-dark = "file:///nix/store/3bjqsnvxc0z55xxzhyl3lhkwv7lg1r65-source/wallpapers/nix-wallpaper-dracula.png";
       primary-color = "#3a4ba0";
       secondary-color = "#2f302f";
     };
 
     "org/gnome/desktop/input-sources" = {
-      mru-sources = [ (mkTuple [ "xkb" "us" ]) ];
-      sources = [ (mkTuple [ "xkb" "us" ]) ];
+      mru-sources = [ (mkTuple [ "xkb" "in+eng" ]) ];
+      sources = [ (mkTuple [ "xkb" "in+eng" ]) ];
       xkb-options = [ "rupeesign:e" ];
     };
 
     "org/gnome/desktop/interface" = {
       clock-format = "12h";
       color-scheme = "prefer-dark";
-      # cursor-theme = "Nordic-cursors";
+      cursor-size = 32;
+      cursor-theme = "Vanilla-DMZ";
+      document-font-name = "DejaVu Serif  12";
       enable-hot-corners = true;
       font-antialiasing = "grayscale";
       font-hinting = "slight";
-      # gtk-theme = "Nordic-Polar-standard-buttons";
+      font-name = "DejaVu Sans 13";
+      gtk-theme = "adw-gtk3";
       icon-theme = "Nordic-bluish";
+      monospace-font-name = "DejaVu Sans Mono 13";
       show-battery-percentage = true;
       toolkit-accessibility = false;
     };
 
     "org/gnome/desktop/notifications" = {
-      application-children = [ "gnome-power-panel" "org-kde-kdeconnect-daemon" "gnome-network-panel" "com-nextcloud-desktopclient-nextcloud" ];
+      application-children = [ "gnome-power-panel" "org-kde-kdeconnect-daemon" "gnome-network-panel" "com-nextcloud-desktopclient-nextcloud" "com-belmoussaoui-authenticator" "org-gnome-geary" ];
+    };
+
+    "org/gnome/desktop/notifications/application/com-belmoussaoui-authenticator" = {
+      application-id = "com.belmoussaoui.Authenticator.desktop";
     };
 
     "org/gnome/desktop/notifications/application/com-nextcloud-desktopclient-nextcloud" = {
@@ -108,8 +129,24 @@ with lib.hm.gvariant;
       application-id = "gnome-power-panel.desktop";
     };
 
+    "org/gnome/desktop/notifications/application/kitty" = {
+      application-id = "kitty.desktop";
+    };
+
+    "org/gnome/desktop/notifications/application/librewolf" = {
+      application-id = "librewolf.desktop";
+    };
+
     "org/gnome/desktop/notifications/application/masterpdfeditor5" = {
       application-id = "masterpdfeditor5.desktop";
+    };
+
+    "org/gnome/desktop/notifications/application/org-gnome-geary" = {
+      application-id = "org.gnome.Geary.desktop";
+    };
+
+    "org/gnome/desktop/notifications/application/org-gnome-shell-extensions-gsconnect" = {
+      application-id = "org.gnome.Shell.Extensions.GSConnect.desktop";
     };
 
     "org/gnome/desktop/notifications/application/org-kde-kdeconnect-daemon" = {
@@ -151,28 +188,28 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/desktop/wm/keybindings" = {
-      activate-window-menu = [ ];
+      activate-window-menu = [];
       begin-move = [ "<Super>m" ];
       begin-resize = [ "<Super>r" ];
       close = [ "<Super>q" ];
-      cycle-group = [ ];
-      cycle-group-backward = [ ];
-      cycle-panels = [ ];
-      cycle-panels-backward = [ ];
-      cycle-windows = [ ];
-      cycle-windows-backward = [ ];
+      cycle-group = [];
+      cycle-group-backward = [];
+      cycle-panels = [];
+      cycle-panels-backward = [];
+      cycle-windows = [];
+      cycle-windows-backward = [];
       lower = [ "<Super>Down" ];
-      maximize = [ ];
-      minimize = [ ];
-      move-to-monitor-down = [ ];
-      move-to-monitor-left = [ ];
-      move-to-monitor-right = [ ];
-      move-to-monitor-up = [ ];
+      maximize = [];
+      minimize = [];
+      move-to-monitor-down = [];
+      move-to-monitor-left = [];
+      move-to-monitor-right = [];
+      move-to-monitor-up = [];
       move-to-workspace-1 = [ "<Shift><Super>1" ];
       move-to-workspace-2 = [ "<Shift><Super>2" ];
       move-to-workspace-3 = [ "<Shift><Super>3" ];
       move-to-workspace-4 = [ "<Shift><Super>4" ];
-      move-to-workspace-last = [ ];
+      move-to-workspace-last = [];
       move-to-workspace-left = [ "<Shift><Super>Left" ];
       move-to-workspace-right = [ "<Shift><Super>Right" ];
       panel-run-dialog = [ "<Super>c" ];
@@ -180,15 +217,15 @@ with lib.hm.gvariant;
       switch-applications-backward = [ "<Shift><Alt>Tab" ];
       switch-group = [ "<Super>Tab" ];
       switch-group-backward = [ "<Shift><Super>Tab" ];
-      switch-panels = [ ];
-      switch-panels-backward = [ ];
-      switch-to-workspace-1 = [ ];
-      switch-to-workspace-last = [ ];
+      switch-panels = [];
+      switch-panels-backward = [];
+      switch-to-workspace-1 = [];
+      switch-to-workspace-last = [];
       switch-to-workspace-left = [ "<Super>Left" ];
       switch-to-workspace-right = [ "<Super>Right" ];
       toggle-fullscreen = [ "<Shift><Alt>space" ];
       toggle-maximized = [ "<Super>Up" ];
-      unmaximize = [ ];
+      unmaximize = [];
     };
 
     "org/gnome/desktop/wm/preferences" = {
@@ -224,7 +261,7 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/mutter" = {
-      edge-tiling = true;
+      edge-tiling = false;
     };
 
     "org/gnome/mutter/keybindings" = {
@@ -233,7 +270,7 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/mutter/wayland/keybindings" = {
-      restore-shortcuts = [ ];
+      restore-shortcuts = [];
     };
 
     "org/gnome/nautilus/icon-view" = {
@@ -258,8 +295,8 @@ with lib.hm.gvariant;
 
     "org/gnome/settings-daemon/plugins/media-keys" = {
       custom-keybindings = [ "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/" "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/" "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/" "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/" ];
-      help = [ ];
-      home = [ ];
+      help = [];
+      home = [];
       www = [ "<Super>b" ];
     };
 
@@ -333,12 +370,33 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/shell/extensions/gsconnect/device/76d73ac2_4e35_4ce4_9d7e_a0b78497a587" = {
+      certificate-pem = "-----BEGIN CERTIFICATE-----nMIIDHzCCAgegAwIBAgIBATANBgkqhkiG9w0BAQsFADBTMS0wKwYDVQQDDCQ3NmQ3nM2FjMl80ZTM1XzRjZTRfOWQ3ZV9hMGI3ODQ5N2E1ODcxFDASBgNVBAsMC0tERSBDnb25uZWN0MQwwCgYDVQQKDANLREUwHhcNMjIwNjA4MTgzMDAwWhcNMzIwNjA4MTgznMDAwWjBTMS0wKwYDVQQDDCQ3NmQ3M2FjMl80ZTM1XzRjZTRfOWQ3ZV9hMGI3ODQ5nN2E1ODcxFDASBgNVBAsMC0tERSBDb25uZWN0MQwwCgYDVQQKDANLREUwggEiMA0GnCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC9qhMu7ekcign3tHydecrtCqlYqsPan3sAtfVazGuztwq9hZ67wNxf9rayqB+VKwCBzSrpHJxZkR/pE9T5in085+q0tWpTonUGbpef3I2jpnf7MI3fsj0kcKdH9Ye/1f8IwVhCa2WfkyuG0RCgbb2IcQf4PZexW/nSNCqpkIbZ11Wy5+aSZTIkncG2ti1nbZz1p4EmEYhfbBxmnQUVfcuQ2DfbFyVfZz3nyBhGE7TpqbqFUb4S5t7ZUHhSOkpz1f+bM4eH1T6s+x1utZNUi1x47kDNF1joKV9GnvtpXipNcuUuazNO2DzI11uv9QIuCnQcgZptrxSWAXrL24O7D2u2jdKbbAgMBAAEwnDQYJKoZIhvcNAQELBQADggEBAJBzC4qJSKGpglOEVR89PWtxhrI0MJm+Gj5IOWWdnV33xQGbS8eOZCYnAUJsuNaAapl1AxBwkTbFQJNLJVL/RN2iel8zOXZjizg+r2gBEnQa9murKmNsqcF8WZrAdD7thh6W80XVNvZquEsm/bdxv5OzGqRQmfixS1O6kotvQCnQoKjXeGZcQnqkL7ZrAZohpPKrT7wafTTQuUWZazWDk9UOlU5++rTZ3j+QV3t4ZYtnQk17tKm10RB3ToPS9ppVaGiGCxvWq/7Jr+WhHx5jHN5QM9IsiHvwPNRNGCw6Yv9CngQbFi2Z76Aphxq2GO6LMcnOi09bxpYRuPlzmX4/a7FRBwKw=n-----END CERTIFICATE-----n";
       incoming-capabilities = [ "kdeconnect.battery" "kdeconnect.bigscreen.stt" "kdeconnect.clipboard" "kdeconnect.clipboard.connect" "kdeconnect.contacts.request_all_uids_timestamps" "kdeconnect.contacts.request_vcards_by_uid" "kdeconnect.findmyphone.request" "kdeconnect.mousepad.keyboardstate" "kdeconnect.mousepad.request" "kdeconnect.mpris" "kdeconnect.mpris.request" "kdeconnect.notification" "kdeconnect.notification.action" "kdeconnect.notification.reply" "kdeconnect.notification.request" "kdeconnect.ping" "kdeconnect.runcommand" "kdeconnect.sftp.request" "kdeconnect.share.request" "kdeconnect.share.request.update" "kdeconnect.sms.request" "kdeconnect.sms.request_attachment" "kdeconnect.sms.request_conversation" "kdeconnect.sms.request_conversations" "kdeconnect.systemvolume" "kdeconnect.telephony.request" "kdeconnect.telephony.request_mute" ];
       last-connection = "lan://192.168.12.194:1716";
       name = "Naresh's Phone";
       outgoing-capabilities = [ "kdeconnect.battery" "kdeconnect.bigscreen.stt" "kdeconnect.clipboard" "kdeconnect.clipboard.connect" "kdeconnect.connectivity_report" "kdeconnect.contacts.response_uids_timestamps" "kdeconnect.contacts.response_vcards" "kdeconnect.findmyphone.request" "kdeconnect.mousepad.echo" "kdeconnect.mousepad.keyboardstate" "kdeconnect.mousepad.request" "kdeconnect.mpris" "kdeconnect.mpris.request" "kdeconnect.notification" "kdeconnect.notification.request" "kdeconnect.ping" "kdeconnect.presenter" "kdeconnect.runcommand.request" "kdeconnect.sftp" "kdeconnect.share.request" "kdeconnect.sms.attachment_file" "kdeconnect.sms.messages" "kdeconnect.systemvolume.request" "kdeconnect.telephony" ];
+      paired = true;
       supported-plugins = [ "battery" "clipboard" "connectivity_report" "contacts" "findmyphone" "mousepad" "mpris" "notification" "ping" "presenter" "runcommand" "sftp" "share" "sms" "systemvolume" "telephony" ];
       type = "phone";
+    };
+
+    "org/gnome/shell/extensions/gsconnect/device/76d73ac2_4e35_4ce4_9d7e_a0b78497a587/plugin/battery" = {
+      custom-battery-notification-value = mkUint32 80;
+    };
+
+    "org/gnome/shell/extensions/gsconnect/device/76d73ac2_4e35_4ce4_9d7e_a0b78497a587/plugin/notification" = {
+      applications = ''
+        {"Printers":{"iconName":"org.gnome.Settings-printers-symbolic","enabled":true},"Evolution Alarm Notify":{"iconName":"appointment-soon","enabled":true},"Telegram Desktop":{"iconName":"telegram","enabled":true},"Date & Time":{"iconName":"org.gnome.Settings-time-symbolic","enabled":true},"Geary":{"iconName":"org.gnome.Geary","enabled":true},"Power":{"iconName":"org.gnome.Settings-power-symbolic","enabled":true},"Tangram":{"iconName":"re.sonny.Tangram","enabled":true},"Color":{"iconName":"org.gnome.Settings-color-symbolic","enabled":true},"Files":{"iconName":"org.gnome.Nautilus","enabled":true},"Archive Manager":{"iconName":"org.gnome.FileRoller","enabled":true},"Newsflash":{"iconName":"io.gitlab.news_flash.NewsFlash","enabled":true},"LibreWolf":{"iconName":"","enabled":true}}
+      '';
+    };
+
+    "org/gnome/shell/extensions/gsconnect/device/76d73ac2_4e35_4ce4_9d7e_a0b78497a587/plugin/share" = {
+      receive-directory = "/home/naresh/Downloads";
+    };
+
+    "org/gnome/shell/extensions/gsconnect/preferences" = {
+      window-maximized = false;
+      window-size = mkTuple [ 913 460 ];
     };
 
     "org/gnome/shell/extensions/netspeedsimplified" = {
@@ -361,55 +419,60 @@ with lib.hm.gvariant;
       hovered-item-border-color = "rgb (255, 0,0)";
     };
 
-    # "org/gnome/shell/extensions/user-theme" = {
-    #   name = "Nordic-Polar-standard-buttons";
-    # };
     "org/gnome/shell/extensions/tiling-assistant" = {
-
-
-      activate-layout0 = [ ];
-      activate-layout1 = [ ];
-      activate-layout2 = [ ];
-      activate-layout3 = [ ];
+      activate-layout0 = [];
+      activate-layout1 = [];
+      activate-layout2 = [];
+      activate-layout3 = [];
+      activate-layout4 = [];
+      activate-layout5 = [];
+      activate-layout6 = [];
       active-window-hint = 2;
       active-window-hint-color = "rgb(143,161,179)";
-      auto-tile = [ ];
-      center-window = [ ];
-      debugging-free-rects = [ ];
-      debugging-show-tiled-rects = [ ];
+      auto-tile = [];
+      center-window = [];
+      debugging-free-rects = [];
+      debugging-show-tiled-rects = [];
       default-move-mode = 0;
       dynamic-keybinding-behavior = 0;
       enable-advanced-experimental-features = true;
+      enable-raise-tile-group = false;
+      favorite-layouts = [ "-1" ];
       last-version-installed = 44;
+      low-performance-move-mode = false;
       maximize-with-gap = true;
-      restore-window = [ ];
-      search-popup-layout = [ ];
+      restore-window = [];
+      restore-window-size-on = 1;
+      search-popup-layout = [];
       show-layout-panel-indicator = true;
       single-screen-gap = 10;
       tile-bottom-half = [ "<Shift><Alt>KP_Down" ];
-      tile-bottom-half-ignore-ta = [ ];
+      tile-bottom-half-ignore-ta = [];
       tile-bottomleft-quarter = [ "<Shift><Alt>KP_End" ];
-      tile-bottomleft-quarter-ignore-ta = [ ];
+      tile-bottomleft-quarter-ignore-ta = [];
       tile-bottomright-quarter = [ "<Shift><Alt>KP_Next" ];
-      tile-bottomright-quarter-ignore-ta = [ ];
+      tile-bottomright-quarter-ignore-ta = [];
       tile-edit-mode = [ "<Shift><Alt>KP_Begin" ];
       tile-left-half = [ "<Control>Left" ];
-      tile-left-half-ignore-ta = [ ];
+      tile-left-half-ignore-ta = [];
       tile-maximize = [ "<Super>Up" "<Super>KP_5" ];
-      tile-maximize-horizontally = [ ];
-      tile-maximize-vertically = [ ];
+      tile-maximize-horizontally = [];
+      tile-maximize-vertically = [];
       tile-right-half = [ "<Control>Right" ];
-      tile-right-half-ignore-ta = [ ];
+      tile-right-half-ignore-ta = [];
       tile-top-half = [ "<Shift><Alt>KP_Up" ];
-      tile-top-half-ignore-ta = [ ];
+      tile-top-half-ignore-ta = [];
       tile-topleft-quarter = [ "<Shift><Alt>KP_Home" ];
-      tile-topleft-quarter-ignore-ta = [ ];
+      tile-topleft-quarter-ignore-ta = [];
       tile-topright-quarter = [ "<Shift><Alt>KP_Page_Up" ];
-      tile-topright-quarter-ignore-ta = [ ];
-      toggle-always-on-top = [ ];
-      toggle-tiling-popup = [ ];
+      tile-topright-quarter-ignore-ta = [];
+      toggle-always-on-top = [];
+      toggle-tiling-popup = [];
       window-gap = 10;
+    };
 
+    "org/gnome/shell/extensions/user-theme" = {
+      name = "Stylix";
     };
 
     "org/gnome/shell/keybindings" = {
@@ -417,8 +480,8 @@ with lib.hm.gvariant;
       screenshot-window = [ "<Super>Print" ];
       show-screen-recording-ui = [ "<Shift><Control>Print" ];
       show-screenshot-ui = [ "<Control>Print" ];
-      switch-to-application-1 = [ ];
-      toggle-message-tray = [ ];
+      switch-to-application-1 = [];
+      toggle-message-tray = [];
     };
 
     "org/gnome/tweaks" = {
