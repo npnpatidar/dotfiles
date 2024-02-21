@@ -364,6 +364,53 @@ with lib.hm.gvariant;
     # "org/gnome/shell/extensions/user-theme" = {
     #   name = "Nordic-Polar-standard-buttons";
     # };
+    "org/gnome/shell/extensions/tiling-assistant" = {
+
+
+      activate-layout0 = [ ];
+      activate-layout1 = [ ];
+      activate-layout2 = [ ];
+      activate-layout3 = [ ];
+      active-window-hint = 2;
+      active-window-hint-color = "rgb(143,161,179)";
+      auto-tile = [ ];
+      center-window = [ ];
+      debugging-free-rects = [ ];
+      debugging-show-tiled-rects = [ ];
+      default-move-mode = 0;
+      dynamic-keybinding-behavior = 0;
+      enable-advanced-experimental-features = true;
+      last-version-installed = 44;
+      maximize-with-gap = true;
+      restore-window = [ ];
+      search-popup-layout = [ ];
+      show-layout-panel-indicator = true;
+      single-screen-gap = 10;
+      tile-bottom-half = [ "<Shift><Alt>KP_Down" ];
+      tile-bottom-half-ignore-ta = [ ];
+      tile-bottomleft-quarter = [ "<Shift><Alt>KP_End" ];
+      tile-bottomleft-quarter-ignore-ta = [ ];
+      tile-bottomright-quarter = [ "<Shift><Alt>KP_Next" ];
+      tile-bottomright-quarter-ignore-ta = [ ];
+      tile-edit-mode = [ "<Shift><Alt>KP_Begin" ];
+      tile-left-half = [ "<Control>Left" ];
+      tile-left-half-ignore-ta = [ ];
+      tile-maximize = [ "<Super>Up" "<Super>KP_5" ];
+      tile-maximize-horizontally = [ ];
+      tile-maximize-vertically = [ ];
+      tile-right-half = [ "<Control>Right" ];
+      tile-right-half-ignore-ta = [ ];
+      tile-top-half = [ "<Shift><Alt>KP_Up" ];
+      tile-top-half-ignore-ta = [ ];
+      tile-topleft-quarter = [ "<Shift><Alt>KP_Home" ];
+      tile-topleft-quarter-ignore-ta = [ ];
+      tile-topright-quarter = [ "<Shift><Alt>KP_Page_Up" ];
+      tile-topright-quarter-ignore-ta = [ ];
+      toggle-always-on-top = [ ];
+      toggle-tiling-popup = [ ];
+      window-gap = 10;
+
+    };
 
     "org/gnome/shell/keybindings" = {
       screenshot = [ "Print" ];
