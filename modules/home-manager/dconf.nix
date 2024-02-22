@@ -212,9 +212,11 @@ with lib.hm.gvariant;
       move-to-workspace-2 = [ "<Shift><Super>2" ];
       move-to-workspace-3 = [ "<Shift><Super>3" ];
       move-to-workspace-4 = [ "<Shift><Super>4" ];
+      move-to-workspace-down = [ ];
       move-to-workspace-last = [ ];
       move-to-workspace-left = [ "<Shift><Super>Left" ];
       move-to-workspace-right = [ "<Shift><Super>Right" ];
+      move-to-workspace-up = [ ];
       panel-run-dialog = [ "<Super>c" ];
       switch-applications = [ "<Alt>Tab" ];
       switch-applications-backward = [ "<Shift><Alt>Tab" ];
@@ -223,9 +225,11 @@ with lib.hm.gvariant;
       switch-panels = [ ];
       switch-panels-backward = [ ];
       switch-to-workspace-1 = [ ];
+      switch-to-workspace-down = [ ];
       switch-to-workspace-last = [ ];
       switch-to-workspace-left = [ "<Super>Left" ];
       switch-to-workspace-right = [ "<Super>Right" ];
+      switch-to-workspace-up = [ ];
       toggle-fullscreen = [ "<Shift><Alt>space" ];
       toggle-maximized = [ "<Super>Up" ];
       unmaximize = [ ];
@@ -267,7 +271,10 @@ with lib.hm.gvariant;
       edge-tiling = false;
     };
 
-    "org/gnome/mutter/keybindings" = { };
+    "org/gnome/mutter/keybindings" = {
+      toggle-tiled-left = [ ];
+      toggle-tiled-right = [ ];
+    };
 
     "org/gnome/mutter/wayland/keybindings" = {
       restore-shortcuts = [ ];
@@ -507,9 +514,9 @@ with lib.hm.gvariant;
       tile-left-half = [ "<Control>Left" ];
       tile-left-half-ignore-ta = [ ];
       tile-maximize = [ "<Super>Up" ];
-      tile-right-half = [ "<Control>Right" ];
       tile-maximize-horizontally = [ ];
       tile-maximize-vertically = [ ];
+      tile-right-half = [ "<Control>Right" ];
       tile-right-half-ignore-ta = [ ];
       tile-top-half = [ "<Shift><Alt>KP_Up" ];
       tile-top-half-ignore-ta = [ ];
