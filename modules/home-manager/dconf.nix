@@ -24,7 +24,10 @@ with lib.hm.gvariant;
     };
 
     "com/belmoussaoui/Authenticator" = {
+      is-maximized = false;
       keyrings-migrated = true;
+      window-height = 600;
+      window-width = 720;
     };
 
     "org/gnome/Geary" = {
@@ -188,28 +191,28 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/desktop/wm/keybindings" = {
-      activate-window-menu = [ ];
+      activate-window-menu = [];
       begin-move = [ "<Super>m" ];
       begin-resize = [ "<Super>r" ];
       close = [ "<Super>q" ];
-      cycle-group = [ ];
-      cycle-group-backward = [ ];
-      cycle-panels = [ ];
-      cycle-panels-backward = [ ];
-      cycle-windows = [ ];
-      cycle-windows-backward = [ ];
+      cycle-group = [];
+      cycle-group-backward = [];
+      cycle-panels = [];
+      cycle-panels-backward = [];
+      cycle-windows = [];
+      cycle-windows-backward = [];
       lower = [ "<Super>Down" ];
-      maximize = [ ];
-      minimize = [ ];
-      move-to-monitor-down = [ ];
-      move-to-monitor-left = [ ];
-      move-to-monitor-right = [ ];
-      move-to-monitor-up = [ ];
+      maximize = [];
+      minimize = [];
+      move-to-monitor-down = [];
+      move-to-monitor-left = [];
+      move-to-monitor-right = [];
+      move-to-monitor-up = [];
       move-to-workspace-1 = [ "<Shift><Super>1" ];
       move-to-workspace-2 = [ "<Shift><Super>2" ];
       move-to-workspace-3 = [ "<Shift><Super>3" ];
       move-to-workspace-4 = [ "<Shift><Super>4" ];
-      move-to-workspace-last = [ ];
+      move-to-workspace-last = [];
       move-to-workspace-left = [ "<Shift><Super>Left" ];
       move-to-workspace-right = [ "<Shift><Super>Right" ];
       panel-run-dialog = [ "<Super>c" ];
@@ -217,15 +220,15 @@ with lib.hm.gvariant;
       switch-applications-backward = [ "<Shift><Alt>Tab" ];
       switch-group = [ "<Super>Tab" ];
       switch-group-backward = [ "<Shift><Super>Tab" ];
-      switch-panels = [ ];
-      switch-panels-backward = [ ];
-      switch-to-workspace-1 = [ ];
-      switch-to-workspace-last = [ ];
+      switch-panels = [];
+      switch-panels-backward = [];
+      switch-to-workspace-1 = [];
+      switch-to-workspace-last = [];
       switch-to-workspace-left = [ "<Super>Left" ];
       switch-to-workspace-right = [ "<Super>Right" ];
       toggle-fullscreen = [ "<Shift><Alt>space" ];
       toggle-maximized = [ "<Super>Up" ];
-      unmaximize = [ ];
+      unmaximize = [];
     };
 
     "org/gnome/desktop/wm/preferences" = {
@@ -270,7 +273,7 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/mutter/wayland/keybindings" = {
-      restore-shortcuts = [ ];
+      restore-shortcuts = [];
     };
 
     "org/gnome/nautilus/icon-view" = {
@@ -295,8 +298,8 @@ with lib.hm.gvariant;
 
     "org/gnome/settings-daemon/plugins/media-keys" = {
       custom-keybindings = [ "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/" "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/" "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/" "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/" ];
-      help = [ ];
-      home = [ ];
+      help = [];
+      home = [];
       www = [ "<Super>b" ];
     };
 
@@ -362,6 +365,55 @@ with lib.hm.gvariant;
       window-preview-title-position = "TOP";
     };
 
+    "org/gnome/shell/extensions/forge" = {
+      stacked-tiling-mode-enabled = false;
+      tabbed-tiling-mode-enabled = false;
+      tiling-mode-enabled = true;
+      window-gap-hidden-on-single = true;
+    };
+
+    "org/gnome/shell/extensions/forge/keybindings" = {
+      con-split-horizontal = [ "<Super>z" ];
+      con-split-layout-toggle = [ "<Super>g" ];
+      con-split-vertical = [ "<Super>v" ];
+      con-stacked-layout-toggle = [ "<Shift><Super>s" ];
+      con-tabbed-layout-toggle = [ "<Shift><Super>t" ];
+      con-tabbed-showtab-decoration-toggle = [ "<Control><Alt>y" ];
+      focus-border-toggle = [ "<Super>x" ];
+      prefs-tiling-toggle = [ "<Super>w" ];
+      window-focus-down = [ "<Super>j" ];
+      window-focus-left = [ "<Super>h" ];
+      window-focus-right = [ "<Super>l" ];
+      window-focus-up = [ "<Super>k" ];
+      window-gap-size-decrease = [ "<Control><Super>minus" ];
+      window-gap-size-increase = [ "<Control><Super>plus" ];
+      window-move-down = [ "<Shift><Super>j" ];
+      window-move-left = [ "<Shift><Super>h" ];
+      window-move-right = [ "<Shift><Super>l" ];
+      window-move-up = [ "<Shift><Super>k" ];
+      window-resize-bottom-decrease = [ "<Shift><Control><Super>i" ];
+      window-resize-bottom-increase = [ "<Control><Super>u" ];
+      window-resize-left-decrease = [ "<Shift><Control><Super>o" ];
+      window-resize-left-increase = [ "<Control><Super>y" ];
+      window-resize-right-decrease = [ "<Shift><Control><Super>y" ];
+      window-resize-right-increase = [ "<Control><Super>o" ];
+      window-resize-top-decrease = [ "<Shift><Control><Super>u" ];
+      window-resize-top-increase = [ "<Control><Super>i" ];
+      window-snap-center = [ "<Control><Alt>c" ];
+      window-snap-one-third-left = [ "<Control><Alt>d" ];
+      window-snap-one-third-right = [ "<Control><Alt>g" ];
+      window-snap-two-third-left = [ "<Control><Alt>e" ];
+      window-snap-two-third-right = [ "<Control><Alt>t" ];
+      window-swap-down = [ "<Control><Super>j" ];
+      window-swap-last-active = [ "<Super>Return" ];
+      window-swap-left = [ "<Control><Super>h" ];
+      window-swap-right = [ "<Control><Super>l" ];
+      window-swap-up = [ "<Control><Super>k" ];
+      window-toggle-always-float = [ "<Shift><Super>c" ];
+      window-toggle-float = [ "<Super>c" ];
+      workspace-active-tile-toggle = [ "<Shift><Super>w" ];
+    };
+
     "org/gnome/shell/extensions/gsconnect" = {
       devices = [ "76d73ac2_4e35_4ce4_9d7e_a0b78497a587" ];
       id = "12d003d4-ae21-4916-97ef-9da204f137ea";
@@ -386,7 +438,7 @@ with lib.hm.gvariant;
 
     "org/gnome/shell/extensions/gsconnect/device/76d73ac2_4e35_4ce4_9d7e_a0b78497a587/plugin/notification" = {
       applications = ''
-        {"Printers":{"iconName":"org.gnome.Settings-printers-symbolic","enabled":true},"Evolution Alarm Notify":{"iconName":"appointment-soon","enabled":true},"Telegram Desktop":{"iconName":"telegram","enabled":true},"Date & Time":{"iconName":"org.gnome.Settings-time-symbolic","enabled":true},"Geary":{"iconName":"org.gnome.Geary","enabled":true},"Power":{"iconName":"org.gnome.Settings-power-symbolic","enabled":true},"Tangram":{"iconName":"re.sonny.Tangram","enabled":true},"Color":{"iconName":"org.gnome.Settings-color-symbolic","enabled":true},"Files":{"iconName":"org.gnome.Nautilus","enabled":true},"Archive Manager":{"iconName":"org.gnome.FileRoller","enabled":true},"Newsflash":{"iconName":"io.gitlab.news_flash.NewsFlash","enabled":true},"LibreWolf":{"iconName":"","enabled":true}}
+        {"Printers":{"iconName":"org.gnome.Settings-printers-symbolic","enabled":true},"Evolution Alarm Notify":{"iconName":"appointment-soon","enabled":true},"Telegram Desktop":{"iconName":"telegram","enabled":true},"Date & Time":{"iconName":"org.gnome.Settings-time-symbolic","enabled":true},"Geary":{"iconName":"org.gnome.Geary","enabled":true},"Power":{"iconName":"org.gnome.Settings-power-symbolic","enabled":true},"Tangram":{"iconName":"re.sonny.Tangram","enabled":true},"Color":{"iconName":"org.gnome.Settings-color-symbolic","enabled":true},"Files":{"iconName":"org.gnome.Nautilus","enabled":true},"Archive Manager":{"iconName":"org.gnome.FileRoller","enabled":true},"Newsflash":{"iconName":"io.gitlab.news_flash.NewsFlash","enabled":true},"LibreWolf":{"iconName":"","enabled":true}}\n
       '';
     };
 
@@ -420,54 +472,56 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/shell/extensions/tiling-assistant" = {
-      activate-layout0 = [ ];
-      activate-layout1 = [ ];
-      activate-layout2 = [ ];
-      activate-layout3 = [ ];
-      activate-layout4 = [ ];
-      activate-layout5 = [ ];
-      activate-layout6 = [ ];
+      activate-layout0 = [];
+      activate-layout1 = [];
+      activate-layout2 = [];
+      activate-layout3 = [];
+      activate-layout4 = [];
+      activate-layout5 = [];
+      activate-layout6 = [];
       active-window-hint = 2;
       active-window-hint-color = "rgb(143,161,179)";
-      auto-tile = [ ];
-      center-window = [ ];
-      debugging-free-rects = [ ];
-      debugging-show-tiled-rects = [ ];
+      auto-tile = [];
+      center-window = [];
+      debugging-free-rects = [];
+      debugging-show-tiled-rects = [];
       default-move-mode = 0;
+      disable-tile-groups = false;
       dynamic-keybinding-behavior = 0;
       enable-advanced-experimental-features = true;
       enable-raise-tile-group = false;
+      enable-tiling-popup = true;
       favorite-layouts = [ "-1" ];
       last-version-installed = 44;
       low-performance-move-mode = false;
       maximize-with-gap = true;
-      restore-window = [ ];
+      restore-window = [];
       restore-window-size-on = 1;
-      search-popup-layout = [ ];
+      search-popup-layout = [];
       show-layout-panel-indicator = true;
       single-screen-gap = 10;
       tile-bottom-half = [ "<Shift><Alt>KP_Down" ];
-      tile-bottom-half-ignore-ta = [ ];
+      tile-bottom-half-ignore-ta = [];
       tile-bottomleft-quarter = [ "<Shift><Alt>KP_End" ];
-      tile-bottomleft-quarter-ignore-ta = [ ];
+      tile-bottomleft-quarter-ignore-ta = [];
       tile-bottomright-quarter = [ "<Shift><Alt>KP_Next" ];
-      tile-bottomright-quarter-ignore-ta = [ ];
+      tile-bottomright-quarter-ignore-ta = [];
       tile-edit-mode = [ "<Shift><Alt>KP_Begin" ];
       tile-left-half = [ "<Control>Left" ];
-      tile-left-half-ignore-ta = [ ];
+      tile-left-half-ignore-ta = [];
       tile-maximize = [ "<Super>Up" "<Super>KP_5" ];
-      tile-maximize-horizontally = [ ];
-      tile-maximize-vertically = [ ];
+      tile-maximize-horizontally = [];
+      tile-maximize-vertically = [];
       tile-right-half = [ "<Control>Right" ];
-      tile-right-half-ignore-ta = [ ];
+      tile-right-half-ignore-ta = [];
       tile-top-half = [ "<Shift><Alt>KP_Up" ];
-      tile-top-half-ignore-ta = [ ];
+      tile-top-half-ignore-ta = [];
       tile-topleft-quarter = [ "<Shift><Alt>KP_Home" ];
-      tile-topleft-quarter-ignore-ta = [ ];
+      tile-topleft-quarter-ignore-ta = [];
       tile-topright-quarter = [ "<Shift><Alt>KP_Page_Up" ];
-      tile-topright-quarter-ignore-ta = [ ];
-      toggle-always-on-top = [ ];
-      toggle-tiling-popup = [ ];
+      tile-topright-quarter-ignore-ta = [];
+      toggle-always-on-top = [];
+      toggle-tiling-popup = [];
       window-gap = 10;
     };
 
@@ -480,8 +534,8 @@ with lib.hm.gvariant;
       screenshot-window = [ "<Super>Print" ];
       show-screen-recording-ui = [ "<Shift><Control>Print" ];
       show-screenshot-ui = [ "<Control>Print" ];
-      switch-to-application-1 = [ ];
-      toggle-message-tray = [ ];
+      switch-to-application-1 = [];
+      toggle-message-tray = [];
     };
 
     "org/gnome/tweaks" = {
@@ -516,6 +570,32 @@ with lib.hm.gvariant;
       type-format = "category";
       window-position = mkTuple [ 0 0 ];
       window-size = mkTuple [ 1600 814 ];
+    };
+
+    "re/sonny/Tangram" = {
+      instances = [ "bee068368613448387f3030bfaf69d65" "59628238917d41ad9bce983e02eea51b" "5464a7d17dea4b218afb16a219fe6f6b" ];
+      window-maximized = true;
+    };
+
+    "re/sonny/Tangram/instances/5464a7d17dea4b218afb16a219fe6f6b" = {
+      name = "Gemini";
+      notifications-priority = "normal";
+      url = "https://gemini.google.com";
+      user-agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.3";
+    };
+
+    "re/sonny/Tangram/instances/59628238917d41ad9bce983e02eea51b" = {
+      name = "Claude";
+      notifications-priority = "normal";
+      url = "https://claude.ai/";
+      user-agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.3";
+    };
+
+    "re/sonny/Tangram/instances/bee068368613448387f3030bfaf69d65" = {
+      name = "ChatGPT";
+      notifications-priority = "normal";
+      url = "https://chat.openai.com";
+      user-agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.3";
     };
 
   };
