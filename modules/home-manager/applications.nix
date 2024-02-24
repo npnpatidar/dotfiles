@@ -53,7 +53,7 @@
     inkscape-with-extensions
     ouch
     imv
-
+    mathpix-snipping-tool
 
     git-lfs
     curl
