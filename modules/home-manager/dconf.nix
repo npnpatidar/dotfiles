@@ -336,6 +336,7 @@ with lib.hm.gvariant;
       disable-user-extensions = false;
       disabled-extensions = [ "dash-to-dock@micxgx.gmail.com" ];
       enabled-extensions = [ "user-theme@gnome-shell-extensions.gcampax.github.com" "dash-to-panel@jderose9.github.com" "pano@elhan.io" "appindicatorsupport@rgcjonas.gmail.com" "netspeedsimplified@prateekmedia.extension" "gsconnect@andyholmes.github.io" "blur-my-shell@aunetx" "panel-date-format@keiii.github.com" "noannoyance-fork@vrba.dev" "gtk4-ding@smedius.gitlab.com" "tiling-assistant@leleat-on-github" "lockkeys@vaina.lt" ];
+
       favorite-apps = [ "thorium-browser.desktop" "librewolf.desktop" "org.gnome.Nautilus.desktop" "kitty.desktop" ];
       last-selected-power-profile = "power-saver";
       welcome-dialog-last-shown-version = "45.1";
@@ -455,6 +456,12 @@ with lib.hm.gvariant;
       window-maximized = false;
       window-size = mkTuple [ 913 460 ];
     };
+
+
+    "org/gnome/shell/extensions/lockkeys" =
+      {
+        style = "show-hide";
+      };
 
     "org/gnome/shell/extensions/netspeedsimplified" = {
       fontmode = 0;
