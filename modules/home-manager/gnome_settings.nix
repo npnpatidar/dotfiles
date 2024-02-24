@@ -11,13 +11,7 @@
 
   xdg.configFile."tiling-assistant/layouts.json".text = ''
 
-
-[{"_name":"Master and Stack [V]","_items":[{"rect":{"x":0,"y":0,"width":0.5,"height":1},"appId":null,"loopType":null},{"rect":{"x":0.5,"y":0,"width":0.5,"height":1},"appId":null,"loopType":"h"}]},{"_name":"N-Columns","_items":[{"rect":{"x":0,"y":0,"width":1,"height":1},"appId":null,"loopType":"v"}]},{"_name":"2 : 1 [V]","_items":[{"rect":{"x":0,"y":0,"width":0.66,"height":1},"appId":null,"loopType":null},{"rect":{"x":0.66,"y":0,"width":0.34,"height":1},"appId":null,"loopType":null}]},{"_name":"4 Quarters","_items":[{"rect":{"x":0,"y":0,"width":0.5,"height":0.5},"appId":null,"loopType":null},{"rect":{"x":0.5,"y":0,"width":0.5,"height":0.5},"appId":null,"loopType":null},{"rect":{"x":0,"y":0.5,"width":0.5,"height":0.5},"appId":null,"loopType":null},{"rect":{"x":0.5,"y":0.5,"width":0.5,"height":0.5},"appId":null,"loopType":null}]},{"_name":"Master Stack [H]","_items":[{"rect":{"x":0,"y":0,"width":1,"height":0.5},"appId":null,"loopType":null},{"rect":{"x":0,"y":0.5,"width":1,"height":0.5},"appId":null,"loopType":"v"}]},{"_name":"3:1 [V]","_items":[{"rect":{"x":0,"y":0,"width":0.75,"height":1},"appId":null,"loopType":null},{"rect":{"x":0.75,"y":0,"width":0.25,"height":1},"appId":null,"loopType":null}]}]
-
-
-
-
-
+[{"_name":"Master and Stack [V]","_items":[{"rect":{"x":0,"y":0,"width":0.5,"height":1},"appId":null,"loopType":null},{"rect":{"x":0.5,"y":0,"width":0.5,"height":1},"appId":null,"loopType":"h"}]},{"_name":"N-Columns","_items":[{"rect":{"x":0,"y":0,"width":1,"height":1},"appId":null,"loopType":"v"}]},{"_name":"2 : 1 [V]","_items":[{"rect":{"x":0,"y":0,"width":0.66,"height":1},"appId":null,"loopType":null},{"rect":{"x":0.66,"y":0,"width":0.34,"height":1},"appId":null,"loopType":null}]},{"_name":"4 Quarters","_items":[{"rect":{"x":0,"y":0,"width":0.5,"height":0.5},"appId":null,"loopType":null},{"rect":{"x":0.5,"y":0,"width":0.5,"height":0.5},"appId":null,"loopType":null},{"rect":{"x":0,"y":0.5,"width":0.5,"height":0.5},"appId":null,"loopType":null},{"rect":{"x":0.5,"y":0.5,"width":0.5,"height":0.5},"appId":null,"loopType":null}]},{"_name":"Master Stack [H]","_items":[{"rect":{"x":0,"y":0,"width":1,"height":0.5},"appId":null,"loopType":null},{"rect":{"x":0,"y":0.5,"width":1,"height":0.5},"appId":null,"loopType":"v"}]},{"_name":"3:1 [V]","_items":[{"rect":{"x":0,"y":0,"width":0.75,"height":1},"appId":null,"loopType":null},{"rect":{"x":0.75,"y":0,"width":0.25,"height":1},"appId":null,"loopType":null}]},{"_name":"RattaAI Chatgpt","_items":[{"rect":{"x":0,"y":0,"width":0.33,"height":1},"appId":null,"loopType":null},{"rect":{"x":0.33,"y":0,"width":0.33,"height":0.5},"appId":null,"loopType":null},{"rect":{"x":0.66,"y":0,"width":0.33,"height":1},"appId":null,"loopType":null},{"rect":{"x":0.33,"y":0.5,"width":0.33,"height":0.5},"appId":null,"loopType":null}]}]
 
 
 
