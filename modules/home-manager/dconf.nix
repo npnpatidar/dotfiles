@@ -148,6 +148,10 @@ with lib.hm.gvariant;
       application-id = "org.gnome.Geary.desktop";
     };
 
+    "org/gnome/desktop/notifications/application/org-gnome-settings" = {
+      application-id = "org.gnome.Settings.desktop";
+    };
+
     "org/gnome/desktop/notifications/application/org-gnome-shell-extensions-gsconnect" = {
       application-id = "org.gnome.Shell.Extensions.GSConnect.desktop";
     };
@@ -201,9 +205,9 @@ with lib.hm.gvariant;
       cycle-panels-backward = [ ];
       cycle-windows = [ ];
       cycle-windows-backward = [ ];
-      lower = [ ];
+      lower = [ "<Super>Down" ];
       maximize = [ ];
-      minimize = [ "<Super>Down" ];
+      minimize = [ ];
       move-to-monitor-down = [ ];
       move-to-monitor-left = [ ];
       move-to-monitor-right = [ ];
