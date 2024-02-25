@@ -231,7 +231,7 @@ with lib.hm.gvariant;
       switch-to-workspace-left = [ "<Ctrl>Left" ];
       switch-to-workspace-right = [ "<Ctrl>Right" ];
       switch-to-workspace-up = [ ];
-      toggle-fullscreen = [ "<Super>KP_Delete" "<Super>KP_Decimal" ];
+      toggle-fullscreen = [ "<Super>KP_Enter" ];
       toggle-maximized = [ ];
       unmaximize = [ ];
     };
@@ -302,10 +302,15 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/settings-daemon/plugins/media-keys" = {
-      custom-keybindings = [ "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/" "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/" "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/" "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/" ];
+      custom-keybindings = [ "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/" "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/" "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/" ];
+      decrease-text-size = [ ];
       help = [ ];
       home = [ ];
-      www = [ "<Super>b" ];
+      magnifier = [ ];
+      magnifier-zoom-in = [ ];
+      magnifier-zoom-out = [ ];
+      screenreader = [ ];
+      www = [ ];
     };
 
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
@@ -315,15 +320,9 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
-      binding = "<Super>x";
-      command = "kitty";
-      name = "Kitty";
-    };
-
-    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2" = {
       binding = "<Super>e";
-      command = "nautilus";
-      name = "Nautilus";
+      command = "anki";
+      name = "Anki";
     };
 
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3" = {
@@ -337,7 +336,6 @@ with lib.hm.gvariant;
       disable-user-extensions = false;
       disabled-extensions = [ "dash-to-dock@micxgx.gmail.com" ];
       enabled-extensions = [ "user-theme@gnome-shell-extensions.gcampax.github.com" "dash-to-panel@jderose9.github.com" "pano@elhan.io" "appindicatorsupport@rgcjonas.gmail.com" "netspeedsimplified@prateekmedia.extension" "gsconnect@andyholmes.github.io" "blur-my-shell@aunetx" "panel-date-format@keiii.github.com" "noannoyance-fork@vrba.dev" "gtk4-ding@smedius.gitlab.com" "tiling-assistant@leleat-on-github" "lockkeys@vaina.lt" ];
-
       favorite-apps = [ "thorium-browser.desktop" "librewolf.desktop" "org.gnome.Nautilus.desktop" "kitty.desktop" ];
       last-selected-power-profile = "power-saver";
       welcome-dialog-last-shown-version = "45.1";
@@ -352,7 +350,6 @@ with lib.hm.gvariant;
       group-apps-use-fixed-width = false;
       hide-overview-on-startup = true;
       hot-keys = true;
-      shortcut-num-keys = "NUM_ROW";
       hotkeys-overlay-combo = "TEMPORARILY";
       leftbox-padding = -1;
       overview-click-to-exit = true;
@@ -366,6 +363,7 @@ with lib.hm.gvariant;
         {"0":48}
       '';
       primary-monitor = 0;
+      shortcut-num-keys = "NUM_ROW";
       show-apps-icon-side-padding = 0;
       status-icon-padding = 1;
       tray-padding = 2;
@@ -382,7 +380,7 @@ with lib.hm.gvariant;
     "org/gnome/shell/extensions/gsconnect/device/76d73ac2_4e35_4ce4_9d7e_a0b78497a587" = {
       certificate-pem = "-----BEGIN CERTIFICATE-----nMIIDHzCCAgegAwIBAgIBATANBgkqhkiG9w0BAQsFADBTMS0wKwYDVQQDDCQ3NmQ3nM2FjMl80ZTM1XzRjZTRfOWQ3ZV9hMGI3ODQ5N2E1ODcxFDASBgNVBAsMC0tERSBDnb25uZWN0MQwwCgYDVQQKDANLREUwHhcNMjIwNjA4MTgzMDAwWhcNMzIwNjA4MTgznMDAwWjBTMS0wKwYDVQQDDCQ3NmQ3M2FjMl80ZTM1XzRjZTRfOWQ3ZV9hMGI3ODQ5nN2E1ODcxFDASBgNVBAsMC0tERSBDb25uZWN0MQwwCgYDVQQKDANLREUwggEiMA0GnCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC9qhMu7ekcign3tHydecrtCqlYqsPan3sAtfVazGuztwq9hZ67wNxf9rayqB+VKwCBzSrpHJxZkR/pE9T5in085+q0tWpTonUGbpef3I2jpnf7MI3fsj0kcKdH9Ye/1f8IwVhCa2WfkyuG0RCgbb2IcQf4PZexW/nSNCqpkIbZ11Wy5+aSZTIkncG2ti1nbZz1p4EmEYhfbBxmnQUVfcuQ2DfbFyVfZz3nyBhGE7TpqbqFUb4S5t7ZUHhSOkpz1f+bM4eH1T6s+x1utZNUi1x47kDNF1joKV9GnvtpXipNcuUuazNO2DzI11uv9QIuCnQcgZptrxSWAXrL24O7D2u2jdKbbAgMBAAEwnDQYJKoZIhvcNAQELBQADggEBAJBzC4qJSKGpglOEVR89PWtxhrI0MJm+Gj5IOWWdnV33xQGbS8eOZCYnAUJsuNaAapl1AxBwkTbFQJNLJVL/RN2iel8zOXZjizg+r2gBEnQa9murKmNsqcF8WZrAdD7thh6W80XVNvZquEsm/bdxv5OzGqRQmfixS1O6kotvQCnQoKjXeGZcQnqkL7ZrAZohpPKrT7wafTTQuUWZazWDk9UOlU5++rTZ3j+QV3t4ZYtnQk17tKm10RB3ToPS9ppVaGiGCxvWq/7Jr+WhHx5jHN5QM9IsiHvwPNRNGCw6Yv9CngQbFi2Z76Aphxq2GO6LMcnOi09bxpYRuPlzmX4/a7FRBwKw=n-----END CERTIFICATE-----n";
       incoming-capabilities = [ "kdeconnect.battery" "kdeconnect.bigscreen.stt" "kdeconnect.clipboard" "kdeconnect.clipboard.connect" "kdeconnect.contacts.request_all_uids_timestamps" "kdeconnect.contacts.request_vcards_by_uid" "kdeconnect.findmyphone.request" "kdeconnect.mousepad.keyboardstate" "kdeconnect.mousepad.request" "kdeconnect.mpris" "kdeconnect.mpris.request" "kdeconnect.notification" "kdeconnect.notification.action" "kdeconnect.notification.reply" "kdeconnect.notification.request" "kdeconnect.ping" "kdeconnect.runcommand" "kdeconnect.sftp.request" "kdeconnect.share.request" "kdeconnect.share.request.update" "kdeconnect.sms.request" "kdeconnect.sms.request_attachment" "kdeconnect.sms.request_conversation" "kdeconnect.sms.request_conversations" "kdeconnect.systemvolume" "kdeconnect.telephony.request" "kdeconnect.telephony.request_mute" ];
-      last-connection = "lan://192.168.12.194:1716";
+      last-connection = "lan://192.168.12.240:1716";
       name = "Naresh's Phone";
       outgoing-capabilities = [ "kdeconnect.battery" "kdeconnect.bigscreen.stt" "kdeconnect.clipboard" "kdeconnect.clipboard.connect" "kdeconnect.connectivity_report" "kdeconnect.contacts.response_uids_timestamps" "kdeconnect.contacts.response_vcards" "kdeconnect.findmyphone.request" "kdeconnect.mousepad.echo" "kdeconnect.mousepad.keyboardstate" "kdeconnect.mousepad.request" "kdeconnect.mpris" "kdeconnect.mpris.request" "kdeconnect.notification" "kdeconnect.notification.request" "kdeconnect.ping" "kdeconnect.presenter" "kdeconnect.runcommand.request" "kdeconnect.sftp" "kdeconnect.share.request" "kdeconnect.sms.attachment_file" "kdeconnect.sms.messages" "kdeconnect.systemvolume.request" "kdeconnect.telephony" ];
       paired = true;
@@ -396,7 +394,7 @@ with lib.hm.gvariant;
 
     "org/gnome/shell/extensions/gsconnect/device/76d73ac2_4e35_4ce4_9d7e_a0b78497a587/plugin/notification" = {
       applications = ''
-        {"Printers":{"iconName":"org.gnome.Settings-printers-symbolic","enabled":true},"Evolution Alarm Notify":{"iconName":"appointment-soon","enabled":true},"Telegram Desktop":{"iconName":"telegram","enabled":true},"Date & Time":{"iconName":"org.gnome.Settings-time-symbolic","enabled":true},"Geary":{"iconName":"org.gnome.Geary","enabled":true},"Power":{"iconName":"org.gnome.Settings-power-symbolic","enabled":true},"Tangram":{"iconName":"re.sonny.Tangram","enabled":true},"Color":{"iconName":"org.gnome.Settings-color-symbolic","enabled":true},"Files":{"iconName":"org.gnome.Nautilus","enabled":true},"Archive Manager":{"iconName":"org.gnome.FileRoller","enabled":true},"Newsflash":{"iconName":"io.gitlab.news_flash.NewsFlash","enabled":true},"LibreWolf":{"iconName":"","enabled":true}}\n
+        {"Printers":{"iconName":"org.gnome.Settings-printers-symbolic","enabled":true},"Evolution Alarm Notify":{"iconName":"appointment-soon","enabled":true},"Telegram Desktop":{"iconName":"telegram","enabled":true},"Date & Time":{"iconName":"org.gnome.Settings-time-symbolic","enabled":true},"Geary":{"iconName":"org.gnome.Geary","enabled":true},"Power":{"iconName":"org.gnome.Settings-power-symbolic","enabled":true},"Tangram":{"iconName":"re.sonny.Tangram","enabled":true},"Color":{"iconName":"org.gnome.Settings-color-symbolic","enabled":true},"Files":{"iconName":"org.gnome.Nautilus","enabled":true},"Archive Manager":{"iconName":"org.gnome.FileRoller","enabled":true},"Newsflash":{"iconName":"io.gitlab.news_flash.NewsFlash","enabled":true}}
       '';
     };
 
@@ -409,11 +407,9 @@ with lib.hm.gvariant;
       window-size = mkTuple [ 913 460 ];
     };
 
-
-    "org/gnome/shell/extensions/lockkeys" =
-      {
-        style = "show-hide";
-      };
+    "org/gnome/shell/extensions/lockkeys" = {
+      style = "show-hide";
+    };
 
     "org/gnome/shell/extensions/netspeedsimplified" = {
       fontmode = 0;
@@ -496,7 +492,7 @@ with lib.hm.gvariant;
     "org/gnome/shell/keybindings" = {
       screenshot = [ "Print" ];
       screenshot-window = [ "<Super>Print" ];
-      show-screen-recording-ui = [ "<Shift><Control>Print" ];
+      show-screen-recording-ui = [ "<Alt>Print" ];
       show-screenshot-ui = [ "<Control>Print" ];
       switch-to-application-1 = [ ];
       toggle-message-tray = [ ];
