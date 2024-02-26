@@ -339,7 +339,7 @@ with lib.hm.gvariant;
       command-history = [ "nvim" "joplin-desktop" "code" "codium" ];
       disable-user-extensions = false;
       disabled-extensions = [ "dash-to-dock@micxgx.gmail.com" ];
-      enabled-extensions = [ "user-theme@gnome-shell-extensions.gcampax.github.com" "dash-to-panel@jderose9.github.com" "pano@elhan.io" "appindicatorsupport@rgcjonas.gmail.com" "netspeedsimplified@prateekmedia.extension" "gsconnect@andyholmes.github.io" "blur-my-shell@aunetx" "panel-date-format@keiii.github.com" "noannoyance-fork@vrba.dev" "gtk4-ding@smedius.gitlab.com" "tiling-assistant@leleat-on-github" "lockkeys@vaina.lt" ];
+      enabled-extensions = [ "user-theme@gnome-shell-extensions.gcampax.github.com" "dash-to-panel@jderose9.github.com" "pano@elhan.io" "appindicatorsupport@rgcjonas.gmail.com" "netspeedsimplified@prateekmedia.extension" "gsconnect@andyholmes.github.io" "blur-my-shell@aunetx" "panel-date-format@keiii.github.com" "noannoyance-fork@vrba.dev" "gtk4-ding@smedius.gitlab.com" "tiling-assistant@leleat-on-github" "lockkeys@vaina.lt" "Shortcuts@kyle.aims.ac.za" ];
       favorite-apps = [ "thorium-browser.desktop" "librewolf.desktop" "org.gnome.Nautilus.desktop" "kitty.desktop" ];
       last-selected-power-profile = "power-saver";
       welcome-dialog-last-shown-version = "45.1";
@@ -355,6 +355,7 @@ with lib.hm.gvariant;
       hide-overview-on-startup = true;
       hot-keys = true;
       hotkeys-overlay-combo = "TEMPORARILY";
+      isolate-workspaces = true;
       leftbox-padding = -1;
       overview-click-to-exit = true;
       panel-anchors = ''
@@ -435,6 +436,11 @@ with lib.hm.gvariant;
       hovered-item-border-color = "rgb (255, 0,0)";
     };
 
+    "org/gnome/shell/extensions/shortcuts" = {
+      shortcuts-toggle-overview = [ "<Super>slash" ];
+      show-icon = false;
+    };
+
     "org/gnome/shell/extensions/tiling-assistant" = {
       activate-layout0 = [ ];
       activate-layout1 = [ ];
@@ -461,7 +467,7 @@ with lib.hm.gvariant;
       maximize-with-gap = true;
       restore-window = [ ];
       restore-window-size-on = 1;
-      search-popup-layout = [ "<Super>KP_Insert" "<Super>KP_0" ];
+      search-popup-layout = [ "<Super>KP_Delete" "<Super>KP_Decimal" ];
       show-layout-panel-indicator = true;
       single-screen-gap = 10;
       tile-bottom-half = [ "<Super>KP_Down" ];
@@ -470,7 +476,7 @@ with lib.hm.gvariant;
       tile-bottomleft-quarter-ignore-ta = [ ];
       tile-bottomright-quarter = [ "<Super>KP_Next" ];
       tile-bottomright-quarter-ignore-ta = [ ];
-      tile-edit-mode = [ "<Shift>KP_End" "<Shift>KP_1" ];
+      tile-edit-mode = [ "<Shift>KP_Insert" "<Shift>KP_0" ];
       tile-left-half = [ "<Super>Left" "<Super>KP_Left" ];
       tile-left-half-ignore-ta = [ ];
       tile-maximize = [ "<Super>Up" ];
@@ -501,6 +507,11 @@ with lib.hm.gvariant;
       switch-to-application-1 = [ ];
       toggle-message-tray = [ ];
     };
+
+    "org/gnome/TextEditor" =
+      {
+        show-line-numbers = true;
+      };
 
     "org/gnome/tweaks" = {
       show-extensions-notice = false;
