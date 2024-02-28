@@ -9,7 +9,7 @@
     ncdu
     mc
     onefetch
-    python311Packages.howdoi
+    # python311Packages.howdoi
     unzip
     fd
     tree-sitter

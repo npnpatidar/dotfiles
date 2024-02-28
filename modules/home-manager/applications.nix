@@ -94,8 +94,8 @@
     nb
     nvitop
     dconf2nix
-    python311Packages.howdoi
     # steam-run
+    # python312Packages.howdoi
     gcc
     zig
     unzip
