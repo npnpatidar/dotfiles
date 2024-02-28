@@ -334,6 +334,13 @@ with lib.hm.gvariant;
       command = "joplin-desktop";
       name = "Joplin";
     };
+    "org/gnome/settings-daemon/plugins/power" = {
+
+      sleep-inactive-battery-type = "suspend";
+      sleep-inactive-battery-timeout = 900;
+      sleep-inactive-ac-type = "nothing";
+
+    };
 
     "org/gnome/shell" = {
       command-history = [ "nvim" "joplin-desktop" "code" "codium" ];
