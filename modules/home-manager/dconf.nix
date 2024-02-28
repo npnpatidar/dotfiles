@@ -476,7 +476,7 @@ with lib.hm.gvariant;
       tile-bottomleft-quarter-ignore-ta = [ ];
       tile-bottomright-quarter = [ "<Super>KP_Next" ];
       tile-bottomright-quarter-ignore-ta = [ ];
-      tile-edit-mode = [ "<Shift>KP_Insert" "<Shift>KP_0" ];
+      tile-edit-mode = [ "<Shift>KP_Insert" "<Shift>KP_0" "<Super>KP_Insert" "<Super>KP_0" ];
       tile-left-half = [ "<Super>Left" "<Super>KP_Left" ];
       tile-left-half-ignore-ta = [ ];
       tile-maximize = [ "<Super>Up" ];
