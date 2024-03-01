@@ -37,6 +37,7 @@
     gnome-control-center
     gnome-shell-extensions
     seahorse
+    gnome-calculator
 
 
   ]) ++ (with pkgs.gnomeExtensions;[
