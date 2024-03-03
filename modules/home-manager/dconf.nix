@@ -518,6 +518,7 @@ with lib.hm.gvariant;
     "org/gnome/TextEditor" =
       {
         show-line-numbers = true;
+        style-scheme = "peninsula-dark";
       };
 
     "org/gnome/tweaks" = {

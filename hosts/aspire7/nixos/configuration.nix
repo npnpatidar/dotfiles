@@ -39,6 +39,7 @@
       ../../../modules/nixos/apple.nix
       # ../../../modules/nixos/fingerprint.nix
       ../../../modules/nixos/fonts.nix
+      ../../../modules/nixos/servarr.nix
       ./hardware-configuration.nix
     ];
 

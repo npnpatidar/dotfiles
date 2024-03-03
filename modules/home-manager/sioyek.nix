@@ -39,6 +39,8 @@ in
       zoom_out -
       fit_to_page_width w
       goto_page_with_page_number .
+      next_page u
+      previous_page i
     '';
     xdg.desktopEntries = {
       "sioyek" = {
