@@ -306,7 +306,7 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/settings-daemon/plugins/media-keys" = {
-      custom-keybindings = [ "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/" "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/" "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/" ];
+      custom-keybindings = [ "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/" "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/" "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/" "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/" ];
       decrease-text-size = [ ];
       help = [ ];
       home = [ ];
@@ -329,6 +329,11 @@ with lib.hm.gvariant;
       name = "Anki";
     };
 
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2" = {
+      binding = "<Shift><Super>s";
+      command = "gnome-text-editor";
+      name = "Note Taking";
+    };
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3" = {
       binding = "<Super>j";
       command = "joplin-desktop";
