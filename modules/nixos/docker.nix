@@ -5,6 +5,7 @@
     docker = {
       enable = true;
       enableNvidia = true;
+      enableOnBoot = lib.mkDefault false;
     };
     oci-containers = {
       backend = "docker";
