@@ -522,7 +522,10 @@ with lib.hm.gvariant;
 
     "org/gnome/TextEditor" =
       {
+        highlight-current-line = true;
+        show-grid = true;
         show-line-numbers = true;
+        show-map = true;
         style-scheme = "peninsula-dark";
       };
 
