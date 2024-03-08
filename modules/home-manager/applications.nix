@@ -55,6 +55,7 @@
     imv
     mathpix-snipping-tool
 
+    qbittorrent
     git-lfs
     curl
     dos2unix
