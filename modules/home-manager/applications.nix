@@ -52,7 +52,6 @@
     # bitwarden
     inkscape-with-extensions
     ouch
-    imv
     mathpix-snipping-tool
 
     qbittorrent
