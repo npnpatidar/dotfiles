@@ -1,76 +1,78 @@
 { config, lib, pkgs, ... }:
 {
+  imports = [ ../../modules/nixos/servarr.nix ];
 
-  environment.packages = with pkgs; [
-    git
-    bat
-    nano
-    neofetch
-    ncdu
-    mc
-    onefetch
-    # python311Packages.howdoi
-    unzip
-    fd
-    tree-sitter
-    comma
-    fontconfig
-    htop
-    screenfetch
-    rnix-lsp
-    git
-    git-crypt
-    gnupg
-    wget
-    neofetch
-    nethogs
-    p7zip
-    #   yt-dlp
-    zoxide
-    tgpt
-    direnv
-    nixpkgs-fmt
-    eza
-    nixfmt
-    cht-sh
-    nix-init
-    ripgrep
-    fzf
-    tldr
-    lazygit
-    curl
-    zsh
-    starship
-    openssh
-    any-nix-shell
-    perl
-    gcc
-    zig
-    cargo
-    pinentry
-    nix-index
-    utillinux
-    bash
-    gnumake
-    rclone
-    ffsend
-    thefuck
-    python3
-    tmux
-    ollama
-    # oterm
-    termdbms
-    python311Packages.pudb
-    ttyper
-    termimage
-    bitwarden-cli
+  environment.packages = with pkgs;
+    [
+      git
+      bat
+      nano
+      neofetch
+      ncdu
+      mc
+      onefetch
+      # python311Packages.howdoi
+      unzip
+      fd
+      tree-sitter
+      comma
+      fontconfig
+      htop
+      screenfetch
+      rnix-lsp
+      git
+      git-crypt
+      gnupg
+      wget
+      neofetch
+      nethogs
+      p7zip
+      #   yt-dlp
+      zoxide
+      tgpt
+      direnv
+      nixpkgs-fmt
+      eza
+      nixfmt
+      cht-sh
+      nix-init
+      ripgrep
+      fzf
+      tldr
+      lazygit
+      curl
+      zsh
+      starship
+      openssh
+      any-nix-shell
+      perl
+      gcc
+      zig
+      cargo
+      pinentry
+      nix-index
+      utillinux
+      bash
+      gnumake
+      rclone
+      ffsend
+      thefuck
+      python3
+      tmux
+      ollama
+      # oterm
+      termdbms
+      python311Packages.pudb
+      ttyper
+      termimage
+      bitwarden-cli
 
-    gpg-tui
-    # Read the changelog before changing this value
-    # home.stateVersion = "23.05";
+      gpg-tui
+      # Read the changelog before changing this value
+      # home.stateVersion = "23.05";
 
-    # insert home-manager config
-  ];
+      # insert home-manager config
+    ];
 
   time.timeZone = "Asia/Kolkata";
   environment.etcBackupExtension = ".bak";
