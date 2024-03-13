@@ -3,6 +3,7 @@ with lib;
 let
   cfg = config.modules.home-manager.zsh;
   alias-abbr = {
+    services = "systemctl-tui";
     cd = "z";
     r = "ranger";
     rd = "rm -rf ";
@@ -95,7 +96,7 @@ in
         enable = true;
         plugins = [
           "thefuck"
-          "git"
+          # "git"
           "fzf"
           "colored-man-pages"
           "extract"

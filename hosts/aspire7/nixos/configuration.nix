@@ -37,6 +37,9 @@
       ../../../modules/nixos/input.nix
       ../../../modules/nixos/nix_related.nix
       ../../../modules/nixos/apple.nix
+      # ../../../modules/nixos/fingerprint.nix
+      ../../../modules/nixos/fonts.nix
+      ../../../modules/nixos/servarr.nix
       ./hardware-configuration.nix
     ];
 
@@ -59,7 +62,6 @@
   hardware.bluetooth.enable = true; # enables support for Bluetooth
   hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
 
-  hardware.opentabletdriver.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.naresh = {
@@ -94,24 +96,6 @@
   services.flatpak.enable = true;
   services.dbus.enable = true;
 
-
-
-  fonts = {
-    enableDefaultPackages = true;
-    packages = with pkgs; [
-      nerdfonts
-      lohit-fonts.devanagari
-      noto-fonts
-    ];
-
-    fontconfig = {
-      enable = true;
-      defaultFonts = {
-        serif = [ "FiraCode Nerd Font" "Lohit Devanagari" ];
-        sansSerif = [ "FiraCode Nerd Font" "Lohit Devanagari" ];
-        monospace = [ "FiraCode Nerd Font Mono" "Lohit Devanagari" ];
-      };
-    };
-  };
+  # programs.steam.enable = true;
 
 }

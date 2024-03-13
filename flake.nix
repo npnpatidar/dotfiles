@@ -75,7 +75,7 @@
                   useUserPackages = true;
                   users.naresh = {
                     imports = [
-                      ./hosts/aspire7/home-manager/home.nix
+                      ./hosts/aspire7/home-manager/naresh_home.nix
                     ];
                   };
 

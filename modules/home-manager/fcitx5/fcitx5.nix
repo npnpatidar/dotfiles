@@ -10,6 +10,7 @@ in
 
   config = mkIf cfg.enable {
     home.file.".config/fcitx5/profile".source = config.lib.file.mkOutOfStoreSymlink ./profile;
+    home.file.".config/fcitx5/config".source = config.lib.file.mkOutOfStoreSymlink ./config;
 
     #   text = ''
     #     [Groups/0]

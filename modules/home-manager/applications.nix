@@ -30,7 +30,6 @@
 
     #Notes 
     gnome-text-editor
-    xournalpp
 
     #Documents
     libreoffice
@@ -38,7 +37,7 @@
 
     #Artificial Intelligence
     ollama
-    # oterm
+    oterm
     # (import ./ollama { inherit pkgs; })
 
     #mindmap 
@@ -53,9 +52,9 @@
     # bitwarden
     inkscape-with-extensions
     ouch
-    imv
+    mathpix-snipping-tool
 
-
+    qbittorrent
     git-lfs
     curl
     dos2unix
@@ -95,8 +94,8 @@
     nb
     nvitop
     dconf2nix
-    python311Packages.howdoi
     # steam-run
+    # python312Packages.howdoi
     gcc
     zig
     unzip
@@ -164,7 +163,11 @@
     lazydocker
     glow
     openssl
-
+    russ
+    tuifeed
+    systemctl-tui
+    nvtop-intel
+    newsboat
   ];
 
 
