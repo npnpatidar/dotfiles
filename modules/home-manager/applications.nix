@@ -53,6 +53,7 @@
     inkscape-with-extensions
     ouch
     mathpix-snipping-tool
+    gpt4all
 
     qbittorrent
     git-lfs
