@@ -41,6 +41,8 @@ in
       goto_page_with_page_number .
       next_page u
       previous_page i
+      embed_annotations <C-s>
+      copy y
     '';
     xdg.desktopEntries = {
       "sioyek" = {
