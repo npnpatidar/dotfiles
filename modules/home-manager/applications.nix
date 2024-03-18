@@ -110,11 +110,11 @@
     flatpak
     bash
     screenfetch
-    rnix-lsp
+    # rnix-lsp
     git
     git-crypt
     gnupg
-    pinentry-gnome
+    pinentry-gnome3
     wget
     neofetch
     nethogs

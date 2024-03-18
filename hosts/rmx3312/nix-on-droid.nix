@@ -19,7 +19,7 @@
       fontconfig
       htop
       screenfetch
-      rnix-lsp
+      # rnix-lsp
       git
       git-crypt
       gnupg
@@ -129,7 +129,7 @@
         programs.direnv.enable = true;
         services.gpg-agent = {
           enable = true;
-          pinentryFlavor = "tty";
+          pinentryPackage = pkgs.pinentry-tty;
         };
       };
   };
