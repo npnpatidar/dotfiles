@@ -29,6 +29,7 @@
     joplin.enable = true;
     mpv.enable = true;
     imv.enable = true;
+    ollama.enable = true;
   };
   nixpkgs = {
     overlays =

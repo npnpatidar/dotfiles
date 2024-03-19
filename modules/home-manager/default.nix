@@ -28,6 +28,7 @@
     ./joplin.nix
     ./mpv.nix
     ./imv.nix
+    ./ollama.nix
   ];
 
 }

@@ -62,7 +62,7 @@
       ollama
       # oterm
       termdbms
-      python311Packages.pudb
+      python312Packages.pudb
       ttyper
       termimage
       bitwarden-cli
