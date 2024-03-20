@@ -1,4 +1,4 @@
-{ config, inputs, ... }:
+{ config, inputs, pkgs, ... }:
 {
   imports = [
     ../../../modules/home-manager
@@ -29,6 +29,7 @@
     joplin.enable = true;
     mpv.enable = true;
     imv.enable = true;
+    ollama.enable = true;
   };
   nixpkgs = {
     overlays =
@@ -54,7 +55,7 @@
   };
   services.gpg-agent = {
     enable = true;
-    pinentryFlavor = "gnome3";
+    pinentryPackage = pkgs.pinentry-gnome3;
   };
 
   home.sessionVariables = {

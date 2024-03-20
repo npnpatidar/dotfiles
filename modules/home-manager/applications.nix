@@ -35,10 +35,6 @@
     libreoffice
     anki
 
-    #Artificial Intelligence
-    ollama
-    oterm
-    # (import ./ollama { inherit pkgs; })
 
     #mindmap 
     freeplane
@@ -53,6 +49,7 @@
     inkscape-with-extensions
     ouch
     mathpix-snipping-tool
+    gpt4all
 
     qbittorrent
     git-lfs
@@ -109,11 +106,11 @@
     flatpak
     bash
     screenfetch
-    rnix-lsp
+    # rnix-lsp
     git
     git-crypt
     gnupg
-    pinentry-gnome
+    pinentry-gnome3
     wget
     neofetch
     nethogs
@@ -128,7 +125,6 @@
     docker
     docker-compose
     xdg-desktop-portal-gtk
-    python3Full
     android-tools
     libimobiledevice
     ifuse
@@ -155,7 +151,8 @@
     tmux
     rclone
     ffsend
-    python311Packages.pudb
+    python312Packages.pudb
+    python312Full
     ttyper
     gpg-tui
     termdbms
@@ -166,7 +163,6 @@
     russ
     tuifeed
     systemctl-tui
-    nvtop-intel
     newsboat
   ];
 

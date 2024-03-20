@@ -4,7 +4,7 @@
 }: {
   home.packages = with pkgs; [
     nixd
-    rnix-lsp
+    # rnix-lsp
     nil
   ];
 
