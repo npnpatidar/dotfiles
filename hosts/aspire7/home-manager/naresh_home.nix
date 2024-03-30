@@ -30,6 +30,7 @@
     mpv.enable = true;
     imv.enable = true;
     ollama.enable = true;
+    newsboat.enable = true;
   };
   nixpkgs = {
     overlays =

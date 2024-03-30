@@ -29,6 +29,7 @@
     ./mpv.nix
     ./imv.nix
     ./ollama.nix
+    ./newsboat.nix
   ];
 
 }
