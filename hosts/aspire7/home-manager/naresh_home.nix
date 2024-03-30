@@ -14,7 +14,7 @@
     geary.enable = true;
     git.enable = true;
     kitty.enable = true;
-    latex.enable = true;
+    latex.enable = false;
     librewolf.enable = true;
     masterpdfeditor.enable = true;
     neovim.enable = true;
@@ -66,9 +66,7 @@
 
   programs.home-manager.enable = true;
 
-  programs.direnv.enable = true;
   nixpkgs.config.allowUnfree = true;
-  programs.nix-index.enable = true;
 
 
 

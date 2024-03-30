@@ -17,8 +17,8 @@
     tutanota-desktop
 
     # Media
-    vlc
-    monophony
+    # vlc
+    # monophony
 
     #Coding
     # android-studio
@@ -37,21 +37,22 @@
 
 
     #mindmap 
-    freeplane
+    # freeplane
 
     #miscellaneious
     authenticator
     fsearch
     (import ../../pkgs/xdm-app.nix { inherit pkgs; })
-    gnome.gnome-boxes
+    (import ../../pkgs/reader.nix { inherit pkgs; })
+    # gnome.gnome-boxes
     newsflash
     # bitwarden
-    inkscape-with-extensions
+    # inkscape-with-extensions
     ouch
     mathpix-snipping-tool
-    gpt4all
+    # gpt4all
 
-    qbittorrent
+    # qbittorrent
     git-lfs
     curl
     dos2unix
@@ -132,7 +133,6 @@
     direnv
     any-nix-shell
     nixpkgs-fmt
-    eza
     nixfmt
     cht-sh
     nix-init
@@ -146,7 +146,6 @@
     gnumake
     tldr
     preload
-    thefuck
     curl
     tmux
     rclone
@@ -163,7 +162,7 @@
     russ
     tuifeed
     systemctl-tui
-    newsboat
+    newsboat # RSS Reader TUI
   ];
 
 

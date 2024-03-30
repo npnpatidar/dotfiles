@@ -94,7 +94,7 @@ in
         EDITOR = "nvim";
       };
       oh-my-zsh = {
-        enable = true;
+        enable = false;
         plugins = [
           "thefuck"
           # "git"
@@ -139,9 +139,7 @@ in
            echo (../)#$1(:a)
          }
 
-         any-nix-shell zsh --info-right | source /dev/stdin
-
-        source ${pkgs.nix-index}/etc/profile.d/command-not-found.sh
+        #  any-nix-shell zsh --info-right | source /dev/stdin
         
 
       '';
@@ -168,7 +166,7 @@ in
       enableZshIntegration = true;
     };
     programs.hstr = {
-      enable = true;
+      enable = false;
       enableZshIntegration = true;
     };
     programs.fzf = {
@@ -178,6 +176,22 @@ in
     programs.direnv = {
       enable = true;
       nix-direnv.enable = true;
+      enableZshIntegration = true;
+    };
+    programs.thefuck = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+    programs.nix-index = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+    programs.eza = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+    programs.carapace = {
+      enable = true;
       enableZshIntegration = true;
     };
   };
