@@ -50,7 +50,6 @@
       zig
       cargo
       pinentry
-      nix-index
       utillinux
       bash
       gnumake
