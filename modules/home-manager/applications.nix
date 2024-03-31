@@ -35,7 +35,7 @@
     libreoffice
     anki
 
-
+    lmstudio
     #mindmap 
     # freeplane
 
