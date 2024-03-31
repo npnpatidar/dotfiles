@@ -3,6 +3,7 @@ with lib;
 let
   cfg = config.modules.home-manager.zsh;
   alias-abbr = {
+    nv = "nvitop --colorful";
     o = "xdg-open";
     services = "systemctl-tui";
     cd = "z";
