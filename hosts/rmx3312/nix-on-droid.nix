@@ -58,7 +58,6 @@
       thefuck
       python3
       tmux
-      ollama
       # oterm
       termdbms
       python312Packages.pudb
