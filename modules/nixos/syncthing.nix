@@ -15,6 +15,12 @@
           name = "RMX3312";
           autoAcceptFolders = true;
         };
+
+        "Ipad" = {
+          id = "EYUCT6O-SQMOKM2-UWA5QAN-OVFGS3G-NNKX5RC-IBL5FLF-LD3YR55-LLMJOA4";
+          name = "Ipad";
+          autoAcceptFolders = true;
+        };
       };
 
       settings.folders = {
@@ -34,7 +40,7 @@
           id = "7snbs-p6fiq";
           label = "Sync_M_L_C";
           path = "/home/naresh/Data/Sync_M_L_C";
-          devices = [ "RMX3312" ];
+          devices = [ "RMX3312" "Ipad" ];
         };
       };
     };
