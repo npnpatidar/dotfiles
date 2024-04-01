@@ -36,10 +36,16 @@
           path = "/home/naresh/Data/Sync_M_L";
           devices = [ "RMX3312" ];
         };
-        "Sync_M_L_C" = {
+        "Sync_M_L_I_C" = {
           id = "7snbs-p6fiq";
-          label = "Sync_M_L_C";
-          path = "/home/naresh/Data/Sync_M_L_C";
+          label = "Sync_M_L_I_C";
+          path = "/home/naresh/Data/Sync_M_L_I_C";
+          devices = [ "RMX3312" "Ipad" ];
+        };
+        "Sync_M_L_I" = {
+          id = "pwm3j-ulcds";
+          label = "Sync_M_L_I";
+          path = "/home/naresh/Data/Sync_M_L_I";
           devices = [ "RMX3312" "Ipad" ];
         };
       };
