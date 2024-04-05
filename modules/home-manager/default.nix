@@ -30,6 +30,7 @@
     ./imv.nix
     ./ollama.nix
     ./newsboat.nix
+    ./rclone.nix
   ];
 
 }
