@@ -57,6 +57,7 @@ in
     (map mkRcloneService [
       "naresh.alternate"
       "npnpatidar"
+      "npnpatidarCrypt"
     ]) // builtins.listToAttrs (map mkRcloneSharedService [
     "npnpatidar"
   ]) // { };
@@ -65,6 +66,7 @@ in
     (map mkSyncTimer [
       "naresh.alternate"
       "npnpatidar"
+      "npnpatidarCrypt"
     ]) // builtins.listToAttrs (map mkSharedSyncTimer [
     "npnpatidar"
   ]) // { };
@@ -84,12 +86,13 @@ in
     - rcloneCrypt/**
     - EncryptedDocuments/**
   '';
+
+  home.file.".config/rclone/npnpatidarCrypt.txt".text = ''
+    + *
+  '';
   home.file.".config/rclone/npnpatidar-shared.txt".text = ''
     + BOOKS/Naresh\ books\ content/Edited\ By\ Naresh/**
-    - BOOKS/**
-    - CLASSIFICATION/**
-    - ratta\ course/**
-    - Naresh\ Data\ purification/**  
+    - *
   '';
 }
 
