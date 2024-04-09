@@ -51,7 +51,7 @@
     ouch
     mathpix-snipping-tool
     # gpt4all
-
+    genymotion
     # qbittorrent
     git-lfs
     curl
@@ -81,6 +81,7 @@
     perl536Packages.EmailOutlookMessage
     cz-cli
     zellij
+    lm_sensors
     # linkrec
 
     # nix-alien
