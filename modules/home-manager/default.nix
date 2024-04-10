@@ -31,6 +31,9 @@
     ./ollama.nix
     ./newsboat.nix
     ./rclone.nix
+    ./distrobox.nix
+    ./firstinstall.nix
+    ./flatpak.nix
   ];
 
 }

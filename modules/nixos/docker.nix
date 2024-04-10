@@ -12,11 +12,11 @@
     };
   };
 
-  virtualisation.oci-containers.containers.archlinux = {
-    autoStart = false;
-    image = "archlinux:latest";
-    cmd = [ "/usr/bin/env" "TERM=xterm-256color" "/usr/bin/bash" ];
-  };
+  # virtualisation.oci-containers.containers.archlinux = {
+  #   autoStart = false;
+  #   image = "archlinux:latest";
+  #   cmd = [ "/usr/bin/env" "TERM=xterm-256color" "/usr/bin/bash" ];
+  # };
 
   users.groups.docker.members = [ "naresh" ];
 

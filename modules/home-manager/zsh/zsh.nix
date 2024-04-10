@@ -3,6 +3,12 @@ with lib;
 let
   cfg = config.modules.home-manager.zsh;
   alias-abbr = {
+    firstinstall = "bash ${config.home.homeDirectory}/.scripts/firstinstall.sh";
+    yay = "distrobox enter --name arch -- yay";
+    pacman = "distrobox enter --name arch -- sudo pacman";
+    apt = "distrobox enter --name deb -- sudo apt ";
+    a = "distrobox enter --name arch -- ";
+    d = "distrobox enter --name deb -- ";
     nv = "nvitop --colorful";
     o = "xdg-open";
     services = "systemctl-tui";
@@ -49,6 +55,7 @@ let
     delete-gen = "sudo nix-env --delete-generations --profile /nix/var/nix/profiles/system";
     clear-boot = "sudo /run/current-system/bin/switch-to-configuration boot";
     arch = "distrobox enter arch";
+    deb = "distrobox enter deb";
     git-merge-droid = "git checkout test && git pull origin test && git merge droid && git push origin test && git checkout droid";
     git-merge-test = "git checkout work && git pull origin work && git merge test && git push origin work && git checkout test";
     git-merge-work = "git checkout main && git pull origin main && git merge work && git push origin main && git checkout work";
@@ -121,24 +128,24 @@ in
       };
       completionInit = ""; # speed up zsh start time
 
-      initExtraFirst = ''
-        zmodload zsh/zprof
-      '';
+      # initExtraFirst = ''
+      #   zmodload zsh/zprof
+      # '';
 
       initExtra = ''
          # be more bashy
-         setopt interactive_comments bashautolist nobeep nomenucomplete \
-                noautolist extended_glob
+         # setopt interactive_comments bashautolist nobeep nomenucomplete \
+         #        noautolist extended_glob
 
          ## include config generated via "p10k configure" manually;
          ## zplug cannot edit home manager's zshrc file.
 
          [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-         findup () {
-           # uses zsh extended globbing, https://unix.stackexchange.com/a/64164
-           echo (../)#$1(:a)
-         }
+         # findup () {
+         #   # uses zsh extended globbing, https://unix.stackexchange.com/a/64164
+         #   echo (../)#$1(:a)
+         # }
 
         #  any-nix-shell zsh --info-right | source /dev/stdin
         
