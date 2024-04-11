@@ -82,6 +82,7 @@
     cz-cli
     zellij
     lm_sensors
+    boxbuddy
     # linkrec
 
     # nix-alien
