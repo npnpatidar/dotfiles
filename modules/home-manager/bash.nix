@@ -100,7 +100,7 @@ in
     programs.oh-my-posh = {
       enable = true;
       enableBashIntegration = true;
-      useTheme = "powerlevel10_rainbow";
+      useTheme = "atomic";
     };
 
     programs.zoxide = {
