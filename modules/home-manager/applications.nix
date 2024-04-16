@@ -83,6 +83,8 @@
     zellij
     lm_sensors
     boxbuddy
+    protonvpn-gui
+    jan
     # linkrec
 
     # nix-alien
@@ -107,7 +109,6 @@
     appimage-run
     btop
     flatpak
-    bash
     screenfetch
     # rnix-lsp
     git
