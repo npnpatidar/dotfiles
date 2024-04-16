@@ -34,6 +34,7 @@
     ./distrobox.nix
     ./firstinstall.nix
     ./flatpak.nix
+    ./bash.nix
   ];
 
 }

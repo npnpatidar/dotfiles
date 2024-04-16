@@ -18,7 +18,7 @@ in
       };
       theme = "Tokyo Night Storm";
       shellIntegration = {
-        enableBashIntegration = false;
+        enableBashIntegration = true;
         enableZshIntegration = true;
       };
       settings = {

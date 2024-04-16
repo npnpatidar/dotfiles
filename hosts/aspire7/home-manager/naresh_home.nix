@@ -8,6 +8,7 @@
     bat.enable = true;
     qutebrowser.enable = false;
     zsh.enable = true;
+    bash.enable = true;
     fcitx5.enable = true;
     stylix.enable = true;
     cryptomator.enable = true;
