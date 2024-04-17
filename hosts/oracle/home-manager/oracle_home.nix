@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib,... }:
 {
   imports = [
 	../../../modules/home-manager/zsh/zsh.nix
@@ -50,16 +50,37 @@
   programs.home-manager.enable = true;
 
   nixpkgs.config.allowUnfree = true;
-
+programs.nix-index = {
+enable = lib.mkForce false;
+};
 
  home.packages= with pkgs;[
-
+zellij
+cht-sh
+zoxide
+neofetch
+btop
+mc
+ncdu
+lazygit
+ripgrep
 atuin
+
 ];
 
 
+programs.neovim = {
+    enable = true;
+    plugins = with pkgs; [ vimPlugins.LazyVim ];
+};
 
 
+  home.file.".config/nvim".source = pkgs.fetchFromGitHub {
+      owner = "LazyVim";
+      repo = "starter";
+      rev = "master";
+      hash = "sha256-gE2tRpglA0SxxjGN+uKwkwdR5YurvjVGf8SRKkW0E1U=";
+    };
 
 
 
