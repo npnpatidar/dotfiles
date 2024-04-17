@@ -73,6 +73,7 @@ let
     js = "joplin sync && joplin e2ee decrypt";
     j = "joplin";
     zl = "zellij";
+    ssh = "kitty +kitten ssh";
   };
 
 

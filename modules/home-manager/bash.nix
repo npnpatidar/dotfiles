@@ -96,6 +96,10 @@ in
         lsta = "function _lt() { lsa --tree --level=\${1:-2}; }; _lt";
         jln = ''jln_func() { if [ "$#" -eq 2 ]; then joplin use "$1" && joplin mknote "$2" && joplin edit "$2"; else joplin use "Terminal" && joplin mknote "$1" && joplin edit "$1"; fi }; jln_func'';
       };
+      initExtra = ''
+        . /home/ubuntu/.nix-profile/etc/profile.d/nix.sh
+
+      '';
     };
     programs.oh-my-posh = {
       enable = true;
