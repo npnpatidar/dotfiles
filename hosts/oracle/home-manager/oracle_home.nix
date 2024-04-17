@@ -57,14 +57,12 @@ enable = lib.mkForce false;
  home.packages= with pkgs;[
 zellij
 cht-sh
-zoxide
 neofetch
 btop
 mc
 ncdu
 lazygit
 ripgrep
-atuin
 
 ];
 
@@ -79,7 +77,8 @@ programs.neovim = {
       owner = "LazyVim";
       repo = "starter";
       rev = "master";
-      hash = "sha256-gE2tRpglA0SxxjGN+uKwkwdR5YurvjVGf8SRKkW0E1U=";
+#      hash = "sha256-gE2tRpglA0SxxjGN+uKwkwdR5YurvjVGf8SRKkW0E1U=";
+hash = "sha256-mZbQVDh6T3GylIPvMGFV9Sp4Oc6TMiqUYW8nPATs+dE=";
     };
 
 
