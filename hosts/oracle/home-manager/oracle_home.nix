@@ -63,7 +63,10 @@ mc
 ncdu
 lazygit
 ripgrep
-
+gcc
+zig
+eza 
+zoxide
 ];
 
 
