@@ -6,9 +6,9 @@
     efiInstallAsRemovable = true;
     device = "nodev";
   };
-  fileSystems."/boot" = { device = "/dev/disk/by-uuid/7E99-2D98"; fsType = "vfat"; };
+  fileSystems."/boot" = { device = "/dev/disk/by-uuid/9ED4-73C8"; fsType = "vfat"; };
   boot.initrd.availableKernelModules = [ "ata_piix" "uhci_hcd" "xen_blkfront" ];
   boot.initrd.kernelModules = [ "nvme" ];
-  fileSystems."/" = { device = "/dev/sda1"; fsType = "ext4"; };
- nixpkgs.hostPlatform = "aarch64-linux";  
+  fileSystems."/" = { device = "/dev/sda3"; fsType = "xfs"; };
+  
 }
