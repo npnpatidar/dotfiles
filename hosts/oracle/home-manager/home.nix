@@ -8,12 +8,25 @@
 }: {
   # You can import other home-manager modules here
   imports = [
-    # If you want to use home-manager modules from other flakes (such as nix-colors):
-    # inputs.nix-colors.homeManagerModule
-
-    # You can also split up your configuration and import pieces of it here:
-    # ./nvim.nix
+    ../../../modules/home-manager/zsh/zsh.nix
+    ../../../modules/home-manager/bash.nix
+    ../../../modules/home-manager/git.nix
+    ../../../modules/home-manager/neovim.nix
+    ../../../modules/home-manager/yazi.nix
+    ../../../modules/home-manager/ranger.nix
+    ../../../modules/home-manager/bat.nix
+    ../../../modules/home-manager/bat.nix
   ];
+
+  modules.home-manager = {
+    bat.enable = true;
+    zsh.enable = true;
+    bash.enable = true;
+    git.enable = true;
+    neovim.enable = true;
+    ranger.enable = true;
+    yazi.enable = true;
+  };
 
   nixpkgs = {
     # You can add overlays here
@@ -44,6 +57,14 @@
   };
 
 
+
+  programs.gpg = {
+    enable = true;
+  };
+  services.gpg-agent = {
+    enable = true;
+    pinentryPackage = pkgs.pinentry-gnome3;
+  };
   home.sessionVariables = {
     EDITOR = "nvim";
     #    BROWSER = "librewolf";
