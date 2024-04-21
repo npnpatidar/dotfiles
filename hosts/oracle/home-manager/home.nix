@@ -92,7 +92,6 @@
     cht-sh
     zellij
     boxbuddy
-    neovim
     ncdu
     mc
     onefetch
