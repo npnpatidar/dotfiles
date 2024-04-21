@@ -49,6 +49,27 @@
       # lib = nixpkgs.lib;
     in
     rec {
+
+      nixosConfigurations = {
+        # FIXME replace with your hostname
+        alma = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs outputs; };
+          # > Our main nixos configuration file <
+          modules = [ ./hosts/oracle/nixos/configuration.nix ];
+        };
+      };
+
+      # Standalone home-manager configuration entrypoint
+      # Available through 'home-manager --flake .#your-username@your-hostname'
+      homeConfigurations = {
+        # FIXME replace with your username@hostname
+        "root@alma" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.aarch64-linux; # Home-manager requires 'pkgs' instance
+          extraSpecialArgs = { inherit inputs outputs; };
+          # > Our main home-manager configuration file <
+          modules = [ ./hosts/oracle/home-manager/home.nix ];
+        };
+      };
       nixosConfigurations =
         {
           aspire7 = nixpkgs.lib.nixosSystem {
