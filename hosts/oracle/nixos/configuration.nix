@@ -20,7 +20,6 @@
   nixpkgs.hostPlatform = "aarch64-linux";
 
 
-
   nix = {
 
     package = pkgs.nixFlakes;
@@ -39,16 +38,16 @@
   time.timeZone = "Asia/Kolkata";
 
 
-  # users.users.naresh = {
-  #   isNormalUser = true;
-  #   initialPassword = "naresh";
-  #   description = "naresh";
-  #   extraGroups = [ "networkmanager" "wheel" "kvm" "input" "disk" "libvirtd" "usbmux" ];
-  #   createHome = true;
-  #   home = "/home/naresh";
-  #   shell = pkgs.zsh;
-  #   openssh.authorizedKeys.keys = [ ''ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC8pK+/SUI3dPB1tQ0nF4Gp9BKKGMHnJ1bBSiYJX2sCHgbfOmDKAlAnuRTP6Zhp6BTZ5LwNC/4pI76bnpmo8YjjGNGkPlMHfOHrn8rm2Hhyx7RVHyMLGKYQdNtzBcfPgDUqrXPM3cdCMya15BnavXE4fOYUoGgIvOolTveWfngHRjQNptTlfpQoIjMRIvIfhu+xLiikJVm4EbgzEVu6U8OdGuV8eq33GYc+HORqKRq+jILIT5V3q4OTcCbORbStt4Zq4WumoVWXuM3abmzpA0nCAbZM8ArWQ8UujOM490hyQVGqfZae8FS1ADGAyEybrHMIMxT0IysZ7xW+tnaljIpt ssh-key-2024-04-15'' ];
-  # };
+  users.users.naresh = {
+    isNormalUser = true;
+    initialPassword = "naresh";
+    description = "naresh";
+    extraGroups = [ "networkmanager" "wheel" "kvm" "input" "disk" "libvirtd" "usbmux" ];
+    createHome = true;
+    home = "/home/naresh";
+    shell = pkgs.zsh;
+    openssh.authorizedKeys.keys = [ ''ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC8pK+/SUI3dPB1tQ0nF4Gp9BKKGMHnJ1bBSiYJX2sCHgbfOmDKAlAnuRTP6Zhp6BTZ5LwNC/4pI76bnpmo8YjjGNGkPlMHfOHrn8rm2Hhyx7RVHyMLGKYQdNtzBcfPgDUqrXPM3cdCMya15BnavXE4fOYUoGgIvOolTveWfngHRjQNptTlfpQoIjMRIvIfhu+xLiikJVm4EbgzEVu6U8OdGuV8eq33GYc+HORqKRq+jILIT5V3q4OTcCbORbStt4Zq4WumoVWXuM3abmzpA0nCAbZM8ArWQ8UujOM490hyQVGqfZae8FS1ADGAyEybrHMIMxT0IysZ7xW+tnaljIpt ssh-key-2024-04-15'' ];
+  };
 
 
   services.ollama = {
@@ -136,22 +135,22 @@
 
   services.freshrss = {
     enable = true;
-    database = {
-      #    type = "pgsql";
-      host = "127.0.0.1";
-      port = 5432;
-      #      passFile = "/etc/nextcloud-admin-pass";
-    };
-    baseUrl = "https://freshrss.naresh.world";
+    # database = {
+    #      type = "pgsql";
+    #   host = "127.0.0.1";
+    #   port = 5432;
+    #   passFile = "/etc/nextcloud-admin-pass";
+    # };
+    baseUrl = "http://127.0.0.1:5432";
     defaultUser = "naresh";
     passwordFile = "/etc/nextcloud-admin-pass";
-    #    virtualHost = "freshrss.naresh.world";
+    virtualHost = "freshrss.naresh.world";
   };
 
 
   environment.etc."hashed_password".text = "$2b$05$ewRpCw9V.jxb7N6UAIcSWegXCiUFdCgMK9UPmkjT36aDIiCZ4392.";
   mailserver = {
-    enable = true;
+    enable = false;
     fqdn = "mail.naresh.world";
     domains = [ "naresh.world" ];
     # A list of all login accounts. To create the password hashes, use
@@ -193,7 +192,7 @@
       address = "127.0.0.1";
       port = 2342;
       passwordFile = "/etc/nextcloud-admin-pass";
-      originalsPath = "/root/photoprism";
+      #      originalsPath = "/root/photoprism";
     };
 
 }

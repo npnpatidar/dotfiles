@@ -50,10 +50,9 @@
     };
   };
 
-  # TODO: Set your username
   home = {
-    username = "root";
-    homeDirectory = "/root";
+    username = "naresh";
+    homeDirectory = "/home/naresh";
   };
 
 
