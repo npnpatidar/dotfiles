@@ -52,7 +52,7 @@
 
       nixosConfigurations = {
         # FIXME replace with your hostname
-        instance-20240419-0404 = nixpkgs.lib.nixosSystem {
+        alma = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
           # > Our main nixos configuration file <
           modules = [ ./hosts/oracle/nixos/configuration.nix ];
@@ -63,7 +63,7 @@
       # Available through 'home-manager --flake .#your-username@your-hostname'
       homeConfigurations = {
         # FIXME replace with your username@hostname
-        "root@instance-20240419-0404" = home-manager.lib.homeManagerConfiguration {
+        "root@alma" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.aarch64-linux; # Home-manager requires 'pkgs' instance
           extraSpecialArgs = { inherit inputs outputs; };
           # > Our main home-manager configuration file <

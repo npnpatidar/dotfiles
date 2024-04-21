@@ -21,6 +21,17 @@
 
 
 
+  nix = {
+
+    package = pkgs.nixFlakes;
+    extraOptions = "experimental-features = nix-command flakes";
+    settings.auto-optimise-store = true;
+    gc = {
+      automatic = false;
+      dates = "weekly";
+      options = "--delete-older-than 3d";
+    };
+  };
 
   programs.zsh = {
     enable = true;
