@@ -109,6 +109,13 @@
         proxyPass = "http://127.0.0.1:27701";
       };
     };
+    virtualHosts."chatbot.naresh.world" = {
+      enableACME = true;
+      forceSSL = true;
+      locations."/" = {
+        proxyPass = "http://127.0.0.1:8080";
+      };
+    };
     virtualHosts."code.naresh.world" = {
       enableACME = true;
       forceSSL = true;
@@ -190,6 +197,81 @@
     telemetryLevel = "off";
     withoutConnectionToken = true;
   };
+
+
+
+  virtualisation.oci-containers = {
+    backend = "docker";
+    containers = {
+      ollama-webui = {
+        image = "ghcr.io/open-webui/open-webui:git-a481255"; # Feb 22, 2024
+        autoStart = true;
+        ports = [ "8080:8080" ];
+        environment = {
+          OLLAMA_API_BASE_URL = "http://localhost:11434/api";
+        };
+        extraOptions = [
+          "--network=host"
+          "--add-host=host.docker.internal:host-gateway"
+        ];
+        volumes = [
+          "/opt/open-webui:/app/backend/data"
+        ];
+      };
+    };
+  };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
