@@ -5,7 +5,6 @@
     (builtins.fetchTarball {
 
       url = "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/archive/nixos-23.05/nixos-mailserver-nixos-23.05.tar.gz";
-      # release="nixos-23.05"; nix-prefetch-url "https://gitlab.com/simple-nixos-mailserver/nixos-mailserver/-/archive/${release}/nixos-mailserver-${release}.tar.gz" --unpack
       sha256 = "sha256:1ngil2shzkf61qxiqw11awyl81cr7ks2kv3r3k243zz7v2xakm5c";
     })
   ];
@@ -42,7 +41,7 @@
     isNormalUser = true;
     initialPassword = "naresh";
     description = "naresh";
-    extraGroups = [ "networkmanager" "wheel" "kvm" "input" "disk" "libvirtd" "usbmux" ];
+    extraGroups = [ "networkmanager" "wheel" "kvm" "input" "disk" "libvirtd" "usbmux" "freshrss" "nextcloud" "openvscode-server" ];
     createHome = true;
     home = "/home/naresh";
     shell = pkgs.zsh;
@@ -52,16 +51,15 @@
 
   services.ollama = {
     enable = true;
-    #listenAddress = "127.0.0.1:11434";
   };
 
 
   environment.etc."nextcloud-admin-pass".text = "Naresh^111";
   services.nextcloud = {
-    enable = false;
+    enable = true;
+    package = pkgs.nextcloud28;
     hostName = "nextcloud.naresh.world";
-    database.createLocally = true;
-    https = false;
+    https = true;
     config = {
       adminpassFile = "/etc/nextcloud-admin-pass";
     };
@@ -99,9 +97,6 @@
     virtualHosts."freshrss.naresh.world" = {
       enableACME = true;
       forceSSL = true;
-      locations."/" = {
-        proxyPass = "http://127.0.0.1:5432";
-      };
     };
     virtualHosts."anki.naresh.world" = {
       enableACME = true;
@@ -110,11 +105,12 @@
         proxyPass = "http://127.0.0.1:27701";
       };
     };
-    virtualHosts."photoprism.naresh.world" = {
+    virtualHosts."code.naresh.world" = {
       enableACME = true;
       forceSSL = true;
       locations."/" = {
-        proxyPass = "http://127.0.0.1:2342";
+        proxyPass = "http://127.0.0.1:3000";
+        proxyWebsockets = true;
       };
     };
   };
@@ -122,7 +118,7 @@
     enable = true;
     config = {
       DOMAIN = "https://vaultwarden.naresh.world";
-      SIGNUPS_ALLOWED = false;
+      SIGNUPS_ALLOWED = true;
       ROCKET_PORT = 8222;
       rocketAddress = "127.0.0.1";
       rocketLog = "critical";
@@ -135,13 +131,7 @@
 
   services.freshrss = {
     enable = true;
-    # database = {
-    #      type = "pgsql";
-    #   host = "127.0.0.1";
-    #   port = 5432;
-    #   passFile = "/etc/nextcloud-admin-pass";
-    # };
-    baseUrl = "http://127.0.0.1:5432";
+    baseUrl = "https://freshrss.naresh.world";
     defaultUser = "naresh";
     passwordFile = "/etc/nextcloud-admin-pass";
     virtualHost = "freshrss.naresh.world";
@@ -186,13 +176,16 @@
       ];
     };
 
-  services.photoprism =
-    {
-      enable = false;
-      address = "127.0.0.1";
-      port = 2342;
-      passwordFile = "/etc/nextcloud-admin-pass";
-      #      originalsPath = "/root/photoprism";
-    };
+  services.openvscode-server = {
+    enable = true;
+    host = "127.0.0.1";
+    port = 3000;
+    withoutConnectionToken = true;
+  };
+
+
+
+
+
 
 }
