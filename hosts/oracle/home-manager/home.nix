@@ -86,6 +86,7 @@
     unzip
     w3m
     oterm
+    thttpd
     lazygit
     ghq
     btop
