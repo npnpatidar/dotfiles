@@ -85,6 +85,7 @@
     unrar
     unzip
     w3m
+    oterm
     lazygit
     ghq
     btop
