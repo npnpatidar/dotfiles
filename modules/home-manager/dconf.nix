@@ -31,7 +31,41 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/Geary" = {
+      compose-as-html = true;
+      formatting-toolbar-visible = false;
       migrated-config = true;
+      window-maximize = true;
+    };
+
+    "org/gnome/TextEditor" = {
+      auto-indent = false;
+      highlight-current-line = true;
+      indent-style = "tab";
+      last-save-directory = "file:///home/naresh/Data/Sync_M_L_C/Study/RAS/Hindi/Anki%20Text%20Files";
+      restore-session = true;
+      show-grid = true;
+      show-line-numbers = true;
+      show-map = true;
+      style-scheme = "peninsula-dark";
+      tab-width = mkUint32 8;
+      use-system-font = false;
+    };
+
+    "org/gnome/calculator" = {
+      accuracy = 9;
+      angle-units = "degrees";
+      base = 10;
+      button-mode = "basic";
+      number-format = "automatic";
+      show-thousands = false;
+      show-zeroes = false;
+      source-currency = "DZD";
+      source-units = "degree";
+      target-currency = "DZD";
+      target-units = "degree";
+      window-maximized = false;
+      window-size = mkTuple [ 377 510 ];
+      word-size = 64;
     };
 
     "org/gnome/control-center" = {
@@ -114,10 +148,31 @@ with lib.hm.gvariant;
 
     "org/gnome/desktop/notifications" = {
       application-children = [ "gnome-power-panel" "org-kde-kdeconnect-daemon" "gnome-network-panel" "com-nextcloud-desktopclient-nextcloud" "com-belmoussaoui-authenticator" "org-gnome-geary" ];
+      show-banners = true;
+    };
+
+    "org/gnome/desktop/notifications/application/-joplinapp-desktop" = {
+      application-id = "@joplinapp-desktop.desktop";
+    };
+
+    "org/gnome/desktop/notifications/application/anki" = {
+      application-id = "anki.desktop";
+    };
+
+    "org/gnome/desktop/notifications/application/calc" = {
+      application-id = "calc.desktop";
+    };
+
+    "org/gnome/desktop/notifications/application/codium" = {
+      application-id = "codium.desktop";
     };
 
     "org/gnome/desktop/notifications/application/com-belmoussaoui-authenticator" = {
       application-id = "com.belmoussaoui.Authenticator.desktop";
+    };
+
+    "org/gnome/desktop/notifications/application/com-github-eneshecan-whatsappforlinux" = {
+      application-id = "com.github.eneshecan.WhatsAppForLinux.desktop";
     };
 
     "org/gnome/desktop/notifications/application/com-nextcloud-desktopclient-nextcloud" = {
@@ -132,6 +187,14 @@ with lib.hm.gvariant;
       application-id = "gnome-power-panel.desktop";
     };
 
+    "org/gnome/desktop/notifications/application/io-github-cboxdoerfer-fsearch" = {
+      application-id = "io.github.cboxdoerfer.FSearch.desktop";
+    };
+
+    "org/gnome/desktop/notifications/application/io-gitlab-news-flash-newsflash" = {
+      application-id = "io.gitlab.news_flash.NewsFlash.desktop";
+    };
+
     "org/gnome/desktop/notifications/application/kitty" = {
       application-id = "kitty.desktop";
     };
@@ -144,8 +207,36 @@ with lib.hm.gvariant;
       application-id = "masterpdfeditor5.desktop";
     };
 
+    "org/gnome/desktop/notifications/application/mathpix-snipping-tool" = {
+      application-id = "mathpix-snipping-tool.desktop";
+    };
+
+    "org/gnome/desktop/notifications/application/org-cryptomator-cryptomator" = {
+      application-id = "org.cryptomator.Cryptomator.desktop";
+    };
+
+    "org/gnome/desktop/notifications/application/org-gnome-evolution-alarm-notify" = {
+      application-id = "org.gnome.Evolution-alarm-notify.desktop";
+    };
+
+    "org/gnome/desktop/notifications/application/org-gnome-extensions-desktop" = {
+      application-id = "org.gnome.Extensions.desktop.desktop";
+    };
+
+    "org/gnome/desktop/notifications/application/org-gnome-extensions" = {
+      application-id = "org.gnome.Extensions.desktop";
+    };
+
+    "org/gnome/desktop/notifications/application/org-gnome-fileroller" = {
+      application-id = "org.gnome.FileRoller.desktop";
+    };
+
     "org/gnome/desktop/notifications/application/org-gnome-geary" = {
       application-id = "org.gnome.Geary.desktop";
+    };
+
+    "org/gnome/desktop/notifications/application/org-gnome-nautilus" = {
+      application-id = "org.gnome.Nautilus.desktop";
     };
 
     "org/gnome/desktop/notifications/application/org-gnome-settings" = {
@@ -156,8 +247,36 @@ with lib.hm.gvariant;
       application-id = "org.gnome.Shell.Extensions.GSConnect.desktop";
     };
 
+    "org/gnome/desktop/notifications/application/org-gnome-texteditor" = {
+      application-id = "org.gnome.TextEditor.desktop";
+    };
+
     "org/gnome/desktop/notifications/application/org-kde-kdeconnect-daemon" = {
       application-id = "org.kde.kdeconnect.daemon.desktop";
+    };
+
+    "org/gnome/desktop/notifications/application/org-keepassxc-keepassxc" = {
+      application-id = "org.keepassxc.KeePassXC.desktop";
+    };
+
+    "org/gnome/desktop/notifications/application/org-qbittorrent-qbittorrent" = {
+      application-id = "org.qbittorrent.qBittorrent.desktop";
+    };
+
+    "org/gnome/desktop/notifications/application/sioyek" = {
+      application-id = "sioyek.desktop";
+    };
+
+    "org/gnome/desktop/notifications/application/thorium-browser" = {
+      application-id = "thorium-browser.desktop";
+    };
+
+    "org/gnome/desktop/notifications/application/writer" = {
+      application-id = "writer.desktop";
+    };
+
+    "org/gnome/desktop/notifications/application/xdm-app" = {
+      application-id = "xdm-app.desktop";
     };
 
     "org/gnome/desktop/peripherals/keyboard" = {
@@ -252,6 +371,36 @@ with lib.hm.gvariant;
       migrated = true;
     };
 
+    "org/gnome/evolution-data-server/calendar" = {
+      reminders-past = [ "cf6167666b5d801a616c81bda5894bfb6f0fb5ebn04f686ff8994d37636a27e269d0284e0436d3220t20240407n1712446200n1712448000n1712534400nBEGIN:VEVENTrnDTSTAMP:20231007T024359ZrnUID:Caldav-3-358rnSEQUENCE:1rnSUMMARY:HolidayrnCOLOR:redrnDTSTART;VALUE=DATE:20240407rnDTEND;VALUE=DATE:20240408rnRRULE:FREQ=WEEKLY;BYDAY=SUrnCLASS:PUBLICrnSTATUS:CONFIRMEDrnTRANSP:TRANSPARENTrnCATEGORIES:npnpatidar@gmail.comrnX-SMT-CATEGORY-COLOR:-267901rnX-SMT-MISSING-YEAR:0rnLAST-MODIFIED:20240330T163000ZrnX-EVOLUTION-CALDAV-ETAG:6fd8544092fdb45ad4c36d8e6584f41crnRECURRENCE-ID;VALUE=DATE:20240407rnBEGIN:VALARMrnX-EVOLUTION-ALARM-UID:04f686ff8994d37636a27e269d0284e0436d3220rnACTION:DISPLAYrnDESCRIPTION:HolidayrnTRIGGER;RELATED=START:-PT30MrnACKNOWLEDGED:20240115T132410ZrnEND:VALARMrnBEGIN:VALARMrnX-EVOLUTION-ALARM-UID:a90f539464deeb2ce9fd9b523e7f5fecac12824crnACTION:EMAILrnSUMMARY:HolidayrnDESCRIPTION:HolidayrnTRIGGER;RELATED=START:-PT7H30MrnATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;rn RSVP=FALSE:mailto:s2nw9rov@duck.comrnACKNOWLEDGED:20240330T163000ZrnEND:VALARMrnEND:VEVENTrn" ];
+    };
+
+    "org/gnome/file-roller/dialogs/extract" = {
+      recreate-folders = true;
+      skip-newer = false;
+    };
+
+    "org/gnome/file-roller/dialogs/new" = {
+      default-extension = ".tar.gz";
+      encrypt-header = false;
+      expand-options = false;
+      volume-size = 0;
+    };
+
+    "org/gnome/file-roller/listing" = {
+      list-mode = "as-folder";
+      name-column-width = 1034;
+      show-path = false;
+      sort-method = "name";
+      sort-type = "ascending";
+    };
+
+    "org/gnome/file-roller/ui" = {
+      sidebar-width = 200;
+      window-height = 805;
+      window-width = 1600;
+    };
+
     "org/gnome/meld" = {
       custom-font = "FiraCode Nerd Font 14";
       highlight-current-line = true;
@@ -283,6 +432,10 @@ with lib.hm.gvariant;
 
     "org/gnome/mutter/wayland/keybindings" = {
       restore-shortcuts = [ ];
+    };
+
+    "org/gnome/nautilus/compression" = {
+      default-compression-format = "zip";
     };
 
     "org/gnome/nautilus/icon-view" = {
@@ -339,25 +492,81 @@ with lib.hm.gvariant;
       command = "joplin-desktop";
       name = "Joplin";
     };
+
     "org/gnome/settings-daemon/plugins/power" = {
-
-      sleep-inactive-battery-type = "suspend";
-      sleep-inactive-battery-timeout = 900;
+      idle-dim = false;
+      power-saver-profile-on-low-battery = true;
       sleep-inactive-ac-type = "nothing";
+      sleep-inactive-battery-timeout = 900;
+      sleep-inactive-battery-type = "suspend";
+    };
 
+    "org/gnome/settings-daemon/plugins/sharing/rygel" = {
+      enabled-connections = [ "94b95485-b7ac-4524-b5f3-f364bbc7fe59" ];
     };
 
     "org/gnome/shell" = {
       command-history = [ "nvim" "joplin-desktop" "code" "codium" ];
+      disable-extension-version-validation = true;
       disable-user-extensions = false;
       disabled-extensions = [ "dash-to-dock@micxgx.gmail.com" ];
-      enabled-extensions = [ "user-theme@gnome-shell-extensions.gcampax.github.com" "dash-to-panel@jderose9.github.com" "pano@elhan.io" "appindicatorsupport@rgcjonas.gmail.com" "netspeedsimplified@prateekmedia.extension" "gsconnect@andyholmes.github.io" "blur-my-shell@aunetx" "panel-date-format@keiii.github.com" "noannoyance-fork@vrba.dev" "gtk4-ding@smedius.gitlab.com" "tiling-assistant@leleat-on-github" "lockkeys@vaina.lt" "Shortcuts@kyle.aims.ac.za" ];
+      enabled-extensions = [ "user-theme@gnome-shell-extensions.gcampax.github.com" "dash-to-panel@jderose9.github.com" "pano@elhan.io" "appindicatorsupport@rgcjonas.gmail.com" "netspeedsimplified@prateekmedia.extension" "gsconnect@andyholmes.github.io" "blur-my-shell@aunetx" "panel-date-format@keiii.github.com" "noannoyance-fork@vrba.dev" "gtk4-ding@smedius.gitlab.com" "tiling-assistant@leleat-on-github" "lockkeys@vaina.lt" "Shortcuts@kyle.aims.ac.za" "miniview@thesecretaryofwar.com" ];
       favorite-apps = [ "thorium-browser.desktop" "librewolf.desktop" "org.gnome.Nautilus.desktop" "kitty.desktop" ];
       last-selected-power-profile = "power-saver";
       welcome-dialog-last-shown-version = "45.1";
     };
 
-    "org/gnome/shell/extensions/dash-to-panel" = {
+    "org/gnome/shell/extensions/arcmenu" = {
+      arcmenu-custom-hotkey = [ "ISO_Level3_Shift" ];
+      enable-menu-hotkey = true;
+      highlight-search-result-terms = true;
+      max-search-results = 10;
+      menu-background-color = "rgba(48,48,49,0.98)";
+      menu-border-color = "rgb(60,60,60)";
+      menu-button-appearance = "Icon";
+      menu-foreground-color = "rgb(223,223,223)";
+      menu-hotkey-type = "Custom";
+      menu-item-active-bg-color = "rgb(25,98,163)";
+      menu-item-active-fg-color = "rgb(255,255,255)";
+      menu-item-hover-bg-color = "rgb(21,83,158)";
+      menu-item-hover-fg-color = "rgb(255,255,255)";
+      menu-layout = "Pop";
+      menu-separator-color = "rgba(255,255,255,0.1)";
+      override-menu-theme = false;
+      prefs-visible-page = 0;
+      search-entry-border-radius = mkTuple [ true 25 ];
+      search-provider-open-windows = true;
+      search-provider-recent-files = true;
+      show-search-result-details = true;
+    };
+
+    "org/gnome/shell/extensions/astra-monitor" = {
+      memory-header-graph = false;
+      memory-header-graph-breakdown = false;
+      memory-indicators-order = "[\"icon\",\"bar\",\"graph\",\"percentage\",\"value\",\"free\"]";
+                                                                                                                                                                                                                                                                                                                                     monitors-order = "[\"processor\",\"memory\",\"storage\",\"network\",\"sensors\"]";
+                                                                                                                                                                                                                                                                                                                                     network-indicators-order = "[\"icon\",\"IO bar\",\"IO graph\",\"IO speed\"]";
+                                                                                                                                                                                                                                                                                                                                     processor-header-show = true;
+                                                                                                                                                                                                                                                                                                                                     processor-indicators-order = "[\"icon\",\"bar\",\"graph\",\"percentage\"]";
+                                                                                                                                                                                                                                                                                                                                     queued-pref-category = "";
+                                                                                                                                                                                                                                                                                                                                     sensors-header-sensor2-show = false;
+                                                                                                                                                                                                                                                                                                                                     sensors-header-show = true;
+                                                                                                                                                                                                                                                                                                                                     sensors-indicators-order = "[\"icon\",\"value\"]";
+                                                                                                                                                                                                                                                                                                                                     storage-indicators-order = "[\"icon\",\"bar\",\"percentage\",\"value\",\"free\",\"IO bar\",\"IO graph\",\"IO speed\"]";
+                                                                                                                                                                                                                                                                                                                                     storage-main = "eui.000000000000000100a0752235b56f14-part2";
+                                                                                                                                                                                                                                                                                                                                     };
+
+                                                                                                                                                                                                                                                                                                                                     "org/gnome/shell/extensions/dash-to-dock" = { apply-custom-theme = false;
+                                                                                                                                                                                                                                                                                                                                     background-opacity = 0.8;
+                                                                                                                                                                                                                                                                                                                                     dash-max-icon-size = 48;
+                                                                                                                                                                                                                                                                                                                                     dock-position = "BOTTOM";
+                                                                                                                                                                                                                                                                                                                                     height-fraction = 0.78;
+                                                                                                                                                                                                                                                                                                                                     preferred-monitor = -2;
+                                                                                                                                                                                                                                                                                                                                     preferred-monitor-by-connector = "eDP-1";
+                                                                                                                                                                                                                                                                                                                                     scroll-action = "cycle-windows";
+                                                                                                                                                                                                                                                                                                                                     };
+
+      "org/gnome/shell/extensions/dash-to-panel" = {
       appicon-margin = 0;
       appicon-padding = 2;
       available-monitors = [ 0 ];
@@ -385,16 +594,49 @@ with lib.hm.gvariant;
       status-icon-padding = 1;
       tray-padding = 2;
       window-preview-title-position = "TOP";
-    };
+      };
 
-    "org/gnome/shell/extensions/gsconnect" = {
+      "org/gnome/shell/extensions/gsconnect" = {
       devices = [ "76d73ac2_4e35_4ce4_9d7e_a0b78497a587" ];
       id = "12d003d4-ae21-4916-97ef-9da204f137ea";
       name = "nixos";
       show-indicators = true;
-    };
+      };
 
-    "org/gnome/shell/extensions/gsconnect/device/76d73ac2_4e35_4ce4_9d7e_a0b78497a587" = {
+      "org/gnome/shell/extensions/gsconnect/device/3BFB85747ABC48E3A01B899D51E59231" = {
+      certificate-pem = "-----BEGIN CERTIFICATE-----nMIIDEjCCAfoCAQowDQYJKoZIhvcNAQEEBQAwTzEUMBIGA1UECwwLS2RlIGNvbm5lnY3QxDDAKBgNVBAoMA0tERTEpMCcGA1UEAwwgM0JGQjg1NzQ3QUJDNDhFM0EwMUI4nOTlENTFFNTkyMzEwHhcNMjQwMzMxMjEzNDMxWhcNMjUwMzMxMjEzNDMxWjBPMRQwnEgYDVQQLDAtLZGUgY29ubmVjdDEMMAoGA1UECgwDS0RFMSkwJwYDVQQDDCAzQkZCnODU3NDdBQkM0OEUzQTAxQjg5OUQ1MUU1OTIzMTCCASIwDQYJKoZIhvcNAQEBBQADnggEPADCCAQoCggEBAMm/BCBIc0yGP4/7poEcd/QTSPvPPLjUQ5yNKCXo9znLNbKLnKSdlvoP+ByVpXF9o/l9MBzel4elbkvywPaOWwEEcMO/09teVWkp33BjIBgrEBfrpn44nRnTlc/MRR130ULhXJtV1Pw+Y0tovY1DAroVGQlH8vU2x2ARJvRtOoxDJFEQmjnQ51AM0oTasXi4pgbiOxuEOBg2oQGQER/N5FcHWifd/DBj/WfkaVbbxBlPDFttp1cn8Bd/uiH6XUhcbvx7l9K5RiCDJ/rHOADNVe7BthZ8ynmFikBHcN0qvqJeaH2IP48qnIiOGRZpL60TmocGrdIWMrHwSYTLAYoNBpHPCBr8CAwEAATANBgkqhkiG9w0BAQQFnAAOCAQEARx7+Mzp7eQTW3ZzUAu9EJTD6OcsjDyxmV6sm8n1LHmjQBKFHPu66wX2RnusKr/umqKHeU7SfelPI6wtkpKfPT8pIMfovteHdyLMRTlnFf0fqu+zV90y8zGsppnPIV262ySiaDQB5WtOn/fdy2zg0qOqAprf+p15R6v1OlrSWE6cX32cFOvSSXyZRRUnEYWc9n1dbCmh1UXej2vrjpAGY1a3ln1T27TXMqC4wakEyjY2jcW4f7SeLJxgiFEAnetI3ycdaFHDLb6+RtYfkVzGZ1Jkz9xNbBEgyoL+pkktd/GSc83GyNN7ohPfb0iKMnUCyWbFBWSdItnURnm2muyShS6M/7AA==n-----END CERTIFICATE-----n";
+      incoming-capabilities = [ "kdeconnect.battery" "kdeconnect.battery.request" "kdeconnect.clipboard" "kdeconnect.clipboard.connect" "kdeconnect.findmyphone.request" "kdeconnect.ping" "kdeconnect.runcommand" "kdeconnect.share.request" ];
+      last-connection = "lan://192.168.95.121:1716";
+      name = "Naresh\8217s iPad";
+      outgoing-capabilities = [ "kdeconnect.battery" "kdeconnect.battery.request" "kdeconnect.clipboard" "kdeconnect.clipboard.connect" "kdeconnect.findmyphone.request" "kdeconnect.mousepad.request" "kdeconnect.ping" "kdeconnect.presenter" "kdeconnect.runcommand.request" "kdeconnect.share.request" ];
+      paired = true;
+      supported-plugins = [ "battery" "clipboard" "findmyphone" "mousepad" "ping" "presenter" "runcommand" "share" ];
+      type = "tablet";
+      };
+
+      "org/gnome/shell/extensions/gsconnect/device/3BFB85747ABC48E3A01B899D51E59231/plugin/battery" = {
+      custom-battery-notification = true;
+      custom-battery-notification-value = mkUint32 80;
+      full-battery-notification = true;
+      send-statistics = true;
+      };
+
+      "org/gnome/shell/extensions/gsconnect/device/3BFB85747ABC48E3A01B899D51E59231/plugin/clipboard" = {
+      receive-content = true;
+      send-content = true;
+      };
+
+      "org/gnome/shell/extensions/gsconnect/device/3BFB85747ABC48E3A01B899D51E59231/plugin/notification" = {
+      applications = ''
+        {"Power":{"iconName":"org.gnome.Settings-power-symbolic","enabled":true},"Printers":{"iconName":"org.gnome.Settings-printers-symbolic","enabled":true},"Color":{"iconName":"org.gnome.Settings-color-symbolic","enabled":true},"Archive Manager":{"iconName":"org.gnome.FileRoller","enabled":true},"Telegram Desktop":{"iconName":"telegram","enabled":true},"Files":{"iconName":"org.gnome.Nautilus","enabled":true},"Evolution Alarm Notify":{"iconName":"appointment-soon","enabled":true},"Newsflash":{"iconName":"io.gitlab.news_flash.NewsFlash","enabled":true},"Tangram":{"iconName":"re.sonny.Tangram","enabled":true},"Geary":{"iconName":"org.gnome.Geary","enabled":true},"Date & Time":{"iconName":"org.gnome.Settings-time-symbolic","enabled":true}}
+      '';
+      };
+
+      "org/gnome/shell/extensions/gsconnect/device/3BFB85747ABC48E3A01B899D51E59231/plugin/share" = {
+      receive-directory = "/home/naresh/Downloads";
+      };
+
+      "org/gnome/shell/extensions/gsconnect/device/76d73ac2_4e35_4ce4_9d7e_a0b78497a587" = {
       certificate-pem = "-----BEGIN CERTIFICATE-----nMIIDHzCCAgegAwIBAgIBATANBgkqhkiG9w0BAQsFADBTMS0wKwYDVQQDDCQ3NmQ3nM2FjMl80ZTM1XzRjZTRfOWQ3ZV9hMGI3ODQ5N2E1ODcxFDASBgNVBAsMC0tERSBDnb25uZWN0MQwwCgYDVQQKDANLREUwHhcNMjIwNjA4MTgzMDAwWhcNMzIwNjA4MTgznMDAwWjBTMS0wKwYDVQQDDCQ3NmQ3M2FjMl80ZTM1XzRjZTRfOWQ3ZV9hMGI3ODQ5nN2E1ODcxFDASBgNVBAsMC0tERSBDb25uZWN0MQwwCgYDVQQKDANLREUwggEiMA0GnCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC9qhMu7ekcign3tHydecrtCqlYqsPan3sAtfVazGuztwq9hZ67wNxf9rayqB+VKwCBzSrpHJxZkR/pE9T5in085+q0tWpTonUGbpef3I2jpnf7MI3fsj0kcKdH9Ye/1f8IwVhCa2WfkyuG0RCgbb2IcQf4PZexW/nSNCqpkIbZ11Wy5+aSZTIkncG2ti1nbZz1p4EmEYhfbBxmnQUVfcuQ2DfbFyVfZz3nyBhGE7TpqbqFUb4S5t7ZUHhSOkpz1f+bM4eH1T6s+x1utZNUi1x47kDNF1joKV9GnvtpXipNcuUuazNO2DzI11uv9QIuCnQcgZptrxSWAXrL24O7D2u2jdKbbAgMBAAEwnDQYJKoZIhvcNAQELBQADggEBAJBzC4qJSKGpglOEVR89PWtxhrI0MJm+Gj5IOWWdnV33xQGbS8eOZCYnAUJsuNaAapl1AxBwkTbFQJNLJVL/RN2iel8zOXZjizg+r2gBEnQa9murKmNsqcF8WZrAdD7thh6W80XVNvZquEsm/bdxv5OzGqRQmfixS1O6kotvQCnQoKjXeGZcQnqkL7ZrAZohpPKrT7wafTTQuUWZazWDk9UOlU5++rTZ3j+QV3t4ZYtnQk17tKm10RB3ToPS9ppVaGiGCxvWq/7Jr+WhHx5jHN5QM9IsiHvwPNRNGCw6Yv9CngQbFi2Z76Aphxq2GO6LMcnOi09bxpYRuPlzmX4/a7FRBwKw=n-----END CERTIFICATE-----n";
       incoming-capabilities = [ "kdeconnect.battery" "kdeconnect.bigscreen.stt" "kdeconnect.clipboard" "kdeconnect.clipboard.connect" "kdeconnect.contacts.request_all_uids_timestamps" "kdeconnect.contacts.request_vcards_by_uid" "kdeconnect.findmyphone.request" "kdeconnect.mousepad.keyboardstate" "kdeconnect.mousepad.request" "kdeconnect.mpris" "kdeconnect.mpris.request" "kdeconnect.notification" "kdeconnect.notification.action" "kdeconnect.notification.reply" "kdeconnect.notification.request" "kdeconnect.ping" "kdeconnect.runcommand" "kdeconnect.sftp.request" "kdeconnect.share.request" "kdeconnect.share.request.update" "kdeconnect.sms.request" "kdeconnect.sms.request_attachment" "kdeconnect.sms.request_conversation" "kdeconnect.sms.request_conversations" "kdeconnect.systemvolume" "kdeconnect.telephony.request" "kdeconnect.telephony.request_mute" ];
       last-connection = "lan://192.168.12.240:1716";
@@ -403,32 +645,47 @@ with lib.hm.gvariant;
       paired = true;
       supported-plugins = [ "battery" "clipboard" "connectivity_report" "contacts" "findmyphone" "mousepad" "mpris" "notification" "ping" "presenter" "runcommand" "sftp" "share" "sms" "systemvolume" "telephony" ];
       type = "phone";
-    };
+      };
 
-    "org/gnome/shell/extensions/gsconnect/device/76d73ac2_4e35_4ce4_9d7e_a0b78497a587/plugin/battery" = {
+      "org/gnome/shell/extensions/gsconnect/device/76d73ac2_4e35_4ce4_9d7e_a0b78497a587/plugin/battery" = {
       custom-battery-notification-value = mkUint32 80;
-    };
+      };
 
-    "org/gnome/shell/extensions/gsconnect/device/76d73ac2_4e35_4ce4_9d7e_a0b78497a587/plugin/notification" = {
+      "org/gnome/shell/extensions/gsconnect/device/76d73ac2_4e35_4ce4_9d7e_a0b78497a587/plugin/clipboard" = {
+      receive-content = true;
+      send-content = true;
+      };
+
+      "org/gnome/shell/extensions/gsconnect/device/76d73ac2_4e35_4ce4_9d7e_a0b78497a587/plugin/notification" = {
       applications = ''
-        {"Printers":{"iconName":"org.gnome.Settings-printers-symbolic","enabled":true},"Evolution Alarm Notify":{"iconName":"appointment-soon","enabled":true},"Telegram Desktop":{"iconName":"telegram","enabled":true},"Date & Time":{"iconName":"org.gnome.Settings-time-symbolic","enabled":true},"Geary":{"iconName":"org.gnome.Geary","enabled":true},"Power":{"iconName":"org.gnome.Settings-power-symbolic","enabled":true},"Tangram":{"iconName":"re.sonny.Tangram","enabled":true},"Color":{"iconName":"org.gnome.Settings-color-symbolic","enabled":true},"Files":{"iconName":"org.gnome.Nautilus","enabled":true},"Archive Manager":{"iconName":"org.gnome.FileRoller","enabled":true},"Newsflash":{"iconName":"io.gitlab.news_flash.NewsFlash","enabled":true}}
+        {"Printers":{"iconName":"org.gnome.Settings-printers-symbolic","enabled":true},"Evolution Alarm Notify":{"iconName":"appointment-soon","enabled":true},"Telegram Desktop":{"iconName":"telegram","enabled":true},"Date & Time":{"iconName":"org.gnome.Settings-time-symbolic","enabled":true},"Geary":{"iconName":"org.gnome.Geary","enabled":true},"Power":{"iconName":"org.gnome.Settings-power-symbolic","enabled":true},"Tangram":{"iconName":"re.sonny.Tangram","enabled":true},"Color":{"iconName":"org.gnome.Settings-color-symbolic","enabled":true},"Files":{"iconName":"org.gnome.Nautilus","enabled":true},"Archive Manager":{"iconName":"org.gnome.FileRoller","enabled":true},"Newsflash":{"iconName":"io.gitlab.news_flash.NewsFlash","enabled":true}}\n
       '';
-    };
+      };
 
-    "org/gnome/shell/extensions/gsconnect/device/76d73ac2_4e35_4ce4_9d7e_a0b78497a587/plugin/share" = {
+      "org/gnome/shell/extensions/gsconnect/device/76d73ac2_4e35_4ce4_9d7e_a0b78497a587/plugin/share" = {
       receive-directory = "/home/naresh/Downloads";
-    };
+      };
 
-    "org/gnome/shell/extensions/gsconnect/preferences" = {
+      "org/gnome/shell/extensions/gsconnect/preferences" = {
       window-maximized = false;
       window-size = mkTuple [ 913 460 ];
-    };
+      };
 
-    "org/gnome/shell/extensions/lockkeys" = {
+      "org/gnome/shell/extensions/gtk4-ding" = {
+      arrangeorder = "KIND";
+      };
+
+      "org/gnome/shell/extensions/lockkeys" = {
       style = "show-hide";
-    };
+      };
 
-    "org/gnome/shell/extensions/netspeedsimplified" = {
+      "org/gnome/shell/extensions/miniview" = {
+      hide-on-focus = true;
+      showme = false;
+      toggle-miniview = [ "<Ctrl>grave" ];
+      };
+
+      "org/gnome/shell/extensions/netspeedsimplified" = {
       fontmode = 0;
       iconstoright = false;
       isvertical = true;
@@ -437,23 +694,32 @@ with lib.hm.gvariant;
       restartextension = true;
       shortenunits = true;
       togglebool = false;
-    };
+      };
 
-    "org/gnome/shell/extensions/panel-date-format" = {
+      "org/gnome/shell/extensions/panel-date-format" = {
       format = "%I:%M %p%n%a %d.%m";
-    };
+      };
 
-    "org/gnome/shell/extensions/pano" = {
+      "org/gnome/shell/extensions/pano" = {
       history-length = 500;
       hovered-item-border-color = "rgb (255, 0,0)";
-    };
+      };
 
-    "org/gnome/shell/extensions/shortcuts" = {
+      "org/gnome/shell/extensions/pop-shell" = {
+      fullscreen-launcher = true;
+      smart-gaps = true;
+      snap-to-grid = true;
+      tile-by-default = true;
+      };
+
+      "org/gnome/shell/extensions/shortcuts" = {
+      maxcolumns = 3;
       shortcuts-toggle-overview = [ "<Super>slash" ];
       show-icon = false;
-    };
+      use-custom-shortcuts = true;
+      };
 
-    "org/gnome/shell/extensions/tiling-assistant" = {
+      "org/gnome/shell/extensions/tiling-assistant" = {
       activate-layout0 = [ ];
       activate-layout1 = [ ];
       activate-layout2 = [ ];
@@ -505,35 +771,35 @@ with lib.hm.gvariant;
       toggle-always-on-top = [ ];
       toggle-tiling-popup = [ ];
       window-gap = 10;
-    };
+      };
 
-    "org/gnome/shell/extensions/user-theme" = {
+      "org/gnome/shell/extensions/user-theme" = {
       name = "Stylix";
-    };
+      };
 
-    "org/gnome/shell/keybindings" = {
+      "org/gnome/shell/keybindings" = {
       screenshot = [ "Print" ];
       screenshot-window = [ "<Super>Print" ];
       show-screen-recording-ui = [ "<Alt>Print" ];
       show-screenshot-ui = [ "<Control>Print" ];
       switch-to-application-1 = [ ];
       toggle-message-tray = [ ];
-    };
-
-    "org/gnome/TextEditor" =
-      {
-        highlight-current-line = true;
-        show-grid = true;
-        show-line-numbers = true;
-        show-map = true;
-        style-scheme = "peninsula-dark";
       };
 
-    "org/gnome/tweaks" = {
+      "org/gnome/tweaks" = {
       show-extensions-notice = false;
-    };
+      };
 
-    "org/gtk/gtk4/settings/file-chooser" = {
+      "org/gtk/gtk4/settings/color-chooser" = {
+      custom-colors = [ (mkTuple [ 0.11372549086809158 0.6745098233222961 0.8392156958580017 1.0 ]) ];
+      selected-color = mkTuple [ true 0.11372549086809158 0.6745098233222961 0.8392156958580017 1.0 ];
+      };
+
+      "org/gtk/gtk4/settings/emoji-chooser" = {
+      recent-emoji = [ (mkTuple [ (mkTuple [ [ (mkUint32 11015) ] "down arrow" [ "arrow" "cardinal" "direction" "down" "south" ] (mkUint32 8) ]) (mkUint32 0) ]) (mkTuple [ (mkTuple [ [ 10145 ] "right arrow" [ "arrow" "cardinal" "direction" "east" ] 8 ]) 0 ]) ];
+      };
+
+      "org/gtk/gtk4/settings/file-chooser" = {
       date-format = "regular";
       location-mode = "path-bar";
       show-hidden = false;
@@ -546,9 +812,9 @@ with lib.hm.gvariant;
       type-format = "category";
       view-type = "list";
       window-size = mkTuple [ 859 326 ];
-    };
+      };
 
-    "org/gtk/settings/file-chooser" = {
+      "org/gtk/settings/file-chooser" = {
       date-format = "regular";
       location-mode = "path-bar";
       show-hidden = false;
@@ -561,33 +827,35 @@ with lib.hm.gvariant;
       type-format = "category";
       window-position = mkTuple [ 0 0 ];
       window-size = mkTuple [ 1600 814 ];
-    };
+      };
 
-    "re/sonny/Tangram" = {
+      "re/sonny/Tangram" = {
       instances = [ "bee068368613448387f3030bfaf69d65" "59628238917d41ad9bce983e02eea51b" "5464a7d17dea4b218afb16a219fe6f6b" ];
+      window-height = 832;
       window-maximized = true;
-    };
+      window-width = 785;
+      };
 
-    "re/sonny/Tangram/instances/5464a7d17dea4b218afb16a219fe6f6b" = {
+      "re/sonny/Tangram/instances/5464a7d17dea4b218afb16a219fe6f6b" = {
       name = "Gemini";
       notifications-priority = "normal";
       url = "https://gemini.google.com";
       user-agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.3";
-    };
+      };
 
-    "re/sonny/Tangram/instances/59628238917d41ad9bce983e02eea51b" = {
+      "re/sonny/Tangram/instances/59628238917d41ad9bce983e02eea51b" = {
       name = "Claude";
       notifications-priority = "normal";
       url = "https://claude.ai/";
       user-agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.3";
-    };
+      };
 
-    "re/sonny/Tangram/instances/bee068368613448387f3030bfaf69d65" = {
+      "re/sonny/Tangram/instances/bee068368613448387f3030bfaf69d65" = {
       name = "ChatGPT";
       notifications-priority = "normal";
       url = "https://chat.openai.com";
       user-agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.3";
-    };
+      };
 
-  };
-}
+      };
+      }

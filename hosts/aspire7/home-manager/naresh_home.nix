@@ -8,13 +8,14 @@
     bat.enable = true;
     qutebrowser.enable = false;
     zsh.enable = true;
+    bash.enable = true;
     fcitx5.enable = true;
     stylix.enable = true;
     cryptomator.enable = true;
     geary.enable = true;
     git.enable = true;
     kitty.enable = true;
-    latex.enable = true;
+    latex.enable = false;
     librewolf.enable = true;
     masterpdfeditor.enable = true;
     neovim.enable = true;
@@ -29,7 +30,8 @@
     joplin.enable = true;
     mpv.enable = true;
     imv.enable = true;
-    ollama.enable = true;
+    ollama.enable = false;
+    newsboat.enable = true;
   };
   nixpkgs = {
     overlays =
@@ -66,9 +68,7 @@
 
   programs.home-manager.enable = true;
 
-  programs.direnv.enable = true;
   nixpkgs.config.allowUnfree = true;
-  programs.nix-index.enable = true;
 
 
 

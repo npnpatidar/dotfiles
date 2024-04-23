@@ -1,7 +1,7 @@
 { lib, pkgs, config, ... }:
 with lib;
 let
-  cfg = config.modules.home-manager.zsh;
+  cfg = config.modules.home-manager.bash;
   alias-abbr = {
     firstinstall = "bash ${config.home.homeDirectory}/.scripts/firstinstall.sh";
     yay = "distrobox enter --name arch -- yay";
@@ -73,135 +73,76 @@ let
     js = "joplin sync && joplin e2ee decrypt";
     j = "joplin";
     zl = "zellij";
-    ssh = "kitty +kitten ssh";
   };
 
 
 in
 {
-  options.modules.home-manager.zsh = {
+  options.modules.home-manager.bash = {
     enable = mkEnableOption false;
   };
 
   config = mkIf cfg.enable {
-    # zsh settings
-    # defaultUserShell = pkgs.zsh;
-    programs.zsh = {
+    # bash settings
+    # defaultUserShell = pkgs.bash;
+    programs.bash = {
       enable = true;
-      autosuggestion.enable = true;
       enableCompletion = true;
-      syntaxHighlighting.enable = true;
-      history = {
-        share = true; # false -> every terminal has it's own history
-        size = 9999999; # Number of history lines to keep.
-        save = 9999999; # Number of history lines to save.
-        ignoreDups = true; # Do not enter command lines into the history list if they are duplicates of the previous event.
-        extended = true; # Save timestamp into the history file.
-      };
-      dotDir = ".config/zsh";
-      sessionVariables = {
-        EDITOR = "nvim";
-      };
-      oh-my-zsh = {
-        enable = false;
-        plugins = [
-          "thefuck"
-          # "git"
-          "fzf"
-          "colored-man-pages"
-          "extract"
-          "copybuffer"
-          "sudo"
-          # "ssh-agent"
-          "bgnotify"
-        ];
-      };
-      zsh-abbr = {
-        enable = true;
-        abbreviations = alias-abbr;
-      };
-
-
+      historyControl = [ "ignoredups" "ignorespace" ];
+      historyFileSize = 9999999; # Number of history lines to keep.
+      historySize = 1000; # Number of history lines to save.
       shellAliases = alias-abbr // {
         lst = "function _lt() { ls --tree --level=\${1:-2}; }; _lt";
         lsta = "function _lt() { lsa --tree --level=\${1:-2}; }; _lt";
         jln = ''jln_func() { if [ "$#" -eq 2 ]; then joplin use "$1" && joplin mknote "$2" && joplin edit "$2"; else joplin use "Terminal" && joplin mknote "$1" && joplin edit "$1"; fi }; jln_func'';
       };
-      completionInit = ""; # speed up zsh start time
-
-      # initExtraFirst = ''
-      #   zmodload zsh/zprof
-      # '';
-
       initExtra = ''
-         # be more bashy
-         # setopt interactive_comments bashautolist nobeep nomenucomplete \
-         #        noautolist extended_glob
-
-         ## include config generated via "p10k configure" manually;
-         ## zplug cannot edit home manager's zshrc file.
-
-         [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-         # findup () {
-         #   # uses zsh extended globbing, https://unix.stackexchange.com/a/64164
-         #   echo (../)#$1(:a)
-         # }
-
-        #  any-nix-shell zsh --info-right | source /dev/stdin
-        
+        . /home/ubuntu/.nix-profile/etc/profile.d/nix.sh
 
       '';
-      zplug = {
-        enable = true;
-        plugins = [
-          { name = "romkatv/powerlevel10k"; tags = [ as:theme depth:1 ]; } # Installations with additional options. For the list of options, please refer to Zplug README.
-        ];
-      };
-
+    };
+    programs.oh-my-posh = {
+      enable = true;
+      enableBashIntegration = true;
+      useTheme = "atomic";
     };
 
-
-    home.file.".p10k.zsh" = {
-      source = ./.p10k.zsh;
-      executable = true;
-    };
     programs.zoxide = {
       enable = true;
-      enableZshIntegration = true;
+      enableBashIntegration = true;
     };
     programs.atuin = {
       enable = true;
-      enableZshIntegration = true;
+      enableBashIntegration = true;
     };
     programs.hstr = {
       enable = false;
-      enableZshIntegration = true;
+      enableBashIntegration = true;
     };
     programs.fzf = {
       enable = true;
-      enableZshIntegration = true;
+      enableBashIntegration = true;
     };
     programs.direnv = {
       enable = true;
       nix-direnv.enable = true;
-      enableZshIntegration = true;
+      enableBashIntegration = true;
     };
     programs.thefuck = {
       enable = true;
-      enableZshIntegration = true;
+      enableBashIntegration = true;
     };
     programs.nix-index = {
-      enable = true;
-      enableZshIntegration = true;
+      enable = lib.mkDefault false;
+      enableBashIntegration = true;
     };
     programs.eza = {
       enable = true;
-      enableZshIntegration = true;
+      enableBashIntegration = true;
     };
     programs.carapace = {
       enable = true;
-      enableZshIntegration = true;
+      enableBashIntegration = true;
     };
   };
 

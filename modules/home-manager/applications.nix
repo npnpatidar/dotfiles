@@ -17,8 +17,8 @@
     tutanota-desktop
 
     # Media
-    vlc
-    monophony
+    # vlc
+    # monophony
 
     #Coding
     # android-studio
@@ -35,23 +35,24 @@
     libreoffice
     anki
 
-
+    lmstudio
     #mindmap 
-    freeplane
+    # freeplane
 
     #miscellaneious
     authenticator
     fsearch
     (import ../../pkgs/xdm-app.nix { inherit pkgs; })
-    gnome.gnome-boxes
+    (import ../../pkgs/reader.nix { inherit pkgs; })
+    # gnome.gnome-boxes
     newsflash
     # bitwarden
-    inkscape-with-extensions
+    # inkscape-with-extensions
     ouch
     mathpix-snipping-tool
-    gpt4all
-
-    qbittorrent
+    # gpt4all
+    genymotion
+    # qbittorrent
     git-lfs
     curl
     dos2unix
@@ -80,6 +81,10 @@
     perl536Packages.EmailOutlookMessage
     cz-cli
     zellij
+    lm_sensors
+    boxbuddy
+    protonvpn-gui
+    jan
     # linkrec
 
     # nix-alien
@@ -104,7 +109,6 @@
     appimage-run
     btop
     flatpak
-    bash
     screenfetch
     # rnix-lsp
     git
@@ -132,7 +136,6 @@
     direnv
     any-nix-shell
     nixpkgs-fmt
-    eza
     nixfmt
     cht-sh
     nix-init
@@ -146,7 +149,6 @@
     gnumake
     tldr
     preload
-    thefuck
     curl
     tmux
     rclone
@@ -163,7 +165,7 @@
     russ
     tuifeed
     systemctl-tui
-    newsboat
+    newsboat # RSS Reader TUI
   ];
 
 

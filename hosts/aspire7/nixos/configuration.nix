@@ -39,7 +39,7 @@
       ../../../modules/nixos/apple.nix
       # ../../../modules/nixos/fingerprint.nix
       ../../../modules/nixos/fonts.nix
-      ../../../modules/nixos/servarr.nix
+      # ../../../modules/nixos/servarr.nix
       ./hardware-configuration.nix
     ];
 
@@ -98,4 +98,12 @@
 
   # programs.steam.enable = true;
 
+
+  services.ollama = {
+
+    enable = true;
+    acceleration = "cuda";
+    listenAddress = "127.0.0.1:11434";
+
+  };
 }
