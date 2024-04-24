@@ -1,6 +1,7 @@
 { config, pkgs, ... }: {
   imports = [
     ./hardware-configuration.nix
+    ../../../modules/nixos/ollama.nix
   ];
 
   boot.tmp.cleanOnBoot = true;
@@ -39,12 +40,12 @@
   };
 
   environment.etc."nextcloud-admin-pass".text = "Naresh^111";
-  networking.firewall.allowedTCPPorts = [ 80 443 ];
+  networking.firewall.allowedTCPPorts = [ 80 443 11434 ];
 
-
-  services.ollama = {
-    enable = true;
-  };
+  #
+  # services.ollama = {
+  #   enable = true;
+  # };
 
   services.nextcloud = {
     enable = true;
@@ -97,27 +98,39 @@
     telemetryLevel = "off";
     withoutConnectionToken = true;
   };
-
-  virtualisation.oci-containers = {
-    backend = "docker";
-    containers = {
-      ollama-webui = {
-        image = "ghcr.io/open-webui/open-webui:git-a481255"; # Feb 22, 2024
-        autoStart = true;
-        ports = [ "8080:8080" ];
-        environment = {
-          OLLAMA_API_BASE_URL = "http://localhost:11434/api";
-        };
-        extraOptions = [
-          "--network=host"
-          "--add-host=host.docker.internal:host-gateway"
-        ];
-        volumes = [
-          "/opt/open-webui:/app/backend/data"
-        ];
-      };
-    };
+  services.homepage-dashboard = {
+    enable = true;
+    openFirewall = true;
+    listenPort = 8888;
+    # package = pkgs.unstable.homepage-dashboard;
+    # settings = { };
+    # bookmarks = [ ];
+    # services = [ ];
+    # widgets = [ ];
+    # docker = { };
   };
+  # virtualisation.oci-containers = {
+  #   backend = "podman";
+  #   containers = {
+  #     open-webui = {
+  #       image = "ghcr.io/open-webui/open-webui:main";
+  #       ports = [ "8080:8080" ];
+  #       autoStart = true;
+  #
+  #       # ports = [ "8090:8080" ];
+  #       environment = {
+  #         OLLAMA_API_BASE_URL = "http://127.0.0.1:11434/api";
+  #       };
+  #       extraOptions = [
+  #         "--network=host"
+  #         # "--add-host=host.docker.internal:host-gateway"
+  #       ];
+  #       volumes = [
+  #         "/opt/open-webui:/app/backend/data"
+  #       ];
+  #     };
+  #   };
+  # };
 
 
   security.acme = {
@@ -142,13 +155,13 @@
         proxyPass = "http://127.0.0.1:8222";
       };
     };
-    virtualHosts."ollama.naresh.world" = {
-      enableACME = true;
-      forceSSL = true;
-      locations."/" = {
-        proxyPass = "http://127.0.0.1:11434";
-      };
-    };
+    # virtualHosts."ollama.naresh.world" = {
+    #   enableACME = true;
+    #   forceSSL = true;
+    #   locations."/" = {
+    #     proxyPass = "http://127.0.0.1:11434";
+    #   };
+    # };
     virtualHosts."freshrss.naresh.world" = {
       enableACME = true;
       forceSSL = true;
@@ -160,11 +173,18 @@
         proxyPass = "http://127.0.0.1:27701";
       };
     };
-    virtualHosts."chatbot.naresh.world" = {
+    # virtualHosts."chat.naresh.world" = {
+    #   enableACME = true;
+    #   forceSSL = true;
+    #   locations."/" = {
+    #     proxyPass = "http://127.0.0.1:8080";
+    #   };
+    # };
+    virtualHosts."home.naresh.world" = {
       enableACME = true;
       forceSSL = true;
       locations."/" = {
-        proxyPass = "http://127.0.0.1:8080";
+        proxyPass = "http://127.0.0.1:8888";
       };
     };
     virtualHosts."code.naresh.world" = {
