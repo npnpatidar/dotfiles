@@ -1,20 +1,11 @@
 { ... }:
-
 {
   services.ollama = {
     enable = true;
     listenAddress = "0.0.0.0:11434";
   };
   virtualisation = {
-    podman = {
-      enable = true;
-      dockerCompat = true;
-      dockerSocket.enable = true;
-      defaultNetwork.settings.dns_enabled = true;
-    };
-
     oci-containers = {
-      backend = "podman";
       containers = {
         open-webui = {
           image = "ghcr.io/open-webui/open-webui:main";
