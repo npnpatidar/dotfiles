@@ -17,7 +17,7 @@
     fontconfig
     htop
     screenfetch
-    rnix-lsp
+    # rnix-lsp
     git
     git-crypt
     gnupg
@@ -31,7 +31,7 @@
     direnv
     nixpkgs-fmt
     eza
-    nixfmt
+    nixfmt-classic
     cht-sh
     nix-init
     ripgrep
@@ -127,7 +127,7 @@
         programs.direnv.enable = true;
         services.gpg-agent = {
           enable = true;
-          pinentryFlavor = "tty";
+          pinentryPackage = pkgs.pinentry-tty;
         };
       };
   };
