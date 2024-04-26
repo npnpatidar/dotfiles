@@ -2,6 +2,7 @@
   imports = [
     ./hardware-configuration.nix
     ../../../modules/nixos/ollama.nix
+    ../../../modules/nixos/filebrowser.nix
   ];
 
   boot.tmp.cleanOnBoot = true;
@@ -32,7 +33,7 @@
     isNormalUser = true;
     initialPassword = "naresh";
     description = "naresh";
-    extraGroups = [ "networkmanager" "wheel" "kvm" "input" "disk" "libvirtd" "usbmux" "freshrss" "nextcloud" "openvscode-server" ];
+    extraGroups = [ "networkmanager" "wheel" "kvm" "input" "disk" "libvirtd" "usbmux" "freshrss" "nextcloud" "openvscode-server" "nginx" ];
     createHome = true;
     home = "/home/naresh";
     shell = pkgs.zsh;
@@ -95,13 +96,106 @@
   };
   services.homepage-dashboard = {
     enable = true;
-    openFirewall = true;
+    # openFirewall = true;
     listenPort = 8888;
+    services =
+      [
+        {
+          "Services" = [
+            {
+              "Nextcloud" = {
+                description = "Nextcloud";
+                href = "http://nextcloud.naresh.world";
+              };
+              "Freshrss" = {
+                description = "Freshrss";
+                href = "http://freshrss.naresh.world";
+              };
+              "Ollama" = {
+                description = "Ollama";
+                href = "http://ollama.naresh.world";
+              };
+              "Chat" = {
+                description = "Chat";
+                href = "http://chat.naresh.world";
+              };
+              "VaultWarden" = {
+                description = "VaultWarden";
+                href = "http://vaultwarden.naresh.world";
+              };
+            }
+          ];
+        }
+      ];
+    bookmarks = [
+      {
+        Developer = [
+          {
+            Nix = [
+              {
+                abbr = "Nix";
+                href = "https://search.nixos.org/options?channel=unstable";
+              }
+            ];
+            Github = [
+              {
+                abbr = "Git";
+                href = "https://github.com/";
+              }
+            ];
+          }
+        ];
+      }
+      {
+        Work = [
+          {
+            Shaladarpan = [
+              {
+                abbr = "SD";
+                href = "https://rajshaladarpan.nic.in/";
+              }
+            ];
+          }
+        ];
+      }
+    ];
+    widgets = [
+      {
+        resources = {
+          cpu = true;
+          memory = true;
+          disk = "/";
+          uptime = true;
+          units = "metric";
+          refresh = 3000;
+          diskUnits = "bytes";
+
+        };
+      }
+      {
+        search = {
+          provider = "duckduckgo";
+          target = "_blank";
+        };
+      }
+    ];
   };
 
   security.acme = {
     acceptTerms = true;
     defaults.email = "letsencrypt@whatisleft.anonaddy.com";
+  };
+
+  services.paperless = {
+    enable = true;
+    # address = "0.0.0.0";
+    # port = 28981;
+    settings = {
+      PAPERLESS_AUTO_LOGIN_USERNAME = "superuser";
+      PAPERLESS_ADMIN_USER = "superuser";
+      PAPERLESS_ADMIN_PASSWORD = "whatthehell";
+      PAPERLESS_ACCOUNT_ALLOW_SIGNUPS = false;
+    };
   };
 
   services.nginx = {
@@ -125,6 +219,13 @@
       enableACME = true;
       forceSSL = true;
     };
+    virtualHosts."paperless.naresh.world" = {
+      enableACME = true;
+      forceSSL = true;
+      locations."/" = {
+        proxyPass = "http://127.0.0.1:28981";
+      };
+    };
     virtualHosts."anki.naresh.world" = {
       enableACME = true;
       forceSSL = true;
@@ -135,6 +236,9 @@
     virtualHosts."home.naresh.world" = {
       enableACME = true;
       forceSSL = true;
+      # basicAuth = {
+      #   naresh = "Naresh^111";
+      # };
       locations."/" = {
         proxyPass = "http://127.0.0.1:8888";
       };
