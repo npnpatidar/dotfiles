@@ -1,7 +1,7 @@
 { config, ... }:
 
 {
-  virtualisation.oci-containers.backend = "docker";
+  # virtualisation.oci-containers.backend = "docker";
   virtualisation.oci-containers.containers.filebrowser = {
     image = "filebrowser/filebrowser";
     # user = "naresh:users";

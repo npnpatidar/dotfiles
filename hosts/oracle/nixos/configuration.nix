@@ -2,7 +2,8 @@
   imports = [
     ./hardware-configuration.nix
     ../../../modules/nixos/ollama.nix
-    ../../../modules/nixos/filebrowser.nix
+    ../../../modules/nixos/gitdaemon.nix
+    # ../../../modules/nixos/filebrowser.nix
   ];
 
   boot.tmp.cleanOnBoot = true;
