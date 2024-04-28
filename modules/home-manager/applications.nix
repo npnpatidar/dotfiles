@@ -86,7 +86,7 @@
     protonvpn-gui
     jan
     # linkrec
-
+    zed-editor
     # nix-alien
     #   CLI Apps 
     ncdu
