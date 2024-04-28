@@ -35,18 +35,25 @@
 
   users.users.naresh = {
     isNormalUser = true;
-    initialPassword = "naresh";
     description = "naresh";
     extraGroups = [ "networkmanager" "wheel" "kvm" "input" "disk" "libvirtd" "usbmux" "freshrss" "nextcloud" "openvscode-server" "nginx" ];
     createHome = true;
     home = "/home/naresh";
     shell = pkgs.zsh;
     openssh.authorizedKeys.keys = [ ''ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC8pK+/SUI3dPB1tQ0nF4Gp9BKKGMHnJ1bBSiYJX2sCHgbfOmDKAlAnuRTP6Zhp6BTZ5LwNC/4pI76bnpmo8YjjGNGkPlMHfOHrn8rm2Hhyx7RVHyMLGKYQdNtzBcfPgDUqrXPM3cdCMya15BnavXE4fOYUoGgIvOolTveWfngHRjQNptTlfpQoIjMRIvIfhu+xLiikJVm4EbgzEVu6U8OdGuV8eq33GYc+HORqKRq+jILIT5V3q4OTcCbORbStt4Zq4WumoVWXuM3abmzpA0nCAbZM8ArWQ8UujOM490hyQVGqfZae8FS1ADGAyEybrHMIMxT0IysZ7xW+tnaljIpt ssh-key-2024-04-15'' ];
-    passwordFile = config.age.secrets."standard".path;
+    hashedPasswordFile = config.age.secrets."hashedstandard".path;
   };
 
-  environment.etc."nextcloud-admin-pass".text = "Naresh^111";
   networking.firewall.allowedTCPPorts = [ 80 443 11434 ];
+
+
+  age.secrets.nextcloud_admin_password = {
+    file = ../../../secrets/nextcloud_admin_password.age;
+    mode = "770";
+    owner = "nextcloud";
+    group = "nextcloud";
+  };
+
 
   services.nextcloud = {
     enable = true;
@@ -54,7 +61,7 @@
     hostName = "nextcloud.naresh.world";
     https = true;
     config = {
-      adminpassFile = "/etc/nextcloud-admin-pass";
+      adminpassFile = config.age.secrets."nextcloud_admin_password".path;
     };
   };
 
@@ -74,7 +81,7 @@
     enable = true;
     baseUrl = "https://freshrss.naresh.world";
     defaultUser = "naresh";
-    passwordFile = "/etc/nextcloud-admin-pass";
+    passwordFile = config.age.secrets."standard".path;
     virtualHost = "freshrss.naresh.world";
   };
 
@@ -87,7 +94,7 @@
       users = [
         {
           username = "naresh";
-          passwordFile = "/etc/nextcloud-admin-pass";
+          passwordFile = config.age.secrets."standard".path;
         }
       ];
     };
@@ -101,7 +108,6 @@
   };
   services.homepage-dashboard = {
     enable = true;
-    # openFirewall = true;
     listenPort = 8888;
     services =
       [
@@ -193,8 +199,6 @@
 
   services.paperless = {
     enable = true;
-    # address = "0.0.0.0";
-    # port = 28981;
     settings = {
       PAPERLESS_AUTO_LOGIN_USERNAME = "superuser";
       PAPERLESS_ADMIN_USER = "superuser";
@@ -203,6 +207,12 @@
     };
   };
 
+  age.secrets.htpasswdstandard = {
+    file = ../../../secrets/htpasswdstandard.age;
+    mode = "770";
+    owner = "nginx";
+    group = "nginx";
+  };
   services.nginx = {
     enable = true;
     recommendedGzipSettings = true;
@@ -241,9 +251,6 @@
     virtualHosts."home.naresh.world" = {
       enableACME = true;
       forceSSL = true;
-      # basicAuth = {
-      #   naresh = "Naresh^111";
-      # };
       locations."/" = {
         proxyPass = "http://127.0.0.1:8888";
       };
@@ -251,9 +258,7 @@
     virtualHosts."code.naresh.world" = {
       enableACME = true;
       forceSSL = true;
-      basicAuth = {
-        naresh = "Naresh^111";
-      };
+      basicAuthFile = config.age.secrets."htpasswdstandard".path;
       locations."/" = {
         proxyPass = "http://127.0.0.1:3000";
         proxyWebsockets = true;
