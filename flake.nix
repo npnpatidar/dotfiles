@@ -8,6 +8,8 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    agenix.url = "github:ryantm/agenix";
+    agenix.inputs.nixpkgs.follows = "nixpkgs";
 
     nixvim = {
       url = "github:nix-community/nixvim";
@@ -37,7 +39,7 @@
     # };
   };
 
-  outputs = { self, nixpkgs, nur, home-manager, nix-on-droid, nix-index-database, stylix, nixvim, ... } @ inputs:
+  outputs = { self, nixpkgs, nur, home-manager, nix-on-droid, nix-index-database, stylix, nixvim, agenix, ... } @ inputs:
     let
 
       inherit (self) outputs;
@@ -55,7 +57,7 @@
         alma = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
           # > Our main nixos configuration file <
-          modules = [ ./hosts/oracle/nixos/configuration.nix ];
+          modules = [ ./hosts/oracle/nixos/configuration.nix agenix.nixosModules.default ];
         };
       };
 

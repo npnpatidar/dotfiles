@@ -1,9 +1,10 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, inputs, ... }: {
   imports = [
     ./hardware-configuration.nix
     ../../../modules/nixos/ollama.nix
     ../../../modules/nixos/gitdaemon.nix
     # ../../../modules/nixos/filebrowser.nix
+    ../../../modules/nixos/agenix.nix
   ];
 
   boot.tmp.cleanOnBoot = true;
@@ -28,6 +29,8 @@
   programs.zsh = {
     enable = true;
   };
+
+  environment.systemPackages = [ inputs.agenix.packages.aarch64-linux.default ];
   time.timeZone = "Asia/Kolkata";
 
   users.users.naresh = {
@@ -39,6 +42,7 @@
     home = "/home/naresh";
     shell = pkgs.zsh;
     openssh.authorizedKeys.keys = [ ''ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC8pK+/SUI3dPB1tQ0nF4Gp9BKKGMHnJ1bBSiYJX2sCHgbfOmDKAlAnuRTP6Zhp6BTZ5LwNC/4pI76bnpmo8YjjGNGkPlMHfOHrn8rm2Hhyx7RVHyMLGKYQdNtzBcfPgDUqrXPM3cdCMya15BnavXE4fOYUoGgIvOolTveWfngHRjQNptTlfpQoIjMRIvIfhu+xLiikJVm4EbgzEVu6U8OdGuV8eq33GYc+HORqKRq+jILIT5V3q4OTcCbORbStt4Zq4WumoVWXuM3abmzpA0nCAbZM8ArWQ8UujOM490hyQVGqfZae8FS1ADGAyEybrHMIMxT0IysZ7xW+tnaljIpt ssh-key-2024-04-15'' ];
+    passwordFile = config.age.secrets."standard".path;
   };
 
   environment.etc."nextcloud-admin-pass".text = "Naresh^111";
