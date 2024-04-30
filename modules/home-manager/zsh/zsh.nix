@@ -73,7 +73,7 @@ let
     js = "joplin sync && joplin e2ee decrypt";
     j = "joplin";
     zl = "zellij";
-    ssh = "kitty +kitten ssh";
+    # ssh = "kitty +kitten ssh";
   };
 
 
@@ -126,6 +126,7 @@ in
         lst = "function _lt() { ls --tree --level=\${1:-2}; }; _lt";
         lsta = "function _lt() { lsa --tree --level=\${1:-2}; }; _lt";
         jln = ''jln_func() { if [ "$#" -eq 2 ]; then joplin use "$1" && joplin mknote "$2" && joplin edit "$2"; else joplin use "Terminal" && joplin mknote "$1" && joplin edit "$1"; fi }; jln_func'';
+        ssh = "kitty +kitten ssh";
       };
       completionInit = ""; # speed up zsh start time
 
