@@ -62,7 +62,6 @@
     yq
     nil #  nix LSP
     ripgrep #recursive search fs for a regex
-    neofetch
     pstree
     zip
     unrar
@@ -116,8 +115,8 @@
     gnupg
     pinentry-gnome3
     wget
-    neofetch
     nethogs
+    fastfetch
     ntfs3g
     p7zip
     fuse-7z-ng
@@ -136,7 +135,7 @@
     direnv
     any-nix-shell
     nixpkgs-fmt
-    nixfmt
+    nixfmt-classic
     cht-sh
     nix-init
     ripgrep

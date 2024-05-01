@@ -5,7 +5,6 @@
     git
     bat
     nano
-    neofetch
     ncdu
     mc
     onefetch
@@ -22,8 +21,8 @@
     git-crypt
     gnupg
     wget
-    neofetch
     nethogs
+    fastfetch
     p7zip
     #   yt-dlp
     zoxide

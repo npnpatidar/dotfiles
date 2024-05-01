@@ -3,6 +3,7 @@ with lib;
 let
   cfg = config.modules.home-manager.bash;
   alias-abbr = {
+    nix-clean = "nix-store --optimise && nix-store --gc && nix-collect-garbage -d";
     firstinstall = "bash ${config.home.homeDirectory}/.scripts/firstinstall.sh";
     yay = "distrobox enter --name arch -- yay";
     pacman = "distrobox enter --name arch -- sudo pacman";

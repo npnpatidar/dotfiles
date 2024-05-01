@@ -28,7 +28,7 @@
         cd ../..
         rm -rf ~/.tmpscript
         distrobox enter --name arch -- yay -Syyuu --noconfirm
-        distrobox enter --name arch -- sudo pacman -S --noconfirm fzf eza neofetch atuin zoxide
+        distrobox enter --name arch -- sudo pacman -S --noconfirm fzf eza fastfetch atuin zoxide
         distrobox enter --name arch -- yay -S --noconfirm noto-fonts-emoji nerd-fonts 
       fi
 
@@ -38,7 +38,7 @@
         echo "deb does not exist, creating..."
         distrobox-create --name deb --image quay.io/toolbx-images/debian-toolbox:12 
         distrobox enter --name deb -- bash <(curl https://raw.githubusercontent.com/atuinsh/atuin/main/install.sh)
-        distrobox enter --name deb -- sudo apt install neofetch fzf zoxide 
+        distrobox enter --name deb -- sudo apt install fastfetch fzf zoxide 
         distrobox enter --name deb --sudo mkdir -p /etc/apt/keyrings
         distrobox enter --name deb -- wget -qO- https://raw.githubusercontent.com/eza-community/eza/main/deb.asc | sudo gpg --dearmor -o /etc/apt/keyrings/gierens.gpg
         distrobox enter --name deb -- echo "deb [signed-by=/etc/apt/keyrings/gierens.gpg] http://deb.gierens.de stable main" | sudo tee /etc/apt/sources.list.d/gierens.list

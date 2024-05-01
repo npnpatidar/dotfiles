@@ -80,7 +80,6 @@
     jq
     nil #  nix LSP
     ripgrep #recursive search fs for a regex
-    neofetch
     zip
     unrar
     unzip
@@ -105,8 +104,8 @@
     comma
     fontconfig
     zlib
-    screenfetch
     # rnix-lsp
+    fastfetch
     git
     git-crypt
     gnupg
@@ -123,14 +122,16 @@
     direnv
     any-nix-shell
     nixpkgs-fmt
-    nixfmt
+    nixfmt-classic
+    ttop
+    glances
     nix-init
     ripgrep
     distrobox
     wl-clipboard
     fzf
     cargo
-    nodejs_21
+    # nodejs_21
     gnumake
     tldr
     curl
