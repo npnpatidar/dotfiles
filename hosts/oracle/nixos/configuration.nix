@@ -3,7 +3,7 @@
     ./hardware-configuration.nix
     ../../../modules/nixos/ollama.nix
     ../../../modules/nixos/gitdaemon.nix
-    # ../../../modules/nixos/filebrowser.nix
+    ../../../modules/nixos/filebrowser.nix
     ../../../modules/nixos/agenix.nix
   ];
 

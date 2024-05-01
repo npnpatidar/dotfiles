@@ -6,9 +6,9 @@
     image = "filebrowser/filebrowser";
     # user = "naresh:users";
     ports = [ "8081:80" ];
-    volumes = [
-      "/home/naresh/"
-    ];
+    # volumes = [
+    #   "/home/naresh/"
+    # ];
   };
 
 
