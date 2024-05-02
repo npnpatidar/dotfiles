@@ -25,7 +25,7 @@ in
         map-syntax = [
         ];
         pager = "less -FR";
-        theme = "base16";
+        # theme = "base16";
       };
       extraPackages = with pkgs.bat-extras;[ batdiff batgrep batman batwatch ];
     };

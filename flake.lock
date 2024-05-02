@@ -590,11 +590,11 @@
         "pre-commit-hooks": "pre-commit-hooks"
       },
       "locked": {
-        "lastModified": 1714494971,
-        "narHash": "sha256-7RsTiRKMMrlwuert1QNFvnoPIwl1q1cepR4H8jv2iok=",
+        "lastModified": 1714600955,
+        "narHash": "sha256-AHz9OVQeVlbhTboR5Wchjet9a2h+a8aPTDjEyVQLz/g=",
         "owner": "nix-community",
         "repo": "nixvim",
-        "rev": "2483dff03dd326296278213a8e051d375b56d3df",
+        "rev": "82a19581defe682ff9ca7cb8b1b980b6dc297cf2",
         "type": "github"
       },
       "original": {
@@ -659,11 +659,11 @@
     },
     "nur": {
       "locked": {
-        "lastModified": 1714527920,
-        "narHash": "sha256-iAdj2ceFcZmk7hLEvcWl32vhiOG/lokdqcjyeAUecv4=",
+        "lastModified": 1714630137,
+        "narHash": "sha256-5en8e5kUHnksH1moQp7rrX4kTR5+b3R0WCvldymxZXE=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "104ed05dc6e51992cef07df810b74f53c93c7e76",
+        "rev": "ffac17ce614bb31258be576d55ef80d2f4ebcc29",
         "type": "github"
       },
       "original": {
@@ -743,11 +743,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1713821140,
-        "narHash": "sha256-/kGc9R01h8mTmZKhrVyGWaK/w9zgettmHIE3GZW8Khs=",
+        "lastModified": 1714555012,
+        "narHash": "sha256-WVUrm3TGVj6c8g5aG20OjJRHMvUtAZjpHQgukDhyOT8=",
         "owner": "danth",
         "repo": "stylix",
-        "rev": "0fe277a3641a849478a94c7900c2d5a90609a306",
+        "rev": "43d23b1609b87f6a4100db2a09bd118c52c78766",
         "type": "github"
       },
       "original": {

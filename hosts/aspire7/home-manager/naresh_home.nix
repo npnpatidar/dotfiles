@@ -30,7 +30,6 @@
     joplin.enable = true;
     mpv.enable = true;
     imv.enable = true;
-    ollama.enable = false;
     newsboat.enable = true;
   };
   nixpkgs = {

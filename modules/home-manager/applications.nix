@@ -144,7 +144,7 @@
     llama-cpp
     fzf
     cargo
-    nodejs_21
+    # nodejs_21
     gnumake
     tldr
     preload
