@@ -52,27 +52,24 @@
       # lib = nixpkgs.lib;
     in
     rec {
-
+      #oracle server  sudo nixos-rebuild test --flake .#alma  
       nixosConfigurations = {
-        # FIXME replace with your hostname
         alma = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
-          # > Our main nixos configuration file <
           modules = [ ./hosts/oracle/nixos/configuration.nix agenix.nixosModules.default ];
         };
       };
 
-      # Standalone home-manager configuration entrypoint
-      # Available through 'home-manager --flake .#your-username@your-hostname'
+      # oracle server 'home-manager --flake .#naresh@alma'
       homeConfigurations = {
-        # FIXME replace with your username@hostname
         "naresh@alma" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.aarch64-linux; # Home-manager requires 'pkgs' instance
           extraSpecialArgs = { inherit inputs outputs; };
-          # > Our main home-manager configuration file <
           modules = [ ./hosts/oracle/home-manager/home.nix ];
         };
       };
+
+      #acer laptop  sudo nixos-rebuild test --flake .#aspire7  
       nixosConfigurations =
         {
           aspire7 = nixpkgs.lib.nixosSystem {
@@ -115,6 +112,7 @@
           };
         };
 
+      # Mobile  nix-on-droid switch --flake .#rmx3312
       nixOnDroidConfigurations.rmx3312 = nix-on-droid.lib.nixOnDroidConfiguration {
         modules = [ ./hosts/rmx3312/nix-on-droid.nix ];
         pkgs = import nixpkgs {
@@ -125,109 +123,19 @@
           ];
         };
       };
-
+      # acer laptop home configuration home-manager switch --flake .#naresh@aspire7
       homeConfigurations = {
-        # FIXME replace with your username@hostname
-        "naresh" = home-manager.lib.homeManagerConfiguration {
+        "naresh@aspire7" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
           extraSpecialArgs = { inherit inputs outputs; };
           modules = [
-            ./hosts/aspire7/home-manager/home.nix
+            ./hosts/aspire7/home-manager/naresh_home.nix
             nix-index-database.hmModules.nix-index
             stylix.homeManagerModules.stylix
           ];
 
         };
       };
-
-
-      nixosConfigurations = {
-        exampleIso = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [
-            "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
-            { nixpkgs.overlays = [ nur.overlay ]; }
-            ({ pkgs, ... }:
-              let
-                nur-no-pkgs = import nur {
-                  nurpkgs = import nixpkgs { system = "x86_64-linux"; };
-                };
-              in
-              {
-                # imports = [ nur-no-pkgs.repos.iopq.modules.xraya ];
-                # services.xraya.enable = true;
-              })
-            ./hosts/aspire7/nixos/configuration.nix
-
-            nur.nixosModules.nur
-            home-manager.nixosModules.home-manager
-            {
-              home-manager = {
-                # useGlobalPkgs = true;
-                useUserPackages = true;
-                users.naresh = {
-                  imports = [
-                    ./hosts/aspire7/home-manager/home.nix
-                  ];
-                };
-
-                extraSpecialArgs = { inherit inputs outputs; };
-                sharedModules = [
-                  nix-index-database.hmModules.nix-index
-                  stylix.homeManagerModules.stylix
-                ];
-              };
-            }
-          ];
-
-        };
-      };
-
-      nixosConfigurations =
-        {
-          aspireM = nixpkgs.lib.nixosSystem {
-            system = "x86_64-linux";
-            modules = [
-              { nixpkgs.overlays = [ nur.overlay ]; }
-              ({ pkgs, ... }:
-                let
-                  nur-no-pkgs = import nur {
-                    nurpkgs = import nixpkgs { system = "x86_64-linux"; };
-                  };
-                in
-                {
-                  # imports = [ nur-no-pkgs.repos.iopq.modules.xraya ];
-                  # services.xraya.enable = true;
-                })
-              ./hosts/aspire7/nixos/configuration.nix
-
-              nur.nixosModules.nur
-              home-manager.nixosModules.home-manager
-              # {
-              #   home-manager = {
-              #     # useGlobalPkgs = true;
-              #     useUserPackages = true;
-              #     users.naresh = {
-              #       imports = [
-              #         ./hosts/aspire7/home-manager/home.nix
-              #       ];
-              #     };
-              #
-              #     extraSpecialArgs = { inherit inputs outputs; };
-              #     sharedModules = [
-              #       nixvim.homeManagerModules.nixvim
-              #       nix-index-database.hmModules.nix-index
-              #       stylix.homeManagerModules.stylix
-              #     ];
-              #   };
-              # }
-            ];
-          };
-        };
-
-
-
-
 
     };
 }
