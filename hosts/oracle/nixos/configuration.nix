@@ -207,6 +207,7 @@
       PAPERLESS_OCR_LANGUAGE = "hin+eng+san";
       PAPERLESS_OCR_SKIP_ARCHIVE_FILE = "always";
       PAPERLESS_TIME_ZONE = config.time.timeZone;
+      PAPERLESS_THREADS_PER_WORKER = 4;
     };
   };
 
