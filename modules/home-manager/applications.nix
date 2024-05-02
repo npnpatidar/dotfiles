@@ -10,8 +10,8 @@
     alacritty
 
     # Communication
-    discord
-    telegram-desktop
+    # discord
+    # telegram-desktop
     ferdium
     whatsapp-for-linux
     tutanota-desktop
@@ -35,7 +35,7 @@
     libreoffice
     anki
 
-    lmstudio
+    # lmstudio
     #mindmap 
     # freeplane
 
@@ -51,7 +51,7 @@
     ouch
     mathpix-snipping-tool
     # gpt4all
-    genymotion
+    # genymotion
     # qbittorrent
     git-lfs
     curl
@@ -70,6 +70,7 @@
     lazygit
     ghq
     btop
+    ttop
     powertop
     poppler_utils #pdf conversions
     ttygif
@@ -83,9 +84,9 @@
     lm_sensors
     boxbuddy
     protonvpn-gui
-    jan
+    # jan
     # linkrec
-    zed-editor
+    # zed-editor
     # nix-alien
     #   CLI Apps 
     ncdu
@@ -165,6 +166,7 @@
     tuifeed
     systemctl-tui
     newsboat # RSS Reader TUI
+    podman-tui
   ];
 
 
