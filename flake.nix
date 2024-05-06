@@ -73,6 +73,7 @@
       nixosConfigurations =
         {
           aspire7 = nixpkgs.lib.nixosSystem {
+            specialArgs = { inherit inputs outputs; };
             system = "x86_64-linux";
             modules = [
               { nixpkgs.overlays = [ nur.overlay ]; }
@@ -87,7 +88,7 @@
                   # services.xraya.enable = true;
                 })
               ./hosts/aspire7/nixos/configuration.nix
-
+              agenix.nixosModules.default
               nur.nixosModules.nur
               home-manager.nixosModules.home-manager
               {

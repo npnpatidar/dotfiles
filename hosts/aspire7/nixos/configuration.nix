@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
 {
 
@@ -41,6 +41,7 @@
       ../../../modules/nixos/fonts.nix
       # ../../../modules/nixos/servarr.nix
       ./hardware-configuration.nix
+      ../../../modules/nixos/agenix.nix
       # ../../../modules/nixos/ollama.nix
     ];
 
@@ -75,7 +76,7 @@
     shell = pkgs.zsh;
   };
 
-
+  environment.systemPackages = [ inputs.agenix.packages.x86_64-linux.default ];
   # environment.systemPackages = [ config.nur.repos.mic92.hello-nur ];
   # environment.systemPackages = with pkgs; [
   # openssh
