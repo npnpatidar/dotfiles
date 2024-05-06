@@ -87,7 +87,7 @@
                   # services.xraya.enable = true;
                 })
               ./hosts/aspire7/nixos/configuration.nix
-
+              agenix.nixosModules.default
               nur.nixosModules.nur
               home-manager.nixosModules.home-manager
               {
