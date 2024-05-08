@@ -43,6 +43,8 @@
       ./hardware-configuration.nix
       ../../../modules/nixos/agenix.nix
       # ../../../modules/nixos/ollama.nix
+      ../../../modules/nixos/agenix.nix
+      ../../../modules/nixos/tailscale.nix
     ];
 
 
