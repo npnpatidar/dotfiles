@@ -15,6 +15,7 @@ in
   "hashedstandard.age".publicKeys = users;
   "htpasswdstandard.age".publicKeys = users;
   "nextcloud_admin_password.age".publicKeys = users;
+  "tailscale_key.age".publicKeys = users;
   # "secret2.age".publicKeys = users ++ systems;
 }
 

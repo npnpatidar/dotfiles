@@ -5,6 +5,7 @@
     ../../../modules/nixos/gitdaemon.nix
     # ../../../modules/nixos/filebrowser.nix
     ../../../modules/nixos/agenix.nix
+    ../../../modules/nixos/tailscale.nix
   ];
 
   boot.tmp.cleanOnBoot = true;
@@ -47,7 +48,7 @@
     hashedPasswordFile = config.age.secrets."hashedstandard".path;
   };
 
-  networking.firewall.allowedTCPPorts = [ 80 443 11434 ];
+  networking.firewall.allowedTCPPorts = [ 443 ];
 
 
   age.secrets.nextcloud_admin_password = {
