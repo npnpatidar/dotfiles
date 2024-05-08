@@ -46,6 +46,7 @@
     (import ../../pkgs/reader.nix { inherit pkgs; })
     # gnome.gnome-boxes
     newsflash
+    localsend
     # bitwarden
     # inkscape-with-extensions
     ouch
