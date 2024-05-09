@@ -65,6 +65,7 @@
     # pop-shell #pop-shell@system76.com
     gtk4-desktop-icons-ng-ding #'gtk4-ding@smedius.gitlab.com
     # astra-monitor
+    bluetooth-quick-connect
   ]);
 
 
