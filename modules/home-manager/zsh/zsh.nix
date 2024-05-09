@@ -154,8 +154,8 @@ in
         # ssh = "kitty +kitten ssh";
         git-init-remote = ''function _git_init_remote() { \
   repo_name=$1; \
-  ssh git@naresh.world "mkdir -p $repo_name.git && cd $repo_name.git && git init --bare"; \
-  git clone ssh://git@naresh.world/~/$repo_name.git; \
+  ssh galma "mkdir -p $repo_name.git && cd $repo_name.git && git init --bare"; \
+  git clone ssh://galma/~/$repo_name.git; \
 }; _git_init_remote'';
       };
       completionInit = ""; # speed up zsh start time
