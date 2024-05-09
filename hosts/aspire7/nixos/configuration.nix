@@ -73,7 +73,10 @@
     hashedPasswordFile = config.age.secrets."hashedstandard".path;
   };
 
-  environment.systemPackages = [ inputs.agenix.packages.x86_64-linux.default ];
+  environment.systemPackages = [
+    inputs.agenix.packages.x86_64-linux.default
+    pkgs.gparted
+  ];
   # environment.systemPackages = [ config.nur.repos.mic92.hello-nur ];
   # environment.systemPackages = with pkgs; [
   # openssh
