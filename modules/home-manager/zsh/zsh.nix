@@ -108,136 +108,148 @@ in
     enable = mkEnableOption false;
   };
 
-  config = mkIf cfg.enable {
-    # zsh settings
-    # defaultUserShell = pkgs.zsh;
-    programs.zsh = {
-      enable = true;
-      autosuggestion.enable = true;
-      enableCompletion = true;
-      syntaxHighlighting.enable = true;
-      history = {
-        share = true; # false -> every terminal has it's own history
-        size = 9999999; # Number of history lines to keep.
-        save = 9999999; # Number of history lines to save.
-        ignoreDups = true; # Do not enter command lines into the history list if they are duplicates of the previous event.
-        extended = true; # Save timestamp into the history file.
-      };
-      dotDir = ".config/zsh";
-      sessionVariables = {
-        EDITOR = "nvim";
-      };
-      oh-my-zsh = {
-        enable = false;
-        plugins = [
-          "thefuck"
-          # "git"
-          "fzf"
-          "colored-man-pages"
-          "extract"
-          "copybuffer"
-          "sudo"
-          # "ssh-agent"
-          "bgnotify"
-        ];
-      };
-      zsh-abbr = {
+  config = mkIf cfg.enable
+    {
+      # zsh settings
+      # defaultUserShell = pkgs.zsh;
+      programs.zsh = {
         enable = true;
-        abbreviations = alias-abbr;
-      };
+        autosuggestion.enable = true;
+        enableCompletion = true;
+        syntaxHighlighting.enable = true;
+        history = {
+          share = true; # false -> every terminal has it's own history
+          size = 9999999; # Number of history lines to keep.
+          save = 9999999; # Number of history lines to save.
+          ignoreDups = true; # Do not enter command lines into the history list if they are duplicates of the previous event.
+          extended = true; # Save timestamp into the history file.
+        };
+        dotDir = ".config/zsh";
+        sessionVariables = {
+          EDITOR = "nvim";
+        };
+        oh-my-zsh = {
+          enable = false;
+          plugins = [
+            "thefuck"
+            # "git"
+            "fzf"
+            "colored-man-pages"
+            "extract"
+            "copybuffer"
+            "sudo"
+            # "ssh-agent"
+            "bgnotify"
+          ];
+        };
+        zsh-abbr = {
+          enable = true;
+          abbreviations = alias-abbr;
+        };
 
 
-      shellAliases = alias-abbr // {
-        lst = "function _lt() { ls --tree --level=\${1:-2}; }; _lt";
-        lsta = "function _lt() { lsa --tree --level=\${1:-2}; }; _lt";
-        jln = ''jln_func() { if [ "$#" -eq 2 ]; then joplin use "$1" && joplin mknote "$2" && joplin edit "$2"; else joplin use "Terminal" && joplin mknote "$1" && joplin edit "$1"; fi }; jln_func'';
-        # ssh = "kitty +kitten ssh";
-        git-init-remote = ''function _git_init_remote() { \
+        shellAliases = alias-abbr // {
+          lst = "function _lt() { ls --tree --level=\${1:-2}; }; _lt";
+          lsta = "function _lt() { lsa --tree --level=\${1:-2}; }; _lt";
+          jln = ''jln_func() { if [ "$#" -eq 2 ]; then joplin use "$1" && joplin mknote "$2" && joplin edit "$2"; else joplin use "Terminal" && joplin mknote "$1" && joplin edit "$1"; fi }; jln_func'';
+          # ssh = "kitty +kitten ssh";
+          git-init-remote = ''function _git_init_remote() { \
   repo_name=$1; \
   ssh galma "mkdir -p $repo_name.git && cd $repo_name.git && git init --bare"; \
   git clone ssh://galma/~/$repo_name.git; \
 }; _git_init_remote'';
-      };
-      completionInit = ""; # speed up zsh start time
+        };
+        completionInit = ""; # speed up zsh start time
 
-      # initExtraFirst = ''
-      #   zmodload zsh/zprof
-      # '';
+        # initExtraFirst = ''
+        #   zmodload zsh/zprof
+        # '';
 
-      initExtra = ''
-         # be more bashy
-         # setopt interactive_comments bashautolist nobeep nomenucomplete \
-         #        noautolist extended_glob
+        initExtra = ''
+           # be more bashy
+           # setopt interactive_comments bashautolist nobeep nomenucomplete \
+           #        noautolist extended_glob
 
-         ## include config generated via "p10k configure" manually;
-         ## zplug cannot edit home manager's zshrc file.
+           ## include config generated via "p10k configure" manually;
+           ## zplug cannot edit home manager's zshrc file.
 
-         [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+           [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-         # findup () {
-         #   # uses zsh extended globbing, https://unix.stackexchange.com/a/64164
-         #   echo (../)#$1(:a)
-         # }
+           # findup () {
+           #   # uses zsh extended globbing, https://unix.stackexchange.com/a/64164
+           #   echo (../)#$1(:a)
+           # }
 
-        #  any-nix-shell zsh --info-right | source /dev/stdin
+          #  any-nix-shell zsh --info-right | source /dev/stdin
         
 
-      '';
-      zplug = {
-        enable = true;
-        plugins = [
-          { name = "romkatv/powerlevel10k"; tags = [ as:theme depth:1 ]; } # Installations with additional options. For the list of options, please refer to Zplug README.
-        ];
+        '';
+        zplug = {
+          enable = true;
+          plugins = [
+            { name = "romkatv/powerlevel10k"; tags = [ as:theme depth:1 ]; } # Installations with additional options. For the list of options, please refer to Zplug README.
+          ];
+        };
+
       };
 
-    };
 
+      home.file.".p10k.zsh" = {
+        source = ./.p10k.zsh;
+        executable = true;
+      };
+      programs.zoxide = {
+        enable = true;
+        enableZshIntegration = true;
+      };
+      programs.atuin = {
+        enable = true;
+        enableZshIntegration = true;
+      };
+      programs.hstr = {
+        enable = false;
+        enableZshIntegration = true;
+      };
+      programs.fzf = {
+        enable = true;
+        enableZshIntegration = true;
+      };
+      programs.direnv = {
+        enable = true;
+        nix-direnv.enable = true;
+        enableZshIntegration = true;
+      };
+      programs.thefuck = {
+        enable = true;
+        enableZshIntegration = true;
+      };
+      programs.nix-index = {
+        enable = true;
+        enableZshIntegration = true;
+      };
+      programs.eza = {
+        enable = true;
+        enableZshIntegration = true;
+      };
+      programs.carapace = {
+        enable = true;
+        enableZshIntegration = true;
+      };
+      programs.zellij = {
+        enable = true;
+        settings = {
+          simplified_ui = true;
+          hide_tab_bar = true;
+          hide_tab_indices = true;
+          hide_up_down_panes = true;
+          hide_border = true;
+          keybinds = {
+            unbind = [
+              "Ctrl s"
+            ];
 
-    home.file.".p10k.zsh" = {
-      source = ./.p10k.zsh;
-      executable = true;
+          };
+        };
+      };
     };
-    programs.zoxide = {
-      enable = true;
-      enableZshIntegration = true;
-    };
-    programs.atuin = {
-      enable = true;
-      enableZshIntegration = true;
-    };
-    programs.hstr = {
-      enable = false;
-      enableZshIntegration = true;
-    };
-    programs.fzf = {
-      enable = true;
-      enableZshIntegration = true;
-    };
-    programs.direnv = {
-      enable = true;
-      nix-direnv.enable = true;
-      enableZshIntegration = true;
-    };
-    programs.thefuck = {
-      enable = true;
-      enableZshIntegration = true;
-    };
-    programs.nix-index = {
-      enable = true;
-      enableZshIntegration = true;
-    };
-    programs.eza = {
-      enable = true;
-      enableZshIntegration = true;
-    };
-    programs.carapace = {
-      enable = true;
-      enableZshIntegration = true;
-    };
-  };
-
-
-
-
 }
-

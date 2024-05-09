@@ -168,6 +168,7 @@
     systemctl-tui
     newsboat # RSS Reader TUI
     podman-tui
+    links2
   ];
 
 
