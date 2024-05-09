@@ -50,7 +50,7 @@
         };
 
         "Sync_M_L_I_O" = {
-          id = "";
+          id = "y3xfw-sbf3u";
           label = "Sync_M_L_I_O";
           path = "/home/naresh/Data/Sync_M_L_I_O";
           devices = [ "RMX3312" "Ipad" "alma" ];
