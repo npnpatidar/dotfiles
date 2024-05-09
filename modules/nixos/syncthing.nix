@@ -5,7 +5,7 @@
     syncthing = {
       enable = true;
       user = "naresh";
-      dataDir = "/home/naresh/Data/Sync_M_L/";
+      dataDir = "/home/naresh/Data";
       configDir = "/home/naresh/.config/syncthing";
       overrideDevices = true;
       overrideFolders = true;
