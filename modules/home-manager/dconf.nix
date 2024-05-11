@@ -310,7 +310,7 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/desktop/session" = {
-      idle-delay = mkUint32 300;
+      idle-delay = mkUint32 1800;
     };
 
     "org/gnome/desktop/wm/keybindings" = {
