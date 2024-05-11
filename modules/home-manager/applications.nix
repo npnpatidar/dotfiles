@@ -33,7 +33,7 @@
 
     #Documents
     libreoffice
-    anki
+    anki-bin
 
     # lmstudio
     #mindmap 
