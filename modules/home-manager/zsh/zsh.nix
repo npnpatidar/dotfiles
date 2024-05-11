@@ -13,7 +13,7 @@ let
     d = "distrobox enter --name deb -- ";
     nv = "nvitop --colorful";
     o = "xdg-open";
-    services = "systemctl-tui";
+    services = "sudo systemctl-tui";
     cd = "z";
     r = "ranger";
     rd = "rm -rf ";
