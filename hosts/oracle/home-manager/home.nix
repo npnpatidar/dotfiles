@@ -82,6 +82,7 @@
     ripgrep #recursive search fs for a regex
     zip
     unrar
+    podman-tui
     unzip
     w3m
     oterm
