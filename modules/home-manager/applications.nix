@@ -34,6 +34,8 @@
     #Documents
     libreoffice
     anki-bin
+    obsidian
+    stremio
 
     # lmstudio
     #mindmap 
