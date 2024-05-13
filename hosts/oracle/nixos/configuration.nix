@@ -237,6 +237,18 @@
                 href = "http://code.naresh.world";
               };
             }
+            {
+              "Syncthing" = {
+                icon = "syncthing";
+                href = "http://alma:8384";
+              };
+            }
+            {
+              "Test" = {
+                # icon = "syncthing";
+                href = "http://test.naresh.world";
+              };
+            }
             # {
             #   "NextDNS" = {
             #     icon = "nextdns";
