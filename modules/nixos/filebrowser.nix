@@ -10,7 +10,7 @@
       User = "root";
       Group = "wheel";
       ExecStart =
-        "/run/current-system/sw/bin/filebrowser --database /var/lib/filebrowser/filebrowser.db --address 0.0.0.0 -p 8081";
+        "/run/current-system/sw/bin/filebrowser --database /var/lib/filebrowser/filebrowser.db --address 127.0.0.1 -p 8081";
     };
   };
 
