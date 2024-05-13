@@ -1,21 +1,25 @@
-{ config, ... }:
+{ pkgs, config, ... }:
 
 {
-  # virtualisation.oci-containers.backend = "docker";
-  virtualisation.oci-containers.containers.filebrowser = {
-    image = "filebrowser/filebrowser";
-    # user = "naresh:users";
-    ports = [ "8081:80" ];
-    # volumes = [
-    #   "/home/naresh/"
-    # ];
+  environment.systemPackages = [ pkgs.filebrowser ];
+  #default username = "admin" and password  = "admin"
+  systemd.services.filebrowser = {
+    enable = true;
+    wantedBy = [ "default.target" ];
+    serviceConfig = {
+      User = "root";
+      Group = "wheel";
+      ExecStart =
+        "/run/current-system/sw/bin/filebrowser --database /var/lib/filebrowser/filebrowser.db --address 0.0.0.0 -p 8081";
+    };
   };
-
 
   services.nginx.virtualHosts."files.naresh.world" = {
     forceSSL = true;
     enableACME = true;
-    locations."/".proxyPass = "http://localhost:8081";
+    locations."/" = {
+      proxyPass = "http://localhost:8081";
+    };
   };
 }
 
