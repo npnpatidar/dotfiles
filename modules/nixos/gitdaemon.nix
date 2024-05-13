@@ -13,7 +13,7 @@
 
   users = {
     users.git = {
-      home = "/srv/git";
+      home = "/var/lib/gitDaemon";
       createHome = true;
       homeMode = "755";
       isSystemUser = false;
