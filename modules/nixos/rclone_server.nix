@@ -1,5 +1,12 @@
 { lib, pkgs, config, ... }:
 let
+
+
+  koofr_filter_file_text = ''
+    + /var/lib/bitwarden_rs/** 
+    - *
+  '';
+
   mkRcloneService = remote_name:
     lib.nameValuePair "rclone-${remote_name}" {
       script = ''
@@ -26,26 +33,32 @@ let
       };
     };
 
+  mkRcloneFilterFile = { remote_name, filterFileText }:
+    lib.nameValuePair "rclone/${remote_name}-filter.text" {
+      source = pkgs.writeText "${remote_name}-filter.text" "${filterFileText}";
+    };
+
 in
 {
   systemd.services = builtins.listToAttrs
     (map mkRcloneService [
-      # "alternate"
-      "alternateCrypt"
+      # "koofr"
+      "koofrCrypt"
     ]);
 
   systemd.timers = builtins.listToAttrs
     (map mkSyncTimer [
-      # "alternate"
-      "alternateCrypt"
+      # "koofr"
+      "koofrCrypt"
     ]);
 
-  environment.etc."rclone/alternateCrypt-filter.text".source =
-    pkgs.writeText "alternateCrypt-filter.text" ''
-      + /var/lib/bitwarden_rs/** 
-      - *
-    '';
-  environment.etc."rclone/rclone.conf".source = config.age.secrets."rclone_config".path;
+  environment.etc = builtins.listToAttrs
+    (map mkRcloneFilterFile [
+      { remote_name = "koofrCrypt"; filterFileText = koofr_filter_file_text; }
+    ]) // { "rclone/rclone.conf".source = config.age.secrets."rclone_config".path; };
+
+
+
   # rclone bisync naresh.alternate: ~/Data/naresh.alternate --resync --filter-from ~/.config/rclone/naresh.alternate.txt 
   # for the first time and similarly for other services untill this command is not successful service won't run
   # + Normal/** to inclue files 
