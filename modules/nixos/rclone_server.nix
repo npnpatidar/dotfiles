@@ -1,9 +1,9 @@
 { lib, pkgs, config, ... }:
 let
-  mkRcloneService = environment:
-    lib.nameValuePair "rclone-${environment}" {
+  mkRcloneService = remote_name:
+    lib.nameValuePair "rclone-${remote_name}" {
       script = ''
-        ${pkgs.rclone}/bin/rclone sync --copy-links "/" ${environment}:/oracle_backup --verbose --create-empty-src-dirs  --check-first --config="/etc/rclone/rclone.conf" --filter-from="/etc/rclone/${environment}-filter.text"
+        ${pkgs.rclone}/bin/rclone sync --copy-links "/" ${remote_name}:/oracle_backup --verbose --create-empty-src-dirs  --check-first --config="/etc/rclone/rclone.conf" --filter-from="/etc/rclone/${remote_name}-filter.text"
       '';
       serviceConfig = {
         User = "root";
@@ -11,8 +11,8 @@ let
       };
     };
 
-  mkSyncTimer = environment:
-    lib.nameValuePair "rclone-${environment}" {
+  mkSyncTimer = remote_name:
+    lib.nameValuePair "rclone-${remote_name}" {
       wantedBy = [ "timers.target" ];
       timerConfig = {
         OnCalendar = "daily";
@@ -22,7 +22,7 @@ let
         # 5 minutes after last finished
         # OnUnitInactiveSec = "5m";
 
-        Unit = "rclone-${environment}.service";
+        Unit = "rclone-${remote_name}.service";
       };
     };
 
