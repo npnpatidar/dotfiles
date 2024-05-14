@@ -83,6 +83,7 @@
     zip
     unrar
     podman-tui
+    rclone
     unzip
     w3m
     oterm
