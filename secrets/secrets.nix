@@ -20,5 +20,6 @@ in
   "htpasswdstandard.age".publicKeys = users ++ systems;
   "nextcloud_admin_password.age".publicKeys = users ++ systems;
   "tailscale_key.age".publicKeys = users ++ systems;
+  "rclone_config.age".publicKeys = users ++ systems;
 }
 
