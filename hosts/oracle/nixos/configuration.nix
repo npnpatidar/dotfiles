@@ -6,6 +6,8 @@
     ../../../modules/nixos/filebrowser.nix
     ../../../modules/nixos/agenix.nix
     ../../../modules/nixos/tailscale.nix
+    ../../../modules/nixos/vaultwarden.nix
+    ../../../modules/nixos/rclone_server.nix
   ];
 
   boot.tmp.cleanOnBoot = true;
@@ -38,7 +40,7 @@
   users.users.naresh = {
     isNormalUser = true;
     description = "naresh";
-    extraGroups = [ "networkmanager" "wheel" "kvm" "input" "disk" "libvirtd" "usbmux" "freshrss" "nextcloud" "openvscode-server" "nginx" ];
+    extraGroups = [ "networkmanager" "wheel" "kvm" "input" "disk" "libvirtd" "usbmux" "freshrss" "nextcloud" "openvscode-server" "nginx" "syncthing" ];
     createHome = true;
     home = "/home/naresh";
     shell = pkgs.zsh;
@@ -76,17 +78,17 @@
     };
   };
 
-  services.vaultwarden = {
-    enable = true;
-    config = {
-      DOMAIN = "https://vaultwarden.naresh.world";
-      SIGNUPS_ALLOWED = true;
-      ROCKET_PORT = 8222;
-      rocketAddress = "127.0.0.1";
-      rocketLog = "critical";
-      disableIconDownload = false;
-    };
-  };
+  # services.vaultwarden = {
+  #   enable = true;
+  #   config = {
+  #     DOMAIN = "https://vaultwarden.naresh.world";
+  #     SIGNUPS_ALLOWED = true;
+  #     ROCKET_PORT = 8222;
+  #     rocketAddress = "127.0.0.1";
+  #     rocketLog = "critical";
+  #     disableIconDownload = false;
+  #   };
+  # };
 
   services.freshrss = {
     enable = true;
