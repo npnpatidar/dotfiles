@@ -50,7 +50,10 @@ in
       {
         remote_name = "koofrCrypt";
         filterFileText = ''
-          + /var/lib/bitwarden_rs/** 
+          + /home/naresh/.backups/vaultwarden/**
+          + /var/lib/anki-sync-server/**
+          + /var/lib/gitDaemon/**
+          + /var/lib/nextcloud/data/naresh/files/**
           - *
         '';
       }

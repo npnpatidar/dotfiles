@@ -30,7 +30,7 @@
 
       DATE=$(date +%Y-%m-%d)
       BACKUP_DIR=/home/naresh/Data/.backups/vaultwarden
-      BACKUP_FILE=vaultwarden-$DATE.tar
+      BACKUP_FILE=vaultwarden-$DATE.7z
       CONTAINER=vaultwarden
       VAULTWARDEN_DATA_DIR=/var/lib/bitwarden_rs/
 
@@ -39,13 +39,13 @@
 
       # Stop the container
       systemctl stop vaultwarden.service
-
+      echo "vaultwarden service stopped"
       # Backup the vaultwarden data directory to the backup directory
-      ${pkgs.gnutar}/bin/tar -cf "$BACKUP_DIR/$BACKUP_FILE" -C "$VAULTWARDEN_DATA_DIR" .
-
+      ${pkgs.p7zip}/bin/7z a "$BACKUP_DIR/$BACKUP_FILE"  "$VAULTWARDEN_DATA_DIR" 
+      echo "7z created successfully"
       # Restart the container
       systemctl start vaultwarden.service
-
+      echo "vaultwarden service started"
       # To delete files older than 30 days
       # find $BACKUP_DIR/* -mtime +30 -exec rm {} \;
 
