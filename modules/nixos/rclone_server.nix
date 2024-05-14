@@ -1,12 +1,5 @@
 { lib, pkgs, config, ... }:
 let
-
-
-  koofr_filter_file_text = ''
-    + /var/lib/bitwarden_rs/** 
-    - *
-  '';
-
   mkRcloneService = remote_name:
     lib.nameValuePair "rclone-${remote_name}" {
       script = ''
@@ -54,7 +47,13 @@ in
 
   environment.etc = builtins.listToAttrs
     (map mkRcloneFilterFile [
-      { remote_name = "koofrCrypt"; filterFileText = koofr_filter_file_text; }
+      {
+        remote_name = "koofrCrypt";
+        filterFileText = ''
+          + /var/lib/bitwarden_rs/** 
+          - *
+        '';
+      }
     ]) // { "rclone/rclone.conf".source = config.age.secrets."rclone_config".path; };
 
 
