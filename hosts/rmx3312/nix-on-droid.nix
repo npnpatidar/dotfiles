@@ -98,7 +98,8 @@
           ../../modules/home-manager/ranger.nix
           ../../modules/home-manager/bat.nix
           ../../modules/home-manager/neovim.nix
-          ../../modules/home-manager/tmux.nix
+          ../../modules/home-manager/bash.nix
+          # ../../modules/home-manager/tmux.nix
           # ../../modules/home-manager/nvim.nix
           ../../modules/home-manager/yazi.nix
         ];
@@ -109,9 +110,10 @@
           ranger.enable = true;
           bat.enable = true;
           neovim.enable = true;
-          tmux.enable = false;
+          # tmux.enable = false;
           # nvim.enable = false;
           yazi.enable = true;
+          bash.enable = true;
         };
         home = {
           username = "nix-on-droid";

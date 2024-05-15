@@ -1,13 +1,14 @@
 { config, pkgs, inputs, ... }: {
   imports = [
     ./hardware-configuration.nix
-    ../../../modules/nixos/ollama.nix
-    ../../../modules/nixos/gitdaemon.nix
-    ../../../modules/nixos/filebrowser.nix
+    ./ollama.nix
+    ./gitdaemon.nix
+    ./filebrowser.nix
+    ./vaultwarden.nix
+    ./rclone_server.nix
+
     ../../../modules/nixos/agenix.nix
     ../../../modules/nixos/tailscale.nix
-    ../../../modules/nixos/vaultwarden.nix
-    ../../../modules/nixos/rclone_server.nix
   ];
 
   boot.tmp.cleanOnBoot = true;
