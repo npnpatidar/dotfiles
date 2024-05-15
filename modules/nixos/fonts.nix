@@ -5,9 +5,10 @@
   fonts = {
     enableDefaultPackages = true;
     packages = with pkgs; [
-      nerdfonts
+      # nerdfonts
+      (pkgs.nerdfonts.override { fonts = [ "FiraCode" ]; })
       lohit-fonts.devanagari
-      noto-fonts
+      # noto-fonts
     ];
 
     fontconfig = {
