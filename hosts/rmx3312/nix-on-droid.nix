@@ -110,9 +110,10 @@
           ranger.enable = true;
           bat.enable = true;
           neovim.enable = true;
-          tmux.enable = false;
+          # tmux.enable = false;
           # nvim.enable = false;
           yazi.enable = true;
+          bash.enable = true;
         };
         home = {
           username = "nix-on-droid";
