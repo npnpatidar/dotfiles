@@ -21,5 +21,7 @@ in
   "nextcloud_admin_password.age".publicKeys = users ++ systems;
   "tailscale_key.age".publicKeys = users ++ systems;
   "rclone_config.age".publicKeys = users ++ systems;
+  "ssh_github_key.age".publicKeys = users ++ systems;
+  "ssh_gitserver_key.age".publicKeys = users ++ systems;
 }
 
