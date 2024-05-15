@@ -28,6 +28,7 @@
       ./hardware-configuration.nix
       ../../../modules/nixos/agenix.nix
       ../../../modules/nixos/tailscale.nix
+      ../../../modules/nixos/ssh_client.nix
 
     ];
 
