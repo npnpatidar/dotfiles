@@ -1,6 +1,20 @@
 { config, ... }:
 {
 
+
+  age.secrets = {
+    ssh_github_key = {
+      file = ../../../secrets/ssh_github_key.age;
+      mode = "600";
+      owner = "naresh";
+    };
+    ssh_gitserver_key = {
+      file = ../../../secrets/ssh_gitserver_key.age;
+      mode = "600";
+      owner = "naresh";
+    };
+  };
+
   programs.ssh = {
     extraConfig = ''
       Host github.com
