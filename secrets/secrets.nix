@@ -23,6 +23,6 @@ in
   "rclone_config.age".publicKeys = users ++ systems;
   "ssh_github_key.age".publicKeys = users ++ systems;
   "ssh_gitserver_key.age".publicKeys = users ++ systems;
-  "ssh_oracle_key.age".publicKeys = [ aspire7 ];
+  "ssh_oracle_key.age".publicKeys = [ aspire7 alma ];
 }
 
