@@ -1,4 +1,4 @@
-{ pkgs, config, ... }: {
+{ pkgs, ... }: {
   services.vaultwarden = {
     enable = true;
     config = {
@@ -10,8 +10,6 @@
       disableIconDownload = false;
     };
   };
-
-
   systemd.timers."vault-backup" = {
     wantedBy = [ "timers.target" ];
     timerConfig = {
@@ -48,8 +46,6 @@
       echo "vaultwarden service started"
       # To delete files older than 30 days
       # find $BACKUP_DIR/* -mtime +30 -exec rm {} \;
-
-
     '';
     serviceConfig = {
       Type = "oneshot";
@@ -57,6 +53,13 @@
     };
   };
 
-
-
+  services.nginx = {
+    virtualHosts."vaultwarden.naresh.world" = {
+      enableACME = true;
+      forceSSL = true;
+      locations."/" = {
+        proxyPass = "http://127.0.0.1:8222";
+      };
+    };
+  };
 }

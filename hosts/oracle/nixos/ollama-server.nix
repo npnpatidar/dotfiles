@@ -1,9 +1,9 @@
-{ ... }:
-{
+{ ... }: {
   services.ollama = {
     enable = true;
     listenAddress = "0.0.0.0:11434";
   };
+
   virtualisation = {
     oci-containers = {
       containers = {
@@ -25,6 +25,23 @@
             "--add-host=ollama.local:10.0.2.2"
           ];
         };
+      };
+    };
+  };
+
+  services.nginx = {
+    virtualHosts."ollama.naresh.world" = {
+      enableACME = true;
+      forceSSL = true;
+      locations."/" = {
+        proxyPass = "http://localhost:11434";
+      };
+    };
+    virtualHosts."chat.naresh.world" = {
+      enableACME = true;
+      forceSSL = true;
+      locations."/" = {
+        proxyPass = "http://127.0.0.1:8090";
       };
     };
   };

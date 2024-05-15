@@ -1,17 +1,6 @@
 { config, lib, pkgs, inputs, ... }:
 {
 
-  nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.packageOverrides = pkgs: {
-    nur = import builtins.fetchTarball
-      {
-        url = "https://github.com/nix-community/NUR/archive/master.tar.gz";
-        sha256 = "sha256:0plki2yk02zcvyw7vynqhag6g1kl5qcicj8dvzfjx5p3p82yilkk";
-      }
-      {
-        inherit pkgs;
-      };
-  };
 
 
   imports =
@@ -34,11 +23,12 @@
       ./apple.nix
       # ./fingerprint.nix
       ./fonts.nix
+      ./ollama_local.nix
       # ../../../modules/nixos/servarr.nix
       ./hardware-configuration.nix
       ../../../modules/nixos/agenix.nix
-      # ../../../modules/nixos/ollama.nix
       ../../../modules/nixos/tailscale.nix
+
     ];
 
 
@@ -53,8 +43,6 @@
   time.timeZone = "Asia/Kolkata";
 
 
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
 
   # Bluetooth
   hardware.bluetooth.enable = true; # enables support for Bluetooth
@@ -93,41 +81,11 @@
 
   # List services that you want to enable:
 
-  # enable flatpak support
   services.flatpak.enable = true;
   services.dbus.enable = true;
+  services.printing.enable = true;
 
   # programs.steam.enable = true;
 
-
-  services.ollama = {
-    enable = true;
-    acceleration = "cuda";
-  };
-
-  virtualisation = {
-    oci-containers = {
-      containers = {
-        open-webui = {
-          image = "ghcr.io/open-webui/open-webui:main";
-          autoStart = true;
-          ports = [
-            "127.0.0.1:8080:8080"
-          ];
-          volumes = [
-            "open-webui:/app/backend/data"
-          ];
-          environment = {
-            OLLAMA_BASE_URL = "http://127.0.0.1:11434";
-            ANONYMIZED_TELEMETRY = "False";
-          };
-          extraOptions = [
-            "--network=host"
-            "--add-host=host.containers.internal:host-gateway"
-          ];
-        };
-      };
-    };
-  };
 
 }

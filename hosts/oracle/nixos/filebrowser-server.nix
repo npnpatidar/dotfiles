@@ -1,6 +1,4 @@
-{ pkgs, config, ... }:
-
-{
+{ pkgs, ... }: {
   environment.systemPackages = [ pkgs.filebrowser ];
   #default username = "admin" and password  = "admin"
   systemd.services.filebrowser = {
