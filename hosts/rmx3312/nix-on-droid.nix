@@ -24,7 +24,6 @@
     nethogs
     fastfetch
     p7zip
-    #   yt-dlp
     zoxide
     tgpt
     direnv
@@ -65,10 +64,6 @@
     bitwarden-cli
     zellij
     gpg-tui
-    # Read the changelog before changing this value
-    # home.stateVersion = "23.05";
-
-    # insert home-manager config
   ];
 
   time.timeZone = "Asia/Kolkata";
@@ -99,8 +94,6 @@
           ../../modules/home-manager/bat.nix
           ../../modules/home-manager/neovim.nix
           ../../modules/home-manager/bash.nix
-          # ../../modules/home-manager/tmux.nix
-          # ../../modules/home-manager/nvim.nix
           ../../modules/home-manager/yazi.nix
         ];
 
@@ -110,8 +103,6 @@
           ranger.enable = true;
           bat.enable = true;
           neovim.enable = true;
-          # tmux.enable = false;
-          # nvim.enable = false;
           yazi.enable = true;
           bash.enable = true;
         };
