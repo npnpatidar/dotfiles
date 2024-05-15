@@ -18,26 +18,25 @@
     [
       #  "${builtins.fetchTarball "https://github.com/nix-community/disko/archive/master.tar.gz"}/module.nix"
       # ./aspire7_disko.nix
-      ../../../modules/nixos/desktop_config/gnome_config.nix
-      ../../../modules/nixos/nvidia.nix
-      ../../../modules/nixos/syncthing.nix
-      ../../../modules/nixos/dns_config.nix
-      ../../../modules/nixos/docker.nix
-      ../../../modules/nixos/ssh.nix
-      ../../../modules/nixos/virtualisation.nix
-      ../../../modules/nixos/bootloader.nix
-      ../../../modules/nixos/networking.nix
-      ../../../modules/nixos/power_management.nix
-      ../../../modules/nixos/sound.nix
-      ../../../modules/nixos/input.nix
-      ../../../modules/nixos/nix_related.nix
-      ../../../modules/nixos/apple.nix
-      # ../../../modules/nixos/fingerprint.nix
-      ../../../modules/nixos/fonts.nix
+      ./desktop_config/gnome_config.nix
+      ./nvidia.nix
+      ./syncthing.nix
+      ./dns_config.nix
+      ./docker.nix
+      ./ssh.nix
+      ./virtualisation.nix
+      ./bootloader.nix
+      ./networking.nix
+      ./power_management.nix
+      ./sound.nix
+      ./input.nix
+      ./nix_related.nix
+      ./apple.nix
+      ./fonts.nix
+      # ./fingerprint.nix
+
       # ../../../modules/nixos/servarr.nix
       ./hardware-configuration.nix
-      ../../../modules/nixos/agenix.nix
-      # ../../../modules/nixos/ollama.nix
       ../../../modules/nixos/agenix.nix
       ../../../modules/nixos/tailscale.nix
     ];
