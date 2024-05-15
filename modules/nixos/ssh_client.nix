@@ -13,6 +13,11 @@
       mode = "600";
       owner = "naresh";
     };
+    ssh_oracle_key = {
+      file = ../../secrets/ssh_oracle_key.age;
+      mode = "600";
+      owner = "naresh";
+    };
   };
 
   programs.ssh = {
@@ -31,13 +36,13 @@
       Host ralma
            HostName home.naresh.world
            User root 
-           IdentityFile ${config.age.secrets.ssh_gitserver_key.path}
+           IdentityFile ${config.age.secrets.ssh_oracle_key.path}
            Port 46587
 
       Host nalma
            HostName home.naresh.world
            User naresh
-           IdentityFile ${config.age.secrets.ssh_gitserver_key.path}
+           IdentityFile ${config.age.secrets.ssh_oracle_key.path}
            Port 46587
     '';
 
