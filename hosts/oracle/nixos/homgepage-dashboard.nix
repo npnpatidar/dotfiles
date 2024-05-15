@@ -1,4 +1,4 @@
-{ config, pkgs }: {
+{ ... }: {
   services.homepage-dashboard = {
     enable = true;
     listenPort = 8888;

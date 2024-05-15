@@ -7,7 +7,7 @@
     virtualHost = "freshrss.naresh.world";
   };
 
-  server.nginx = {
+  services.nginx = {
     virtualHosts."freshrss.naresh.world" = {
       enableACME = true;
       forceSSL = true;

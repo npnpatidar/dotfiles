@@ -1,4 +1,4 @@
-{ config, pkgs }: {
+{ config, ... }: {
   services.openvscode-server = {
     enable = true;
     host = "127.0.0.1";

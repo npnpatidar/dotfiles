@@ -1,4 +1,4 @@
-{ config }: {
+{ config, ... }: {
   services.paperless = {
     enable = true;
     passwordFile = config.age.secrets."standard".path;
