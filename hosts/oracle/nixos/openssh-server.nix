@@ -7,7 +7,7 @@
     ports = [ 46587 ];
     settings = {
       PasswordAuthentication = false;
-      AllowUsers = [ "naresh" "git" ];
+      AllowUsers = [ "naresh" "gitea" ];
     };
     extraConfig = "MaxAuthTries 10";
   };
