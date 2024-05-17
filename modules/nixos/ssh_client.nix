@@ -27,9 +27,9 @@
               User git
               IdentityFile ${config.age.secrets.ssh_github_key.path}
 
-      Host galma
-           HostName home.naresh.world
-           User git
+      Host git.naresh.world
+           HostName git.naresh.world
+           User gitea
            IdentityFile ${config.age.secrets.ssh_gitserver_key.path}
            Port 46587
 
@@ -54,6 +54,10 @@
 
       "home.naresh.world" = {
         hostNames = [ "[home.naresh.world]:46587" ];
+        publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO32al0GNzcSFmPhJQW4A/Ikflj4A38Nhfd8JGY7u85U";
+      };
+      "git.naresh.world" = {
+        hostNames = [ "[git.naresh.world]:46587" ];
         publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO32al0GNzcSFmPhJQW4A/Ikflj4A38Nhfd8JGY7u85U";
       };
     };

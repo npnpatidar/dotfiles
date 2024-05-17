@@ -61,7 +61,7 @@
     hashedPasswordFile = config.age.secrets."hashedstandard".path;
   };
 
-  networking.firewall.allowedTCPPorts = [ 443 ];
+  networking.firewall.allowedTCPPorts = [ 443 80 ];
   # networking.firewall.allowedUDPPorts = [ 22000 21027 ];
 
 }
