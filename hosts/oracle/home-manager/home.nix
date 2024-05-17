@@ -156,7 +156,7 @@
   programs.home-manager.enable = true;
   programs.git.enable = true;
   programs.zellij = {
-    enableZshIntegration = true;
+    # enableZshIntegration = true;
   };
 
   # Nicely reload system units when changing configs
