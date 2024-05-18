@@ -153,11 +153,6 @@ in
           lsta = "function _lt() { lsa --tree --level=\${1:-2}; }; _lt";
           jln = ''jln_func() { if [ "$#" -eq 2 ]; then joplin use "$1" && joplin mknote "$2" && joplin edit "$2"; else joplin use "Terminal" && joplin mknote "$1" && joplin edit "$1"; fi }; jln_func'';
           # ssh = "kitty +kitten ssh";
-          git-init-remote = ''function _git_init_remote() { \
-  repo_name=$1; \
-  ssh galma "mkdir -p $repo_name.git && cd $repo_name.git && git init --bare"; \
-  git clone ssh://galma/~/$repo_name.git; \
-}; _git_init_remote'';
         };
         completionInit = ""; # speed up zsh start time
 
