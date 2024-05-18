@@ -41,6 +41,7 @@ in
       extraConfig = {
         diff = { tool = "meld"; };
         difftool = { prompt = false; };
+        init.defaultBranch = "main";
       };
     };
   };
