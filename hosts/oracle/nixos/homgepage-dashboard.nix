@@ -125,6 +125,12 @@
               };
             }
             {
+              "Git" = {
+                icon = "git";
+                href = "https://git.naresh.world";
+              };
+            }
+            {
               "Test" = {
                 # icon = "syncthing";
                 href = "http://test.naresh.world";
