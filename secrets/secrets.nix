@@ -27,5 +27,6 @@ in
   "freshrss_password.age".publicKeys = [ aspire7 alma ];
   "anki_password.age".publicKeys = users ++ systems;
   "paperless_password.age".publicKeys = users ++ systems;
+  "vscode_htpassword.age".publicKeys = users ++ systems;
 }
 

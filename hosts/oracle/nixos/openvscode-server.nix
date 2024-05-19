@@ -10,7 +10,7 @@
     virtualHosts."code.naresh.world" = {
       enableACME = true;
       forceSSL = true;
-      basicAuthFile = config.age.secrets."htpasswdstandard".path;
+      basicAuthFile = config.age.secrets.vscode_htpassword.path;
       locations."/" = {
         proxyPass = "http://127.0.0.1:3000";
         proxyWebsockets = true;
