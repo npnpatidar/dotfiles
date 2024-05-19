@@ -7,4 +7,7 @@
   config.age.secrets."ssh_github_key".file = ../../secrets/ssh_github_key.age;
   config.age.secrets."ssh_gitserver_key".file = ../../secrets/ssh_gitserver_key.age;
   config.age.secrets."ssh_oracle_key".file = ../../secrets/ssh_oracle_key.age;
+  config.age.secrets."freshrss_password".file = ../../secrets/freshrss_password.age;
+  config.age.secrets."anki_password".file = ../../secrets/anki_password.age;
+  config.age.secrets."paperless_password".file = ../../secrets/paperless_password.age;
 }

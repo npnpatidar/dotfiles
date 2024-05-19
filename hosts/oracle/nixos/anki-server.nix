@@ -7,7 +7,7 @@
     users = [
       {
         username = "naresh";
-        passwordFile = config.age.secrets."standard".path;
+        passwordFile = config.age.secrets.anki_password.path;
       }
     ];
   };

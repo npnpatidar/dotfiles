@@ -24,5 +24,8 @@ in
   "ssh_github_key.age".publicKeys = users ++ systems;
   "ssh_gitserver_key.age".publicKeys = users ++ systems;
   "ssh_oracle_key.age".publicKeys = [ aspire7 alma ];
+  "freshrss_password.age".publicKeys = [ aspire7 alma ];
+  "anki_password.age".publicKeys = users ++ systems;
+  "paperless_password.age".publicKeys = users ++ systems;
 }
 

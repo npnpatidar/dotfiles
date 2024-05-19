@@ -1,7 +1,7 @@
 { config, ... }: {
   services.paperless = {
     enable = true;
-    passwordFile = config.age.secrets."standard".path;
+    passwordFile = config.age.secrets.paperless_password.path;
     settings = {
       PAPERLESS_ACCOUNT_ALLOW_SIGNUPS = false;
       PAPERLESS_OCR_LANGUAGE = "hin+eng+san";

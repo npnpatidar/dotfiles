@@ -3,7 +3,7 @@
     enable = true;
     baseUrl = "https://freshrss.naresh.world";
     defaultUser = "naresh";
-    passwordFile = config.age.secrets."standard".path;
+    passwordFile = config.age.secrets.freshrss_password.path;
     virtualHost = "freshrss.naresh.world";
   };
 
