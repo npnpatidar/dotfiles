@@ -6,6 +6,14 @@
     telemetryLevel = "off";
     withoutConnectionToken = true;
   };
+
+
+  age.secrets.vscode_htpassword = {
+    file = ../../../secrets/vscode_htpassword.age;
+    mode = "770";
+    owner = "nginx";
+    group = "nginx";
+  };
   services.nginx = {
     virtualHosts."code.naresh.world" = {
       enableACME = true;
