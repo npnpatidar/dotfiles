@@ -121,7 +121,7 @@
             {
               "Syncthing" = {
                 icon = "syncthing";
-                href = "http://alma:8384";
+                href = "https://syncthing.naresh.world";
               };
             }
             {

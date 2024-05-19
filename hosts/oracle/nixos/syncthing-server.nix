@@ -8,7 +8,7 @@
       configDir = "/home/naresh/.config/syncthing";
       overrideDevices = true;
       overrideFolders = true;
-      guiAddress = "alma.tail4db3da.ts.net:8384";
+      guiAddress = "0.0.0.0:8384";
       # extraFlags = [
       #   "-gui-address=alma.tail4db3da.ts.net:8384"
       # ];
@@ -82,5 +82,15 @@
   };
 
 
+  services.nginx = {
+    virtualHosts."syncthing.naresh.world" = {
+      forceSSL = true;
+      enableACME = true;
+      locations."/" = {
+        proxyPass = "http://127.0.0.1:8384";
+      };
+    };
+  };
 
 }
+
