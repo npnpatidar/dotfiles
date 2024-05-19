@@ -2,12 +2,12 @@
 let
   pname = "thorium-browser";
   sname = "thorium";
-  version = "122.0.6261.132";
+  version = "124.0.6367.218";
   name = "${pname}-${version}";
   rev = "1"; # Update this when you make changes to the derivation
   src = pkgs.fetchurl {
-    url = "https://github.com/Alex313031/thorium/releases/download/M${version}/Thorium_Browser_${version}_x64.AppImage";
-    sha256 = "sha256-P10CI4C6V9vkkCLHhj4FVw6qyrchCpmnO7yDgajJnF8=";
+    url = "https://github.com/Alex313031/thorium/releases/download/M${version}/Thorium_Browser_${version}_AVX2.AppImage";
+    sha256 = "sha256-y15pJWps+CdU9zNz+8eobBv09ENHJmUt14d9D+tzj98=";
   };
   appimageContents = pkgs.appimageTools.extractType2 { inherit name src; };
 in
