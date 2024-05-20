@@ -131,6 +131,18 @@
               };
             }
             {
+              "Stirling-pdf" = {
+                icon = "stirling-pdf";
+                href = "https://stirling.naresh.world";
+              };
+            }
+            {
+              "Searx" = {
+                icon = "searx";
+                href = "https://searx.naresh.world";
+              };
+            }
+            {
               "Test" = {
                 # icon = "syncthing";
                 href = "http://test.naresh.world";
