@@ -16,6 +16,8 @@
     ./paperless-server.nix
     ./syncthing-server.nix
     ./vaultwarden-server.nix
+    ./stirling-server.nix
+    ./searx.nix
 
 
     ../../../modules/nixos/agenix.nix
