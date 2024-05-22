@@ -38,12 +38,12 @@
     in
     {
       enable = true;
-      package = pkgs.nextcloud28;
+      package = pkgs.nextcloud29;
       hostName = "nextcloud.naresh.world";
       # extraApps = with pkgs.nextcloud28Packages.apps; {
       #   inherit passMan passwords mail contacts news bookmarks calendar notes onlyoffice tasks memories previewgenerator twofactor_webauthn groupfolders end_to_end_encryption integration_github;
       # };
-      # extraAppsEnable = true;
+      extraAppsEnable = true;
       https = true;
       config = {
         adminpassFile = config.age.secrets."nextcloud_admin_password".path;
