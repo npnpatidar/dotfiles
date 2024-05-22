@@ -13,7 +13,7 @@ in
       enable = true;
       font = {
         name = lib.mkDefault "FiraCode";
-        size = lib.mkDefault 13;
+        size = lib.mkForce 16;
         # package = pkgs.nerdfonts.override { fonts = [ "FiraCode" ]; };
       };
       theme = "Tokyo Night Storm";
