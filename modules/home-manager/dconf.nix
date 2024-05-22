@@ -133,7 +133,7 @@ with lib.hm.gvariant;
       clock-format = "12h";
       color-scheme = "prefer-dark";
       cursor-size = 32;
-      cursor-theme = "Vanilla-DMZ";
+      cursor-theme = lib.mkForce "Nordic-cursors";
       document-font-name = "DejaVu Serif  12";
       enable-hot-corners = true;
       font-antialiasing = "grayscale";
