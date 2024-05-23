@@ -59,11 +59,11 @@
   #   pinentryPackage = pkgs.pinentry-gnome3;
   # };
 
-  home.sessionVariables = {
-    EDITOR = "nvim";
-    BROWSER = "librewolf";
-    TERMINAL = "kitty";
-  };
+  # home.sessionVariables = {
+  #   EDITOR = "nvim";
+  #   BROWSER = "librewolf";
+  #   TERMINAL = "kitty";
+  # };
 
   programs.home-manager.enable = true;
 

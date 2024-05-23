@@ -1,5 +1,29 @@
 { config, lib, pkgs, inputs, ... }:
 {
+  nixpkgs.config.allowUnfree = true;
+
+  # Update nixos
+  # system.autoUpgrade = {
+  #   #		enable = true;
+  #   allowReboot = false;
+  #   channel = "https://channels.nixos.org/nixos-unstable";
+  # };
+
+  system.stateVersion = "23.05"; # Did you read the comment?
+
+
+  nix = {
+
+    # package = pkgs.nixFlakes;
+    extraOptions = "experimental-features = nix-command flakes";
+    # settings.auto-optimise-store = true;
+    # gc = {
+    #   automatic = false;
+    #   dates = "weekly";
+    #   options = "--delete-older-than 3d";
+    # };
+  };
+
 
 
 
@@ -15,16 +39,16 @@
       # ./ssh.nix
       # ./virtualisation.nix
       # ./bootloader.nix
-      ./networking.nix
+      # ./networking.nix
       # ./power_management.nix
-      ./sound.nix
-      ./input.nix
-      ./nix_related.nix
+      # ./sound.nix
+      # ./input.nix
+      # ./nix_related.nix
       # ./apple.nix
-      # # ./fingerprint.nix
+      # ./fingerprint.nix
       # ./fonts.nix
       # ./ollama_local.nix
-      # # ../../../modules/nixos/servarr.nix
+      # ../../../modules/nixos/servarr.nix
       ./hardware-configuration.nix
       # ../../../modules/nixos/agenix.nix
       # ../../../modules/nixos/tailscale.nix
@@ -35,6 +59,9 @@
 
   # programs.geary.enable = true;
 
+  services.xserver = {
+    enable = true;
+  };
 
   programs.zsh = {
     enable = true;
@@ -43,7 +70,10 @@
   # Set your time zone.
   time.timeZone = "Asia/Kolkata";
 
-
+  networking = {
+    hostName = "qbox";
+    networkmanager.enable = true;
+  };
 
   # Bluetooth
   # hardware.bluetooth.enable = true; # enables support for Bluetooth
