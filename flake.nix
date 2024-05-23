@@ -137,6 +137,38 @@
 
         };
       };
+      nixosConfigurations =
+        {
+          qbox = nixpkgs.lib.nixosSystem {
+            specialArgs = { inherit inputs outputs; };
+            system = "x86_64-linux";
+            modules = [
+              ./hosts/qbox/nixos/configuration.nix
+              # agenix.nixosModules.default
+              # nur.nixosModules.nur
+              home-manager.nixosModules.home-manager
+              {
+                home-manager = {
+                  # useGlobalPkgs = true;
+                  useUserPackages = true;
+                  users.naresh = {
+                    imports = [
+                      ./hosts/qbox/home-manager/home.nix
+                    ];
+                  };
+
+                  # extraSpecialArgs = { inherit inputs outputs; };
+                  # sharedModules = [
+                  #   nixvim.homeManagerModules.nixvim
+                  #   nix-index-database.hmModules.nix-index
+                  #   stylix.homeManagerModules.stylix
+                  # ];
+                };
+              }
+            ];
+          };
+        };
+
 
     };
 }

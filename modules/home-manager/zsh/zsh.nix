@@ -48,7 +48,7 @@ let
     au = "cd ~/dotfiles/scripts && ~/dotfiles/scripts/apply-users.sh";
     buildvm = "cd ~/dotfiles/scripts && ~/dotfiles/scripts/create-vm.sh";
     runvm = "$(readlink -f ~/dotfiles/result/bin/run-nixos-vm)";
-    vm = "cd ~/dotfiles/scripts && ~/dotfiles/scripts/create-vm.sh  && $(readlink -f ~/dotfiles/result/bin/run-nixos-vm)";
+    vm = "cd ~/dotfiles/scripts && ~/dotfiles/scripts/create-vm.sh  && $(readlink -f ~/dotfiles/result/bin/run-qbox-vm)";
     lsa = "ls -a";
     lsl = "ls -l";
     lsla = "lsl -a";
