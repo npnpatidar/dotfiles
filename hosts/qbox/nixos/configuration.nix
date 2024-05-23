@@ -7,16 +7,70 @@
   };
   imports =
     [
-      ./desktop_config/gnome_config.nix
+      # ./desktop_config/gnome_config.nix
       ./hardware-configuration.nix
     ];
-  services.xserver = {
-    enable = true;
-  };
-
   programs.zsh = {
     enable = true;
   };
+
+
+
+
+
+  hardware =
+    {
+      opengl.enable = true;
+      nvidia.modesetting.enable = true;
+    };
+
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+  };
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  environment.sessionVariables.WLR_NO_HARDWARE_CURSORS = "1";
+  services.xserver.displayManager.gdm.enable = true;
+  xdg.portal = {
+    enable = true;
+    wlr.enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  };
+  services.xserver.enable = false;
+  programs.waybar.enable = true;
+  environment.systemPackages = with pkgs;[
+    kitty
+    rofi-wayland
+    dunst
+    pyprland
+    hyprpicker
+    hyprcursor
+    hyprlock
+    hypridle
+    hyprpaper
+    # greetd.tuigreet
+    eww
+    neovim
+  ];
+
+  # Enable Display Manager
+  # services.greetd = {
+  #   enable = true;
+  #   settings = {
+  #     default_session = {
+  #       command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --time-format '%I:%M %p | %a • %h | %F' --cmd Hyprland";
+  #       user = "greeter";
+  #     };
+  #   };
+  # };
+
+
+
+
+
+
+
+
 
   time.timeZone = "Asia/Kolkata";
 
@@ -33,8 +87,5 @@
     shell = pkgs.zsh;
     initialPassword = "naresh";
   };
-  environment.systemPackages = with pkgs;[
-    kitty
-  ];
   services.dbus.enable = true;
 }
