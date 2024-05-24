@@ -28,5 +28,7 @@ in
   "anki_password.age".publicKeys = users ++ systems;
   "paperless_password.age".publicKeys = users ++ systems;
   "vscode_htpassword.age".publicKeys = users ++ systems;
+  "groq_api_key.age".publicKeys = users ++ systems;
+  "openrouter_api_key.age".publicKeys = users ++ systems;
 }
 

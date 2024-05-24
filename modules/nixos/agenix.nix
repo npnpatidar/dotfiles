@@ -11,4 +11,6 @@
   config.age.secrets."anki_password".file = ../../secrets/anki_password.age;
   config.age.secrets."paperless_password".file = ../../secrets/paperless_password.age;
   config.age.secrets."vscode_htpassword".file = ../../secrets/vscode_htpassword.age;
+  config.age.secrets."groq_api_key".file = ../../secrets/groq_api_key.age;
+  config.age.secrets."openrouter_api_key".file = ../../secrets/openrouter_api_key.age;
 }
