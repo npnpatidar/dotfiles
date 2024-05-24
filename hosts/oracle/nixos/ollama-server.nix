@@ -17,6 +17,8 @@
             "open-webui:/app/backend/data"
           ];
           environment = {
+            OPENAI_API_BASE_URLS = "https://api.groq.com/openai/v1;https://openrouter.ai/api/v1";
+            # OPENAI_API_KEYS = "<OPENAI_API_KEY_1>;<OPENAI_API_KEY_2>";
             OLLAMA_BASE_URL = "http://ollama.local:11434";
             ANONYMIZED_TELEMETRY = "False";
           };
