@@ -1,16 +1,19 @@
 { config, ... }: {
-  config.age.secrets."standard".file = ../../secrets/standard.age;
-  config.age.secrets."hashedstandard".file = ../../secrets/hashedstandard.age;
-  config.age.secrets."htpasswdstandard".file = ../../secrets/htpasswdstandard.age;
-  config.age.secrets."tailscale_key".file = ../../secrets/tailscale_key.age;
-  config.age.secrets."rclone_config".file = ../../secrets/rclone_config.age;
-  config.age.secrets."ssh_github_key".file = ../../secrets/ssh_github_key.age;
-  config.age.secrets."ssh_gitserver_key".file = ../../secrets/ssh_gitserver_key.age;
-  config.age.secrets."ssh_oracle_key".file = ../../secrets/ssh_oracle_key.age;
-  config.age.secrets."freshrss_password".file = ../../secrets/freshrss_password.age;
-  config.age.secrets."anki_password".file = ../../secrets/anki_password.age;
-  config.age.secrets."paperless_password".file = ../../secrets/paperless_password.age;
-  config.age.secrets."vscode_htpassword".file = ../../secrets/vscode_htpassword.age;
-  config.age.secrets."groq_api_key".file = ../../secrets/groq_api_key.age;
-  config.age.secrets."openrouter_api_key".file = ../../secrets/openrouter_api_key.age;
+  config.age.secrets = {
+    "standard".file = ../../secrets/standard.age;
+    "hashedstandard".file = ../../secrets/hashedstandard.age;
+    "htpasswdstandard".file = ../../secrets/htpasswdstandard.age;
+    "tailscale_key".file = ../../secrets/tailscale_key.age;
+    "rclone_config".file = ../../secrets/rclone_config.age;
+    "ssh_github_key".file = ../../secrets/ssh_github_key.age;
+    "ssh_gitserver_key".file = ../../secrets/ssh_gitserver_key.age;
+    "ssh_oracle_key".file = ../../secrets/ssh_oracle_key.age;
+    "freshrss_password".file = ../../secrets/freshrss_password.age;
+    "anki_password".file = ../../secrets/anki_password.age;
+    "paperless_password".file = ../../secrets/paperless_password.age;
+    "vscode_htpassword".file = ../../secrets/vscode_htpassword.age;
+    "groq_api_key".file = ../../secrets/groq_api_key.age;
+    "openrouter_api_key".file = ../../secrets/openrouter_api_key.age;
+    "syncthing_gui_password".file = ../../secrets/syncthing_gui_password.age;
+  };
 }

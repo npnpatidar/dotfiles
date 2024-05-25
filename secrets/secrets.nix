@@ -30,5 +30,6 @@ in
   "vscode_htpassword.age".publicKeys = users ++ systems;
   "groq_api_key.age".publicKeys = users ++ systems;
   "openrouter_api_key.age".publicKeys = users ++ systems;
+  "syncthing_gui_password.age".publicKeys = users ++ systems;
 }
 
