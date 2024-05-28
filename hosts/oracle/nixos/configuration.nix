@@ -19,6 +19,7 @@
     ./stirling-server.nix
     ./searx.nix
     ./blog.nix
+    ./ghost.nix
 
 
     ../../../modules/nixos/agenix.nix
@@ -67,4 +68,11 @@
   networking.firewall.allowedTCPPorts = [ 443 80 ];
   # networking.firewall.allowedUDPPorts = [ 22000 21027 ];
 
+  virtualisation.oci-containers.backend = "podman";
+
+  virtualisation.podman = {
+    enable = true;
+    defaultNetwork.settings.dns_enabled = true;
+    autoPrune.enable = true;
+  };
 }
