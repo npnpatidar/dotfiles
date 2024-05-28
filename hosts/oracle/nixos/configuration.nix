@@ -18,6 +18,7 @@
     ./vaultwarden-server.nix
     ./stirling-server.nix
     ./searx.nix
+    ./blog.nix
 
 
     ../../../modules/nixos/agenix.nix

@@ -4,7 +4,7 @@
     acme.enable = true;
     nginx.enable = true;
     nginx.forceSSL = true;
-    host = "test.naresh.world";
+    host = "blog.naresh.world";
     admin.name = "naresh";
     admin.initialPasswordFile = config.age.secrets.standard.path;
     settings.server.port = 7898;
@@ -14,14 +14,14 @@
     };
   };
 
-  age = {
-    secrets.standard = {
-      file = ../../../secrets/standard.age;
-      mode = "400";
-      owner = "writefreely";
-      group = "writefreely";
-    };
-  };
+  # age = {
+  #   secrets.standard = {
+  #     file = ../../../secrets/standard.age;
+  #     mode = "400";
+  #     owner = "writefreely";
+  #     group = "writefreely";
+  #   };
+  # };
 
 
 }
