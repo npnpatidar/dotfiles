@@ -4,7 +4,7 @@ let
 in
 { pkgs, ... }:
 {
-  services.nginx.virtualHosts."test.naresh.world" = {
+  services.nginx.virtualHosts."naresh.world" = {
     forceSSL = true;
     enableACME = true;
     locations."/" = {
@@ -21,7 +21,7 @@ in
       "ghost_content:/var/lib/ghost/content"
     ];
     environment = {
-      url = "https://test.naresh.world";
+      url = "https://naresh.world";
       database__client = "mysql";
       database__connection__host = "ghost-db";
       database__connection__user = dbuser;
