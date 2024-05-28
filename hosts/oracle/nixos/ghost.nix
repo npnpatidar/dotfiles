@@ -21,7 +21,7 @@ in
       "ghost_content:/var/lib/ghost/content"
     ];
     environment = {
-      url = "http://127.0.0.1:2368";
+      url = "https://test.naresh.world";
       database__client = "mysql";
       database__connection__host = "ghost-db";
       database__connection__user = dbuser;
