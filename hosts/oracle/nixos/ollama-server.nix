@@ -1,4 +1,4 @@
-{ ... }: {
+{ config, ... }: {
   services.ollama = {
     enable = true;
     listenAddress = "0.0.0.0:11434";
@@ -17,11 +17,10 @@
             "open-webui:/app/backend/data"
           ];
           environment = {
-            OPENAI_API_BASE_URLS = "https://api.groq.com/openai/v1;https://openrouter.ai/api/v1";
-            # OPENAI_API_KEYS = "<OPENAI_API_KEY_1>;<OPENAI_API_KEY_2>";
             OLLAMA_BASE_URL = "http://ollama.local:11434";
             ANONYMIZED_TELEMETRY = "False";
           };
+          environmentFiles = [ config.age.secrets.open_webui_environment_file.path ];
           extraOptions = [
             "--network=slirp4netns:allow_host_loopback=true"
             "--add-host=ollama.local:10.0.2.2"
