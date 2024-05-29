@@ -15,5 +15,6 @@
     "groq_api_key".file = ../../secrets/groq_api_key.age;
     "openrouter_api_key".file = ../../secrets/openrouter_api_key.age;
     "syncthing_gui_password".file = ../../secrets/syncthing_gui_password.age;
+    "open_webui_environment_file".file = ../../secrets/open_webui_environment_file.age;
   };
 }
