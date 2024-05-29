@@ -150,6 +150,7 @@
     tuifeed
     systemctl-tui
     newsboat # RSS Reader TUI
+    gorilla-cli
   ];
 
   # Enable home-manager and git

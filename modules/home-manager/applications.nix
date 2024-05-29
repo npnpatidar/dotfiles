@@ -171,6 +171,7 @@
     newsboat # RSS Reader TUI
     podman-tui
     links2
+    gorilla-cli
   ];
 
 

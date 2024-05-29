@@ -64,6 +64,7 @@
     bitwarden-cli
     zellij
     gpg-tui
+    gorilla-cli
   ];
 
   time.timeZone = "Asia/Kolkata";
