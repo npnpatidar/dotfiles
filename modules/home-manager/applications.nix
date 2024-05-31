@@ -172,6 +172,11 @@
     podman-tui
     links2
     gorilla-cli
+    trashy
+    cheat
+    ouch
+    bandwhich
+    entr # run arbitrary command when file changes
   ];
 
 

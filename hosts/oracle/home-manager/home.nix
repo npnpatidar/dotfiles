@@ -151,6 +151,11 @@
     systemctl-tui
     newsboat # RSS Reader TUI
     gorilla-cli
+    trashy
+    cheat
+    ouch
+    bandwhich
+    entr # run arbitrary command when file changes
   ];
 
   # Enable home-manager and git
