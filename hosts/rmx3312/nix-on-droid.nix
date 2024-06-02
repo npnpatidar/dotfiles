@@ -65,11 +65,13 @@
     zellij
     gpg-tui
     gorilla-cli
+    busybox
+    ncurses
   ];
 
   time.timeZone = "Asia/Kolkata";
   environment.etcBackupExtension = ".bak";
-  system.stateVersion = "23.05";
+  system.stateVersion = "23.11";
   nix.extraOptions = ''
     experimental-features = nix-command flakes
   '';
@@ -110,7 +112,7 @@
         home = {
           username = "nix-on-droid";
           homeDirectory = "/data/data/com.termux.nix/files/home";
-          stateVersion = "23.05";
+          stateVersion = "23.11";
         };
         home.packages = with pkgs; [
           eza
