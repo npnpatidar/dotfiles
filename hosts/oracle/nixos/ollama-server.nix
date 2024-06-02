@@ -1,7 +1,8 @@
 { config, ... }: {
   services.ollama = {
     enable = true;
-    listenAddress = "0.0.0.0:11434";
+    host = "0.0.0.0";
+    port = 34345;
   };
 
   virtualisation = {
@@ -17,7 +18,7 @@
             "open-webui:/app/backend/data"
           ];
           environment = {
-            OLLAMA_BASE_URL = "http://ollama.local:11434";
+            OLLAMA_BASE_URL = "http://ollama.local:34345";
             ANONYMIZED_TELEMETRY = "False";
           };
           environmentFiles = [ config.age.secrets.open_webui_environment_file.path ];
