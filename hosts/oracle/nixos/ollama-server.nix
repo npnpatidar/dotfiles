@@ -36,7 +36,7 @@
       enableACME = true;
       forceSSL = true;
       locations."/" = {
-        proxyPass = "http://localhost:11434";
+        proxyPass = "http://localhost:34345";
       };
     };
     virtualHosts."chat.naresh.world" = {
