@@ -5,9 +5,6 @@ let
   alias-abbr = {
     nix-clean = "nix-store --optimise && nix-store --gc && nix-collect-garbage -d";
     firstinstall = "bash ${config.home.homeDirectory}/.scripts/firstinstall.sh";
-    yay = "distrobox enter --name arch -- yay";
-    pacman = "distrobox enter --name arch -- sudo pacman";
-    apt = "distrobox enter --name deb -- sudo apt ";
     a = "distrobox enter --name arch -- ";
     d = "distrobox enter --name deb -- ";
     nv = "nvitop --colorful";
