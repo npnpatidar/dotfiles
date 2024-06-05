@@ -2,7 +2,7 @@
   services.openvscode-server = {
     enable = true;
     host = "127.0.0.1";
-    port = 3000;
+    port = 3045;
     telemetryLevel = "off";
     withoutConnectionToken = true;
   };
@@ -20,7 +20,7 @@
       forceSSL = true;
       basicAuthFile = config.age.secrets.vscode_htpassword.path;
       locations."/" = {
-        proxyPass = "http://127.0.0.1:3000";
+        proxyPass = "http://127.0.0.1:3045";
         proxyWebsockets = true;
       };
     };
