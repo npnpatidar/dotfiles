@@ -20,7 +20,7 @@
     ./searx.nix
     ./blog.nix
     ./ghost.nix
-
+    ./n8n.nix
 
     ../../../modules/nixos/agenix.nix
     ../../../modules/nixos/tailscale.nix
