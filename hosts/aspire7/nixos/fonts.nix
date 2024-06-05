@@ -3,7 +3,7 @@
 
 
   fonts = {
-    enableDefaultPackages = false;
+    enableDefaultPackages = true;
     packages = with pkgs; [
       # nerdfonts
       (import ../../../pkgs/sahityaFont.nix { inherit pkgs; })
