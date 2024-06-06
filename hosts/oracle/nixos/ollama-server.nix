@@ -2,7 +2,7 @@
   services.ollama = {
     enable = true;
     host = "0.0.0.0";
-    port = 34345;
+    port = 11343;
   };
 
   virtualisation = {
@@ -18,7 +18,7 @@
             "open-webui:/app/backend/data"
           ];
           environment = {
-            OLLAMA_BASE_URL = "http://ollama.local:34345";
+            OLLAMA_BASE_URL = "http://ollama.local:11343";
             ANONYMIZED_TELEMETRY = "False";
           };
           environmentFiles = [ config.age.secrets.open_webui_environment_file.path ];
@@ -35,8 +35,9 @@
     virtualHosts."ollama.naresh.world" = {
       enableACME = true;
       forceSSL = true;
+      basicAuthFile = config.age.secrets.htpasswdstandard.path;
       locations."/" = {
-        proxyPass = "http://localhost:34345";
+        proxyPass = "http://localhost:11343";
       };
     };
     virtualHosts."chat.naresh.world" = {
