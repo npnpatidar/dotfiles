@@ -177,6 +177,8 @@
     ouch
     bandwhich
     entr # run arbitrary command when file changes
+    # onlyoffice-bin_latest
+    wpsoffice
   ];
 
 
