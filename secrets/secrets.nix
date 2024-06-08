@@ -23,8 +23,8 @@ in
   "rclone_config.age".publicKeys = users ++ systems;
   "ssh_github_key.age".publicKeys = users ++ systems;
   "ssh_gitserver_key.age".publicKeys = users ++ systems;
-  "ssh_oracle_key.age".publicKeys = [ aspire7 alma ];
-  "freshrss_password.age".publicKeys = [ aspire7 alma ];
+  "ssh_oracle_key.age".publicKeys = users ++ systems;
+  "freshrss_password.age".publicKeys = users ++ systems;
   "anki_password.age".publicKeys = users ++ systems;
   "paperless_password.age".publicKeys = users ++ systems;
   "vscode_htpassword.age".publicKeys = users ++ systems;
