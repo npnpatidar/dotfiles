@@ -1,41 +1,32 @@
 { config, pkgs, ... }:
 
 let
-  immichHost = "test.naresh.world";
-
-  immichRoot = "/immich";
+  immichRoot = "/var/lib/immich";
   immichPhotos = "${immichRoot}/photos";
   immichAppdataRoot = "${immichRoot}/appdata";
   immichVersion = "v1.105.1";
 
   postgresRoot = "${immichAppdataRoot}/pgsql";
-  postgresPassword = "hunter2"; # TODO: use secrets (is this necessary?)
+  postgresPassword = "immich";
   postgresUser = "immich";
   postgresDb = "immich";
 
   extraOptions = [
-    # Force DNS resolution to only be the podman dnsname name server; by default podman provides a resolv.conf
-    # that includes both this server and the upstream system server, causing resolutions of other pod names
-    # to be inconsistent.
     "--pull=newer"
-    # "--dns=10.88.0.1"
     "--network=immich-network"
   ];
+
+  immich_environment = {
+    IMMICH_VERSION = immichVersion;
+    DB_HOSTNAME = "immich_postgres";
+    DB_USERNAME = postgresUser;
+    DB_DATABASE_NAME = postgresDb;
+    DB_PASSWORD = postgresPassword;
+    REDIS_HOSTNAME = "immich_redis";
+  };
 in
 {
-  virtualisation = {
-    containers.enable = true;
-    podman = {
-      enable = true;
-      defaultNetwork.settings.dns_enabled = true;
-    };
-  };
-
   networking.firewall.interfaces."podman+".allowedUDPPorts = [ 53 5353 ];
-  networking.firewall.allowedTCPPorts = [ 80 443 ];
-  # networking.firewall.enable = false;
-  # To make redis happy.
-  # boot.kernel.sysctl = { "vm.overcommit_memory" = 1; };
 
   systemd.services.create-immich-network = with config.virtualisation.oci-containers; {
     serviceConfig.Type = "oneshot";
@@ -52,10 +43,9 @@ in
     '';
   };
 
-  services.nginx.enable = true;
-  services.nginx.virtualHosts."${immichHost}" = {
+  # services.nginx.enable = true;
+  services.nginx.virtualHosts."immich.naresh.world" = {
     extraConfig = ''
-      ## Per https://immich.app/docs/administration/reverse-proxy...
       client_max_body_size 50000M;
     '';
     forceSSL = true;
@@ -64,10 +54,6 @@ in
       proxyPass = "http://127.0.0.1:2283";
       proxyWebsockets = true;
     };
-  };
-  security.acme = {
-    acceptTerms = true;
-    # defaults.email = "gabriel@gabrieltb.me";
   };
 
 
@@ -91,14 +77,7 @@ in
         "${immichPhotos}:/usr/src/app/upload"
         "/etc/localtime:/etc/localtime:ro"
       ];
-      environment = {
-        IMMICH_VERSION = immichVersion;
-        DB_HOSTNAME = "immich_postgres";
-        DB_USERNAME = postgresUser;
-        DB_DATABASE_NAME = postgresDb;
-        DB_PASSWORD = postgresPassword;
-        REDIS_HOSTNAME = "immich_redis";
-      };
+      environment = immich_environment;
       ports = [ "127.0.0.1:2283:3001" ];
       dependsOn = [
         "immich_redis"
@@ -114,14 +93,7 @@ in
         "${immichPhotos}:/usr/src/app/upload"
         "/etc/localtime:/etc/localtime:ro"
       ];
-      environment = {
-        IMMICH_VERSION = immichVersion;
-        DB_HOSTNAME = "immich_postgres";
-        DB_USERNAME = postgresUser;
-        DB_DATABASE_NAME = postgresDb;
-        DB_PASSWORD = postgresPassword;
-        REDIS_HOSTNAME = "immich_redis";
-      };
+      environment = immich_environment;
       dependsOn = [
         "immich_redis"
         "immich_postgres"
