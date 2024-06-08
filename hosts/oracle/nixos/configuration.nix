@@ -22,6 +22,7 @@
     ./ghost.nix
     ./n8n.nix
     ./invidious.nix
+    ./immich.nix
 
     ../../../modules/nixos/agenix.nix
     ../../../modules/nixos/tailscale.nix
