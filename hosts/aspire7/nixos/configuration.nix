@@ -24,6 +24,7 @@
       # ./fingerprint.nix
       ./fonts.nix
       ./ollama_local.nix
+      ./rclone.nix
       # ../../../modules/nixos/servarr.nix
       ./hardware-configuration.nix
       ../../../modules/nixos/agenix.nix
