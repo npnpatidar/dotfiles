@@ -103,6 +103,7 @@ in
       enable = true;
       enableBashIntegration = true;
       useTheme = "atomic";
+      package =pkgs.oh-my-posh;
     };
 
     programs.zoxide = {
