@@ -23,6 +23,7 @@
     ./n8n.nix
     ./invidious.nix
     ./immich.nix
+    ./rclone-mount.nix
 
     ../../../modules/nixos/agenix.nix
     ../../../modules/nixos/tailscale.nix
@@ -77,4 +78,5 @@
     defaultNetwork.settings.dns_enabled = true;
     autoPrune.enable = true;
   };
+
 }

@@ -37,11 +37,23 @@ in
     (map mkRcloneService [
       # "koofr"
       "koofrCrypt"
-    ]);
+    ]) // {
+    "rclone_config" = {
+      wantedBy = [ "multi-user.target" ];
+      script = ''
+        #!/bin/sh
+        cp /etc/rclone/rclone.conf /home/naresh/.config/rclone
+        chown naresh /home/naresh/.config/rclone/rclone.conf
+      '';
+      serviceConfig = {
+        Type = "oneshot";
+        User = "root";
+      };
+    };
+  };
 
   systemd.timers = builtins.listToAttrs
     (map mkSyncTimer [
-      # "koofr"
       "koofrCrypt"
     ]);
 
