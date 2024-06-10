@@ -28,6 +28,7 @@
     package = pkgs.nixFlakes;
     extraOptions = "experimental-features = nix-command flakes";
     settings.auto-optimise-store = true;
+    settings.trusted-users = [ "root" "naresh" ];
     gc = {
       automatic = false;
       dates = "weekly";
