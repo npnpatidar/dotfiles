@@ -62,7 +62,7 @@ in
       {
         remote_name = "koofrCrypt";
         filterFileText = ''
-          + /home/naresh/Data/.backups/vaultwarden/**
+          + ${config.globals.data_directory}/.backups/vaultwarden/**
           + /var/lib/anki-sync-server/**
           + /var/lib/gitDaemon/**
           + /var/lib/nextcloud/data/naresh/files/**

@@ -2,6 +2,7 @@
 {
   imports = [
     ../../../modules/home-manager
+    ../../../modules/nixos/globals.nix
   ];
 
   modules.home-manager = {

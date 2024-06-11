@@ -56,7 +56,7 @@ let
     	},
     	"notes.sortOrder.field": "user_created_time",
     	"editor.spellcheckBeta": true,
-    	"sync.2.path": "/home/naresh/Data/nextcloud/.joplin/"
+    	"sync.2.path": "${config.globals.data_directory}/nextcloud/.joplin/"
     }
 
 
