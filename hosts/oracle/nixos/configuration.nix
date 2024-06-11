@@ -28,6 +28,7 @@
     ../../../modules/nixos/agenix.nix
     ../../../modules/nixos/tailscale.nix
     ../../../modules/nixos/ssh_client.nix
+    ../../../modules/nixos/globals.nix
   ];
 
   boot.tmp.cleanOnBoot = true;
