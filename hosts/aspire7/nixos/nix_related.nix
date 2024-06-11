@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 {
 
   nixpkgs.config.allowUnfree = true;
@@ -28,7 +28,7 @@
     package = pkgs.nixFlakes;
     extraOptions = "experimental-features = nix-command flakes";
     settings.auto-optimise-store = true;
-    settings.trusted-users = [ "root" "naresh" ];
+    settings.trusted-users = [ "root" "${config.globals.default_user}" ];
     gc = {
       automatic = false;
       dates = "weekly";

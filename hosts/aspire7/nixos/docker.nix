@@ -18,7 +18,7 @@
   #   cmd = [ "/usr/bin/env" "TERM=xterm-256color" "/usr/bin/bash" ];
   # };
 
-  users.groups.docker.members = [ "naresh" ];
+  users.groups.docker.members = [ "${config.globals.default_user}" ];
 
   environment.systemPackages = with pkgs; [
     docker-compose

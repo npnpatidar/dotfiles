@@ -7,7 +7,7 @@
     ports = [ 46587 ];
     settings = {
       PasswordAuthentication = false;
-      AllowUsers = [ "naresh" "gitea" ];
+      AllowUsers = [ "${config.globals.default_user}" "${config.services.gitea.user}" ];
     };
     extraConfig = "MaxAuthTries 10";
   };

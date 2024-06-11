@@ -38,7 +38,7 @@ let
     	"preferredLightTheme": 6,
     	"preferredDarkTheme": 6,
     	"style.editor.fontSize": 20,
-    	"editor": "/etc/profiles/per-user/naresh/bin/nvim",
+    	"editor": "/etc/profiles/per-user/${config.globals.default_user}/bin/nvim",
     	"sync.target": 2,
     	"sync.5.path": "https://nch.pl/remote.php/webdav/.joplin",
     	"sync.5.username": "s2nw9rov",

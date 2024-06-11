@@ -42,8 +42,8 @@ in
       wantedBy = [ "multi-user.target" ];
       script = ''
         #!/bin/sh
-        cp /etc/rclone/rclone.conf /home/naresh/.config/rclone
-        chown naresh /home/naresh/.config/rclone/rclone.conf
+        cp /etc/rclone/rclone.conf ${config.globals.home_directory}/.config/rclone
+        chown ${config.globals.default_user} ${config.globals.home_directory}/.config/rclone/rclone.conf
       '';
       serviceConfig = {
         Type = "oneshot";

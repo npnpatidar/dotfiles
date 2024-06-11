@@ -1,4 +1,5 @@
-{ ... }:
+{ config, ... }:
+
 {
 
   virtualisation.libvirtd.enable = true;
@@ -10,7 +11,7 @@
       diskSize = 10 * 1024;
       sharedDirectories = {
         my-share = {
-          source = "/home/naresh/VMShare";
+          source = "${config.globals.home_directory}/VMShare";
           target = "/mnt/SharedToHost";
         };
       };

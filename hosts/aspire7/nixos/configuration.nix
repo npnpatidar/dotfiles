@@ -53,12 +53,12 @@
 
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.naresh = {
+  users.users."${config.globals.default_user}" = {
     isNormalUser = true;
-    description = "naresh";
+    description = "${config.globals.default_user}";
     extraGroups = [ "networkmanager" "wheel" "kvm" "input" "disk" "libvirtd" "usbmux" ];
     createHome = true;
-    home = "/home/naresh";
+    home = "${config.globals.home_directory}";
     shell = pkgs.zsh;
     hashedPasswordFile = config.age.secrets."hashedstandard".path;
   };

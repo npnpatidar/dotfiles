@@ -47,8 +47,8 @@
       ];
   };
   home = {
-    username = "naresh";
-    homeDirectory = "/home/naresh";
+    username = "${config.globals.default_user}";
+    homeDirectory = "${config.globals.home_directory}";
     stateVersion = "23.05";
   }; # Just don't change 
 

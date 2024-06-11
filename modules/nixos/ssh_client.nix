@@ -6,17 +6,17 @@
     ssh_github_key = {
       file = ../../secrets/ssh_github_key.age;
       mode = "600";
-      owner = "naresh";
+      owner = "${config.globals.default_user}";
     };
     ssh_gitserver_key = {
       file = ../../secrets/ssh_gitserver_key.age;
       mode = "600";
-      owner = "naresh";
+      owner = "${config.globals.default_user}";
     };
     ssh_oracle_key = {
       file = ../../secrets/ssh_oracle_key.age;
       mode = "600";
-      owner = "naresh";
+      owner = "${config.globals.default_user}";
     };
   };
 
@@ -41,7 +41,7 @@
 
       Host nalma
            HostName home.${config.globals.domain_name}
-           User naresh
+           User ${config.globals.default_user}
            IdentityFile ${config.age.secrets.ssh_oracle_key.path}
            Port 46587
     '';

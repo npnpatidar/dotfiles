@@ -51,8 +51,8 @@
   };
 
   home = {
-    username = "naresh";
-    homeDirectory = "/home/naresh";
+    username = "${config.globals.default_user}";
+    homeDirectory = "${config.globals.home_directory}";
   };
 
 

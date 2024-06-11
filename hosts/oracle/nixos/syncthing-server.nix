@@ -2,7 +2,7 @@
   services = {
     syncthing = {
       enable = true;
-      user = "naresh";
+      user = "${config.globals.default_user}";
       openDefaultPorts = true;
       dataDir = "${config.globals.data_directory}";
       configDir = "${config.globals.home_directory}/.config/syncthing";

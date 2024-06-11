@@ -6,7 +6,7 @@ in
   services.freshrss = {
     enable = true;
     baseUrl = "https://freshrss.${domain}";
-    defaultUser = "naresh";
+    defaultUser = "${config.globals.default_user}";
     passwordFile = config.age.secrets.freshrss_password.path;
     virtualHost = "freshrss.${domain}";
   };
