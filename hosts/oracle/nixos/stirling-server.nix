@@ -15,7 +15,7 @@
     group = "nginx";
   };
   services.nginx = {
-    virtualHosts."stirling.${config.domain_name}" = {
+    virtualHosts."stirling.${config.globals.domain_name}" = {
       enableACME = true;
       forceSSL = true;
       basicAuthFile = config.age.secrets.vscode_htpassword.path;
