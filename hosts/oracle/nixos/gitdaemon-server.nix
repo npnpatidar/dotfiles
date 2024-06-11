@@ -1,13 +1,15 @@
 { pkgs
+, config
 , ...
-}: {
+}:
+{
   services.gitea = {
     enable = true;
     settings = {
       server = {
         SSH_PORT = 46587;
         HTTP_PORT = 5654;
-        DOMAIN = "git.naresh.world";
+        DOMAIN = "git.${config.globals.domain_name}";
       };
       repository = {
         DEFAULT_PUSH_CREATE_PRIVATE = true;
@@ -21,7 +23,7 @@
   };
 
   services.nginx = {
-    virtualHosts."git.naresh.world" = {
+    virtualHosts."git.${config.globals.domain_name}" = {
       forceSSL = true;
       enableACME = true;
       locations."/" = {

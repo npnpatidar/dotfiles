@@ -1,8 +1,8 @@
-{ pkgs, ... }: {
+{ pkgs, config, ... }: {
   services.vaultwarden = {
     enable = true;
     config = {
-      DOMAIN = "https://vaultwarden.naresh.world";
+      DOMAIN = "https://vaultwarden.${config.globals.domain_name}";
       SIGNUPS_ALLOWED = false;
       ROCKET_PORT = 8222;
       rocketAddress = "127.0.0.1";
@@ -54,7 +54,7 @@
   };
 
   services.nginx = {
-    virtualHosts."vaultwarden.naresh.world" = {
+    virtualHosts."vaultwarden.${config.globals.domain_name}" = {
       enableACME = true;
       forceSSL = true;
       locations."/" = {

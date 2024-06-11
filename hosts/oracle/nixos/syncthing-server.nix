@@ -1,4 +1,4 @@
-{ ... }: {
+{ config, ... }: {
   services = {
     syncthing = {
       enable = true;
@@ -83,7 +83,7 @@
 
 
   services.nginx = {
-    virtualHosts."syncthing.naresh.world" = {
+    virtualHosts."syncthing.${config.globals.domain_name}" = {
       forceSSL = true;
       enableACME = true;
       locations."/" = {

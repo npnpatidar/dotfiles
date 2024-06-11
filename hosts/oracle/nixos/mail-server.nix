@@ -11,13 +11,13 @@
 
   mailserver = {
     enable = true;
-    fqdn = "mail.naresh.world";
-    domains = [ "naresh.world" ];
+    fqdn = "mail.${config.globals.domain_name}";
+    domains = [ "${config.globals.domain_name}" ];
 
     loginAccounts = {
-      "naresh@naresh.world" = {
+      "naresh@${config.globals.domain_name}" = {
         hashedPasswordFile = config.age.secrets."hashedstandard".path;
-        aliases = [ "postmaster@naresh.world" ];
+        aliases = [ "postmaster@${config.globals.domain_name}" ];
       };
       # "user2@example.com" = { ... };
     };
@@ -25,6 +25,6 @@
     certificateScheme = "acme-nginx";
   };
   # security.acme.acceptTerms = true;
-  # security.acme.defaults.email = "security@naresh.world";
+  # security.acme.defaults.email = "security@${config.globals.domain_name}";
 }
 

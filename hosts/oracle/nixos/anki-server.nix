@@ -12,7 +12,7 @@
     ];
   };
   services.nginx = {
-    virtualHosts."anki.naresh.world" = {
+    virtualHosts."anki.${config.globals.domain_name}" = {
       enableACME = true;
       forceSSL = true;
       locations."/" = {

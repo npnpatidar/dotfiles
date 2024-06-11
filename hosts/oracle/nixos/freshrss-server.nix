@@ -1,14 +1,18 @@
-{ config, ... }: {
+{ config, ... }:
+let
+  domain = config.globals.domain_name;
+in
+{
   services.freshrss = {
     enable = true;
-    baseUrl = "https://freshrss.naresh.world";
+    baseUrl = "https://freshrss.${domain}";
     defaultUser = "naresh";
     passwordFile = config.age.secrets.freshrss_password.path;
-    virtualHost = "freshrss.naresh.world";
+    virtualHost = "freshrss.${domain}";
   };
 
   services.nginx = {
-    virtualHosts."freshrss.naresh.world" = {
+    virtualHosts."freshrss.${domain}" = {
       enableACME = true;
       forceSSL = true;
     };

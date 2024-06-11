@@ -1,4 +1,4 @@
-{ ... }: {
+{ config, ... }: {
   services.homepage-dashboard = {
     enable = true;
     listenPort = 8888;
@@ -55,10 +55,10 @@
             {
               "Nextcloud" = {
                 icon = "nextcloud";
-                href = "http://nextcloud.naresh.world";
+                href = "http://nextcloud.${config.globals.domain_name}";
                 # widget = {
                 #   type = "nextcloud";
-                #   url = "http://nextcloud.naresh.world";
+                #   url = "http://nextcloud.${config.globals.domain_name}";
                 #   username = "naresh";
                 #   password = "";
                 # };
@@ -67,19 +67,19 @@
             {
               "Freshrss" = {
                 icon = "freshrss";
-                href = "http://freshrss.naresh.world";
+                href = "http://freshrss.${config.globals.domain_name}";
               };
             }
             {
               "Ollama" = {
                 icon = "https://ollama.com/public/ollama.png";
-                href = "http://ollama.naresh.world";
+                href = "http://ollama.${config.globals.domain_name}";
               };
             }
             {
               "Chat" = {
                 icon = "open-webui";
-                href = "http://chat.naresh.world";
+                href = "http://chat.${config.globals.domain_name}";
               };
             }
             {
@@ -91,61 +91,61 @@
             {
               "News" = {
                 icon = "https://newsboat.org/logo.svg";
-                href = "http://news.naresh.world";
+                href = "http://news.${config.globals.domain_name}";
               };
             }
             {
               "VaultWarden" = {
                 icon = "vaultwarden";
-                href = "http://vaultwarden.naresh.world";
+                href = "http://vaultwarden.${config.globals.domain_name}";
               };
             }
             {
               "Paperless" = {
                 icon = "paperless-ngx";
-                href = "http://paperless.naresh.world";
+                href = "http://paperless.${config.globals.domain_name}";
               };
             }
             {
               "Files" = {
                 icon = "files";
-                href = "http://files.naresh.world";
+                href = "http://files.${config.globals.domain_name}";
               };
             }
             {
               "Code" = {
                 icon = "vscode";
-                href = "http://code.naresh.world";
+                href = "http://code.${config.globals.domain_name}";
               };
             }
             {
               "Syncthing" = {
                 icon = "syncthing";
-                href = "https://syncthing.naresh.world";
+                href = "https://syncthing.${config.globals.domain_name}";
               };
             }
             {
               "Git" = {
                 icon = "git";
-                href = "https://git.naresh.world";
+                href = "https://git.${config.globals.domain_name}";
               };
             }
             {
               "Stirling-pdf" = {
                 icon = "stirling-pdf";
-                href = "https://stirling.naresh.world";
+                href = "https://stirling.${config.globals.domain_name}";
               };
             }
             {
               "Searx" = {
                 icon = "searx";
-                href = "https://searx.naresh.world";
+                href = "https://searx.${config.globals.domain_name}";
               };
             }
             {
               "Test" = {
                 # icon = "syncthing";
-                href = "http://test.naresh.world";
+                href = "http://test.${config.globals.domain_name}";
               };
             }
             # {
@@ -220,7 +220,7 @@
   };
 
   services.nginx = {
-    virtualHosts."home.naresh.world" = {
+    virtualHosts."home.${config.globals.domain_name}" = {
       enableACME = true;
       forceSSL = true;
       locations."/" = {

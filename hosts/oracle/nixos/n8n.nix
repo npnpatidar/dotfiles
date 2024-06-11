@@ -1,8 +1,8 @@
-{ ... }: {
+{ config, ... }: {
   nixpkgs.config.allowUnfree = true;
   services.n8n.enable = true;
   services.nginx = {
-    virtualHosts."n8n.naresh.world" = {
+    virtualHosts."n8n.${config.globals.domain_name}" = {
       enableACME = true;
       forceSSL = true;
       locations."/" = {

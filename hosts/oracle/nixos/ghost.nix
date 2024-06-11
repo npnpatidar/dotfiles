@@ -2,9 +2,9 @@ let
   dbuser = "root";
   dbpass = "ghostpass";
 in
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 {
-  services.nginx.virtualHosts."naresh.world" = {
+  services.nginx.virtualHosts."${config.globals.domain_name}" = {
     forceSSL = true;
     enableACME = true;
     locations."/" = {
@@ -21,7 +21,7 @@ in
       "ghost_content:/var/lib/ghost/content"
     ];
     environment = {
-      url = "https://naresh.world";
+      url = "https://${config.globals.domain_name}";
       database__client = "mysql";
       database__connection__host = "ghost-db";
       database__connection__user = dbuser;

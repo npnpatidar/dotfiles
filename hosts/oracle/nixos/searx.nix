@@ -77,7 +77,7 @@
   };
 
   services.nginx = {
-    virtualHosts."searx.naresh.world" = {
+    virtualHosts."searx.${config.globals.domain_name}" = {
       enableACME = true;
       forceSSL = true;
       locations."/" = {

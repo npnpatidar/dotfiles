@@ -4,7 +4,7 @@
     acme.enable = true;
     nginx.enable = true;
     nginx.forceSSL = true;
-    host = "blog.naresh.world";
+    host = "blog.${config.globals.domain_name}";
     admin.name = "naresh";
     admin.initialPasswordFile = config.age.secrets.standard.path;
     settings.server.port = 7898;

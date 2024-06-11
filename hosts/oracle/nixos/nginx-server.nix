@@ -17,7 +17,7 @@
     recommendedOptimisation = true;
     recommendedProxySettings = true;
 
-    # virtualHosts."test.naresh.world" = {
+    # virtualHosts."test.${config.globals.domain_name}" = {
     #   enableACME = true;
     #   forceSSL = true;
     #   locations."/" = {

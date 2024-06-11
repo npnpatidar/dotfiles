@@ -11,7 +11,7 @@
     };
   };
   services.nginx = {
-    virtualHosts."paperless.naresh.world" = {
+    virtualHosts."paperless.${config.globals.domain_name}" = {
       enableACME = true;
       forceSSL = true;
       locations."/" = {

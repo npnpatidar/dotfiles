@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, config, ... }: {
   environment.systemPackages = [ pkgs.filebrowser ];
   #default username = "admin" and password  = "admin"
   systemd.services.filebrowser = {
@@ -12,7 +12,7 @@
     };
   };
 
-  services.nginx.virtualHosts."files.naresh.world" = {
+  services.nginx.virtualHosts."files.${config.globals.domain_name}" = {
     forceSSL = true;
     enableACME = true;
     locations."/" = {

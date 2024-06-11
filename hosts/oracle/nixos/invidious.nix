@@ -1,10 +1,10 @@
-{ ... }:
+{ config, ... }:
 {
 
   services.invidious = {
     enable = true;
     nginx.enable = true;
-    domain = "invidious.naresh.world";
+    domain = "invidious.${config.globals.domain_name}";
     settings = {
       db.user = "invidious";
       db.dbname = "invidious";

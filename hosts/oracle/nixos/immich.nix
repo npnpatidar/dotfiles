@@ -44,7 +44,7 @@ in
   };
 
   # services.nginx.enable = true;
-  services.nginx.virtualHosts."immich.naresh.world" = {
+  services.nginx.virtualHosts."immich.${config.globals.domain_name}" = {
     extraConfig = ''
       client_max_body_size 50000M;
     '';

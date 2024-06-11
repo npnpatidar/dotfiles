@@ -15,7 +15,7 @@
     group = "nginx";
   };
   services.nginx = {
-    virtualHosts."code.naresh.world" = {
+    virtualHosts."code.${config.globals.domain_name}" = {
       enableACME = true;
       forceSSL = true;
       basicAuthFile = config.age.secrets.vscode_htpassword.path;

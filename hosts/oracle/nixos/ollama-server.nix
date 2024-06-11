@@ -32,7 +32,7 @@
   };
 
   services.nginx = {
-    virtualHosts."ollama.naresh.world" = {
+    virtualHosts."ollama.${config.globals.domain_name}" = {
       enableACME = true;
       forceSSL = true;
       basicAuthFile = config.age.secrets.htpasswdstandard.path;
@@ -40,7 +40,7 @@
         proxyPass = "http://localhost:11343";
       };
     };
-    virtualHosts."chat.naresh.world" = {
+    virtualHosts."chat.${config.globals.domain_name}" = {
       enableACME = true;
       forceSSL = true;
       locations."/" = {

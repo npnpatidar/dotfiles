@@ -1,13 +1,3 @@
-# file: modules/globals.nix
-# { config, lib, ... }:
-#
-# {
-#   config = {
-#     domain_name = "naresh.world";
-#     email_domain = "whatiscenter@disroot.org";
-#   };
-# }
-#
 { config, lib, options, ... }:
 
 {
