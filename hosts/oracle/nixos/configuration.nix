@@ -24,6 +24,7 @@
     ./invidious.nix
     ./immich.nix
     ./rclone-mount.nix
+    ./wallabag.nix
 
     ../../../modules/nixos/agenix.nix
     ../../../modules/nixos/tailscale.nix
