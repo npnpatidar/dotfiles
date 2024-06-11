@@ -4,8 +4,8 @@
       enable = true;
       user = "naresh";
       openDefaultPorts = true;
-      dataDir = "/home/naresh/Data/";
-      configDir = "/home/naresh/.config/syncthing";
+      dataDir = "${config.globals.data_directory}";
+      configDir = "${config.globals.home_directory}/.config/syncthing";
       overrideDevices = true;
       overrideFolders = true;
       guiAddress = "0.0.0.0:8384";
@@ -50,31 +50,31 @@
         # "Camera" = {
         # id = "knuao-1ygcm";
         #   label = "Camera";
-        #   path = "/home/naresh/Camera";
+        #   path = "${config.globals.home_directory}/Camera";
         #   devices = [ "RMX3312" ];
         # };
         # "Sync_M_L" = {
         #   id = "tpz2c-x9q93";
         #   label = "Sync_M_L";
-        #   path = "/home/naresh/Data/Sync_M_L";
+        #   path = "${config.globals.data_directory}/Sync_M_L";
         #   devices = [ "RMX3312" ];
         # };
         # "Sync_M_L_I_C" = {
         #   id = "7snbs-p6fiq";
         #   label = "Sync_M_L_I_C";
-        #   path = "/home/naresh/Data/Sync_M_L_I_C";
+        #   path = "${config.globals.data_directory}/Sync_M_L_I_C";
         #   devices = [ "RMX3312" "Ipad" ];
         # };
         # "Sync_M_L_I" = {
         #   id = "pwm3j-ulcds";
         #   label = "Sync_M_L_I";
-        #   path = "/home/naresh/Data/Sync_M_L_I";
+        #   path = "${config.globals.data_directory}/Sync_M_L_I";
         #   devices = [ "RMX3312" "Ipad" ];
         # };
         "Sync_M_L_I_O" = {
           id = "y3xfw-sbf3u";
           label = "Sync_M_L_I_O";
-          path = "/home/naresh/Data/Sync_M_L_I_O";
+          path = "${config.globals.data_directory}/Sync_M_L_I_O";
           devices = [ "RMX3312" "Ipad" "nixos" ];
         };
       };

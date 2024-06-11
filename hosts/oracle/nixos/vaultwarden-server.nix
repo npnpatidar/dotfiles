@@ -27,7 +27,7 @@
       set -e
 
       DATE=$(date +%Y-%m-%d)
-      BACKUP_DIR=/home/naresh/Data/.backups/vaultwarden
+      BACKUP_DIR=${config.globals.data_directory}/.backups/vaultwarden
       BACKUP_FILE=vaultwarden-$DATE.7z
       CONTAINER=vaultwarden
       VAULTWARDEN_DATA_DIR=/var/lib/bitwarden_rs/

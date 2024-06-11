@@ -26,13 +26,13 @@
       fsType = "vfat";
     };
 
-  fileSystems."/home/naresh/Data" =
+  fileSystems."${config.globals.data_directory}" =
     {
       device = "/dev/disk/by-label/DATA";
       fsType = "ext4";
     };
 
-  fileSystems."/home/naresh" =
+  fileSystems."${config.globals.home_directory}" =
     {
       device = "/dev/disk/by-label/HOME";
       fsType = "ext4";
