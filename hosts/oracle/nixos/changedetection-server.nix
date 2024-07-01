@@ -58,7 +58,7 @@ in
   virtualisation = {
     oci-containers.containers = {
       changedetection-io-webdriver = {
-        image = "selenium/standalone-chrome";
+        image = "selenium/standalone-chromium";
         environment = {
           VNC_NO_PASSWORD = "1";
           SCREEN_WIDTH = "1920";
