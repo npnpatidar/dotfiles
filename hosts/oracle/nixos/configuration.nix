@@ -27,6 +27,7 @@
     ./wallabag.nix
     ./shlink.nix
     ./changedetection-server.nix
+    ./joplin-server.nix
 
     ../../../modules/nixos/agenix.nix
     ../../../modules/nixos/tailscale.nix
@@ -57,7 +58,7 @@
   programs.zsh = {
     enable = true;
   };
-
+  programs.npm.enable = true;
   environment.systemPackages = [ inputs.agenix.packages.aarch64-linux.default ];
   time.timeZone = "Asia/Kolkata";
 
