@@ -24,6 +24,10 @@
     ./invidious.nix
     ./immich.nix
     ./rclone-mount.nix
+    ./wallabag.nix
+    ./shlink.nix
+    ./changedetection-server.nix
+    ./joplin-server.nix
 
     ../../../modules/nixos/agenix.nix
     ../../../modules/nixos/tailscale.nix
@@ -40,6 +44,7 @@
   nixpkgs.hostPlatform = "aarch64-linux";
   nix.optimise.automatic = true;
   nix.optimise.dates = [ "03:45" ];
+  nixpkgs.config.allowUnfree = true;
   nix = {
     package = pkgs.nixFlakes;
     extraOptions = "experimental-features = nix-command flakes";
@@ -54,8 +59,12 @@
   programs.zsh = {
     enable = true;
   };
+  programs.npm.enable = true;
+  environment.systemPackages = [
+    inputs.agenix.packages.aarch64-linux.default
 
-  environment.systemPackages = [ inputs.agenix.packages.aarch64-linux.default ];
+    (import ../../../pkgs/n8n.nix { inherit pkgs; })
+  ];
   time.timeZone = "Asia/Kolkata";
 
   users.users."${config.globals.default_user}" = {
