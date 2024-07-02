@@ -15,6 +15,7 @@
     ../../../modules/home-manager/yazi.nix
     ../../../modules/home-manager/ranger.nix
     ../../../modules/home-manager/bat.nix
+    ../../../modules/nixos/globals.nix
     ./rclone.nix
   ];
 
