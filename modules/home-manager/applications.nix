@@ -36,6 +36,7 @@
     anki-bin
     obsidian
     stremio
+    masterpdfeditor4
 
     # lmstudio
     #mindmap 
@@ -180,6 +181,7 @@
     # onlyoffice-bin_latest
     wpsoffice
     devenv
+
   ];
 
 
