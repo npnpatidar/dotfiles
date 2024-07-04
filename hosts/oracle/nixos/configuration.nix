@@ -28,6 +28,7 @@
     ./shlink.nix
     ./changedetection-server.nix
     ./joplin-server.nix
+    ./redis.nix
 
     ../../../modules/nixos/agenix.nix
     ../../../modules/nixos/tailscale.nix
