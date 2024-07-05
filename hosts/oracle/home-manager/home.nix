@@ -158,6 +158,7 @@
     ouch
     bandwhich
     entr # run arbitrary command when file changes
+    busybox
   ];
 
   # Enable home-manager and git
