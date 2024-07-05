@@ -4,6 +4,7 @@
   services.invidious = {
     enable = true;
     nginx.enable = true;
+    port = 3009;
     domain = "invidious.${config.globals.domain_name}";
     settings = {
       db.user = "invidious";
