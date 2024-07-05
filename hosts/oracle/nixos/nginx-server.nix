@@ -1,4 +1,4 @@
-{ ... }: {
+{ config, ... }: {
   security.acme = {
     acceptTerms = true;
     defaults.email = "letsencrypt@whatisleft.anonaddy.com";
