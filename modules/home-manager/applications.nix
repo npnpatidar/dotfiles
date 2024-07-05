@@ -181,7 +181,7 @@
     # onlyoffice-bin_latest
     wpsoffice
     devenv
-
+    busybox
   ];
 
 
