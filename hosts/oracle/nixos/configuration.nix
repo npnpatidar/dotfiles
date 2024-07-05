@@ -29,6 +29,7 @@
     ./changedetection-server.nix
     ./joplin-server.nix
     ./redis.nix
+    ./aria.nix
 
     ../../../modules/nixos/agenix.nix
     ../../../modules/nixos/tailscale.nix
