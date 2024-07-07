@@ -12,4 +12,7 @@
       proxyWebsockets = true;
     };
   };
+  users.groups."aria2" = {
+    members = [ "naresh" "jellyfin" ];
+  };
 }
