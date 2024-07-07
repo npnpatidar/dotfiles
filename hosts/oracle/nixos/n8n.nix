@@ -19,8 +19,13 @@ in
       N8N_USER_FOLDER = "/var/lib/n8n";
       HOME = "/var/lib/n8n";
       N8N_CONFIG_FILES = "${configFile}";
-      WEBHOOK_URL = "${cfg.webhookUrl}";
+      WEBHOOK_URL = "https://n8n.naresh.world/";
+      GENERIC_TIMEZONE = "Asia/Kolkata";
+      NODE_FUNCTION_ALLOW_EXTERNAL = "*";
+      NODE_FUNCTION_ALLOW_BUILTIN = "*";
 
+
+      N8N_TEMPLATES_ENABLED = "true";
       # Don't phone home
       N8N_DIAGNOSTICS_ENABLED = "false";
       N8N_VERSION_NOTIFICATIONS_ENABLED = "false";
