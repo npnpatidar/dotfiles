@@ -3,6 +3,7 @@
   services.aria2 = {
     enable = true;
     rpcSecretFile = config.age.secrets.standard.path;
+    settings.dir = "/mnt/mega/aria2/Downloads";
   };
   services.nginx.virtualHosts."aria.naresh.world" = {
     enableACME = true;

@@ -36,5 +36,6 @@ in
       "npnpatidarCrypt"
       "naresh.alternateCrypt"
       "arebhaiCrypt"
+      "mega"
     ]);
 }
