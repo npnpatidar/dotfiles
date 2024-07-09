@@ -2,7 +2,7 @@
   imports = [
     ./hardware-configuration.nix
     ./anki-server.nix
-    # ./mail-server.nix
+    ./mail-server.nix
     ./nginx-server.nix
     ./ollama-server.nix
     ./rclone-backup.nix
