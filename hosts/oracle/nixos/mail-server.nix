@@ -11,11 +11,18 @@
     loginAccounts = {
       "naresh@${config.globals.domain_name}" = {
         hashedPasswordFile = config.age.secrets."hashedstandard".path;
-        aliases = [ "postmaster@${config.globals.domain_name}" ];
+        aliases = [ "@${config.globals.domain_name}" ];
+        catchAll = [ "${config.globals.domain_name}" ];
       };
       # "user2@example.com" = { ... };
     };
 
+    fullTextSearch = {
+      enable = true;
+      enforced = "body";
+      indexAttachments = true;
+      memoryLimit = 512;
+    };
     certificateScheme = "acme-nginx";
   };
 
