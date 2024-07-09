@@ -26,5 +26,25 @@
   };
   # security.acme.acceptTerms = true;
   # security.acme.defaults.email = "security@${config.globals.domain_name}";
+  #
+
+
+  services.roundcube = {
+    enable = true;
+    # this is the url of the vhost, not necessarily the same as the fqdn of
+    # the mailserver
+    hostName = "webmail.naresh.world";
+    extraConfig = ''
+      # starttls needed for authentication, so the fqdn required to match
+      # the certificate
+      $config['smtp_server'] = "tls://${config.mailserver.fqdn}";
+      $config['smtp_user'] = "%u";
+      $config['smtp_pass'] = "%p";
+    '';
+  };
+
+  # services.nginx.enable = true;
+
+  networking.firewall.allowedTCPPorts = [ 80 443 ];
 }
 
