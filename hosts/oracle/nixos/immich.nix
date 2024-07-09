@@ -4,7 +4,7 @@ let
   immichRoot = "/var/lib/immich";
   immichPhotos = "${immichRoot}/photos";
   immichAppdataRoot = "${immichRoot}/appdata";
-  immichVersion = "v1.105.1";
+  immichVersion = "v1.107.2";
 
   postgresRoot = "${immichAppdataRoot}/pgsql";
   postgresPassword = "immich";
