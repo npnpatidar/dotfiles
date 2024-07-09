@@ -8,6 +8,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    simple-nixos-mailserver = {
+      url = "gitlab:simple-nixos-mailserver/nixos-mailserver/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     agenix = {
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -40,7 +44,7 @@
     # };
   };
 
-  outputs = { self, nixpkgs, nur, home-manager, nix-on-droid, nix-index-database, stylix, nixvim, agenix, ... } @ inputs:
+  outputs = { self, nixpkgs, nur, home-manager, nix-on-droid, nix-index-database, stylix, nixvim, agenix, simple-nixos-mailserver, ... } @ inputs:
     let
 
       inherit (self) outputs;
