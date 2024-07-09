@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, inputs, lib, ... }:
 {
   imports = [ inputs.simple-nixos-mailserver.nixosModule ];
 
@@ -30,6 +30,26 @@
       $config['smtp_user'] = "%u";
       $config['smtp_pass'] = "%p";
     '';
+    package = pkgs.roundcube.withPlugins (
+      plugins: [
+        plugins.carddav
+        plugins.contextmenu
+        plugins.custom_from
+        plugins.persistent_login
+        plugins.thunderbird_labels
+      ]
+    );
+    plugins = [
+      "attachment_reminder" # Roundcube internal plugin
+      "carddav"
+      "contextmenu"
+      "custom_from"
+      "managesieve" # Roundcube internal plugin
+      "newmail_notifier" # Roundcube internal plugin
+      "persistent_login"
+      "thunderbird_labels"
+      "zipdownload" # Roundcube internal plugin
+    ];
   };
 
 }
