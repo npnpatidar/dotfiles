@@ -4,18 +4,18 @@
 
 pkgs.stdenv.mkDerivation (finalAttrs: {
   pname = "n8n";
-  version = "1.48.2";
+  version = "1.51.0";
 
   src = pkgs.fetchFromGitHub {
     owner = "n8n-io";
     repo = "n8n";
     rev = "n8n@${finalAttrs.version}";
-    hash = "sha256-rjyG2uWAja2Si4r0eHF7bYA7Xyng9pRjijHprsT8qEw=";
+    hash = "sha256-dSM4uYDP/5n7uSUHJ7mRcQQPMxpMayHyxhiqooAs9Uo=";
   };
 
   pnpmDeps = pkgs.pnpm.fetchDeps {
     inherit (finalAttrs) pname version src;
-    hash = "sha256-n1U5ftbB7BbiDIkZMVPG2ieoRBlJ+nPYFT3fNJRRTCI=";
+    hash = "sha256-FjK8QcdfZkSSUNruX+DeHI4wAIUbWnL2HahwQaDqv04=";
   };
 
   nativeBuildInputs = with pkgs;[
@@ -52,7 +52,8 @@ pkgs.stdenv.mkDerivation (finalAttrs: {
     cp -r {packages,node_modules} $out/lib
 
     makeWrapper $out/lib/packages/cli/bin/n8n $out/bin/n8n \
-      --set N8N_RELEASE_TYPE "stable"
+      --set N8N_RELEASE_TYPE "stable"   \
+      --set N8N_PAYLOAD_SIZE_MAX 64
 
     runHook postInstall
   '';
