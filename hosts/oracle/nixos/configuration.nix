@@ -26,11 +26,14 @@
     ./rclone-mount.nix
     ./wallabag.nix
     ./shlink.nix
-    ./changedetection-server.nix
+    # ./changedetection-server.nix
     ./joplin-server.nix
     ./redis.nix
     ./aria.nix
     ./jellyfin.nix
+    ./radicale.nix
+    ./qdrant.nix
+    ./redlib.nix
 
     ../../../modules/nixos/agenix.nix
     ../../../modules/nixos/tailscale.nix
@@ -73,7 +76,7 @@
   users.users."${config.globals.default_user}" = {
     isNormalUser = true;
     description = "${config.globals.default_user}";
-    extraGroups = [ "networkmanager" "wheel" "kvm" "input" "disk" "libvirtd" "usbmux" "freshrss" "nextcloud" "openvscode-server" "nginx" "syncthing" ];
+    extraGroups = [ "networkmanager" "podman" "wheel" "kvm" "input" "disk" "libvirtd" "usbmux" "freshrss" "nextcloud" "openvscode-server" "nginx" "syncthing" ];
     createHome = true;
     home = "/home/${config.globals.default_user}";
     shell = pkgs.zsh;
