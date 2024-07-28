@@ -20,6 +20,8 @@
           environment = {
             OLLAMA_BASE_URL = "http://ollama.local:11434";
             ANONYMIZED_TELEMETRY = "False";
+            ENABLE_RAG_WEB_SEARCH = "True";
+            RAG_WEB_SEARCH_ENGINE = "duckduckgo";
           };
           environmentFiles = [ config.age.secrets.open_webui_environment_file.path ];
           extraOptions = [
