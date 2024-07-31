@@ -1,9 +1,4 @@
 { config, ... }: {
-  services.ollama = {
-    enable = true;
-    host = "0.0.0.0";
-    port = 11434;
-  };
 
   virtualisation = {
     oci-containers = {
@@ -29,6 +24,13 @@
             "--add-host=ollama.local:10.0.2.2"
           ];
         };
+
+        ollama = {
+          image = "ollama/ollama";
+          autoStart = true;
+          ports = [ "11434:11434" ];
+          volumes = [ "ollama:/root/.ollama" ];
+        };
       };
     };
   };
@@ -39,7 +41,7 @@
       forceSSL = true;
       basicAuthFile = config.age.secrets.htpasswdstandard.path;
       locations."/" = {
-        proxyPass = "http://localhost:11434";
+        proxyPass = "http://127.0.0.1:11434";
       };
     };
     virtualHosts."chat.${config.globals.domain_name}" = {
