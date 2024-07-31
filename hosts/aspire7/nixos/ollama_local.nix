@@ -1,9 +1,9 @@
 { config, ... }: {
-  services.ollama = {
-    enable = true;
-    acceleration = "cuda";
-    host = "0.0.0.0";
-  };
+  # services.ollama = {
+  #   enable = true;
+  #   acceleration = "cuda";
+  #   host = "0.0.0.0";
+  # };
 
   virtualisation = {
     oci-containers = {
@@ -26,6 +26,14 @@
             "--network=host"
             "--add-host=host.containers.internal:host-gateway"
           ];
+        };
+
+        ollama = {
+          image = "ollama/ollama";
+          autoStart = true;
+          ports = [ "11434:11434" ];
+          volumes = [ "ollama:/root/ollama" ];
+          extraOptions = [ "--gpus=all" ];
         };
       };
     };
