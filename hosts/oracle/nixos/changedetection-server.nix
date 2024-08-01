@@ -13,67 +13,49 @@ in
     };
   };
 
-  systemd.services.changedetection-io = {
-    wantedBy = [ "multi-user.target" ];
-    after = [ "network.target" ];
-    preStart = ''
-      mkdir -p -m 0750 ${datastorePath}
-    '';
-    serviceConfig = {
-      User = "changedetection-io";
-      Group = "changedetection-io";
-      StateDirectory = "changedetection-io";
-      StateDirectoryMode = "0750";
-      WorkingDirectory = datastorePath;
-      Environment = [
-        "HIDE_REFERER=false"
-        "BASE_URL=${baseURL}"
-        "USE_X_SETTINGS=1"
-        "WEBDRIVER_URL=http://127.0.0.1:4444/wd/hub"
-        "PLAYWRIGHT_DRIVER_URL=ws://127.0.0.1:4455/?stealth=1&--disable-web-security=true"
-      ];
-      ExecStart = ''
-        ${pkgs.changedetection-io}/bin/changedetection.py \
-          -h localhost -p 5000 -d ${datastorePath}
-      '';
-      ProtectHome = true;
-      ProtectSystem = true;
-      Restart = "on-failure";
-    };
-  };
-
-  users = {
-    users = {
-      "changedetection-io" = {
-        isSystemUser = true;
-        group = "changedetection-io";
-      };
-    };
-
-    groups = {
-      "changedetection-io" = { };
-    };
-  };
 
   virtualisation = {
     oci-containers.containers = {
-      changedetection-io-webdriver = {
-        image = "selenium/standalone-chromium";
+      changedetection-io = {
+        image = "lscr.io/linuxserver/changedetection.io:latest";
         environment = {
-          VNC_NO_PASSWORD = "1";
-          SCREEN_WIDTH = "1920";
-          SCREEN_HEIGHT = "1080";
-          SCREEN_DEPTH = "24";
+          PUID = "1000";
+          PGID = "1000";
+          TZ = "Asia/Kolkata";
+          HIDE_REFERER = "false";
+          BASE_URL = "${baseURL}";
+          USE_X_SETTINGS = "1";
+          # WEBDRIVER_URL = "http://changedetection-io.local:4444/wd/hub";
+          PLAYWRIGHT_DRIVER_URL = "ws://changedetection-io.local:4455/?stealth=1&--disable-web-security=true";
         };
-        ports = [
-          "127.0.0.1:4444:4444"
-        ];
-        volumes = [
-          "/dev/shm:/dev/shm"
+        volumes = [ "${datastorePath}:/config" ];
+        ports = [ "5000:5000" ];
+        autoStart = true;
+        extraOptions = [
+          "--network=slirp4netns:allow_host_loopback=true"
+          "--add-host=changedetection-io.local:10.0.2.2"
         ];
       };
+      # changedetection-io-webdriver = {
+      #   image = "selenium/standalone-chromium";
+      #   autoStart = true;
+      #   environment = {
+      #     VNC_NO_PASSWORD = "1";
+      #     SCREEN_WIDTH = "1920";
+      #     SCREEN_HEIGHT = "1080";
+      #     SCREEN_DEPTH = "24";
+      #   };
+      #   ports = [
+      #     "127.0.0.1:4444:4444"
+      #   ];
+      #   volumes = [
+      #     "/dev/shm:/dev/shm"
+      #   ];
+      #   };
+      #
       changedetection-io-playwright = {
-        image = "browserless/chrome";
+        image = "ghcr.io/browserless/chromium";
+        autoStart = true;
         environment = {
           SCREEN_WIDTH = "1920";
           SCREEN_HEIGHT = "1024";

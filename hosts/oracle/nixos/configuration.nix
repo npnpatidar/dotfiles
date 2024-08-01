@@ -26,7 +26,7 @@
     ./rclone-mount.nix
     ./wallabag.nix
     ./shlink.nix
-    # ./changedetection-server.nix
+    ./changedetection-server.nix
     ./joplin-server.nix
     ./redis.nix
     ./aria.nix
