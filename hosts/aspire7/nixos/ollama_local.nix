@@ -15,7 +15,7 @@
             "127.0.0.1:8080:8080"
           ];
           volumes = [
-            "open-webui:/app/backend/data"
+            "/data/ollama/open-webui:/app/backend/data"
           ];
           environment = {
             OLLAMA_BASE_URL = "http://127.0.0.1:11434";
@@ -32,7 +32,7 @@
           image = "ollama/ollama";
           autoStart = true;
           ports = [ "11434:11434" ];
-          volumes = [ "ollama:/root/ollama" ];
+          volumes = [ "/data/ollama/ollama:/root/.ollama" ];
           extraOptions = [ "--gpus=all" ];
         };
       };
