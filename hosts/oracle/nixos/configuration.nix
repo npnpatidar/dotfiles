@@ -34,6 +34,7 @@
     ./radicale.nix
     ./qdrant.nix
     ./redlib.nix
+    ./openvscode-server-pod.nix
 
     ../../../modules/nixos/agenix.nix
     ../../../modules/nixos/tailscale.nix
@@ -68,8 +69,6 @@
   programs.npm.enable = true;
   environment.systemPackages = [
     inputs.agenix.packages.aarch64-linux.default
-
-    (import ../../../pkgs/n8n.nix { inherit pkgs; })
   ];
   time.timeZone = "Asia/Kolkata";
 
