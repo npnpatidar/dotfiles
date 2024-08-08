@@ -782,7 +782,8 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/shell/extensions/user-theme" = {
-      name = "Stylix";
+      # name = "Stylix";
+      name = "Nordic-bluish-accent";
     };
 
     "org/gnome/shell/keybindings" = {
