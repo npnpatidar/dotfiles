@@ -7,7 +7,6 @@
     ./librewolf.nix
     ./gnome_settings.nix
     ./neovim.nix
-    #./nvim
     ./ranger.nix
     ./git.nix
     ./bat.nix
@@ -21,7 +20,6 @@
     ./fcitx5/fcitx5.nix
     ./qutebrowser.nix
     ./tmux.nix
-    ./nvim.nix
     ./yazi.nix
     ./zathura.nix
     ./sioyek.nix
