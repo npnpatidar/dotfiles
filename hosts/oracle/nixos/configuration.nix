@@ -35,6 +35,7 @@
     ./qdrant.nix
     ./redlib.nix
     ./openvscode-server-pod.nix
+    ./obsidian-server.nix
 
     ../../../modules/nixos/agenix.nix
     ../../../modules/nixos/tailscale.nix
