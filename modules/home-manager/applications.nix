@@ -5,6 +5,8 @@
     (import ../../pkgs/thorium.nix { inherit pkgs; })
     tangram
 
+    pandoc
+
 
     # terminals
     alacritty
