@@ -1,5 +1,18 @@
 { config, pkgs, ... }:
+let
+  rootCodePath = "/data/openvscode-server";
+in
 {
+  systemd.services."createCodeDirectory" = {
+    script = ''
+      mkdir -p ${rootCodePath}
+    '';
+    wantedBy = [ "multi-user.target" ];
+    before = [ "podman-openvscode-server.service" ];
+    serviceConfig.Type = "oneshot";
+  };
+
+
   virtualisation = {
     oci-containers.containers = {
       openvscode-server = {
@@ -13,7 +26,7 @@
           SUDO_PASSWORD = "password";
           # SUDO_PASSWORD_HASH= 
         };
-        volumes = [ "openvscode-server:/config" ];
+        volumes = [ "${rootCodePath}:/config" ];
         ports = [ "3035:3000" ];
         autoStart = true;
       };
