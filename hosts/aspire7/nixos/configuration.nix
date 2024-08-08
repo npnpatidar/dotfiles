@@ -52,6 +52,7 @@
   hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
 
 
+  home-manager.backupFileExtension = "backup";
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users."${config.globals.default_user}" = {
     isNormalUser = true;
