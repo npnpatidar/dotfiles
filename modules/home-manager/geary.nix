@@ -11,7 +11,7 @@ in
   config = mkIf cfg.enable {
 
     home.packages = [
-      pkgs.gnome.geary
+      pkgs.geary
     ];
     home.file.".config/geary/user-style.css".text = ''
      

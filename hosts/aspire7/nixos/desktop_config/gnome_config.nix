@@ -29,15 +29,15 @@
     nordic
     papirus-nord
     dconf2nix
-  ]) ++ (with pkgs.gnome;[
     adwaita-icon-theme
     nautilus
     gnome-tweaks
     dconf-editor
-    gnome-control-center
-    gnome-shell-extensions
     seahorse
     gnome-calculator
+  ]) ++ (with pkgs.gnome;[
+    gnome-control-center
+    gnome-shell-extensions
 
 
   ]) ++ (with pkgs.gnomeExtensions;[

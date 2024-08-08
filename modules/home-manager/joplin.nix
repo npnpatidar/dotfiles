@@ -72,7 +72,7 @@ in
   config = mkIf cfg.enable {
 
     home.packages = [
-      pkgs.joplin
+      # pkgs.joplin
       pkgs.joplin-desktop
     ];
     xdg.configFile."joplin/settings.json".text = settings;
