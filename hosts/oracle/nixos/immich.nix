@@ -37,7 +37,21 @@ in
       "${backend}-immich_redis.service"
       "${backend}-immich_postgres.service"
     ];
+    before = [
+      "${backend}-immich_server.service"
+      "${backend}-immich_microservices.service"
+      "${backend}-immich_machine_learning.service"
+      "${backend}-immich_redis.service"
+      "${backend}-immich_postgres.service"
+    ];
+
     script = ''
+
+      mkdir -p ${immichAppdataRoot}
+      mkdir -p ${immichPhotos}
+      mkdir -p ${postgresRoot}
+
+
       ${pkgs.podman}/bin/podman network exists immich-network || \
       ${pkgs.podman}/bin/podman network create immich-network
     '';
