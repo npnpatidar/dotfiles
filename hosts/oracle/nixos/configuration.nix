@@ -8,8 +8,8 @@
     ./rclone-backup.nix
     ./openssh-server.nix
     ./freshrss-server.nix
-    ./gitdaemon-server.nix
     ./nextcloud-server.nix
+    ./writefreely.nix
     ./filebrowser-server.nix
     ./homgepage-dashboard.nix
     ./openvscode-server.nix
@@ -18,8 +18,8 @@
     ./vaultwarden-server.nix
     ./stirling-server.nix
     ./searx.nix
-    ./blog.nix
     ./ghost.nix
+    ./gitea.nix
     ./n8n.nix
     ./invidious.nix
     ./immich.nix
@@ -27,7 +27,6 @@
     ./wallabag.nix
     ./shlink.nix
     ./changedetection-server.nix
-    ./joplin-server.nix
     ./redis.nix
     ./aria.nix
     ./jellyfin.nix
