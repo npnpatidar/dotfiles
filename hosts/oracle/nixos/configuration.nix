@@ -23,7 +23,7 @@
     ./n8n.nix
     ./invidious.nix
     ./immich.nix
-    ./rclone-mount.nix
+    # ./rclone-mount.nix
     ./wallabag.nix
     ./shlink.nix
     ./changedetection-server.nix
