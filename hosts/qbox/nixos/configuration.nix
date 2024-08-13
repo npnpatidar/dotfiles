@@ -17,7 +17,7 @@
 
 
 
-
+  home-manager.backupFileExtension = "backup";
   hardware =
     {
       opengl.enable = true;

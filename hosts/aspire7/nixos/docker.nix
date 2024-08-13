@@ -4,14 +4,13 @@
   virtualisation = {
     docker = {
       enable = true;
-      enableNvidia = true;
       enableOnBoot = lib.mkDefault false;
     };
     oci-containers = {
       backend = "docker";
     };
   };
-
+  hardware.nvidia-container-toolkit.enable = true;
   # virtualisation.oci-containers.containers.archlinux = {
   #   autoStart = false;
   #   image = "archlinux:latest";

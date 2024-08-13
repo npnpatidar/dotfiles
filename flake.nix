@@ -16,10 +16,10 @@
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixvim = {
-      url = "github:nix-community/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # nixvim = {
+    #   url = "github:nix-community/nixvim";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
     stylix.url = "github:danth/stylix";
     # neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     # nixvim.url = "github:pta2002/nixvim";
@@ -44,7 +44,7 @@
     # };
   };
 
-  outputs = { self, nixpkgs, nur, home-manager, nix-on-droid, nix-index-database, stylix, nixvim, agenix, simple-nixos-mailserver, ... } @ inputs:
+  outputs = { self, nixpkgs, nur, home-manager, nix-on-droid, nix-index-database, stylix, agenix, simple-nixos-mailserver, ... } @ inputs:
     let
 
       inherit (self) outputs;
@@ -107,7 +107,7 @@
 
                   extraSpecialArgs = { inherit inputs outputs; };
                   sharedModules = [
-                    nixvim.homeManagerModules.nixvim
+                    # nixvim.homeManagerModules.nixvim
                     nix-index-database.hmModules.nix-index
                     stylix.homeManagerModules.stylix
                   ];
