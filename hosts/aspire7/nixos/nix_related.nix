@@ -3,14 +3,14 @@
 
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.packageOverrides = pkgs: {
-    nur = import builtins.fetchTarball
-      {
-        url = "https://github.com/nix-community/NUR/archive/master.tar.gz";
-        sha256 = "sha256:0plki2yk02zcvyw7vynqhag6g1kl5qcicj8dvzfjx5p3p82yilkk";
-      }
-      {
-        inherit pkgs;
-      };
+    #   nur = import builtins.fetchTarball
+    #     {
+    #       url = "https://github.com/nix-community/NUR/archive/master.tar.gz";
+    #       sha256 = "sha256:0plki2yk02zcvyw7vynqhag6g1kl5qcicj8dvzfjx5p3p82yilkk";
+    #     }
+    #     {
+    #       inherit pkgs;
+    #     };
   };
 
   # Update nixos

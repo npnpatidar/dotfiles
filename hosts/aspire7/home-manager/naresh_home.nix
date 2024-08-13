@@ -38,7 +38,7 @@
       # ++
       [
         # inputs.nixneovimplugins.overlays.default
-        inputs.nur.overlay
+        # inputs.nur.overlay
         # inputs.attic.overlays.default
         # inputs.neovim-nightly-overlay.overlay
         # inputs.nixgl.overlay
