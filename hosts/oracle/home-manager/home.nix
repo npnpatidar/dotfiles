@@ -15,7 +15,8 @@
     ../../../modules/home-manager/yazi.nix
     ../../../modules/home-manager/ranger.nix
     ../../../modules/home-manager/bat.nix
-    ../../../modules/home-manager/bat.nix
+    ../../../modules/nixos/globals.nix
+    ./rclone.nix
   ];
 
   modules.home-manager = {
@@ -51,8 +52,8 @@
   };
 
   home = {
-    username = "naresh";
-    homeDirectory = "/home/naresh";
+    username = "${config.globals.default_user}";
+    homeDirectory = "${config.globals.home_directory}";
   };
 
 
@@ -80,9 +81,10 @@
     jq
     nil #  nix LSP
     ripgrep #recursive search fs for a regex
-    neofetch
     zip
     unrar
+    podman-tui
+    rclone
     unzip
     w3m
     oterm
@@ -92,6 +94,7 @@
     btop
     cht-sh
     zellij
+    links2
     boxbuddy
     ncdu
     mc
@@ -105,8 +108,8 @@
     comma
     fontconfig
     zlib
-    screenfetch
     # rnix-lsp
+    fastfetch
     git
     git-crypt
     gnupg
@@ -123,14 +126,16 @@
     direnv
     any-nix-shell
     nixpkgs-fmt
-    nixfmt
+    nixfmt-classic
+    ttop
+    glances
     nix-init
     ripgrep
     distrobox
     wl-clipboard
     fzf
     cargo
-    nodejs_21
+    # nodejs_21
     gnumake
     tldr
     curl
@@ -147,11 +152,26 @@
     tuifeed
     systemctl-tui
     newsboat # RSS Reader TUI
+    gorilla-cli
+    trashy
+    cheat
+    ouch
+    bandwhich
+    entr # run arbitrary command when file changes
+    busybox
   ];
 
   # Enable home-manager and git
   programs.home-manager.enable = true;
   programs.git.enable = true;
+  programs.zellij = {
+    # enableZshIntegration = true;
+  };
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+    enableBashIntegration = true;
+  };
 
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";

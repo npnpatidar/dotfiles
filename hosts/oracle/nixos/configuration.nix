@@ -1,16 +1,57 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, inputs, ... }: {
   imports = [
     ./hardware-configuration.nix
+    ./anki-server.nix
+    ./mail-server.nix
+    ./nginx-server.nix
+    ./ollama-server.nix
+    ./rclone-backup.nix
+    ./openssh-server.nix
+    ./freshrss-server.nix
+    ./nextcloud-server.nix
+    ./writefreely.nix
+    ./filebrowser-server.nix
+    ./homgepage-dashboard.nix
+    ./openvscode-server.nix
+    ./paperless-server.nix
+    ./syncthing-server.nix
+    ./vaultwarden-server.nix
+    ./stirling-server.nix
+    ./searx.nix
+    ./ghost.nix
+    ./gitea.nix
+    ./n8n.nix
+    ./invidious.nix
+    ./immich.nix
+    # ./rclone-mount.nix
+    ./wallabag.nix
+    ./shlink.nix
+    ./changedetection-server.nix
+    ./redis.nix
+    ./aria.nix
+    ./jellyfin.nix
+    ./radicale.nix
+    ./qdrant.nix
+    ./redlib.nix
+    ./openvscode-server-pod.nix
+    ./obsidian-server.nix
+
+    ../../../modules/nixos/agenix.nix
+    ../../../modules/nixos/tailscale.nix
+    ../../../modules/nixos/ssh_client.nix
+    ../../../modules/nixos/globals.nix
   ];
 
   boot.tmp.cleanOnBoot = true;
   zramSwap.enable = true;
   networking.hostName = "alma";
   networking.domain = "";
-  services.openssh.enable = true;
   users.users.root.openssh.authorizedKeys.keys = [ ''ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC8pK+/SUI3dPB1tQ0nF4Gp9BKKGMHnJ1bBSiYJX2sCHgbfOmDKAlAnuRTP6Zhp6BTZ5LwNC/4pI76bnpmo8YjjGNGkPlMHfOHrn8rm2Hhyx7RVHyMLGKYQdNtzBcfPgDUqrXPM3cdCMya15BnavXE4fOYUoGgIvOolTveWfngHRjQNptTlfpQoIjMRIvIfhu+xLiikJVm4EbgzEVu6U8OdGuV8eq33GYc+HORqKRq+jILIT5V3q4OTcCbORbStt4Zq4WumoVWXuM3abmzpA0nCAbZM8ArWQ8UujOM490hyQVGqfZae8FS1ADGAyEybrHMIMxT0IysZ7xW+tnaljIpt ssh-key-2024-04-15'' ];
   system.stateVersion = "23.11";
   nixpkgs.hostPlatform = "aarch64-linux";
+  nix.optimise.automatic = true;
+  nix.optimise.dates = [ "03:45" ];
+  nixpkgs.config.allowUnfree = true;
   nix = {
     package = pkgs.nixFlakes;
     extraOptions = "experimental-features = nix-command flakes";
@@ -25,215 +66,35 @@
   programs.zsh = {
     enable = true;
   };
+  programs.npm.enable = true;
+  environment.systemPackages = [
+    inputs.agenix.packages.aarch64-linux.default
+  ];
   time.timeZone = "Asia/Kolkata";
 
-  users.users.naresh = {
+  users.users."${config.globals.default_user}" = {
     isNormalUser = true;
-    initialPassword = "naresh";
-    description = "naresh";
-    extraGroups = [ "networkmanager" "wheel" "kvm" "input" "disk" "libvirtd" "usbmux" "freshrss" "nextcloud" "openvscode-server" ];
+    description = "${config.globals.default_user}";
+    extraGroups = [ "networkmanager" "podman" "wheel" "kvm" "input" "disk" "libvirtd" "usbmux" "freshrss" "nextcloud" "openvscode-server" "nginx" "syncthing" ];
     createHome = true;
-    home = "/home/naresh";
+    home = "/home/${config.globals.default_user}";
     shell = pkgs.zsh;
     openssh.authorizedKeys.keys = [ ''ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC8pK+/SUI3dPB1tQ0nF4Gp9BKKGMHnJ1bBSiYJX2sCHgbfOmDKAlAnuRTP6Zhp6BTZ5LwNC/4pI76bnpmo8YjjGNGkPlMHfOHrn8rm2Hhyx7RVHyMLGKYQdNtzBcfPgDUqrXPM3cdCMya15BnavXE4fOYUoGgIvOolTveWfngHRjQNptTlfpQoIjMRIvIfhu+xLiikJVm4EbgzEVu6U8OdGuV8eq33GYc+HORqKRq+jILIT5V3q4OTcCbORbStt4Zq4WumoVWXuM3abmzpA0nCAbZM8ArWQ8UujOM490hyQVGqfZae8FS1ADGAyEybrHMIMxT0IysZ7xW+tnaljIpt ssh-key-2024-04-15'' ];
+    hashedPasswordFile = config.age.secrets."hashedstandard".path;
+  };
+  users.groups."media" = {
+    members = [ "aria2" "nextcloud" "jellyfin" "naresh" ];
   };
 
-  environment.etc."nextcloud-admin-pass".text = "Naresh^111";
-  networking.firewall.allowedTCPPorts = [ 80 443 ];
+  networking.firewall.allowedTCPPorts = [ 443 80 ];
+  # networking.firewall.allowedUDPPorts = [ 22000 21027 ];
 
+  virtualisation.oci-containers.backend = "podman";
 
-  services.ollama = {
+  virtualisation.podman = {
     enable = true;
+    defaultNetwork.settings.dns_enabled = true;
+    autoPrune.enable = true;
   };
-
-  services.nextcloud = {
-    enable = true;
-    package = pkgs.nextcloud28;
-    hostName = "nextcloud.naresh.world";
-    https = true;
-    config = {
-      adminpassFile = "/etc/nextcloud-admin-pass";
-    };
-  };
-
-  services.vaultwarden = {
-    enable = true;
-    config = {
-      DOMAIN = "https://vaultwarden.naresh.world";
-      SIGNUPS_ALLOWED = true;
-      ROCKET_PORT = 8222;
-      rocketAddress = "127.0.0.1";
-      rocketLog = "critical";
-      disableIconDownload = false;
-    };
-  };
-
-  services.freshrss = {
-    enable = true;
-    baseUrl = "https://freshrss.naresh.world";
-    defaultUser = "naresh";
-    passwordFile = "/etc/nextcloud-admin-pass";
-    virtualHost = "freshrss.naresh.world";
-  };
-
-  services.anki-sync-server =
-    {
-      enable = true;
-      openFirewall = true;
-      address = "127.0.0.1";
-      port = 27701;
-      users = [
-        {
-          username = "naresh";
-          passwordFile = "/etc/nextcloud-admin-pass";
-        }
-      ];
-    };
-
-  services.openvscode-server = {
-    enable = true;
-    host = "127.0.0.1";
-    port = 3000;
-    telemetryLevel = "off";
-    withoutConnectionToken = true;
-  };
-
-  virtualisation.oci-containers = {
-    backend = "docker";
-    containers = {
-      ollama-webui = {
-        image = "ghcr.io/open-webui/open-webui:git-a481255"; # Feb 22, 2024
-        autoStart = true;
-        ports = [ "8080:8080" ];
-        environment = {
-          OLLAMA_API_BASE_URL = "http://localhost:11434/api";
-        };
-        extraOptions = [
-          "--network=host"
-          "--add-host=host.docker.internal:host-gateway"
-        ];
-        volumes = [
-          "/opt/open-webui:/app/backend/data"
-        ];
-      };
-    };
-  };
-
-
-  security.acme = {
-    acceptTerms = true;
-    defaults.email = "letsencrypt@whatisleft.anonaddy.com";
-  };
-
-  services.nginx = {
-    enable = true;
-    recommendedGzipSettings = true;
-    recommendedOptimisation = true;
-    recommendedProxySettings = true;
-
-    virtualHosts."nextcloud.naresh.world" = {
-      forceSSL = true;
-      enableACME = true;
-    };
-    virtualHosts."vaultwarden.naresh.world" = {
-      enableACME = true;
-      forceSSL = true;
-      locations."/" = {
-        proxyPass = "http://127.0.0.1:8222";
-      };
-    };
-    virtualHosts."ollama.naresh.world" = {
-      enableACME = true;
-      forceSSL = true;
-      locations."/" = {
-        proxyPass = "http://127.0.0.1:11434";
-      };
-    };
-    virtualHosts."freshrss.naresh.world" = {
-      enableACME = true;
-      forceSSL = true;
-    };
-    virtualHosts."anki.naresh.world" = {
-      enableACME = true;
-      forceSSL = true;
-      locations."/" = {
-        proxyPass = "http://127.0.0.1:27701";
-      };
-    };
-    virtualHosts."chatbot.naresh.world" = {
-      enableACME = true;
-      forceSSL = true;
-      locations."/" = {
-        proxyPass = "http://127.0.0.1:8080";
-      };
-    };
-    virtualHosts."code.naresh.world" = {
-      enableACME = true;
-      forceSSL = true;
-      basicAuth = {
-        naresh = "Naresh^111";
-      };
-      locations."/" = {
-        proxyPass = "http://127.0.0.1:3000";
-        proxyWebsockets = true;
-      };
-    };
-  };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

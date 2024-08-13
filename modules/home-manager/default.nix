@@ -28,7 +28,6 @@
     ./joplin.nix
     ./mpv.nix
     ./imv.nix
-    ./ollama.nix
     ./newsboat.nix
     ./rclone.nix
     ./distrobox.nix

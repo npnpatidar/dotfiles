@@ -2,6 +2,7 @@
 {
   imports = [
     ../../../modules/home-manager
+    ../../../modules/nixos/globals.nix
   ];
 
   modules.home-manager = {
@@ -30,7 +31,6 @@
     joplin.enable = true;
     mpv.enable = true;
     imv.enable = true;
-    ollama.enable = false;
     newsboat.enable = true;
   };
   nixpkgs = {
@@ -47,8 +47,8 @@
       ];
   };
   home = {
-    username = "naresh";
-    homeDirectory = "/home/naresh";
+    username = "${config.globals.default_user}";
+    homeDirectory = "${config.globals.home_directory}";
     stateVersion = "23.05";
   }; # Just don't change 
 

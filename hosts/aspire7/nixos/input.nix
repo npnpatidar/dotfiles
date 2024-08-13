@@ -34,12 +34,13 @@
       variant = "";
       options = "rupeesign:e";
     };
-    libinput = {
-      enable = true;
-      touchpad = {
-        tappingDragLock = false;
-        naturalScrolling = true;
-      };
+
+  };
+  services.libinput = {
+    enable = true;
+    touchpad = {
+      tappingDragLock = false;
+      naturalScrolling = true;
     };
   };
 

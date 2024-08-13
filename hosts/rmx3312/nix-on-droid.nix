@@ -1,80 +1,77 @@
 { config, lib, pkgs, ... }:
 {
-  imports = [ ../../modules/nixos/servarr.nix ];
 
-  environment.packages = with pkgs;
-    [
-      git
-      bat
-      nano
-      neofetch
-      ncdu
-      mc
-      onefetch
-      # python311Packages.howdoi
-      unzip
-      fd
-      tree-sitter
-      comma
-      fontconfig
-      htop
-      screenfetch
-      # rnix-lsp
-      git
-      git-crypt
-      gnupg
-      wget
-      neofetch
-      nethogs
-      p7zip
-      #   yt-dlp
-      zoxide
-      tgpt
-      direnv
-      nixpkgs-fmt
-      eza
-      nixfmt
-      cht-sh
-      nix-init
-      ripgrep
-      fzf
-      tldr
-      lazygit
-      curl
-      zsh
-      starship
-      openssh
-      any-nix-shell
-      perl
-      gcc
-      zig
-      cargo
-      pinentry
-      utillinux
-      bash
-      gnumake
-      rclone
-      ffsend
-      thefuck
-      python3
-      tmux
-      # oterm
-      termdbms
-      python312Packages.pudb
-      ttyper
-      termimage
-      bitwarden-cli
-
-      gpg-tui
-      # Read the changelog before changing this value
-      # home.stateVersion = "23.05";
-
-      # insert home-manager config
-    ];
+  environment.packages = with pkgs; [
+    git
+    bat
+    nano
+    ncdu
+    mc
+    onefetch
+    python311Packages.howdoi
+    unzip
+    fd
+    tree-sitter
+    comma
+    fontconfig
+    htop
+    screenfetch
+    # rnix-lsp
+    git
+    git-crypt
+    gnupg
+    wget
+    nethogs
+    fastfetch
+    p7zip
+    zoxide
+    tgpt
+    direnv
+    nixpkgs-fmt
+    eza
+    nixfmt-classic
+    cht-sh
+    nix-init
+    ripgrep
+    fzf
+    tldr
+    lazygit
+    curl
+    zsh
+    starship
+    openssh
+    any-nix-shell
+    perl
+    gcc
+    zig
+    cargo
+    pinentry
+    nix-index
+    utillinux
+    bash
+    gnumake
+    rclone
+    ffsend
+    thefuck
+    python3
+    tmux
+    ollama
+    # oterm
+    termdbms
+    python311Packages.pudb
+    ttyper
+    termimage
+    bitwarden-cli
+    zellij
+    gpg-tui
+    gorilla-cli
+    busybox
+    ncurses
+  ];
 
   time.timeZone = "Asia/Kolkata";
   environment.etcBackupExtension = ".bak";
-  system.stateVersion = "23.05";
+  system.stateVersion = "23.11";
   nix.extraOptions = ''
     experimental-features = nix-command flakes
   '';
@@ -99,8 +96,7 @@
           ../../modules/home-manager/ranger.nix
           ../../modules/home-manager/bat.nix
           ../../modules/home-manager/neovim.nix
-          ../../modules/home-manager/tmux.nix
-          # ../../modules/home-manager/nvim.nix
+          ../../modules/home-manager/bash.nix
           ../../modules/home-manager/yazi.nix
         ];
 
@@ -110,14 +106,13 @@
           ranger.enable = true;
           bat.enable = true;
           neovim.enable = true;
-          tmux.enable = false;
-          # nvim.enable = false;
           yazi.enable = true;
+          bash.enable = true;
         };
         home = {
           username = "nix-on-droid";
           homeDirectory = "/data/data/com.termux.nix/files/home";
-          stateVersion = "23.05";
+          stateVersion = "23.11";
         };
         home.packages = with pkgs; [
           eza

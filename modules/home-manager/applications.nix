@@ -10,8 +10,8 @@
     alacritty
 
     # Communication
-    discord
-    telegram-desktop
+    # discord
+    # telegram-desktop
     ferdium
     whatsapp-for-linux
     tutanota-desktop
@@ -33,9 +33,12 @@
 
     #Documents
     libreoffice
-    anki
+    anki-bin
+    obsidian
+    stremio
+    masterpdfeditor4
 
-    lmstudio
+    # lmstudio
     #mindmap 
     # freeplane
 
@@ -46,12 +49,13 @@
     (import ../../pkgs/reader.nix { inherit pkgs; })
     # gnome.gnome-boxes
     newsflash
+    localsend
     # bitwarden
     # inkscape-with-extensions
     ouch
     mathpix-snipping-tool
     # gpt4all
-    genymotion
+    # genymotion
     # qbittorrent
     git-lfs
     curl
@@ -62,7 +66,6 @@
     yq
     nil #  nix LSP
     ripgrep #recursive search fs for a regex
-    neofetch
     pstree
     zip
     unrar
@@ -71,6 +74,7 @@
     lazygit
     ghq
     btop
+    ttop
     powertop
     poppler_utils #pdf conversions
     ttygif
@@ -84,9 +88,9 @@
     lm_sensors
     boxbuddy
     protonvpn-gui
-    jan
+    # jan
     # linkrec
-
+    # zed-editor
     # nix-alien
     #   CLI Apps 
     ncdu
@@ -116,8 +120,8 @@
     gnupg
     pinentry-gnome3
     wget
-    neofetch
     nethogs
+    fastfetch
     ntfs3g
     p7zip
     fuse-7z-ng
@@ -136,7 +140,7 @@
     direnv
     any-nix-shell
     nixpkgs-fmt
-    nixfmt
+    nixfmt-classic
     cht-sh
     nix-init
     ripgrep
@@ -145,7 +149,7 @@
     llama-cpp
     fzf
     cargo
-    nodejs_21
+    # nodejs_21
     gnumake
     tldr
     preload
@@ -166,6 +170,18 @@
     tuifeed
     systemctl-tui
     newsboat # RSS Reader TUI
+    podman-tui
+    links2
+    gorilla-cli
+    trashy
+    cheat
+    ouch
+    bandwhich
+    entr # run arbitrary command when file changes
+    # onlyoffice-bin_latest
+    wpsoffice
+    devenv
+    busybox
   ];
 
 

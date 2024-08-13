@@ -21,6 +21,11 @@ in
         mkhl.direnv
         jnoortheen.nix-ide
         ms-python.python
+        continue.continue
+        # bierner.color-info
+        # marlosirapuan.nord-deep
+        # ms-python.debugpy
+        dotjoshjohnson.xml
 
       ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
         {
@@ -29,12 +34,12 @@ in
           version = "1.4.23";
           sha256 = "sha256-HZpBZy6n8YBOA2t4klccqlGISzEq3MjOBVjPECOdBcI=";
         }
-        {
-          name = "nix-ide";
-          publisher = "jnoortheen";
-          version = "0.2.2";
-          sha256 = "sha256-jwOM+6LnHyCkvhOTVSTUZvgx77jAg6hFCCpBqY8AxIg=";
-        }
+        # {
+        #   name = "nix-ide";
+        #   publisher = "jnoortheen";
+        #   version = "0.2.2";
+        #   sha256 = "sha256-jwOM+6LnHyCkvhOTVSTUZvgx77jAg6hFCCpBqY8AxIg=";
+        # }
 
       ];
     };
