@@ -8,8 +8,8 @@
     ./rclone-backup.nix
     ./openssh-server.nix
     ./freshrss-server.nix
-    ./gitdaemon-server.nix
     ./nextcloud-server.nix
+    ./writefreely.nix
     ./filebrowser-server.nix
     ./homgepage-dashboard.nix
     ./openvscode-server.nix
@@ -18,19 +18,24 @@
     ./vaultwarden-server.nix
     ./stirling-server.nix
     ./searx.nix
-    ./blog.nix
     ./ghost.nix
+    ./gitea.nix
     ./n8n.nix
     ./invidious.nix
     ./immich.nix
-    ./rclone-mount.nix
+    # ./rclone-mount.nix
     ./wallabag.nix
     ./shlink.nix
     ./changedetection-server.nix
-    ./joplin-server.nix
     ./redis.nix
     ./aria.nix
     ./jellyfin.nix
+    ./radicale.nix
+    ./qdrant.nix
+    ./redlib.nix
+    ./openvscode-server-pod.nix
+    ./obsidian-server.nix
+
 
     ../../../modules/nixos/agenix.nix
     ../../../modules/nixos/tailscale.nix
@@ -65,15 +70,13 @@
   programs.npm.enable = true;
   environment.systemPackages = [
     inputs.agenix.packages.aarch64-linux.default
-
-    (import ../../../pkgs/n8n.nix { inherit pkgs; })
   ];
   time.timeZone = "Asia/Kolkata";
 
   users.users."${config.globals.default_user}" = {
     isNormalUser = true;
     description = "${config.globals.default_user}";
-    extraGroups = [ "networkmanager" "wheel" "kvm" "input" "disk" "libvirtd" "usbmux" "freshrss" "nextcloud" "openvscode-server" "nginx" "syncthing" ];
+    extraGroups = [ "networkmanager" "podman" "wheel" "kvm" "input" "disk" "libvirtd" "usbmux" "freshrss" "nextcloud" "openvscode-server" "nginx" "syncthing" ];
     createHome = true;
     home = "/home/${config.globals.default_user}";
     shell = pkgs.zsh;

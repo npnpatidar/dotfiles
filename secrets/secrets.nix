@@ -32,5 +32,7 @@ in
   "openrouter_api_key.age".publicKeys = users ++ systems;
   "syncthing_gui_password.age".publicKeys = users ++ systems;
   "open_webui_environment_file.age".publicKeys = users ++ systems;
+  "obsidian_couchdb_environment_file.age".publicKeys = users ++ systems;
+  "gitea_action_runner_token.age".publicKeys = users ++ systems;
 }
 

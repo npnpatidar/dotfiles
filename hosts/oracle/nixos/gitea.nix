@@ -19,6 +19,9 @@
       service = {
         DISABLE_REGISTRATION = true;
       };
+      actions = {
+        enabled = true;
+      };
     };
   };
 
@@ -32,18 +35,18 @@
     };
   };
 
-  # services.gitea-actions-runner = {
-  # package = pkgs.forgejo-actions-runner;
-  # instances.neutrino = {
-  #   enable = true;
-  #   url = "https://git.neutrino.su";
-  #   tokenFile = "/run/forgejo-token";
-  #   name = "whale";
-  #   labels = [ "ubuntu-latest:docker://node:16-bullseye" ];
-  #   settings = {
-  #     capacity = 4;
-  #   };
-  # };
+  services.gitea-actions-runner = {
+    instances.neutrino = {
+      enable = true;
+      url = "https://git.naresh.world";
+      tokenFile = config.age.secrets.gitea_action_runner_token.path;
+      name = "whale";
+      labels = [ "ubuntu-latest:docker://node:16-bullseye" ];
+      settings = {
+        capacity = 4;
+      };
+    };
+  };
 
 
 

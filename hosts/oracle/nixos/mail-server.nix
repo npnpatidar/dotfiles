@@ -23,6 +23,8 @@
       indexAttachments = true;
       memoryLimit = 512;
     };
+    
+    indexDir = "/var/lib/dovecot/indices";
     certificateScheme = "acme-nginx";
   };
 
