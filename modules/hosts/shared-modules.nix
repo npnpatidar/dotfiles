@@ -34,6 +34,7 @@
       neovim
       opencode
       pi-coding-agent
+      freebuff
       common-packages
       inputs.sops-nix.homeManagerModules.sops
       config.flake.modules.generic.systemConstants
