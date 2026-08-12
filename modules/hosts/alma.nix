@@ -35,7 +35,6 @@
       inputs.hermes-agent.nixosModules.default
     ];
   };
-
   flake.homeConfigurations."naresh@alma" = inputs.home-manager.lib.homeManagerConfiguration {
     pkgs = inputs.nixpkgs.legacyPackages.aarch64-linux;
     extraSpecialArgs = { inherit inputs; };
@@ -47,6 +46,7 @@
       degoog
       agent-zero
       alma-packages
+      { programs.pi-coding-agent.sudoAskpass = false; }
     ];
   };
 }
