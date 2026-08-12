@@ -1,0 +1,22 @@
+keys:
+  - &admin_naresh age150lp4hteazvm5nu48swdd4mru48qjw0ruja028vqw2dt4e30jdnqk2qnfa
+  - &host_alma age1vafc7dut36j7vs5q34xug8nemsqke7aztgecdya8jhtux52fnccq744j8p
+  - &host_aspire7 age1e22ew43f40dzvrun3dvxn59mxvqc0t9a72w7gmf5qaxdsqd7tqdsqjlewg
+
+creation_rules:
+  - path_regex: secrets/shared.yaml
+    key_groups:
+    - age:
+      - *admin_naresh
+      - *host_alma
+      - *host_aspire7
+  - path_regex: secrets/alma.yaml
+    key_groups:
+    - age:
+      - *admin_naresh
+      - *host_alma
+  - path_regex: secrets/aspire7.yaml
+    key_groups:
+    - age:
+      - *admin_naresh
+      - *host_aspire7

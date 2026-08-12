@@ -1,0 +1,76 @@
+{
+  perSystem = { pkgs, system, ... }: {
+    # Same derivation as the karakeep NixOS service uses (services.karakeep.package).
+    # Exposed so CI can pre-build/cache it for alma (aarch64).
+    # Mirror the system config's nixpkgs.config (modules/system/nix.nix) so the
+    # pnpm-9.15.9 pin used by karakeep's build is permitted.
+    packages.karakeep =
+      let
+        pkgsK = import pkgs.path {
+          inherit system;
+          config = {
+            allowUnfree = true;
+            permittedInsecurePackages = [ "pnpm-9.15.9" ];
+          };
+        };
+      in
+      pkgsK.karakeep;
+  };
+
+  flake.nixosModules.karakeep = { config, lib, ... }: {
+    sops.secrets.karakeep_environment_file = {
+      sopsFile = ../../secrets/alma.yaml;
+    };
+
+    services = {
+      oink.domains = [
+        {
+          domain = "${config.systemConstants.domain_name}";
+          subdomain = "karakeep";
+        }
+      ];
+
+      karakeep = {
+        enable = true;
+        meilisearch.enable = true;
+        browser.enable = true;
+        environmentFile = config.sops.secrets.karakeep_environment_file.path;
+        extraEnvironment = {
+          NEXTAUTH_URL = "https://karakeep.${config.systemConstants.domain_name}";
+          DISABLE_PASSWORD_AUTH = "true";
+          OAUTH_WELLKNOWN_URL = "https://id.${config.systemConstants.domain_name}/.well-known/openid-configuration";
+          OAUTH_CLIENT_ID = "karakeep";
+          OAUTH_PROVIDER_NAME = "Pocket ID";
+          OAUTH_SCOPE = "openid email profile";
+          OAUTH_ALLOW_DANGEROUS_EMAIL_ACCOUNT_LINKING = "true";
+          PORT = "3003";
+          CRAWLER_FULL_PAGE_SCREENSHOT = "true";
+          CRAWLER_FULL_PAGE_ARCHIVE = "true";
+          DISABLE_SIGNUPS = "false";
+          DISABLE_NEW_RELEASE_CHECK = "true";
+        };
+      };
+
+      nginx.virtualHosts."karakeep.${config.systemConstants.domain_name}" = {
+        enableACME = true;
+        forceSSL = true;
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:3003";
+        };
+      };
+    };
+
+    systemd = {
+      services.karakeep-web = {
+        environment.DATA_DIR = lib.mkForce "/mnt/filen/Alma/services/karakeep";
+        serviceConfig.EnvironmentFile = lib.mkAfter [
+          "/var/lib/oidc-client-secrets/karakeep-env"
+        ];
+        after = [ "pocket-id-seed.service" ];
+        requires = [ "pocket-id-seed.service" ];
+      };
+      services.karakeep-workers.environment.DATA_DIR = lib.mkForce "/mnt/filen/Alma/services/karakeep";
+      tmpfiles.rules = [ "d /mnt/filen/Alma/services/karakeep 0755 root root -" ];
+    };
+  };
+}

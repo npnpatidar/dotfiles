@@ -1,0 +1,113 @@
+name: "CI Build"
+
+on:
+  workflow_dispatch:
+
+jobs:
+  # Temporarily disabled: full closure pushes exceed the 5 GB Cachix quota too fast.
+  # build-system:
+  #   name: Build NixOS (aspire7)
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+  #     - uses: DeterminateSystems/nix-installer-action@252ce0ac769a3b5e2f2869cbdbb0e050f23a5a90 # v1
+  #     - uses: cachix/cachix-action@02b16339eddcf6ea27126a830c7f1992855cae13 # v17
+  #       with:
+  #         name: npnpatidar
+  #         authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+  #         skipPush: true
+  #     - id: build
+  #       run: echo "out=$(nix build --no-link --print-out-paths .#nixosConfigurations.aspire7.config.system.build.toplevel)" >> "$GITHUB_OUTPUT"
+  #     - name: Push to Cachix (skip if unchanged)
+  #       env:
+  #         OUT: ${{ steps.build.outputs.out }}
+  #       run: |
+  #         hash="$(basename "$OUT" | cut -d- -f1)"
+  #         if curl -sf "https://npnpatidar.cachix.org/${hash}.narinfo" > /dev/null; then
+  #           echo "::notice::${hash} already in cache - skipping push"
+  #         else
+  #           cachix push npnpatidar "$OUT"
+  #         fi
+
+  # build-home-manager:
+  #   name: Build home-manager (naresh@aspire7)
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+  #     - uses: DeterminateSystems/nix-installer-action@252ce0ac769a3b5e2f2869cbdbb0e050f23a5a90 # v1
+  #     - uses: cachix/cachix-action@02b16339eddcf6ea27126a830c7f1992855cae13 # v17
+  #       with:
+  #         name: npnpatidar
+  #         authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+  #         skipPush: true
+  #     - id: build
+  #       run: echo "out=$(nix build --no-link --print-out-paths .#homeConfigurations."naresh@aspire7".activationPackage)" >> "$GITHUB_OUTPUT"
+  #     - name: Push to Cachix (skip if unchanged)
+  #       env:
+  #         OUT: ${{ steps.build.outputs.out }}
+  #       run: |
+  #         hash="$(basename "$OUT" | cut -d- -f1)"
+  #         if curl -sf "https://npnpatidar.cachix.org/${hash}.narinfo" > /dev/null; then
+  #           echo "::notice::${hash} already in cache - skipping push"
+  #         else
+  #           cachix push npnpatidar "$OUT"
+  #         fi
+
+  build-packages:
+    name: Build ${{ matrix.label }}
+    runs-on: ${{ matrix.runner }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - label: llama.cpp CPU (x86_64)
+            runner: ubuntu-latest
+            attr: packages.x86_64-linux.llama-cpp
+          - label: llama.cpp CUDA (aspire7)
+            runner: ubuntu-latest
+            attr: packages.x86_64-linux.llama-cpp-cuda
+          - label: llama.cpp CPU (aarch64 / alma)
+            runner: ubuntu-24.04-arm
+            attr: packages.aarch64-linux.llama-cpp
+          - label: karakeep (aarch64 / alma)
+            runner: ubuntu-24.04-arm
+            attr: packages.aarch64-linux.karakeep
+          - label: hermes-agent (aarch64 / alma)
+            runner: ubuntu-24.04-arm
+            attr: nixosConfigurations.alma.config.services.hermes-agent.package
+          - label: NVIDIA driver (userspace, aspire7)
+            runner: ubuntu-latest
+            attr: nixosConfigurations.aspire7.config.boot.kernelPackages.nvidiaPackages.production
+          - label: NVIDIA kernel modules (aspire7)
+            runner: ubuntu-latest
+            attr: nixosConfigurations.aspire7.config.boot.kernelPackages.nvidiaPackages.production.mod
+          - label: neovim plugins (x86_64 / aspire7)
+            runner: ubuntu-latest
+            attr: homeConfigurations.naresh@aspire7.config.programs.neovim.finalPackage
+          - label: neovim plugins (aarch64 / alma)
+            runner: ubuntu-24.04-arm
+            attr: homeConfigurations.naresh@alma.config.programs.neovim.finalPackage
+    timeout-minutes: 720
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: DeterminateSystems/nix-installer-action@252ce0ac769a3b5e2f2869cbdbb0e050f23a5a90 # v1
+      - uses: cachix/cachix-action@02b16339eddcf6ea27126a830c7f1992855cae13 # v17
+        with:
+          name: npnpatidar
+          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+          skipPush: true
+      - id: build
+        run: |
+          SECONDS=0
+          echo "out=$(nix build --no-link --print-out-paths .#${{ matrix.attr }})" >> "$GITHUB_OUTPUT"
+          echo "::notice::Build duration: ${SECONDS}s for ${{ matrix.attr }}"
+      - name: Push to Cachix (skip if unchanged)
+        env:
+          OUT: ${{ steps.build.outputs.out }}
+        run: |
+          hash="$(basename "$OUT" | cut -d- -f1)"
+          if curl -sf "https://npnpatidar.cachix.org/${hash}.narinfo" > /dev/null; then
+            echo "::notice::${hash} already in cache - skipping push"
+          else
+            cachix push npnpatidar "$OUT"
+          fi
