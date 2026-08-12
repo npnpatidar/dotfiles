@@ -1,10 +1,10 @@
 # Dotfiles Codebase Intelligence
 
 > **Last updated:** 2026-08-12  
-> **Last commit tracked:** `5f8368b` (HEAD)  
+> **Last commit tracked:** `98ed134` (HEAD — single squashed snapshot)  
 > **Owner:** owner (user)  
 > **Domain:** example.com  
-> **Primary Git branch:** opencode (active development)  
+> **Primary Git branch:** main (only branch; history anonymized + squashed 2026-08-12)  
 > **Total files:** ~1563 (includes generated lock files, secrets, etc.)
 
 ---
@@ -900,21 +900,17 @@ Built by modules, consumed by CI + hosts (see §16):
 
 ---
 
-## 14. Git Branches & History
+## 14. Git History & Branches
 
-| Branch | Purpose |
-|--------|---------|
-| `opencode` | **Active development** — current default |
-| `main` | Stable/release |
-| `nerd-dictation` | Dictation feature branch |
-| `voice` | Voice control experiments |
-| `auth-change` | Auth infrastructure refactoring |
-| `den` / `dendritic` | CI/CD branch |
-| `initialoci` | Early containerization |
-| `opencode-refactored` | OpenCode refactor |
-| `wayland` | Wayland migration |
+**Single-snapshot history (2026-08-12):** the repository's 1500+ commit history was deliberately rewritten and squashed for privacy before going public:
 
-Commit style: Conventional Commits (`feat:`, `chore:`, `refactor:`, `fix:`, etc.)
+- **All commit authors/committers** mapped to a neutral identity (`user <user@users.noreply.github.com>`) via `git-filter-repo` — filtering out name, email, and domain identifiers
+- **History squashed** into a single orphan commit `98ed134` — *"initial commit"* — snapshotting the current file tree (142 files, 106 .nix modules)
+- **All other branches deleted** locally and from GitHub; only `main` remains
+- **Local artifacts purged** — reflogs expired, stashes dropped, `git gc --prune=now`; `git fsck` reports zero unreachable objects
+- Pre-wipe state preserved in `/tmp/dotfiles-backup-20260812.bundle` (deletable once confirmed)
+
+Commit style going forward: Conventional Commits (`feat:`, `chore:`, `refactor:`, `fix:`, etc.)
 
 ---
 
@@ -1001,9 +997,9 @@ Home-manager modules declare `sops.secrets` directly. A `home.activation` script
 
 ---
 
-## 17. Changes Since Last Tracking Point (`b7a11d9` → `95ec59d`)
+## 17. Snapshot Composition & History Reset
 
-> Grouped by area. Diff: `git diff b7a11d9..HEAD`
+> The history was reset to a single commit `98ed134 "initial commit"` (2026-08-12, see §14); the old tracking points (`b7a11d9`, `95ec59d`, `ac08d87`, `5f8368b`) no longer exist. The grouped notes below describe what the snapshot contains.
 
 ### Terminal / Shell
 - **zellij removed, herdr integrated** as the terminal workspace manager (`modules/home/herdr.nix`): tmux/zellij-style F12 prefix keybindings, catppuccin theme with auto light/dark switch, lazygit/btop/yazi popups, session resume for agent panes; `h` alias added, `zl` alias dropped
@@ -1048,28 +1044,30 @@ Home-manager modules declare `sops.secrets` directly. A `home.activation` script
 ### Removed
 - `modules/home/cryptomator.nix`, `modules/ai/pi-subagents` npm dependency (replaced by local extension), `scripts/fill-sops-secrets.py`, `pkgs/zen-browser-source/` (source-build experiment, reverted)
 
-### Changes Since `95ec59d` → `ac08d87` (+ working tree)
+### Additional capture: zen-browser cleanup & removable-media split
 
 - **CI:** zen-browser source-build matrix entry dropped (was building `packages.x86_64-linux.zen-browser-patched`, ~2-3 h on 16 cores)
 - **Flake:** `perSystem.packages.zen-browser-patched` removed from `flake.nix` — dangling refs from the reverted source-build experiment cleaned up
 - **Desktop (aspire7):** removable-media settings split out of `modules/display/niri.nix` into a dedicated `modules/display/removable-media.nix` — `udisks2` + `gvfs` + `upower` (system) and `udiskie` (home); `niri.nix` keeps only compositor config and the niri-docs-required packages (portal, wl-clipboard, qtwayland, xwayland-satellite, grim); module wired into aspire7 system + home lists
 
+### Post-snapshot changes
+
+None yet — the first post-snapshot commit will extend the history from `98ed134`.
+
 ---
 
-## 18. How to Update This File (diff-based method)
+## 18. How to Update This File
 
-Do **not** track commits one-by-one. Update the document from the actual code diff:
+The repo history is a single snapshot (`98ed134`, see §14), so commit-diff-based updates no longer apply. Update from the live code:
 
-1. Find `Last commit tracked:` in the header — that's where the last update stopped
-2. `git log --oneline <hash>..HEAD` — skim to know what areas changed
-3. `git diff <hash>..HEAD --stat` — identify changed files, then read each changed module (`git diff <hash>..HEAD -- <path>` or just `read` the current file) and verify against the *current* code
-4. Update the affected sections in place:
-   - New/removed modules → §3 inputs, §4 host module lists
+1. `git status` / `git diff` against the `98ed134` snapshot — identify changed files, read each changed module (`git diff HEAD -- <path>` or just `read` the current file) and verify against the *current* code
+2. Update the affected sections in place:
+   - New/removed modules → §3 inputs, §4 host module lists, §19 index
    - Changed module behavior → the corresponding §5/§6/§7/§8 subsection
-   - Secrets → §9; scripts → §10; CI → §12; patterns → §16
+   - Secrets → §9; scripts → §10; CI → §12; patterns → §16; history/branches → §14
    - Update the header (`Last updated:`, `Last commit tracked:`)
-5. Append a **grouped** summary (by area, not by commit) to §17 — only if notable; drop the summary if nothing user-visible changed
-6. Never re-list individual commits — the git history is the authoritative changelog
+3. Append a **grouped** summary (by area, not by commit) to §17 — only if notable; drop the summary if nothing user-visible changed
+4. Never re-list individual commits — the git history (fresh from `98ed134`) is the authoritative changelog
 
 ---
 
