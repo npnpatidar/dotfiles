@@ -184,6 +184,10 @@ _: {
             - On headless hosts (alma) there is no dialog: non-allowlisted sudo fails with a clear error. Do not retry it; tell the user what command needs sudo so they can extend the NOPASSWD allowlist (modules/system/users.nix) or run it themselves.
             - NEVER type, echo, pipe (`-S`), store, or write a password anywhere.
 
+            ## Subagent Usage
+            - The agent may autonomously decide to use subagents for tasks that would benefit from parallel execution, such as independent web searches, file operations, or build processes, without requiring explicit user request.
+            - Subagents are managed with self-awareness to avoid recursion and report results upon completion.
+
             ## Project Instructions
             - Pi loads `AGENTS.md` from the current directory (and parents) at startup. Follow the project's `AGENTS.md` for project-specific workflows and commands.
           '';

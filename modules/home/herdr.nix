@@ -160,7 +160,14 @@
           # Notifications & sound
           toast = {
             delivery = "herdr"; # off | herdr | terminal | system
-            delay_seconds = 1;
+            delay_seconds = 0; # immediate notifications
+            herdr = {
+              position = "top-right";
+            };
+            clipboard = {
+              enabled = true;
+              position = "bottom-center";
+            };
           };
           sound.enabled = true;
         };
