@@ -152,7 +152,7 @@ _: {
               "kitty"
               "org.gnome.Nemo"
               "dev.noctalia.Noctalia"
-              "zen-beta"
+              "librewolf"
             ];
             show_running = true;
             show_dots = true;

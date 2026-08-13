@@ -17,7 +17,9 @@ _: {
       settings.program_options = {
         automount = true;
         notify = true;
+        tray = false;
       };
+      tray = "auto";
     };
   };
 }

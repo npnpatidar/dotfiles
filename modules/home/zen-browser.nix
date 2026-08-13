@@ -10,7 +10,7 @@ _: {
       imports = [ inputs.zen-browser.homeModules.beta ];
       programs.zen-browser = {
         enable = true;
-        setAsDefaultBrowser = true;
+        setAsDefaultBrowser = false;
         profiles.default = {
           id = 0;
           extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
