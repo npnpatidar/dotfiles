@@ -321,5 +321,14 @@ in
         NIXOS_OZONE_WL = "1";
       };
     };
+
+    # Auto-mount removable drives (USB pendrives) on insertion.
+    services.udiskie = {
+      enable = true;
+      settings.program_options = {
+        automount = true;
+        notify = true;
+      };
+    };
   };
 }
