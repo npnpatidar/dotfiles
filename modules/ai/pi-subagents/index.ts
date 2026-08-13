@@ -512,7 +512,7 @@ export default function (pi: ExtensionAPI) {
             "--provider",
             "nvidia",
             "--model",
-            "nvidia/nemotron-3-super-120b-a12b",
+            "nvidia/nemotron-3-ultra-550b-a55b",
             "--append-system-prompt",
             promptFile,
           ],
