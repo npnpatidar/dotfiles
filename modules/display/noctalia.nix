@@ -364,7 +364,8 @@ _: {
           widget = {
             "workspaces" = {
               type = "workspaces";
-              display = "id";
+              label_source = "id";
+              show_labels = true;
               hide_when_empty = true;
             };
             "clock-day" = {
@@ -382,9 +383,6 @@ _: {
             "battery" = {
               type = "battery";
               show_label = true;
-            };
-            "battery-threshold" = {
-              type = "damian-ds7/battery-threshold:battery-threshold";
             };
             "network" = {
               type = "network";
