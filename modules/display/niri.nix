@@ -322,13 +322,5 @@ in
       };
     };
 
-    # Auto-mount removable drives (USB pendrives) on insertion.
-    services.udiskie = {
-      enable = true;
-      settings.program_options = {
-        automount = true;
-        notify = true;
-      };
-    };
   };
 }
