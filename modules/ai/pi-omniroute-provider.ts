@@ -1,0 +1,60 @@
+import { createProvider, openAICompletionsApi } from "@earendil-works/pi-ai";
+import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
+
+const omnirouteModels = [
+  "auto/best-coding",
+  "auto/best-reasoning",
+  "auto/best-fast",
+  "auto/best-vision",
+  "auto/best-chat",
+  "auto/pro-coding",
+  "auto/pro-reasoning",
+  "auto/pro-vision",
+  "auto/pro-chat",
+  "auto/pro-fast",
+  "auto/coding",
+  "auto/fast",
+  "auto/chat",
+  "auto/cheap",
+  "auto/offline",
+  "auto/smart",
+  "auto/claude-opus",
+  "auto/claude-sonnet",
+  "auto/best-free",
+  "auto/best-chaos",
+  "auto/chaos",
+  "auto/coding:fast",
+  "auto/coding:cheap",
+  "auto/coding:free",
+  "auto/coding:pro",
+  "auto/coding:reliable",
+  "auto/reasoning",
+  "auto/reasoning:pro",
+  "auto/vision",
+  "auto/multimodal",
+  "auto/glm",
+  "auto/minimax",
+  "auto/mimo",
+  "auto/zai",
+  "auto/gemma",
+  "auto/llama",
+  "auto/gemini",
+];
+
+export default function (pi: ExtensionAPI) {
+  pi.registerProvider("omniroute", {
+    name: "OmniRoute",
+    baseUrl: "http://127.0.0.1:20128/v1",
+    apiKey: "not-needed",
+    api: "openai-completions",
+    models: omnirouteModels.map((id) => ({
+      id,
+      name: id,
+      reasoning: true,
+      input: ["text"],
+      cost: { input: 0, output: 0, cacheRead: 0, cacheWrite: 0 },
+      contextWindow: 1048576,
+      maxTokens: 384000,
+    })),
+  });
+}

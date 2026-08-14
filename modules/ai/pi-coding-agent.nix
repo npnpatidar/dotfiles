@@ -116,6 +116,9 @@ _: {
 
             # Custom footer: show actual context tokens (e.g. 48.2k/200k) instead of only percent
             ".pi/agent/extensions/footer.ts".source = ./pi-footer.ts;
+
+            # OmniRoute provider extension - registers omniroute as a custom OpenAI-compatible provider
+            ".pi/agent/extensions/omniroute-provider.ts".source = ./pi-omniroute-provider.ts;
           };
         };
 

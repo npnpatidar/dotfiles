@@ -36,6 +36,7 @@
       pi-coding-agent
       freebuff
       common-packages
+      omniroute
       inputs.sops-nix.homeManagerModules.sops
       config.flake.modules.generic.systemConstants
     ];
