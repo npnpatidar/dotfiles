@@ -50,7 +50,7 @@ _: {
             # NOT ~/.pi — writing here is what actually disables the search curator.
             ".config/pi/web-search.json".text = builtins.toJSON {
               searxngBaseUrl = "http://alma.n:8056";
-              workflow = "none";
+              commands.curator = false;
               autoOpenBrowser = false;
               ssrf = {
                 allowRanges = [ "127.0.0.1/32" ];
@@ -136,9 +136,7 @@ _: {
             enableInstallTelemetry = false;
             packages = [
               "npm:pi-web-access"
-              "npm:pi-observational-memory"
-              "npm:omniroute-pi-ext-integration"
-
+              "git:github.com/md-riaz/omniroute-pi-ext-integration"
             ];
 
             compaction = {
