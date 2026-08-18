@@ -7,12 +7,12 @@ let
       in
       prev.llama-cpp.overrideAttrs (finalAttrs: rec {
         # Tagged release with MCP support.
-        version = "10253";
+        version = "10481";
         src = prev.fetchFromGitHub {
           owner = "ggml-org";
           repo = "llama.cpp";
-          rev = "94bc47f2807805ffdc1c5fbe5dce5cd2afdf3a97";
-          hash = "sha256-U9ubELkeW08EHnVgQFtVXqGbI9fPpTjuoNmKI4i5qf4=";
+          rev = "25ae3a9b331fffea50ff8d07a5cad34c33f1276f";
+          hash = "sha256-3EFOqoJb5CFLWIkekTtWYOPv+PyVgKGHNKyWQ7qnxls=";
           leaveDotGit = true;
           postFetch = ''
             git -C "$out" rev-parse --short HEAD > $out/COMMIT
@@ -21,7 +21,7 @@ let
         };
         buildInputs = (finalAttrs.buildInputs or [ ]) ++ [ prev.curl ];
         npmRoot = "tools/ui";
-        npmDepsHash = "sha256-B7uEynAG70a3xauBKc20RuFa9cnWaWzVBCh+LPLBnIM=";
+        npmDepsHash = "sha256-2Q7XhaLAArmviOLdQsNbYTfdyDE5pW9lR26cRHEVl9k=";
         preConfigure = builtins.replaceStrings [ "tools/server/webui" ] [ "tools/ui" ] origPreConfigure;
       });
     llama-cpp-cuda = final.llama-cpp.override { cudaSupport = true; };
