@@ -30,6 +30,19 @@
         }
       ];
 
+      # Workaround: the upstream NixOS meilisearch module sets
+      # experimental_dumpless_upgrade = true by default, but meilisearch 1.51.0
+      # dropped that TOML field in favour of `upgrade_db`. Override the
+      # entire settings to swap the option name while keeping all other defaults.
+      meilisearch.settings = lib.mkForce {
+        db_path = "/var/lib/meilisearch";
+        dump_dir = "/var/lib/meilisearch/dumps";
+        snapshot_dir = "/var/lib/meilisearch/snapshots";
+        no_analytics = true;
+        http_addr = "localhost:7700";
+        upgrade_db = true;
+      };
+
       karakeep = {
         enable = true;
         meilisearch.enable = true;
