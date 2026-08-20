@@ -1,4 +1,21 @@
 _: {
+  flake.nixosModules.omniroute = { config, ... }: {
+    services.oink.domains = [
+      {
+        domain = "${config.systemConstants.domain_name}";
+        subdomain = "omniroute";
+      }
+    ];
+    services.nginx.virtualHosts."omniroute.${config.systemConstants.domain_name}" = {
+      enableACME = true;
+      forceSSL = true;
+      locations."/" = {
+        proxyPass = "http://127.0.0.1:20128";
+        proxyWebsockets = true;
+      };
+    };
+  };
+
   flake.homeModules.omniroute = { config, ... }: {
     virtualisation.quadlet = {
       enable = true;

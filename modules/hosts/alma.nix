@@ -32,6 +32,7 @@
       degoog
       agent-zero
       opencode
+      omniroute
       inputs.hermes-agent.nixosModules.default
     ];
   };
