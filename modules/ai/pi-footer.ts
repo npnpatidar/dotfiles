@@ -54,7 +54,91 @@ function addUsage(totals: Totals, usage: Usage): void {
 	}
 }
 
+// OmniRoute keepalive sentinel: the gateway sends `data: {"model":"omniroute"}`
+// keepalives before the real routing completes. pi-ai's openai-completions
+// does `responseModel ||= chunk.model`, so the first keepalive locks
+// responseModel to "omniroute" and the real `nvidia/...` model is lost.
+// Filter that sentinel at the fetch layer so pi-ai sees only the actual model.
+let lastOmniActualModel: string | undefined;
+let fetchPatched = false;
+function patchOmniFetch() {
+	if (fetchPatched || typeof globalThis.fetch !== "function") return;
+	fetchPatched = true;
+	const origFetch = globalThis.fetch.bind(globalThis);
+	globalThis.fetch = (async (input: RequestInfo | URL, init?: RequestInit) => {
+		const res = await origFetch(input as any, init as any);
+		try {
+			if (!res.body || !res.ok) return res;
+			const ct = res.headers.get("content-type") || "";
+			const isStream = ct.includes("text/event-stream");
+			if (!isStream) return res;
+			// Only filter streams that actually contain the omniroute sentinel; peek by
+			// transforming the stream and filtering keepalive chunks.
+			const decoder = new TextDecoder();
+			const encoder = new TextEncoder();
+			let buffer = "";
+			const transform = new TransformStream<Uint8Array, Uint8Array>({
+				transform(chunk, controller) {
+					buffer += decoder.decode(chunk, { stream: true });
+					const parts = buffer.split("\n");
+					buffer = parts.pop() ?? "";
+					for (const line of parts) {
+						if (line.startsWith("data: ") && line.includes('"model":"omniroute"')) {
+							// Drop keepalive sentinel entirely
+							continue;
+						}
+						// Capture actual model for fallback display
+						if (line.startsWith("data: ")) {
+							try {
+								const payload = JSON.parse(line.slice(6));
+								if (payload?.model && payload.model !== "omniroute") {
+									lastOmniActualModel = payload.model;
+								}
+							} catch {}
+						}
+						controller.enqueue(encoder.encode(line + "\n"));
+					}
+				},
+				flush(controller) {
+					if (buffer) {
+						// Don't emit trailing sentinel
+						if (!(buffer.startsWith("data: ") && buffer.includes('"model":"omniroute"'))) {
+							controller.enqueue(encoder.encode(buffer));
+						}
+					}
+				},
+			});
+			return new Response(res.body.pipeThrough(transform), {
+				status: res.status,
+				statusText: res.statusText,
+				headers: res.headers,
+			});
+		} catch {
+			return res;
+		}
+	}) as typeof fetch;
+}
+
 export default function (pi: ExtensionAPI) {
+	patchOmniFetch();
+
+	// Also capture provider response header fallback (in case keepalive filtering
+	// missed) and patch persisted messages where pi-ai locked to "omniroute".
+	pi.on("after_provider_response", (event) => {
+		const h = event.headers["x-omniroute-model"] ?? event.headers["x-omniroute-model".toLowerCase()];
+		if (h && h !== "omniroute") lastOmniActualModel = h;
+	});
+	pi.on("message_end", (event) => {
+		if (event.message.role !== "assistant") return;
+		const msg = event.message as AssistantMessage;
+		if (msg.provider === "omni" && msg.responseModel === "omniroute" && lastOmniActualModel) {
+			return { message: { ...msg, responseModel: lastOmniActualModel } };
+		}
+		if (msg.provider === "omni" && !msg.responseModel && lastOmniActualModel && msg.model !== lastOmniActualModel) {
+			return { message: { ...msg, responseModel: lastOmniActualModel } };
+		}
+	});
+
 	pi.on("session_start", (_event, ctx) => {
 		ctx.ui.setFooter((tui, theme, footerData) => {
 			const unsub = footerData.onBranchChange(() => tui.requestRender());
@@ -65,9 +149,12 @@ export default function (pi: ExtensionAPI) {
 				render(width: number): string[] {
 					// Cumulative usage across all session entries (same as built-in footer)
 					const totals: Totals = { input: 0, output: 0, cacheRead: 0, cacheWrite: 0, cost: 0 };
+					let lastAssistant: AssistantMessage | undefined;
 					for (const e of ctx.sessionManager.getEntries()) {
 						if (e.type === "message" && e.message.role === "assistant") {
-							addUsage(totals, (e.message as AssistantMessage).usage);
+							const msg = e.message as AssistantMessage;
+							addUsage(totals, msg.usage);
+							lastAssistant = msg;
 						} else if (e.type === "message" && e.message.role === "toolResult" && e.message.usage) {
 							addUsage(totals, e.message.usage);
 						} else if ((e.type === "branch_summary" || e.type === "compaction") && e.usage) {
@@ -131,7 +218,27 @@ export default function (pi: ExtensionAPI) {
 					}
 
 					// Right side: model • thinking level, provider prefix if multiple providers
-					const modelName = ctx.model?.id || "no-model";
+					// When the provider (e.g. omniroute) routes to a concrete backing model,
+					// pi-ai surfaces it as `responseModel` (e.g. auto -> anthropic/claude-opus).
+					// Show `requested → actual` so the user sees exactly which model served
+					// the latest response. Falls back to plain model when no routing occurred.
+					let modelName = ctx.model?.id || "no-model";
+					// Prefer header/stream-captured actual model when pi-ai locked to sentinel "omniroute"
+					let routed = lastAssistant?.responseModel;
+					if (routed === "omniroute" && lastOmniActualModel) routed = lastOmniActualModel;
+					if (!routed && lastOmniActualModel && lastAssistant?.provider === "omni") routed = lastOmniActualModel;
+					const requested = lastAssistant?.model;
+					const isRouted =
+						!!routed &&
+						!!requested &&
+						routed !== requested &&
+						routed !== "omniroute" &&
+						!!ctx.model &&
+						lastAssistant.provider === ctx.model.provider &&
+						requested === ctx.model.id;
+					if (isRouted) {
+						modelName = `${requested} → ${routed}`;
+					}
 					let rightSideWithoutProvider = modelName;
 					if (ctx.model?.reasoning) {
 						const thinkingLevel = ctx.thinkingLevel || "off";
