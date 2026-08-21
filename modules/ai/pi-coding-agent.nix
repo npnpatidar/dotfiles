@@ -10,6 +10,7 @@ _: {
       inherit (lib.hm.dag) entryAfter;
       opencodeKeyFile = config.sops.secrets.opencode_api_key.path;
       nvidiaKeyFile = config.sops.secrets.nvidia_api_key.path;
+      mistralKeyFile = config.sops.secrets.mistral_api_key.path;
     in
     {
       options.programs.pi-coding-agent = {
@@ -21,24 +22,48 @@ _: {
       };
 
       config = {
-        sops.secrets.opencode_api_key = {
-          mode = "0600";
-        };
-        sops.secrets.nvidia_api_key = {
-          mode = "0600";
+        sops = {
+          secrets = {
+            opencode_api_key = {
+              mode = "0600";
+            };
+            nvidia_api_key = {
+              mode = "0600";
+            };
+            mistral_api_key = {
+              mode = "0600";
+            };
+          };
         };
 
         home = {
           activation.setOpenCodeZenAuth = entryAfter [ "writeBoundary" ] ''
-              mkdir -p "${config.home.homeDirectory}/.pi/agent"
-              if [ -f "${opencodeKeyFile}" ] && [ -f "${nvidiaKeyFile}" ]; then
-                cat > "${config.home.homeDirectory}/.pi/agent/auth.json" << EOF
-            {
-              "opencode": { "type": "api_key", "key": "$(cat ${opencodeKeyFile})" },
-              "nvidia": { "type": "api_key", "key": "$(cat ${nvidiaKeyFile})" }
-            }
-            EOF
-              fi
+            mkdir -p "${config.home.homeDirectory}/.pi/agent"
+            # Build auth.json from any available sops-managed keys (opencode, nvidia, mistral)
+            tmp="${config.home.homeDirectory}/.pi/agent/auth.json.tmp"
+            rm -f "$tmp"
+            echo "{" > "$tmp"
+            first=1
+            if [ -f "${opencodeKeyFile}" ]; then
+              printf '%s  "opencode": { "type": "api_key", "key": "%s" }' "$([ "$first" -eq 1 ] && echo "" || echo ",")" "$(cat ${opencodeKeyFile})" >> "$tmp"
+              first=0
+            fi
+            if [ -f "${nvidiaKeyFile}" ]; then
+              printf '%s  "nvidia": { "type": "api_key", "key": "%s" }' "$([ "$first" -eq 1 ] && echo "" || echo ",")" "$(cat ${nvidiaKeyFile})" >> "$tmp"
+              first=0
+            fi
+            if [ -f "${mistralKeyFile}" ]; then
+              printf '%s  "mistral": { "type": "api_key", "key": "%s" }' "$([ "$first" -eq 1 ] && echo "" || echo ",")" "$(cat ${mistralKeyFile})" >> "$tmp"
+              first=0
+            fi
+            echo "" >> "$tmp"
+            echo "}" >> "$tmp"
+            if [ "$first" -eq 0 ]; then
+              mv "$tmp" "${config.home.homeDirectory}/.pi/agent/auth.json"
+              chmod 600 "${config.home.homeDirectory}/.pi/agent/auth.json"
+            else
+              rm -f "$tmp"
+            fi
           '';
 
           sessionVariables = {
