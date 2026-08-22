@@ -262,9 +262,15 @@ in
   flake.nixosModules.niri = { inputs, pkgs, ... }: {
     imports = [ inputs.niri.nixosModules.niri ];
 
+    # nixpkgs removed libdisplay-info_0_2 (aliases.nix throws), but niri-flake's
+    # make-niri still asserts libdisplay-info_0_2.version == "0.2.0". Re-add it via
+    # overlay so niri builds against current nixpkgs; build niri from our pkgs rather
+    # than the prebuilt inputs.niri.packages (which use raw inputs.nixpkgs).
+    nixpkgs.overlays = [ (import ../../overlays/libdisplay-info-0_2.nix) ];
+
     programs = {
       niri.enable = true;
-      niri.package = inputs.niri.packages.${pkgs.stdenv.hostPlatform.system}.niri-unstable;
+      niri.package = (inputs.niri.lib.internal.make-package-set pkgs).niri-unstable;
     };
 
     environment.etc."niri/config.kdl".text = niriConfig;
@@ -285,7 +291,11 @@ in
   flake.homeModules.niri = { pkgs, inputs, ... }: {
     imports = [ inputs.niri.homeModules.niri ];
 
-    programs.niri.package = inputs.niri.packages.${pkgs.stdenv.hostPlatform.system}.niri-unstable;
+    # See flake.nixosModules.niri: re-add libdisplay-info_0_2 and build niri from
+    # our pkgs so it links against the overlay-provided 0.2.0.
+    nixpkgs.overlays = [ (import ../../overlays/libdisplay-info-0_2.nix) ];
+
+    programs.niri.package = (inputs.niri.lib.internal.make-package-set pkgs).niri-unstable;
     programs.niri.config = null;
 
     xdg = {
