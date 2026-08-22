@@ -22,7 +22,7 @@ _: {
       };
       containerConfig = {
         image = "n8nio/n8n";
-        publishPorts = [ "5678:5678" ];
+        publishPorts = [ "127.0.0.1:5678:5678" ];
         volumes = [ "/mnt/filen/Alma/services/n8n:/home/node/.n8n:Z" ];
         environments = {
           WEBHOOK_URL = "https://n8n.${config.systemConstants.domain_name}/";

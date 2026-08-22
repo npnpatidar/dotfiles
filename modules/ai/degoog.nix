@@ -58,7 +58,7 @@ _: {
         };
         containerConfig = {
           image = "ghcr.io/degoog-org/degoog:latest";
-          publishPorts = [ "4444:4444" ];
+          publishPorts = [ "127.0.0.1:4444:4444" ];
           volumes = [ "${config.home.homeDirectory}/.local/share/degoog:/app/data" ];
           environments = {
             TZ = "Asia/Kolkata";
