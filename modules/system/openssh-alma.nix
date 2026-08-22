@@ -7,7 +7,7 @@ _: {
           "${config.systemConstants.default_user}"
           "${config.services.gitea.user}"
         ];
-        MaxAuthTries = 10;
+        MaxAuthTries = 4;
       };
       ports = [ 46587 ];
       allowSFTP = true;
@@ -22,6 +22,16 @@ _: {
     services.fail2ban = {
       enable = true;
       jails = {
+        # Public SSH gets constant brute-force probes; ban aggressively.
+        sshd = {
+          filter = "sshd";
+          settings = {
+            logpath = "sshd.service"; # journald unit (backend = systemd)
+            maxretry = 4;
+            findtime = "1h";
+            bantime = "6h";
+          };
+        };
         # IMAP/SMTP are publicly reachable and get brute-forced (observed
         # probes for info@/billing@/admin@/... against 993 from the internet).
         dovecot = {
