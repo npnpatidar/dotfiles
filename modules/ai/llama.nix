@@ -1,29 +1,30 @@
 _:
 let
   llamaCppOverlay = final: prev: {
-    llama-cpp =
-      let
-        origPreConfigure = prev.llama-cpp.preConfigure or "";
-      in
-      prev.llama-cpp.overrideAttrs (finalAttrs: rec {
-        # Tagged release with MCP support.
-        version = "10481";
-        src = prev.fetchFromGitHub {
-          owner = "ggml-org";
-          repo = "llama.cpp";
-          rev = "25ae3a9b331fffea50ff8d07a5cad34c33f1276f";
-          hash = "sha256-3EFOqoJb5CFLWIkekTtWYOPv+PyVgKGHNKyWQ7qnxls=";
-          leaveDotGit = true;
-          postFetch = ''
-            git -C "$out" rev-parse --short HEAD > $out/COMMIT
-            find "$out" -name .git -print0 | xargs -0 rm -rf
-          '';
-        };
-        buildInputs = (finalAttrs.buildInputs or [ ]) ++ [ prev.curl ];
-        npmRoot = "tools/ui";
-        npmDepsHash = "sha256-2Q7XhaLAArmviOLdQsNbYTfdyDE5pW9lR26cRHEVl9k=";
-        preConfigure = builtins.replaceStrings [ "tools/server/webui" ] [ "tools/ui" ] origPreConfigure;
-      });
+    llama-cpp = prev.llama-cpp.overrideAttrs (finalAttrs: rec {
+      # Tagged release with MCP support.
+      version = "0.2.0";
+      src = prev.fetchFromGitHub {
+        owner = "ggml-org";
+        repo = "llama.cpp";
+        rev = "bb4caa7540188872173c44d161602d9271386413"; # v0.2.0
+        hash = "sha256-6cK5BMCCEUWL+590+WbrRInH3eEnsZ/S5m71IIBgDsA=";
+        leaveDotGit = true;
+        postFetch = ''
+          git -C "$out" rev-parse --short HEAD > $out/COMMIT
+          find "$out" -name .git -print0 | xargs -0 rm -rf
+        '';
+      };
+      buildInputs = (finalAttrs.buildInputs or [ ]) ++ [ prev.curl ];
+      npmDepsHash = "sha256-2Q7XhaLAArmviOLdQsNbYTfdyDE5pW9lR26cRHEVl9k=";
+      # nixpkgs passes -DLLAMA_BUILD_NUMBER=<version> expecting a numeric
+      # b-number; upstream v0.2.x is semver and generates `int = 0.2.0`
+      # which fails to compile. Drop the flag so upstream's build-info.cmake
+      # default (0, no .git in the fixed-output src) is used instead.
+      cmakeFlags = builtins.filter (
+        f: !prev.lib.hasPrefix "-DLLAMA_BUILD_NUMBER=" f
+      ) finalAttrs.cmakeFlags;
+    });
     llama-cpp-cuda = final.llama-cpp.override { cudaSupport = true; };
   };
 in
