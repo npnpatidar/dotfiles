@@ -47,12 +47,6 @@ _: {
           defaults.email = config.systemConstants.acme_email;
         };
 
-        sops.secrets.htpasswdstandard = {
-          mode = "0770";
-          owner = "nginx";
-          group = "nginx";
-        };
-
         services.nginx = {
           enable = true;
           recommendedGzipSettings = true;

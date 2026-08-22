@@ -20,9 +20,6 @@ _: {
       sops.secrets.webdav_environment_file = {
         sopsFile = ../../secrets/alma.yaml;
       };
-      sops.secrets.webdav_mount_file = {
-        sopsFile = ../../secrets/alma.yaml;
-      };
 
       systemd.services.webdav.serviceConfig.EnvironmentFile =
         config.sops.secrets.webdav_environment_file.path;
