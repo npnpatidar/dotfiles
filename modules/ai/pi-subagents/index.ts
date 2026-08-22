@@ -371,7 +371,7 @@ export default function (pi: ExtensionAPI) {
         }),
       ),
     }),
-    async execute(toolCallId, params: any, signal, onUpdate) {
+    async execute(toolCallId, params: any, signal, onUpdate, ctx) {
       const update = (text: string) =>
         onUpdate?.({ content: [{ type: "text" as const, text }] });
 
@@ -408,9 +408,11 @@ export default function (pi: ExtensionAPI) {
       // --- model selection: explicit param > this agent's own model > pi default ---
       const requested =
         (params.model as string | undefined) ??
-        (process.env.PI_PROVIDER && process.env.PI_MODEL
-          ? `${process.env.PI_PROVIDER}/${process.env.PI_MODEL}`
-          : undefined);
+        (ctx?.model
+          ? `${ctx.model.provider}/${ctx.model.id}`
+          : process.env.PI_PROVIDER && process.env.PI_MODEL
+            ? `${process.env.PI_PROVIDER}/${process.env.PI_MODEL}`
+            : undefined);
       let modelArgs: string[] = [];
       if (requested) {
         const slash = requested.indexOf("/");
