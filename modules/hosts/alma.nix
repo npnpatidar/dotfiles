@@ -22,7 +22,6 @@
       overlays
       radicale
       webdav
-      databases
       rclone-mount
       filen-sync
       oink
