@@ -364,6 +364,12 @@ export default function (pi: ExtensionAPI) {
           description: `Max wait in minutes (default: ${DEFAULT_TIMEOUT_MIN}).`,
         }),
       ),
+      model: Type.Optional(
+        Type.String({
+          description:
+            "Model for the sub-agent as `provider/model` (e.g. `opencode/x-preview-f-free`). Default: this agent's own provider and model.",
+        }),
+      ),
     }),
     async execute(toolCallId, params: any, signal, onUpdate) {
       const update = (text: string) =>
@@ -398,6 +404,33 @@ export default function (pi: ExtensionAPI) {
       const name = params.name
         ? sanitizeLabel(params.name)
         : `subagent-${listEntries().length + 1}`;
+
+      // --- model selection: explicit param > this agent's own model > pi default ---
+      const requested =
+        (params.model as string | undefined) ??
+        (process.env.PI_PROVIDER && process.env.PI_MODEL
+          ? `${process.env.PI_PROVIDER}/${process.env.PI_MODEL}`
+          : undefined);
+      let modelArgs: string[] = [];
+      if (requested) {
+        const slash = requested.indexOf("/");
+        if (slash <= 0 || slash === requested.length - 1) {
+          return {
+            content: [
+              {
+                type: "text" as const,
+                text: `Invalid model "${requested}" — expected the form \`provider/model\`.`,
+              },
+            ],
+          };
+        }
+        modelArgs = [
+          "--provider",
+          requested.slice(0, slash),
+          "--model",
+          requested.slice(slash + 1),
+        ];
+      }
 
       // --- create tab ---
       update(`Creating herdr tab "${name}"…`);
@@ -444,6 +477,7 @@ export default function (pi: ExtensionAPI) {
         status: "working",
         notes: "",
         report: "",
+        model: requested ?? "pi-default",
         parent_pane: parentPane,
         parent_tab: parentTab,
         created_at: nowIso(),
@@ -509,10 +543,7 @@ export default function (pi: ExtensionAPI) {
             String(AGENT_START_TIMEOUT_MS),
             "--",
             "pi",
-            "--provider",
-            "nvidia",
-            "--model",
-            "nvidia/nemotron-3-ultra-550b-a55b",
+            ...modelArgs,
             "--append-system-prompt",
             promptFile,
           ],
