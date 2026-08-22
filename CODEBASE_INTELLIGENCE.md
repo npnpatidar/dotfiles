@@ -5,7 +5,7 @@
 > **Owner:** owner (user)  
 > **Domain:** example.com  
 > **Primary Git branch:** main (only branch)  
-> **Total files:** ~1563 (includes generated lock files, secrets, etc.)
+> **Total files:** 144 tracked (plus generated lock files)
 
 ---
 

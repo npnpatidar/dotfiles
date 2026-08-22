@@ -2,9 +2,9 @@ name: "Run nix flake check"
 
 on:
   push:
-    branches: ["dendritic"]
+    branches: ["main"]
   pull_request:
-    branches: ["dendritic"]
+    branches: ["main"]
 
 jobs:
   check:

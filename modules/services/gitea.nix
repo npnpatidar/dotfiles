@@ -60,7 +60,7 @@ _: {
             url = "https://git.${config.systemConstants.domain_name}";
             tokenFile = config.sops.secrets.gitea_action_runner_token.path;
             name = "whale";
-            labels = [ "ubuntu-latest:docker://node:16-bullseye" ];
+            labels = [ "ubuntu-latest:docker://node:20-bookworm" ];
             settings = {
               capacity = 4;
             };
