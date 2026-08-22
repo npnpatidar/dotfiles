@@ -19,7 +19,7 @@ _: {
         settings = {
           server = {
             port = 8056;
-            bind_address = "0.0.0.0";
+            bind_address = "127.0.0.1";
             public_instance = false;
             secret_key = "$SEARX_SECRET_KEY";
             infinite_scroll = true;

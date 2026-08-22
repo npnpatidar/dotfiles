@@ -2,6 +2,7 @@
 {
   flake.nixosModules.syncthing = { config, ... }: {
     services.syncthing = {
+
       enable = true;
       guiAddress = "0.0.0.0:8384";
       user = "${config.systemConstants.default_user}";
@@ -32,5 +33,9 @@
         };
       };
     };
+
+    # GUI reachable only over the tailnet; public interfaces stay blocked
+    # by the default firewall.
+    networking.firewall.interfaces."tailscale0".allowedTCPPorts = [ 8384 ];
   };
 }

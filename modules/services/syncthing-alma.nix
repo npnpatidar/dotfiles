@@ -54,24 +54,6 @@ _: {
           };
         };
       };
-
-      nginx = {
-        virtualHosts."syncthing.${config.systemConstants.domain_name}" = {
-          forceSSL = true;
-          enableTinyauth = true;
-          enableACME = true;
-          locations."/" = {
-            proxyPass = "http://0.0.0.0:8384";
-          };
-        };
-      };
-
-      oink.domains = [
-        {
-          domain = "${config.systemConstants.domain_name}";
-          subdomain = "syncthing";
-        }
-      ];
     };
   };
 }
