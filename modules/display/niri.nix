@@ -1,4 +1,4 @@
-_:
+{ lib, ... }:
 let
   niriConfig = ''
 
@@ -292,7 +292,7 @@ in
       portal = {
         enable = true;
         extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-        config.common.default = "gtk";
+        config.common.default = lib.mkDefault "gtk";
       };
 
       configFile."niri/config.kdl".text = niriConfig;
@@ -313,7 +313,7 @@ in
       ];
 
       sessionVariables = {
-        XDG_CURRENT_DESKTOP = "niri";
+        XDG_CURRENT_DESKTOP = lib.mkDefault "niri";
         XDG_SESSION_TYPE = "wayland";
         QT_QPA_PLATFORM = "wayland";
         GDK_BACKEND = "wayland";

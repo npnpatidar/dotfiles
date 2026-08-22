@@ -24,6 +24,7 @@
       flatpak
       appimage
       niri
+      umbriel
       removable-media
       stylix
       noctalia
@@ -48,6 +49,7 @@
       sioyek
       zed-editor
       niri
+      umbriel
       removable-media
       filen-desktop
       kdeconnect
