@@ -79,11 +79,11 @@ dotfiles/
 | `lanzaboote` | nix-community/lanzaboote v1.1.0 | Secure Boot for aspire7 |
 | `niri` | sodiboo/niri-flake | Niri compositor |
 | `stylix` | danth/stylix | System-wide theming |
-| `zen-browser` | 0xc000022070/zen-browser-flake | Zen browser (Brave fork) |
-| `dictation` | owner/dictation | Voice dictation |
+| `zen-browser` | 0xc000022070/zen-browser-flake | Zen browser (Firefox fork) |
+| `dictation` | owner/dictation (follows nixpkgs) | Voice dictation |
 | `hermes-agent` | NousResearch/hermes-agent | AI agent framework |
 | `quadlet-nix` | SEIAROTg/quadlet-nix | Declarative Podman containers |
-| `simple-nixos-mailserver` | gitlab:simple-nixos-mailserver | Full mail server |
+| `simple-nixos-mailserver` | gitlab:simple-nixos-mailserver/nixos-mailserver/main (follows nixpkgs) | Full mail server |
 | `nix-index-database` | Mic92/nix-index-database | `nix-locate` database |
 | `noctalia` / `noctalia-greeter` | noctalia-dev | Desktop shell + greeter |
 | `treefmt-nix` | numtide/treefmt-nix | Formatter orchestration |
@@ -117,13 +117,14 @@ Some modules also export `perSystem.packages.*` for CI pre-building/caching (see
 
 **Purpose:** Public-facing server hosting all services.
 
-**NixOS Modules:**
+**NixOS Modules (`modules/hosts/alma.nix`):**
 ```
-shared-modules          # Base: syncthing, containerization, tailscale, nix, users, networking, openssh, sops-nix
+shared-modules          # Base: syncthing, containerization, quadlet, tailscale, nix, users, networking, openssh, time-locale, sops-nix, systemConstants
+{ networking.hostName = "alma"; }
 alma-hardware           # QEMU guest, EFI boot, XFS root
 users-alma              # Extra groups: podman, usbmux, nginx, syncthing, fuse
-networking-alma         # Opens ports 80/443/853 (DoT)
-openssh-alma            # Port 46587, fail2ban (SSH + dovecot + postfix-sasl jails), Gitea user allowed
+networking-alma         # Opens ports 80/443/853 (DoT), empty domain
+openssh-alma            # Port 46587, SFTP on, ed25519-only host key, fail2ban (dovecot + postfix-sasl jails), Gitea user allowed, MaxAuthTries 10
 tailscale-alma          # Advertises as exit node
 nginx                   # ACME, Tinyauth middleware support
 pocket_id_tinyauth      # Pocket ID (OIDC IdP) + Tinyauth (auth middleware)
@@ -134,7 +135,8 @@ gitea                   # Git hosting with OIDC via Pocket ID
 searx                   # Privacy-focused metasearch engine
 syncthing-alma          # File sync between all devices
 karakeep                # Self-hosted bookmarking/read-later
-hermes-agent            # AI agent framework
+hermes-agent            # AI agent framework (+ upstream inputs.hermes-agent.nixosModules.default)
+overlays                # NUR overlay
 radicale                # CalDAV/CardDAV server
 webdav                  # WebDAV file access
 rclone-mount            # Cloud storage mounts (koofr, mega, filen)
@@ -146,14 +148,15 @@ mcp                     # MCP protocol server proxy
 degoog                  # Google service migration proxy
 agent-zero              # AI agent container
 opencode                # AI coding agent web access
-notebooklm              # NotebookLM CLI (home module, activation-installed)
+omniroute               # Unified AI gateway (see §7.10)
 ```
 
 **Home Manager Modules (user@alma):**
 ```
-shared-modules           # herdr, yazi, bat, core, shell, git, neovim, opencode, pi-coding-agent, common-packages
+shared-modules           # herdr, yazi, bat, core, shell, git, neovim, opencode, pi-coding-agent, freebuff, common-packages, omniroute
 llama, n8n, mcp, degoog, agent-zero
-alma-packages            # nodejs, kitty, btop, uv, python314 huggingface-hub, podman-compose, ollama
+alma-packages            # nodejs, kitty, screen, ghq, btop, nixfmt, ouch, python314 huggingface-hub, uv, wireguard-tools, dnsutils, podman-compose, llama-cpp, ollama, ketch
+{ programs.pi-coding-agent.sudoAskpass = false; }   # headless: no GUI askpass dialog on alma
 ```
 
 ### 4.2 Aspire7 (Laptop / Workstation — x86_64-linux)
@@ -184,37 +187,40 @@ flatpak                  # Flatpak support
 appimage                 # AppImage binary format
 niri                     # Niri scrollable-tiling Wayland compositor
 removable-media          # udisks2/gvfs/upower (system) + udiskie (home) automount
-stylix                   # Theming (Ocean base16 scheme)
+stylix                   # Theming (Ocean base16 scheme) + inputs.stylix.nixosModules.stylix
 noctalia                 # Desktop shell/panel/launcher/lockscreen
 ```
 
 **Home Manager Modules (user@aspire7):**
 ```
-shared-modules           # herdr, yazi, bat, core, shell, git, neovim, opencode, pi-coding-agent, common-packages
+shared-modules           # herdr, yazi, bat, core, shell, git, neovim, opencode, pi-coding-agent, freebuff, common-packages, omniroute
 vscode / zed-editor      # Code editors
 dictation               # Voice dictation (English + Hindi)
+aspire7-packages (home)  # ente-auth, alacritty, karere, pdfarranger, jupyterlab, conda, xdm-app, localsend, pandoc, ffmpeg, docker/-compose, zig, cachix, bitwarden-desktop, pear-desktop, llama-cpp-cuda, ...
 chromium / zen-browser / librewolf  # Browsers (LibreWolf installed alongside Zen)
-obsidian                # Note-taking with vaults
-geary                   # Email client
-mpv / imv               # Media players
-sioyek                  # PDF reader
-niri                    # Niri WM config
-removable-media         # udiskie automount daemon
-filen-desktop           # Cloud sync GUI
-kdeconnect              # Phone integration
-llama                   # llama.cpp user service (home.llama.gpu = true → CUDA build)
-mcp                     # MCP server proxy
-notebooklm              # NotebookLM CLI
-noctalia                # Desktop shell config
-nur                     # NUR packages
-xdg / gtk               # MIME associations, GTK config
-kitty                   # Terminal emulator
-flatpak                 # Flatpak setup
-stylix                  # Stylix home theming
-onlyoffice              # Office suite
-zen-browser             # Primary browser
-voxtype                 # Voice-to-type (local ML)
-nix-index-database      # `nix-locate` integration
+obsidian                 # Note-taking with vaults
+geary                    # Email client
+mpv / imv                # Media players
+sioyek                   # PDF reader
+niri                     # Niri WM config
+removable-media          # udiskie automount daemon
+filen-desktop            # Cloud sync GUI
+kdeconnect               # Phone integration
+llama                    # llama.cpp user service (home.llama.gpu = true, cudaVersion 12.4, capabilities ["7.5"] → CUDA build matching GTX 1650)
+mcp                      # MCP server proxy
+notebooklm               # NotebookLM CLI
+noctalia                 # Desktop shell config
+nur                      # NUR packages
+xdg / gtk                # MIME associations, GTK config
+kitty                    # Terminal emulator
+flatpak                  # Flatpak setup
+stylix                   # Stylix home theming + inputs.stylix.homeModules.default
+onlyoffice               # Office suite
+zen-browser              # Primary browser
+voxtype                  # Voice-to-type (local ML)
+inputs.nix-index-database.homeModules.nix-index   # `nix-locate` integration
+inputs.quadlet-nix.homeManagerModules.quadlet     # declarative user containers
+session vars             # BROWSER=zen-beta, TERMINAL=kitty; yazi theme.toml force-overridden
 ```
 
 ---
@@ -223,7 +229,7 @@ nix-index-database      # `nix-locate` integration
 
 ### 5.1 Generic Constants (`systemconstants.nix`)
 
-Central repository of shared values used across modules:
+Central repository of shared values used across modules. `systemConstants` is defined as a proper module option (`lib.mkOption`, `attrsOf unspecified`, via `flake.modules.generic.systemConstants`) rather than a bare attrset, so per-module overrides are possible:
 ```nix
 systemConstants = {
   domain_name      = "example.com";
@@ -231,7 +237,7 @@ systemConstants = {
   home_directory   = "/home/user";
   data_directory   = "/home/user/Data";
   user_ssh_key     = "ssh-ed25519 ... user@nixos";
-  host_ssh_key     = "ssh-ed25519 ...";  # rotated 2026-08
+  host_ssh_key     = "ssh-ed25519 ...";
   ssh_port         = 46587;
   git_email        = "user@example.com";
   acme_email       = "letsencrypt@whatisleft.anonaddy.com";
@@ -292,10 +298,13 @@ systemConstants = {
 
 #### Nix Configuration (`nix.nix`)
 - Nix latest version with flakes
-- Auto-optimise store, garbage collection (disabled auto, manual weekly 3d)
-- NH (nix helper) with daily clean (`--no-direnv`)
+- Auto-optimise store + `optimise.automatic` daily at 03:45; `/tmp` cleaned on boot
+- Garbage collection (auto disabled; weekly manual run with `--delete-older-than 3d`)
+- NH (nix helper) with flake `~/dotfiles`, daily clean (`--no-direnv`)
 - Nix-ld for dynamic linking
 - ZRAM swap
+- Trusted users: root + main user
+- FUSE with `userAllowOther` (user-owned rclone/gocryptfs mounts can use `-o allow_other`)
 - `allowUnfree = true`, `pnpm-9.15.9` as permitted insecure
 - **Substituters:** cache.nixos.org, owner.cachix.org (self-hosted CI cache), zen-browser, noctalia, niri, cuda-maintainers
 
@@ -319,10 +328,10 @@ systemConstants = {
 
 #### SSH
 - **Both hosts:** password + keyboard-interactive auth disabled, `PermitRootLogin = "no"`, `AllowUsers` restricted to the main user (alma additionally allows the Gitea user)
-- Alma: Port 46587, fail2ban enabled (SSH + dovecot + postfix-sasl jails), MaxAuthTries 10
-- SSH keys managed via sops-nix: GitHub, Gitea, Oracle cloud jump host
-- SSH config defines: `github.com`, `git.example.com`, `nalma` (user)
-- Known hosts pre-configured for all endpoints
+- Alma: Port 46587, SFTP enabled, single ed25519 host key (`/etc/ssh/ssh_host_ed25519_key` — also the sops age key source), fail2ban enabled with dovecot + postfix-sasl jails only (maxretry 3, findtime/bantime 6h, journald-backed logpaths) — no sshd jail exists, MaxAuthTries 10
+- SSH keys managed via sops-nix (mode 0600, owned by the main user): GitHub, Gitea, Oracle cloud jump host
+- SSH config defines: `github.com` (git user), `git.example.com` (gitea user, port 46587), `nalma` → `home.example.com` (port 46587, oracle key)
+- Known hosts pre-configured for github.com, `[home/git].example.com:<port>`, and alma (bare, port-suffixed, and `alma.n`)
 
 #### Tailscale
 - Uses headscale (self-hosted) at `https://headscale.example.com`
@@ -344,11 +353,14 @@ systemConstants = {
 
 #### 5.4.1 nginx
 - Central reverse proxy for all web services
-- ACME (Let's Encrypt) auto-certificates, auto-renewal
-- Optional Tinyauth authentication middleware (configurable per vhost)
-- Generic vhost options via `enableTinyauth` flag
-- Test vhost at `test.example.com` → localhost:7860
-- Also serves TLS termination for AdGuard Home DoT (`streamConfig` on TCP 853)
+- ACME (Let's Encrypt) auto-certificates (`acceptTerms`, default email from `systemConstants.acme_email`), auto-renewal
+- Optional Tinyauth authentication middleware via a custom per-vhost `enableTinyauth` flag (submodule option on `services.nginx.virtualHosts`):
+  - injects an `internal` `/tinyauth` location proxying to `http://127.0.0.1:3009/api/auth/nginx` (Tinyauth's nginx auth endpoint) with `X-Forwarded-*` headers,
+  - wraps `/` with `auth_request /tinyauth`, propagates `Remote-User`/`Remote-Groups`/`Remote-Name`/`Remote-Email` upstream, and 302-redirects 401/403 to Tinyauth's redirect URL
+- Recommended gzip/optimisation/proxy settings enabled
+- Declares the `htpasswdstandard` sops secret (mode 0770, owner/group nginx) — currently **unused by any module** (dangling declaration)
+- Test vhost at `test.example.com` → localhost:7860 (ACME + forceSSL, no Tinyauth)
+- Note: the DoT TLS termination on TCP 853 is *not* configured here — it lives in `adguardhome.nix` via `nginx.streamConfig` (see §5.4.2)
 
 #### 5.4.2 AdGuard Home (alma only)
 - DNS-level content filtering at `adh.example.com` (behind Tinyauth)
@@ -356,35 +368,41 @@ systemConstants = {
 - **Admin auth:** local `admin` user with committed bcrypt hash (AdGuard has no OIDC; protects `/control/*` from localhost CSRF/rebinding)
 - **Fully declarative:** `mutableSettings = false` — config regenerated from Nix on every start
 - **Blocklists (~1.0M rules):** HaGeZi Ultimate, HaGeZi Threat Intelligence (mini), Encrypted DNS/VPN/TOR/Proxy Bypass, NSFW, Gambling, URL Shortener — all in `adblock` format
-- **DNS:** explicit upstreams (Quad9 DoH + 8.8.8.8 + 1.1.1.1, load_balance), DNSSEC on, safe browsing + parental enabled
-- **Blocked services:** social media (Facebook, TikTok, Discord, Snapchat), Gaming (Steam, Epic, Blizzard, Roblox), Streaming (Netflix, Disney+, Hulu, Spotify, Twitch), Shopping (Temu, Shein, Aliexpress), Dating apps, Messaging (WhatsApp blocked via Facebook), etc.
-- **Allowed domains:** huggingface.co, filen.io, syncthing.net, example.com, maps.rspamd.com, github.com
+- **DNS:** explicit upstreams (Quad9 DoH `https://dns10.quad9.net/dns-query` + 8.8.8.8 + 1.1.1.1, load_balance; bootstrap via plain 9.9.9.9/8.8.8.8/1.1.1.1), DNSSEC on, safe browsing + parental enabled, safe_search disabled; DNS binds `0.0.0.0`
+- **Custom rules:** allow `hf.co`, `huggingface.co`, `cas-bridge.xethub.hf.co`, `controlplane.tailscale.com^$important`; block `speechs3proto2-pa.googleapis.com`
+- **Blocked services:** social media (Facebook, TikTok, Discord, Snapchat, LinkedIn, Bluesky, Mastodon, Tumblr, …), Gaming (Steam, Epic, Blizzard, Roblox, Minecraft, Nintendo, PlayStation, Xbox, Riot, EA, Ubisoft, …), Streaming (Netflix, Disney+, Hulu, Spotify, Twitch, Plex, Crunchyroll, …), Shopping (Temu, Shein, Aliexpress, eBay, Shopee, Lazada, …), Dating (Tinder, Plenty of Fish, Wizz), Messaging (Line, Kik, Viber, WeChat, Skype, Slack, KakaoTalk — note: no WhatsApp entry)
+- **Query-log/statistics ignore list (= de-facto allowed domains):** filen.io/.net/filen-1..5.net, syncthing.net, example.com, maps.rspamd.com, github.com
 - **Clients:** Tailscale IPs 100.64.0.1-4
 - **DNS-over-TLS on TCP 853** (nginx stream passthrough with the `adh.` ACME cert) — enables Android "Private DNS" on the phone; port opened in both the OS firewall and the Oracle Cloud VCN security list
 
 #### 5.4.3 Pocket ID + Tinyauth (alma)
-- **Pocket ID:** Self-hosted OIDC identity provider
-  - SMTP via mail.example.com (port 465, TLS)
+- **Pocket ID:** Self-hosted OIDC identity provider at `id.example.com`, bound to `127.0.0.1:1411` with `TRUST_PROXY = true`
+  - SMTP via mail.example.com (port 465, TLS), from the domain mailbox address
   - Login notifications, API key expiration, email verification
   - UI config disabled (admin API only)
-  - 30-day session duration (persistent login)
-- **Tinyauth:** OAuth2 proxy middleware (nginx auth_request)
-  - Provider: Pocket ID via OIDC
-  - Protects AdGuard Home and SearXNG web UIs
+  - 30-day session duration (`SESSION_DURATION = "43200"` minutes — persistent login)
+- **Tinyauth:** OAuth2 proxy middleware (nginx auth_request) at `sso.example.com`, bound to `127.0.0.1:3009`
+  - Provider: Pocket ID via OIDC (client id `tinyauth`, secret from `/var/lib/oidc-client-secrets/tinyauth`)
+  - Session cookie also persisted 30 days (`AUTH_SESSIONEXPIRY = "2592000"` seconds vs 24h default)
+  - Protects AdGuard Home and SearXNG web UIs (and DeGoog — `enableTinyauth = true`)
 - **pocket-id-seed.service:** One-shot service that provisions OIDC clients (tinyauth, headscale, headplane, gitea, karakeep):
   - **Heals missing clients** — re-creates a client if Pocket ID's DB was reset
-  - **Secret rotation** — verifies the on-disk secret against Pocket ID's token endpoint (401 = stale → rotate); blips treated as valid to avoid needless rotation
-  - Secrets written to `/var/lib/oidc-client-secrets/`
-  - Sandboxed (NoNewPrivileges, ProtectSystem=strict, restricted address families)
+  - **Secret rotation** — verifies the on-disk secret against Pocket ID's token endpoint (401 = stale → rotate); curl blips treated as valid to avoid needless rotation
+  - Admin API key carried in a root-only temp curl config file (`curl -K`) so it never appears in process argv
+  - Secrets written to `/var/lib/oidc-client-secrets/` (root:<group>, 0640); additionally writes `karakeep-env` (`OAUTH_CLIENT_SECRET=...`, root:karakeep) for karakeep
+  - Runs `before tinyauth.service`; `tinyauth.service` is `requires`+`after` the seed
+  - Sandboxed (NoNewPrivileges, ProtectSystem=strict, ProtectProc=invisible, restricted address families, etc.)
+  - ⚠️ its `after` list references an **agenix unit although the repo uses sops-nix** — stale leftover ordering dep on a nonexistent unit (harmless but worth cleaning up)
 
 #### 5.4.4 Headscale (alma only)
-- Self-hosted Tailscale control server
-- DERP disabled (using direct connections)
-- Prefix: `100.64.0.0/24` (sequential allocation)
-- Magic DNS with base domain `n` (`.n` TLD — e.g., `alma.n`, `aspire7.n`)
-- OIDC via Pocket ID
-- **Headplane** web UI at `/admin` on headscale.example.com
+- Self-hosted Tailscale control server on loopback `127.0.0.1:8097` (nginx TLS vhost is the sole entry point); `disable_check_updates = true`
+- DERP server disabled (`derp.server.enabled = false`)
+- Prefixes: v4 `100.64.0.0/24`, v6 `fd7a:115c:a1e0::/48`, allocation `sequential`
+- Magic DNS with base domain `n` (`.n` TLD — e.g., `alma.n`, `aspire7.n`); `override_local_dns = true`; routing domain `example.com`; no extra records
 - DNS: global nameserver `100.64.0.2` (AdGuard Home)
+- OIDC via Pocket ID (`issuer https://id.<domain>`, client id `headscale`, secret from `/var/lib/oidc-client-secrets/headscale`)
+- **Headplane** web UI proxied at `/admin` on headscale.example.com → headplane on `0.0.0.0:3000` (relies on the host firewall, not loopback binding); OIDC client `headplane` (`client_secret_basic`, API-key login disabled); cookie secret from sops; headplane gets a generated strict config (`headscale-for-plane.yml` = live settings with TLS/policy paths nulled, `config_strict = true`)
+- **Startup order:** headscale.service `requires`/`after` `pocket-id-seed.service` (won't start until the OIDC client secret is seeded)
 
 #### 5.4.5 Gitea (alma only)
 - Private Git hosting at `git.example.com`
@@ -395,35 +413,37 @@ systemConstants = {
   - Runs **before** gitea.service (Gitea caches OAuth2 providers in memory at startup)
   - **Idempotent**: creates the auth source if missing, then declaratively re-applies full config (`admin auth update-oauth`) to heal secret/options drift
 - SSH push key registered in Gitea UI (command-restricted keys managed by Gitea)
+- Mailer fully configured but `ENABLED = false`; a CI runner instance (`whale`, capacity 4, token from sops `gitea_action_runner_token`) is fully staged yet disabled
 
 #### 5.4.6 Mail Server (alma only)
 - **Stack:** simple-nixos-mailserver (postfix + dovecot + rspamd + opendkim)
-- **Domain:** mail.example.com
-- **Account:** user@example.com (catch-all for @example.com)
-- **Storage:** `/mnt/filen/Alma/services/mail-server/vmail`
-- **Full-text search:** Dovecot FTS with auto-indexing, 512 MB memory limit
-- **ManageSieve** enabled
-- **Submission:** SMTP submission (STARTTLS) on **587** in addition to 465
-- **DKIM:** 2048-bit RSA with new selector `mail2` (old 1024-bit `mail` selector kept during DNS transition)
-- **MTA-STS:** `mode: enforce` policy served at `mta-sts.example.com` (publish `_mta-sts` TXT record)
+- **Domain:** mail.example.com (`fqdn`), serving `example.com`; `openFirewall = true`, `localDnsResolver = false`, stateVersion 5
+- **Account:** main user's address (catch-all alias for the whole domain); password from sops (`mail_password`)
+- **Storage:** `/mnt/filen/Alma/services/mail-server/vmail`; Dovecot indices at `/mnt/filen/Alma/services/mail-server/dovecot/indices`
+- **Full-text search:** Dovecot FTS enabled with auto-indexing, 512 MB memory limit
+- **ManageSieve** enabled; standard submission (STARTTLS) on **587** in addition to 465
+- **DKIM:** single selector `mail2`, 2048-bit RSA (the old 1024-bit `mail` selector is no longer declared in the module)
+- **MTA-STS:** `mode: enforce` policy served at `mta-sts.example.com/.well-known/mta-sts.txt` (publish `_mta-sts` TXT record; oink creates the mta-sts subdomain record; nginx vhost has Tinyauth explicitly off)
 - **rspamd DNS:** independent public resolvers (9.9.9.9, 1.1.1.1) instead of the Tailscale→AdGuard chain, so mail processing can't stall on a DNS hiccup
 - **fail2ban:** jails for dovecot (IMAP brute-force) and postfix-sasl (SMTP auth), maxretry 3 / 6h ban
-- **Roundcube** webmail at `webmail.example.com`
-  - Plugins: carddav, contextmenu, custom_from, persistent_login, thunderbird_labels, etc.
-  - IMAP: SSL port 993, SMTP: TLS port 587
-  - `phpfpm-roundcube` systemd watchdog disabled (vmail on rclone FUSE mount exceeds the 15s WatchdogSec)
-- **ACME cert** via Let's Encrypt webroot
+- **Roundcube** webmail at `webmail.example.com` (PostgreSQL for Roundcube is provisioned socket-only by this module — see §5.4.10)
+  - Plugins: attachment_reminder, carddav, contextmenu, custom_from, managesieve, newmail_notifier, persistent_login, thunderbird_labels, zipdownload
+  - IMAP: `ssl://mail.example.com:993`; SMTP: `tls://mail.example.com` (587) authenticated as `%u`/`%p`
+  - `phpfpm-roundcube` systemd watchdog disabled (`WatchdogSec = mkForce 0`; vmail on rclone FUSE mount exceeds the hardcoded 15s)
+- **ACME cert** via Let's Encrypt webroot (`/var/lib/acme/acme-challenge`) for the mailserver fqdn
 
 #### 5.4.7 SearXNG (alma only)
-- Privacy search engine at `searx.example.com` (behind Tinyauth)
+- Privacy search engine at `searx.example.com` (behind Tinyauth); **bound to `127.0.0.1:8056`** — nginx vhost is the sole entry point; `public_instance = false`; secret key from `searx_environment_file`
 - **Default language:** `all` (neutral results — `en-IN` biased toward Indian LinkedIn/college noise in Google CSE)
-- **Timeouts:** `request_timeout 2s`, `max_request_timeout 5s` — fail fast on dead engines
-- **Curated engines:**
-  - General web: google cse (weight 2.0), brave (1.5), bing/mojeek (1.0); DDG + startpage disabled (captcha-suspended)
-  - Reference (low weight 0.5): wikipedia, wikidata, wolframalpha
+- JSON output format enabled alongside html (`formats = ["html" "json"]`), autocomplete `startpage`, safe_search off
+- **Timeouts:** `request_timeout 2s`, `max_request_timeout 5s` — fail fast on dead engines; metrics disabled
+- **Curated engines** (note: searxng merges this list with built-in defaults, which is why junk engines are explicitly disabled):
+  - General web: google cse (weight 2.0), brave (1.5), bing/mojeek (1.0); DDG + startpage (+ startpage news/images) disabled (captcha-suspended)
+  - Reference (low weight 0.5): wikipedia (base_url wikipedia.org), wikidata, wolframalpha
   - IT/coding (`categories=it`): archwiki, nixos wiki, github, gitlab, codeberg, stackoverflow, mdn, mankier, docker hub, huggingface, pypi, npm, crates.io, packagist, lib.rs, hackernews, lobste.rs, openalex
-  - Junk explicitly disabled: torrent sites (1337x, piratebay, kickass, ...), library genesis, lemmy, etc.
-- Dark theme, infinite scroll
+  - Junk explicitly disabled: torrent sites (1337x, piratebay, kickass, solidtorrents, bt4g, btdigg, nyaa, tokyotoshokan), library genesis, lemmy (communities/users/posts/comments), mastodon users/hashtags, tootfinder, qwant
+- Dark theme (simple/dark), infinite scroll
+- Local consumers hit it directly over the tailnet, e.g. pi web-search uses `http://alma.n:8056`
 
 #### 5.4.8 Syncthing
 - **Global config:** GUI at port 8384 (all interfaces), devices `android` + `ipad` pre-configured
@@ -432,13 +452,15 @@ systemConstants = {
 - **Aspire7:** Syncs 7 folders (Camera, Sync_M_L, Sync_M_L_I_O, Sync_M_L_I_C, Sync_M_L_I, Sync_L_O, Sync_M_L_O)
   - Camera from android, Notes with obsidian ignore patterns
 - Unique device IDs per host, certs from sops-nix
+- Global GUI credentials are set as settings (user + bcrypt hash) in addition to the firewall restriction; alma sets `openDefaultPorts = true` / `overrideDevices = false` while aspire7 sets the reverse; device entries use explicit `[ "dynamic" "tcp://<name>.n:22000" ]` MagicDNS addresses
 
 #### 5.4.9 Containerization
-- **Podman** with DNS-enabled default network + auto-prune
-- **Quadlet** for declarative containers (systemd-style)
-- Alma: Docker compatibility disabled
-- Aspire7: Docker compatibility enabled, libvirt disabled
-  - VM variant: 4 GB RAM, 8 cores, 10 GB disk, shared directory
+- **Podman** as oci-containers backend, DNS-enabled default network + auto-prune
+- **Quadlet** enabled for declarative containers
+- Main user added to the `podman` group (shared module)
+- Alma: Docker compatibility not enabled (default off)
+- Aspire7: Docker compatibility enabled (`dockerCompat = true`), containers enabled, libvirtd disabled; extra system packages docker-compose + docker-client
+  - VM variant: 4096 MB RAM, 8 cores, 10240 MB disk, shared dir `$HOME/VMShare` → `/mnt/SharedToHost`, resolution 1440×900
 
 #### 5.4.10 Databases (alma only)
 - **PostgreSQL 16**, provisioned by the Roundcube module (no dedicated databases module):
@@ -447,40 +469,54 @@ systemConstants = {
 - **Redis:** none on the host (mailserver's separate `redis-rspamd` instance remains)
 
 #### 5.4.11 Oink (alma)
-- Dynamic DNS updater — creates DNS records for subdomains
-- Used by: AdGuard Home, Headscale, Gitea, SearXNG, Karakeep, Radicale, WebDAV, N8N, OpenCode, DeGoog, LLaMA, OmniRoute, mta-sts
+Dynamic DNS updater — creates DNS records for subdomains. The base module declares only the two sops secrets (`oink_api_key`, `oink_secret_api_key` from alma.yaml) with `domains = [ ]`; subdomains are contributed by other modules via `services.oink.domains`. Current contributors (13 subdomains):
+- AdGuard Home (`adh`), Headscale (`headscale`), Gitea (`git`), SearXNG (`searx`), Karakeep (`karakeep`), Radicale (`cal`), WebDAV (`dav`), OpenCode (`opencode`), DeGoog (`degoog`), OmniRoute (`omniroute`, home module), mta-sts (mail-server), **Pocket ID + Tinyauth (`sso` and `id`)**
+- Not wired to oink: LLaMA (`llama.` vhost) and N8N (`n8n.` vhost) have no `services.oink.domains` entries
 
 #### 5.4.12 Filen Sync (alma)
-- Continuous bidirectional sync from local dirs to Filen cloud:
-  - Paperless, Radicale, Redis (rspamd), DKIM
-- Uses `filen-cli` with syncPairs.json
+- Continuous **one-way local→cloud** sync (`syncMode: localToCloud` for every pair):
+  - `/var/lib/paperless` → `/Alma/services/paperless`
+  - `/var/lib/radicale` → `/Alma/services/radicale`
+  - `/var/lib/redis-rspamd` → `/Alma/services/mail-server/redis-rspamd`
+  - `/var/dkim` → `/Alma/services/mail-server/dkim`
+- Runs as a root systemd service (`filen sync --continuous`, `Restart=always`, 10s restart delay, after network-online)
+- Auth config from sops: user copy at `~/.config/filen-cli/.filen-cli-auth-config` (mode 0600) plus a root copy at `/root/.config/filen-cli/...`; `syncPairs.json` generated into `/root/.config/filen-cli/` by preStart
+- `filen-cli` installed system-wide
 
 #### 5.4.13 RClone Mount (alma)
-- FUSE mounts for cloud storage at `/mnt/`:
-  - koofrCrypt, megaCrypt, ownerCrypt, user.alternateCrypt, filen
-- Aggressive caching: full VFS cache, 48h dir cache, 512 MB buffer
-- Automount via systemd
+- FUSE mounts for cloud storage at `/mnt/`: **koofrCrypt, megaCrypt, ownerCrypt, user.alternateCrypt, filen**
+- Aggressive caching: full VFS cache (`vfs-cache-mode=full`), 48h dir cache, 512M buffer, read chunks 10M→512M limit, `cache_dir=/tmp/remote/<remote>`, `no-modtime`
+- Mounted uid/gid 1000, umask 002, `allow_other`; systemd automount (`x-systemd.automount`, `_netdev`, `nofail`, requires network-online); rclone config from the `rclone_config` sops secret
+
+##### 5.4.13b RClone helper (aspire7) — previously undocumented
+- `rclone-mount-aspire7.nix`: renders `/etc/rclone.conf` from the `rclone_config` sops secret and runs a one-shot `vault-backup.service` (as user) that copies it to `~/.config/rclone`. No FUSE mounts on aspire7.
 
 #### 5.4.14 Karakeep (alma)
-- Self-hosted bookmarking / read-later app
-- Meilisearch for full-text search, built-in browser for screenshots
-- OIDC auth via Pocket ID
-- Storage at `/mnt/filen/Alma/services/karakeep`
-- Package exposed via `perSystem.packages.karakeep` for CI caching
+- Self-hosted bookmarking / read-later app on `127.0.0.1:3003` (nginx vhost karakeep.example.com, ACME + forceSSL, no Tinyauth)
+- Meilisearch backend on localhost:7700 with an upstream-workaround override: the whole `meilisearch.settings` is `mkForce`d because meilisearch 1.51.0 dropped `experimental_dumpless_upgrade` in favour of `upgrade_db` (db/dump/snapshot dirs under /var/lib/meilisearch, analytics off)
+- Built-in browser enabled for screenshots + full-page archive (`CRAWLER_FULL_PAGE_SCREENSHOT`/`CRAWLER_FULL_PAGE_ARCHIVE` true)
+- OIDC auth via Pocket ID (wellknown `id.<domain>`, client `karakeep`, provider name "Pocket ID", scope openid email profile, dangerous email-account linking allowed, password auth disabled); signups NOT disabled (`DISABLE_SIGNUPS = false`)
+- Environment from sops (`karakeep_environment_file`) + `/var/lib/oidc-client-secrets/karakeep-env` appended by pocket-id-seed; `karakeep-web` requires/after `pocket-id-seed.service`
+- Storage: DATA_DIR forced to `/mnt/filen/Alma/services/karakeep` for both web and workers (tmpfiles rule creates the dir)
+- Package exposed via `perSystem.packages.karakeep` for CI caching (mirrors allowUnfree + pnpm-9.15.9 insecure pin)
 
 #### 5.4.15 Immich (aspire7)
-- Self-hosted Google Photos alternative
-- Simple enable (defaults)
+- Self-hosted Google Photos alternative, defaults except `host = "0.0.0.0"` (binds all interfaces so the mobile app can reach it over Tailscale at `aspire7.n:2283`)
+- Managed by power-management: started when battery ≥75%, stopped below (<75%) alongside immich-machine-learning and redis-immich
 
 #### 5.4.16 Radicale (alma)
-- CalDAV/CardDAV server at `cal.example.com`
-- IMAP auth via mail server (TLS)
+- CalDAV/CardDAV server at `cal.example.com` (nginx → `localhost:5232`, websockets enabled, `X-Script-Name " "` header, Authorization passthrough; ACME + forceSSL; **no Tinyauth**)
+- IMAP auth via mail server (`<mailserver.fqdn>:993`, `imap_security = tls`)
+- systemd overrides on radicale.service: `PrivateNetwork = false` and `IPAddressDeny = null` (mkForce null) so the service can reach the IMAP server
+- DNS record via oink (`cal` subdomain)
 - Used by Noctalia calendar integration
 
 #### 5.4.17 WebDAV (alma)
-- File access at `dav.example.com`
+- File access at `dav.example.com` (nginx → `127.0.0.1:8475`, websockets enabled, `client_max_body_size 1G`)
+- Service binds `127.0.0.1:8475` with `behindProxy = true` — nginx TLS vhost is the sole entry point
 - Exposes `/mnt/filen/` with CRUD permissions
-- Auth via env file
+- Auth via env file (`webdav_environment_file` sops secret → `{env}WEBDAV_USERNAME` / `{env}WEBDAV_PASSWORD`)
+- Also declares a `webdav_mount_file` sops secret that is **never consumed by any module** (dangling declaration)
 
 #### 5.4.18 Hermes Agent (alma)
 - AI agent framework from NousResearch
@@ -496,61 +532,67 @@ systemConstants = {
 
 ### 6.1 Niri — Scrollable-Tiling Wayland Compositor
 
-Highly customized KDL config including:
-- **Blur:** 2 passes, xray false
-- **Window rules:** Bitwarden floating, browsers maximized, PiP floating, Zen Library floating, xdg-desktop-portal floating
-- **Layout:** 4px gaps, 2px border (active: purple #7c3aed, inactive: gray), focus ring
+Highly customized KDL config (`environment.etc` + xdg.configFile, same text for both; package is `niri-unstable` from the niri flake) including:
+- **Blur:** 2 passes, offset 3.0, noise 0.03, saturation 1.0, xray false; layer-rules blur noctalia background/launcher-overlay/dock layers and place `noctalia-backdrop` within the backdrop
+- **Window rules:** Bitwarden floating (zen-beta|firefox), zen-beta/chromium maximized, PiP floating at 50%×50%, Zen Library floating 50%×50%, xdg-desktop-portal floating 50%×50%
+- **Layout:** 4px gaps, 2px border (active: purple `#7c3aed`, inactive: gray `#374151`) + focus ring width 2
 - **Column widths:** 20%, 34%, 50%, 66%, 80%, 98%
 - **Input:** US keyboard, numlock on, touchpad tap + natural scroll
 - **Hotkeys (Mod = Super/Windows):**
-  - `Mod+Return/T` → kitty
-  - `Mod+B` → Zen browser, `Mod+Shift+B` → acer-battery-toggle
-  - `Mod+W` → Bitwarden
-  - `Mod+E` → Nemo file manager
+  - `Mod+Return/T` → kitty; `Mod+Q` close window; `Mod+F` maximize-column
+  - `Mod+B` → Zen browser (zen-beta), `Mod+Shift+B` → acer-battery-toggle
+  - `Mod+W` → Bitwarden, `Mod+E` → Nemo, `Mod+Y` → Yazi
   - `Mod+S` → Noctalia launcher in `/fs` live-file-search mode
-  - `Mod+Y` → Yazi (terminal file manager)
-  - `Mod+D / Mod+Space` → Noctalia launcher
-  - `Mod+V` → Clipboard manager
+  - `Mod+D / Mod+Space` → Noctalia launcher, `Mod+V` → Noctalia clipboard panel
+  - `Mod+Escape` → Noctalia session panel, `Mod+X` → theme-mode-toggle
   - `Mod+Shift+Ctrl+S` → Voxtype toggle
-  - `Mod+Shift+S` → English dictation toggle, `Mod+Shift+Alt+S` → Hindi dictation toggle
-  - `Mod+F1` → Noctalia keybind-cheatsheet panel, `Mod+N` → Noctalia notes panel
-  - `Mod+Tab` → Overview (workspace switcher)
-  - Vim-style arrow keys + numpad; up/down also cross workspace boundaries (`focus-window-or-workspace-*`)
-  - `Mod+Wheel` → Column/workspace navigation
-  - Media keys (volume, brightness — **work when locked**, screenshot)
-  - Lid close → lock and suspend
+  - `Mod+Shift+S` → English dictation toggle, `Mod+Shift+Alt+S` → Hindi dictation toggle (`~/.local/bin/{dictation,hindi-dictation}-toggle`)
+  - `Mod+F1` → keybind-cheatsheet panel, `Mod+N` → Noctalia notes panel
+  - `Mod+Tab / Mod+KP_5 / Mod+KP_Begin` → Overview
+  - `Alt+Tab / Alt+Shift+Tab` recent-windows (next/previous), `Alt+grave / Alt+Shift+grave` per-app-id recent windows
+  - Vim-style arrows + full numpad set; up/down cross workspace boundaries (`focus-window-or-workspace-*`, `move-window-*-or-to-workspace-*`); Mod+Ctrl+arrows focus/move workspaces; numpad 9/3/Prior/Next workspace focus+move
+  - `Mod+J` toggle-window-floating, `Mod+Shift+J` switch focus floating/tiling, `Mod+R` cycle preset column widths, `Mod+Equal/Minus` column width ±10%, `Mod+Shift+Equal/Minus` window height ±10%
+  - `Mod+Wheel` → column navigation, `Mod+Shift+Wheel` → workspace navigation
+  - Screenshots: `Print` screen, `Ctrl+Print` region, `Shift+Print` screen to clipboard, `Mod+Print` window
+  - Media keys (volume, brightness — **work when locked**); XF86Launch6 mic mute; XF86TouchpadOn/Off notifications
+  - `Ctrl+Alt+Delete` → quit niri
+- **Lid close** → Noctalia lock-and-suspend
+- **System packages:** xwayland-satellite, libnotify, brightnessctl, nm-applet, pavucontrol, pamixer, wireplumber, nemo-with-extensions, grim; home side adds wl-clipboard, qt5/qt6 wayland, session env vars (NIXOS_OZONE_WL etc.); xdg portal = gtk
 - **Removable media** (dedicated `removable-media` module, see §6.5): udisks2 + gvfs + upower (system side, Nemo devices sidebar) and udiskie (home side, auto-mount + notify on insertion)
 
 ### 6.2 Noctalia — Desktop Shell
 
-Comprehensive desktop environment:
-- **Panel (top):** Workspaces, CPU/RAM/Network monitors, Media, Clock, System tray, Clipboard, Lock keys, Notifications, Network, Bluetooth, Caffeine, Privacy, Control center, Battery (+ battery-threshold widget), Session
-- **Dock (bottom):** Auto-hide, pinned apps (kitty, Nemo, Noctalia, Zen), running app dots, magnification
-- **Launcher:** App launcher with overview (categories off)
-- **Notifications:** Top-right
-- **OSD:** Top-center, horizontal (volume, brightness, wifi, bluetooth, etc.)
-- **Lockscreen:** Blurred desktop, custom login box widget (fingerprint option available, off)
-- **Backdrop:** Blur + tint
-- **Hot corners:** Top-right → Control center, Bottom-left → Window switcher, Bottom-right → Launcher
-- **Desktop widgets:** Fancy audio visualizer + weather (6-day forecast)
-- **Calendar:** CalDAV integration with Radicale at `cal.example.com`
-- **Audio:** No overdrive
-- **Nightlight:** Disabled
-- **External IP indicator** in the panel (enable flag)
+Comprehensive desktop environment (home module from the noctalia flake, systemd service disabled):
+- **Greeter (NixOS):** `noctalia-greeter` module with `--session niri`, appearance scheme "Noctalia", default session Niri, Adwaita cursor 24
+- **Panel (top, glass transparency, capsule, thickness 34, margins 2/100/2):**
+  - Start: workspaces (label_source id, labels on, hide when empty), CPU/RAM/net-rx/net-tx sysmon widgets (10s poll), Media (hide when no media)
+  - Center: clock-day/clock-time/clock-date widgets ("%-I:%M %p" time format)
+  - End: System tray, Clipboard, Lock keys, Notifications, Network, Bluetooth, Caffeine, Privacy (hide inactive), Control center, Battery (+label), Session
+- **Dock (bottom):** auto-hide, pinned apps (**kitty, Nemo, Noctalia, LibreWolf** — Zen was replaced by LibreWolf), running app dots, magnification, icon size 48
+- **Launcher:** categories off; niri-overview-type-to-launch enabled
+- **Notifications:** top-right; **OSD:** top-center horizontal (volume/output/input, brightness, wifi, bluetooth, caffeine, dnd, lock keys, keyboard layout)
+- **Lockscreen:** blurred desktop (intensity 0.5), fingerprint off; a custom login-box widget is *configured* under `lockscreen_widgets` but currently **disabled** (`enabled = false`)
+- **Backdrop:** blur 0.3 + tint 0.3
+- **Hot corners:** top-right → Control center, bottom-left → Window switcher, bottom-right → Launcher
+- **Desktop widgets:** fancy audio visualizer + weather (6-day forecast) on eDP-1
+- **Calendar:** CalDAV via Radicale at `cal.example.com` (custom provider, main user's address)
+- **Audio:** no overdrive; **Nightlight:** disabled; location "Thakarda"; external IP indicator enabled; screen-time enabled; polkit agent enabled; clipboard history max 10000 entries
+- **Control center:** full sidebar, width 1000, shortcuts wifi/bluetooth/nightlight/dark_mode/screen_time
 - **Plugins (enabled):**
-  - `noctalia/notes` — notes panel (notes dir under `Data/Sync_M_L_I_C/Notes/Niri_Notes`)
-  - `kenn/keybind-cheatsheet` — shows Niri keybindings from the live `config.kdl`
-  - `user/live-file-search` — `/fs` + `/fso` launcher providers (searches `$HOME`, 15 results, excludes .git/node_modules/.cache/...)
-  - Plugin sources: official-plugins, community-plugins, owner/noctalia-plugins (tracked rename of the old plugin repo)
-- **Theme:** custom palette from `nix-wallpaper-dracula-fs`, `m3-monochrome` wallpaper scheme, templates auto-applied to kitty, niri, gtk3/4, qt, scroll, neovim, obsidian, vscode, zed, yazi, zathura, opencode, pi-agent, pear-desktop, zen-browser, lazygit, rofi, papirus-icons, alacritty, btop
-- **Theming:** Noctalia built-in theme, auto-applies to kitty, niri, GTK3/4, QT, scroll, neovim, obsidian, vscode, zed, yazi, zathura, etc.
+  - `noctalia/notes` — notes dir `Data/Sync_M_L_I_C/Notes/Niri_Notes`
+  - `kenn/keybind-cheatsheet` — Niri bindings from the live `config.kdl` (show_actions true)
+  - `user/live-file-search` — `/fs` + `/fso` launcher providers (searches `$HOME`, 15 results, excludes .git/node_modules/.cache/Trash/target/__pycache__/.npm/venv/.venv)
+  - Plugin sources: official-plugins + community-plugins (noctalia-dev GitHub) and `noctalia-plugins` (own plugin repo)
+- **Theme:** mode dark, source custom, builtin Catppuccin, custom palette forced to `nix-wallpaper-dracula-fs`, wallpaper scheme `m3-monochrome`; template targets: builtin alacritty, btop, gtk3, gtk4, kitty, niri, qt, scroll; community opencode, pi-agent, pear-desktop, zen-browser, neovim, obsidian, vscode, zed, rofi, zathura, papirus-icons, lazygit, yazi
+- **Wallpaper:** enabled, defaults to `config.stylix.image`
 
 ### 6.3 Stylix
 - **Image:** `abstract-swirls` (Catppuccin Mocha style)
-- **Base16 scheme:** Ocean
-- **Font sizes:** Desktop 13, Terminal 14, Popups 12
+- **Base16 scheme:** Ocean (pinned rev of tinted-theming/base16-schemes, ocean.yaml)
+- **Font sizes:** Desktop 13, Applications 13, Terminal 14, Popups 12
 - **Opacity:** Desktop 0.90, Terminal 0.97, Applications 0.90, Popups 0.50
-- Zen browser and Neovim excluded from Stylix targeting; LibreWolf profile names declared for theming
+- **NixOS:** autoEnable true; `targets.regreet.enable = false` (noctalia-greeter is used instead; avoids the obsolete programs.regreet trace)
+- **Home:** polarity dark; Zen browser and Neovim excluded from Stylix targeting; LibreWolf profile names declared (`default`) for theming
 
 ### 6.4 Wallpaper Module
 Defines wallpaper sources:
@@ -586,37 +628,34 @@ Primary coding assistant configuration:
 
 ### 7.2 Pi Coding Agent
 
-- **Providers:** `opencode` (default), `nvidia` (key from sops), fallback `oc-sdk-zen` / `deepseek-v4-flash-free`
-- **Default model:** `deepseek-v4-flash-free`, thinking level medium, dark theme
-- **Packages:** `pi-web-access`, `pi-observational-memory`; subagents handled by a local extension
+- **Default provider/model:** `nvidia` / `nvidia/nemotron-3-ultra-550b-a55b`, thinking level medium, dark theme
+- **auth.json:** built at activation from whichever sops-managed keys exist — `opencode_api_key`, `nvidia_api_key`, and `mistral_api_key` (all mode 0600); providers available accordingly
+- **Packages:** `npm:pi-web-access` and `git:github.com/md-riaz/omniroute-pi-ext-integration`; subagents handled by a local extension
 - **Local extensions** (`.pi/agent/extensions/`):
-  - `herdr-subagents/` — managed sub-agents: main agent gets `subagent` (spawn+wait), `subagent_abort`, `subagents_list`; sub-agents get report/note tools and can never spawn. Identified via `HERDR_*` env + role marker; registry under `~/.cache/pi-subagents`; dead-agent sweeps, 8-max active, abort timeout support
-  - `question.ts` — interactive question tool (options list + free-text "Type something." entry)
-  - `footer.ts` — footer shows actual context tokens (e.g. `48.2k/200k (24%)`) instead of only percent
-- **Sudo wrapper (`~/.local/bin/sudo`):** NOPASSWD allowlisted commands (systemctl subcommands, nixos-rebuild) run as before; everything else invokes `sudo -A` with an askpass that pops a **zenity GUI password dialog** on the user's desktop — the password goes through an internal pipe and never enters the agent's context, tool output, TUI, or any file. Headless hosts (alma) exit with a clear error instead (extend the NOPASSWD allowlist in `modules/system/users.nix`)
-- **Compaction:** Enabled, 16384 reserve, 20000 keep-recent
-- **Retry:** 3 max retries
-- **Directions:** Web-search points to the local SearXNG on alma (`http://alma.n:8056`), workflow `none`, autoOpenBrowser off
-- **SSRF:** Allows 127.0.0.1/32 only
-- Telemetry/install-telemetry/version-check disabled
+  - `herdr-subagents/` — managed sub-agents: main agent gets `subagent` (spawn+wait, optional wait=false fire-and-forget, timeoutMinutes up to 180, explicit `provider/model` param or inherited from spawner), `subagent_abort`, `subagents_list`; sub-agents get report/note tools and can never spawn/abort. Identified via `HERDR_*` env + `PI_SUBAGENT_ROLE_ACTIVE` marker; registry under `~/.cache/pi-subagents`; dead-agent sweeps (10-min quiet + no live herdr agent → slot reclaimed), 8-max active, registry pruning after 7 days, role reconciliation strips spawn/abort tools from sub-agent sessions and appends enforcement prompt
+  - `question.ts` — interactive question tool (options list + descriptions + free-text "Type something." entry; TUI-only, sequential execution)
+  - `footer.ts` — footer shows actual context tokens (e.g. `48.2k/200k (24%)`), token/cost/cache stats, and an OmniRoute keepalive-sentinel fix that filters `data: {"model":"omniroute"}` SSE chunks and rewrites locked `responseModel` so the footer shows `requested → actual` routed model
+- **Sudo wrapper (`~/.local/bin/sudo`)** — gated by the `programs.pi-coding-agent.sudoAskpass` option (default true; disable on hosts where normal interactive sudo is wanted): NOPASSWD allowlisted commands (systemctl subcommands, nixos-rebuild) run as before; `-n/-S/-A` invocations pass straight through; everything else invokes `sudo -A` with the askpass at `~/.pi/agent/sudo-askpass.sh`, which pops a **zenity GUI password dialog** (pinned store path) on the desktop — the password only travels sudo's internal pipe, never entering the agent's context, output, TUI, or files. Headless hosts (alma) exit non-zero with a clear error instead (extend the NOPASSWD allowlist in `modules/system/users.nix`). Wrapper + askpass live in the immutable Nix store.
+- **Compaction:** enabled, 16384 reserve, 20000 keep-recent; **retry:** 3 max retries
+- **Web search:** SearXNG on alma (`http://alma.n:8056`), curator disabled (`commands.curator = false` in `~/.config/pi/web-search.json`), autoOpenBrowser off, SSRF allowlist `127.0.0.1/32` only
+- Telemetry/install-telemetry disabled, version check skipped (`PI_SKIP_VERSION_CHECK=1`); extraPackages nodejs, bun, python3Minimal; global instructions embedded as context
 
 ### 7.3 LLaMA CPP (alma + aspire7)
 
-- Custom overlay building from git, **version b10253** (tagged release with MCP support)
-- **GPU option:** `home.llama.gpu = true` → CUDA 12.4 build (`llama-cpp-cuda`); else CPU build (`llama-cpp`) with `--cpu-moe`. Aspire7 enables GPU, matching its NVIDIA config (sm_75)
-- **Exposed via `perSystem.packages`** (`.#llama-cpp`, `.#llama-cpp-cuda`) so CI pre-builds/caches the exact store paths the hosts use
+- Custom overlay building llama.cpp from git at pinned rev `25ae3a9b`, **version 10481** (tagged release with MCP support); overlay also switches the server web UI build dir to `tools/ui` (npm deps vendored via npmDepsHash) and adds curl to buildInputs
+- **GPU option:** `home.llama.gpu = true` → CUDA 12.4 build (`llama-cpp-cuda`, capabilities sm_75); else CPU build (`llama-cpp`) run with `--cpu-moe`. Aspire7 enables GPU
+- **Exposed via `perSystem.packages`** (`.#llama-cpp`, `.#llama-cpp-cuda`; CUDA variant imports `pkgs.path` with matching config so store paths match the host's home-manager build for CI caching)
 - **Alma nginx:** Reverse proxy at `llama.example.com`
 - **Aspire7:** User service with:
-  - 65536 context, mlocked, reasoning disabled in chat template
-  - MCP servers config from `~/.config/mcp/mcp.json`
-  - API key from sops-nix (now in `secrets/shared.yaml`)
+  - 65536 context, `--mlock`, `--api-key-file /run/secrets/llama_cpp_api_key` (sops, shared.yaml), port 11434, host 0.0.0.0
+  - Reasoning disabled both ways: `--reasoning off` flag + `LLAMA_ARG_CHAT_TEMPLATE_KWARGS={"enable_thinking":false}` and `LLAMA_ARG_REASONING=off` env
+  - MCP servers config from `~/.config/mcp/mcp.json`; Restart on-failure, SIGINT kill signal
 - `llama-cpp-cuda` binary tools also in aspire7 system packages
 
 ### 7.4 MCP Proxy (alma + aspire7)
-- SSE transport via `mcp-proxy` on port 8082
-- Exposes MCP servers configured in `~/.config/mcp/mcp.json`
-- Currently: nixos (uvx mcp-nixos)
-- Alma: nginx proxy at `mcp.example.com`
+- `mcp-proxy` on port 8082 using **`--transport streamablehttp`** (not SSE) with `--named-server-config ~/.config/mcp/mcp.json`
+- Exposes MCP servers configured in `~/.config/mcp/mcp.json` — currently: nixos (`uvx mcp-nixos`); PATH includes nodejs/uv/nix profile bins
+- Alma: nginx proxy at `mcp.example.com` → `127.0.0.1:8082`
 
 ### 7.5 N8N (alma)
 - Workflow automation (Quadlet container)
@@ -651,7 +690,15 @@ Primary coding assistant configuration:
 - Unified AI gateway (Quadlet container, `diegosouzapw/omniroute:latest`)
 - Data persisted to the synced podman dir (`Sync_L_O/podman/omniroute`)
 - Container port published on `127.0.0.1` only; clients use `https://omniroute.example.com` (nginx TLS vhost, no Tinyauth — API-key auth is omniroute's own)
-- pi coding agent consumes it through the `omniroute-pi-ext-integration` extension
+- pi coding agent consumes it through the `omniroute-pi-ext-integration` package (git input in `settings.packages`, see §7.2); the local `pi-omniroute-provider.ts` extension was removed, and `pi-footer.ts` filters OmniRoute keepalive sentinels and displays the routed `requested → actual` model
+- Module lives in `modules/home/omniroute.nix`, exporting **both** `flake.nixosModules.omniroute` (oink DNS record + nginx TLS vhost → `127.0.0.1:20128`, websocket proxying) and `flake.homeModules.omniroute` (quadlet container) — the home module is part of shared-modules, so installed for both hosts
+
+### 7.11 Freebuff (both hosts)
+
+Free coding-agent CLI installed via `modules/ai/freebuff.nix` (part of shared-modules → present in both hosts' home environments):
+- Package from `pkgs/freebuff.nix` (see §11): version **0.0.146**, built declaratively from the npm registry tarball (`fetchurl` + sha256) with a vendored `freebuff-lock.json`
+- Home module simply adds the derivation to `home.packages`
+- Bump procedure documented in the package file header comment (fetch latest npm metadata, regenerate lockfile)
 
 ---
 
@@ -680,36 +727,36 @@ Primary coding assistant configuration:
 - Integrated with pi sub-agent extension (§7.2)
 
 ### 8.2 Git (`git.nix`)
-- **User:** owner / user@example.com
-- **Diff:** difftastic (side-by-side-both, dark, always color)
+- **User:** GitHub account name / `systemConstants.git_email` (both resolved live from constants — not hardcoded literals)
+- **Diff:** difftastic (`side-by-side-show-both`, dark, always color); difftool meld, no prompt
 - **Tools:** lazygit, gh, hub, meld, git-graph, onefetch, git-lfs
-- **gh CLI auth:** `~/.config/gh/hosts.yml` generated from the sops `gh_token` secret (template, mode 0600, user owner, git_protocol ssh)
+- **gh CLI auth:** `~/.config/gh/hosts.yml` generated from the sops `gh_token` secret (sops template, mode 0600, user = GitHub account name, git_protocol ssh)
 - **Aliases:** ci, co, s, aa, p, d, ds, dt, l
+- `init.defaultBranch = main`
 
 ### 8.3 Editors
 
 #### Neovim
-- **LazyVim** via `lazyvim-nix` flake input (previously a hand-pinned LazyVim starter fetchGit)
-- Extras enabled (with nix-managed tool deps — no runtime mason downloads):
-  - `lang.nix` (nil, nixfmt, statix), `lang.python` (pyright, ruff, venv-selector), `lang.markdown` (marksman, prettier, markdown-preview), `lang.json` (jsonls + SchemaStore), `lang.yaml` (yamlls + SchemaStore), `formatting.prettier`
-- `extraPackages`: bash-language-server, marksman, nil, nixfmt, pyright, shellcheck, shfmt, statix, yaml-language-server, yamllint
-- Custom plugins: shell support (bashls + shfmt/shellcheck via conform/nvim-lint), yamllint linter wired into lang.yaml
-- vi/vim aliases kept; extra packages: ghostscript, tectonic (LaTeX), mermaid-cli, gcc, jq, ripgrep
+- **LazyVim** via `lazyvim-nix` flake input
+- Extras enabled (all with nix-managed tool deps — no runtime mason downloads):
+  - `lang.nix`, `lang.python`, `lang.markdown`, `lang.json`, `lang.yaml`, `formatting.prettier`
+- `extraPackages`: bash-language-server, marksman, nil, nixfmt, pyright, shellcheck, shfmt, statix, yaml-language-server, yamllint (only these — no ghostscript/tectonic/mermaid-cli/gcc/jq/ripgrep)
+- Custom plugins: shell support (bashls LSP + shfmt/shellcheck via conform/nvim-lint), yamllint linter wired into lang.yaml
+- vi/vim aliases kept
 
 #### VSCodium
-- FHS-compatible package
-- Extensions: Git Graph, GitHub PR, Prettier, Nix env/ide, Python, Continue.dev, Claude Dev
-- XML and Markdown extensions
+- FHS-compatible package (`vscodium-fhs`)
+- Extensions: Git Graph, GitHub PR, Prettier, Nix env selector, direnv, Nix IDE, Python, Continue.dev, Claude Dev (marketplace-pinned 3.5.0), XML, Markdown Editor
 
 #### Zed Editor
-- Extensions: nix, json, catppuccin themes, material icons, python, mcp-server-puppeteer
+- Extensions: nix, json, catppuccin + catppuccin-blur themes, material icons, python-requirements, python-snippets, mcp-server-puppeteer
 - Extra packages: python-lsp-server, tinymist (Typst), nixd, nixfmt, nil
-- Remote server enabled
+- Remote server enabled (`installRemoteServer = true`)
 
 ### 8.4 Browsers
 
 #### Zen Browser (primary)
-- Fork of Firefox with telemetry stripped
+- Fork of Firefox via zen-browser-flake (`homeModules.beta`); `setAsDefaultBrowser = false` (xdg defaults point at LibreWolf)
 - Extensions: Bitwarden, uBlock Origin, Floccus, Skip Redirect, Absolute Enable Right Click, Tridactyl, Karakeep, Buster, ClearURLs, Imagus, Multi-Account Containers, I Still Don't Care About Cookies, Obsidian Web Clipper, Enhanced GitHub, Print to PDF document
 - Search engines: SearXNG (default), Perplexity, Google, ChatGPT, DuckDuckGo, GitHub, NixOS Wiki, Nixpkgs, Nix Flakes
 - Containers: School (orange), Personal (blue), Banking (red), Study (green)
@@ -718,7 +765,7 @@ Primary coding assistant configuration:
   - No disk cache, media in memory only, downloads via temp dir, "always ask" for new mime types
   - Telemetry/studies/coverage/normandy/ping-centre all disabled; no sponsored content, no what's-new, no weather/topstories feeds
   - URL bar: search terms hidden, quick-suggest/weather/market/yelp/wikipedia gates off, no breach-alert pings
-  - DRM/EME disabled (`media.eme.enabled = false` — no Netflix/Prime DRM streaming), WebGL disabled, PDF.js disabled (external reader), new windows open as tabs, granular prefs instead of `resistFingerprinting` (RFP off)
+  - RFP **on** (`privacy.resistFingerprinting = true`, letterboxing off, spoof_english, window size caps), WebGL disabled, WebGPU disabled, DRM/EME disabled (`media.eme.enabled = false`), PDF.js disabled (external reader), new windows open as tabs, safe browsing off, HTTPS-only mode, DoH off (TRR mode 5)
 - Note: an experimental source build with LibreWolf patches was added then reverted — the home module uses the zen-browser-flake beta package instead
 
 #### Chromium (secondary)
@@ -726,8 +773,8 @@ Primary coding assistant configuration:
 - Chromium Web Store extension from GitHub release
 
 #### LibreWolf (installed, secondary)
-- Same privacy-focused config as Zen
-- Additional extensions: Copy Link Text, XDM Browser Monitor
+- Own ~50 pref overrides (RFP on, WebGL off, pdfjs off, telemetry off, IPv6 off, session restore off); search.default searx (force) even though legacy prefs name Google
+- Same core addon set as Zen minus Buster/Print-to-PDF, plus XDM Browser Monitor v3.4 (manually built xpi)
 - Tridactyl for vim-like browsing
 - Profile names declared in Stylix so theming applies
 
@@ -772,12 +819,12 @@ Primary coding assistant configuration:
 - Zoom, rotate
 
 ### 8.8 Newsboat (RSS Reader)
-- Config at `.config/newsboat/config`, managed by home-manager
+- Config at `~/.newsboat/config`, an out-of-store symlink into the local `.secrets/newsboat_config` (kept out of the store/git)
 
 ### 8.9 Obsidian
 - Vaults: `General` and `rajasthan` in `Data/Sync_M_L_I_C/Notes/`
 - 21px base font, readable line length off
-- Core plugins: backlinks, bookmarks, canvas, command palette, file explorer, file recovery, global search, outgoing links, outline, page preview
+- Core plugins: backlinks, bookmarks, canvas, command palette, file explorer, file recovery, global search, outgoing links, outline, page preview, editor-status
 
 ### 8.10 Other Apps
 - **Kitty** terminal: FiraCode font, Noctalia theme, custom keybindings (splits), config.py from GitHub
@@ -786,20 +833,41 @@ Primary coding assistant configuration:
 - **Bitwarden Desktop:** installed on aspire7 (floating window rule in Niri)
 - **Tesseract OCR:** enabled for `hin+eng+osd` (Devanagari + English) on both hosts
 - **Distrobox:** Ubuntu and Arch Linux containers via Podman
-- **Flatpak:** Script to install apps
+- **Flatpak:** `~/.scripts/flatpak.sh` idempotently ensures the Flathub remote; its `apps` array is currently empty (installs nothing today)
+- **firstinstall:** `~/.scripts/firstinstall.sh` chains `flatpak.sh` then `distrobox.sh` (zsh abbreviation `firstinstall`)
 - **udiskie:** auto-mounts removable drives with notifications (user service)
 
 ### 8.11 XDG / GTK
 - **Default apps:**
-  - Images → imv-dir
-  - PDF → sioyek
+  - Images → imv-dir (except `image/svg+xml` → LibreWolf)
+  - PDF → sioyek (Chromium removed as pdf handler)
   - Text/Markdown → Zed
   - Directories → Nemo
-  - HTTP/HTML → Zen Browser
+  - HTTP/HTML/web schemes → **LibreWolf**
   - Audio/Video → mpv
-  - Office docs → OnlyOffice
-- Hidden desktop entries: btop, cups, ranger, meld, gparted, fcitx5, nvim
-- Virtshared directory symlink: `~/VMShare`
+  - Office docs incl. `text/csv` → OnlyOffice
+- Hidden desktop entries: btop, cups, ranger, Meld (org.gnome.Meld), gparted, fcitx5-configtool, Fcitx5 migrator + main entry, nvim
+- `VMSHARE` declared as an XDG user dir (`~/VMShare`, auto-created)
+- gtk.nix: `gtk.enable`, forces overwrite of `gtk-3.0/gtk.css` and `gtk-4.0/gtk.css` (for stylix-generated themes)
+
+### 8.12 Core (`core.nix`)
+- Home-manager base: username/homeDirectory from systemConstants, stateVersion **26.05**
+- `allowUnfree`, `EDITOR=nvim` session variable, `programs.home-manager.enable`, `systemd.user.startServices = "sd-switch"`
+
+### 8.13 Dictation (`dictation.nix`)
+- Packages: the dictation flake's `dictation` + `nerd-dictation` packages, plus `wtype`
+- `~/.config/nerd-dictation/nerd-dictation.py` sourced from `scripts/nerd-dictation/` (spoken punctuation/symbol → written form replacements + trailing-space fix for continuous mode)
+- Toggle scripts `~/.local/bin/{dictation,hindi-dictation}-toggle` (pgrep-guarded; start `dictation en|hi --continuous` or stop) — bound in Niri (§6.1)
+
+### 8.14 Rclone Bisync (`rclone.nix`)
+- User services `rclone-<remote>.service` bisyncing `<remote>:/` ↔ `~/Data/<remote>/Drive` for the `user.alternate`, GitHub-user and `-Crypt` remotes
+- A shared-drive service bisyncs to `~/Data/<github-user>/Shared` with `--drive-shared-with-me`
+- Filter files written to `~/.config/rclone/*.txt` (exclude rcloneCrypt/EncryptedDocuments; shared allowlist for books/edited content)
+- Matching timers: OnBootSec 2m, re-run every 5 min while inactive (`OnUnitInactiveSec`)
+- Common flags: `--force --drive-import-formats=docx --create-empty-src-dirs --resilient --check-first --recover`
+
+### 8.15 NUR Overlay (`nur.nix`)
+- Adds `inputs.nur.overlays.default` to nixpkgs overlays (required by rycee firefox-addons used in the browser modules)
 
 ---
 
@@ -810,7 +878,7 @@ All secrets are encrypted using sops-nix (YAML-based with AES256-GCM encryption 
 **Secret files:** `secrets/` directory  
 **Recipient keys (age public keys):**
 - `user` — user SSH key (`age150lp4hteazvm5nu48swdd4mru48qjw0ruja028vqw2dt4e30jdnqk2qnfa`)
-- `alma` — host SSH key (`age1vafc7dut36jvs7q34xug8nemsqke7aztgecdya8jhtux52fnccq744j8p`)
+- `alma` — host SSH key (`age1vafc7dut36j7vs5q34xug8nemsqke7aztgecdya8jhtux52fnccq744j8p`)
 - `aspire7` — host SSH key (`age1e22ew43f40dzvrun3dvxn59mxvqc0t9a72w7gmf5qaxdsqd7tqdsqjlewg`)
 
 **Secret files structure:**
@@ -818,16 +886,13 @@ All secrets are encrypted using sops-nix (YAML-based with AES256-GCM encryption 
 - `alma.yaml` — Alma-specific secrets
 - `aspire7.yaml` — Aspire7-specific secrets
 
-**Key secrets stored:**
-- **Auth:** hashedstandard, standard, htpasswdstandard
-- **SSH:** ssh_github_key, ssh_gitserver_key, ssh_oracle_key
-- **AI:** opencode_api_key, opencode_password_web, nvidia_api_key, llama_cpp_api_key (moved to shared.yaml)
-- **Network:** tailscale_key, headscale_api_key, headscale_cookie_secret
-- **Storage:** rclone_config, webdav_environment_file
-- **OIDC/Auth infra:** pocket-id-encryption-key, pocket-id-static-api-key, pocket-id-smtp-password, tinyauth-env
-- **Apps:** karakeep_environment_file, searx_environment_file
+Creation rules: `shared.yaml` encrypted for the admin key + both host keys; `alma.yaml` for admin + alma; `aspire7.yaml` for admin + aspire7.
+
+**Key secrets stored (top-level names verified against the YAML files):**
+- **`shared.yaml` (14):** gh_token, hashedstandard, htpasswdstandard, llama_cpp_api_key, mistral_api_key, nvidia_api_key, opencode_api_key, opencode_password_web, rclone_config, ssh_github_key, ssh_gitserver_key, ssh_oracle_key, standard, tailscale_key
+- **`alma.yaml` (23):** alma_syncthing_cert, alma_syncthing_key, degoog_settings_password, filen_cli_auth_config, filen_cli_auth_config_root, flowise_environment_file, gitea_action_runner_token, groq_api_key, headscale_api_key, headscale_cookie_secret, hermes-env, karakeep_environment_file, mail_password, oink_api_key, oink_secret_api_key, openrouter_api_key, pocket-id-encryption-key, pocket-id-smtp-password, pocket-id-static-api-key, searx_environment_file, tinyauth-env, webdav_environment_file, webdav_mount_file
+- **`aspire7.yaml` (2):** aspire7_syncthing_cert, aspire7_syncthing_key
 - **Git tooling:** gh_token (→ `~/.config/gh/hosts.yml` via sops template)
-- **Other:** oink_api_key, oink_secret_api_key, restic_repository_password
 
 ---
 
@@ -842,8 +907,8 @@ All secrets are encrypted using sops-nix (YAML-based with AES256-GCM encryption 
 | `apply-home-build.sh` | `home-manager build` |
 | `apply-home-switch.sh` | `home-manager switch` |
 | `apply-droid.sh` | `nix-on-droid switch` for phone |
-| `commit.sh` | AI-powered commit message generation (OpenAI API from `.env`) |
-| `podman-images-update.sh` | Pull latest images, restart dependent containers |
+| `commit.sh` | Stages everything (`git add -A`), generates a Conventional Commits message via an OpenAI-compatible API (`OPENAI_API_KEY`/`OPENAI_BASE_URL`/`OPENAI_MODEL` from `.env`; staged diff truncated to 30 KB) and **commits automatically**; falls back to `nix-shell -p curl jq` when deps are missing |
+| `podman-images-update.sh` | Pull latest tags for every non-`<none>` image, then stop & start (not `podman restart`) containers whose ancestor matches (dedup'd) |
 | `update-system.sh` | `nix flake update --commit-lock-file` |
 | `nerd-dictation/nerd-dictation.py` | Dictation punctuation/symbol replacement + trailing-space fix (auto-loaded into `~/.config/nerd-dictation/`) |
 | `sioyek/*.py` | Sioyek annotation management (embed, import, remove) |
@@ -867,6 +932,11 @@ All secrets are encrypted using sops-nix (YAML-based with AES256-GCM encryption 
 - Patched for NixOS (autoPatchelf, runtime deps)
 - Fixes OpenSSL and lttng-ust library paths
 
+### Freebuff
+- Free coding-agent CLI, version 0.0.146, built declaratively from the npm registry tarball via `buildNpmPackage` with `importNpmLock` resolving deps from the vendored `pkgs/freebuff-lock.json` (no npmDepsHash guessing on bumps)
+- Vendored lockfile strips monorepo-only prepack/postpack scripts; `dontNpmBuild = true`; mainProgram `freebuff`
+- Consumed by `modules/ai/freebuff.nix` (see §7.11)
+
 ### Flake-level packages (`perSystem.packages.*`)
 Built by modules, consumed by CI + hosts (see §16):
 - `.#llama-cpp` / `.#llama-cpp-cuda` (from `modules/ai/llama.nix`)
@@ -889,6 +959,7 @@ Built by modules, consumed by CI + hosts (see §16):
 ### `lint.yaml`
 - Triggers on push/PR to `dendritic` branch
 - Runs `nix flake check`
+- Note: the repo has only `main`, so this workflow never triggers as configured (stale trigger branch — see §14)
 
 ---
 
@@ -976,7 +1047,7 @@ sops.secrets.my_secret = {
   neededForUsers = true; # optional
 };
 ```
-Then referenced via `config.sops.secrets.my_secret.path`. Secrets shared by all hosts live in `shared.yaml` (e.g. `llama_cpp_api_key`, `gh_token`).
+Then referenced via `config.sops.secrets.my_secret.path`. Secrets shared by all hosts live in `shared.yaml` (e.g. `llama_cpp_api_key`, `gh_token`). The shared system module configures sops with `age.sshKeyPaths = ["/etc/ssh/ssh_host_ed25519_key"]` + `age.generateKey = true` (and also imports `inputs.quadlet-nix.nixosModules.quadlet`); the home side uses `$HOME/.ssh/id_ed25519` with `defaultSopsFile = secrets/shared.yaml`.
 
 ### sops Template Pattern
 `sops.templates` renders decrypted secrets into files at activation (e.g. `~/.config/gh/hosts.yml` from `gh_token`) — keeps secrets out of the Nix store without a manual activation script.
