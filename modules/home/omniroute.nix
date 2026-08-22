@@ -29,7 +29,7 @@ _: {
           };
           containerConfig = {
             image = "docker.io/diegosouzapw/omniroute:latest";
-            publishPorts = [ "20128:20128" ];
+            publishPorts = [ "127.0.0.1:20128:20128" ];
             volumes = [ "${config.systemConstants.data_directory}/Sync_L_O/podman/omniroute:/app/data:Z" ];
             environments = {
               PORT = "20128";
