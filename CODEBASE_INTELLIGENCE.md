@@ -1,10 +1,10 @@
 # Dotfiles Codebase Intelligence
 
-> **Last updated:** 2026-08-12  
-> **Last commit tracked:** `98ed134` (HEAD — single squashed snapshot)  
+> **Last updated:** 2026-08-22  
+> **Last commit tracked:** `9e2ac44` (HEAD)  
 > **Owner:** owner (user)  
 > **Domain:** example.com  
-> **Primary Git branch:** main (only branch; history anonymized + squashed 2026-08-12)  
+> **Primary Git branch:** main (only branch)  
 > **Total files:** ~1563 (includes generated lock files, secrets, etc.)
 
 ---
@@ -25,7 +25,7 @@ The repo uses:
 - **pre-commit-hooks.nix** + **treefmt-nix** for code quality
 - **import-tree** to auto-import all `.nix` files in `./modules/`
 - **lanzaboote** for Secure Boot on aspire7
-- **herdr** as the terminal workspace manager for AI coding agents (replaced zellij)
+- **herdr** as the terminal workspace manager for AI coding agents
 - **lazyvim-nix** for the Neovim LazyVim distribution
 
 ---
@@ -137,7 +137,6 @@ karakeep                # Self-hosted bookmarking/read-later
 hermes-agent            # AI agent framework
 radicale                # CalDAV/CardDAV server
 webdav                  # WebDAV file access
-databases               # PostgreSQL + Redis
 rclone-mount            # Cloud storage mounts (koofr, mega, filen)
 filen-sync              # Continuous sync to Filen cloud
 oink                    # Dynamic DNS updater
@@ -319,9 +318,10 @@ systemConstants = {
 - Wake-on-LAN disabled on both wifi and ethernet
 
 #### SSH
-- Alma: Port 46587, no root login, fail2ban enabled (SSH + dovecot + postfix-sasl jails), Gitea user allowed, MaxAuthTries 10, `KbdInteractiveAuthentication` disabled
+- **Both hosts:** password + keyboard-interactive auth disabled, `PermitRootLogin = "no"`, `AllowUsers` restricted to the main user (alma additionally allows the Gitea user)
+- Alma: Port 46587, fail2ban enabled (SSH + dovecot + postfix-sasl jails), MaxAuthTries 10
 - SSH keys managed via sops-nix: GitHub, Gitea, Oracle cloud jump host
-- SSH config defines: `github.com`, `git.example.com`, `nalma` (user) — dead `ralma` alias removed
+- SSH config defines: `github.com`, `git.example.com`, `nalma` (user)
 - Known hosts pre-configured for all endpoints
 
 #### Tailscale
@@ -355,7 +355,7 @@ systemConstants = {
 - **UI binding:** loopback-only (`127.0.0.1:5380`) — the nginx vhost proxies to it; no unauthenticated exposure
 - **Admin auth:** local `admin` user with committed bcrypt hash (AdGuard has no OIDC; protects `/control/*` from localhost CSRF/rebinding)
 - **Fully declarative:** `mutableSettings = false` — config regenerated from Nix on every start
-- **Blocklists (deduped, ~1.0M rules vs old ~3.6M):** HaGeZi Ultimate, HaGeZi Threat Intelligence (mini), Encrypted DNS/VPN/TOR/Proxy Bypass, NSFW, Gambling, URL Shortener — all in `adblock` format; HaGeZi lists cover what OISD/Phishing Army/URLHaus/Spam404/Sinfonietta/NRD used to add
+- **Blocklists (~1.0M rules):** HaGeZi Ultimate, HaGeZi Threat Intelligence (mini), Encrypted DNS/VPN/TOR/Proxy Bypass, NSFW, Gambling, URL Shortener — all in `adblock` format
 - **DNS:** explicit upstreams (Quad9 DoH + 8.8.8.8 + 1.1.1.1, load_balance), DNSSEC on, safe browsing + parental enabled
 - **Blocked services:** social media (Facebook, TikTok, Discord, Snapchat), Gaming (Steam, Epic, Blizzard, Roblox), Streaming (Netflix, Disney+, Hulu, Spotify, Twitch), Shopping (Temu, Shein, Aliexpress), Dating apps, Messaging (WhatsApp blocked via Facebook), etc.
 - **Allowed domains:** huggingface.co, filen.io, syncthing.net, example.com, maps.rspamd.com, github.com
@@ -370,7 +370,7 @@ systemConstants = {
   - 30-day session duration (persistent login)
 - **Tinyauth:** OAuth2 proxy middleware (nginx auth_request)
   - Provider: Pocket ID via OIDC
-  - Protects AdGuard Home, SearXNG, Syncthing web UIs
+  - Protects AdGuard Home and SearXNG web UIs
 - **pocket-id-seed.service:** One-shot service that provisions OIDC clients (tinyauth, headscale, headplane, gitea, karakeep):
   - **Heals missing clients** — re-creates a client if Pocket ID's DB was reset
   - **Secret rotation** — verifies the on-disk secret against Pocket ID's token endpoint (401 = stale → rotate); blips treated as valid to avoid needless rotation
@@ -426,9 +426,9 @@ systemConstants = {
 - Dark theme, infinite scroll
 
 #### 5.4.8 Syncthing
-- **Global config:** GUI at port 8384, devices `android` + `ipad` pre-configured
+- **Global config:** GUI at port 8384 (all interfaces), devices `android` + `ipad` pre-configured
+- **GUI access — tailnet only:** the firewall allows TCP 8384 **only on `tailscale0`** (`http://<host>.n:8384` or the tailscale IP); there is no public vhost for it
 - **Alma:** Syncs 3 folders (Sync_M_L_I_O, Sync_L_O, Sync_M_L_O) with aspire7, android, ipad
-  - Accessible via `syncthing.example.com` behind Tinyauth
 - **Aspire7:** Syncs 7 folders (Camera, Sync_M_L, Sync_M_L_I_O, Sync_M_L_I_C, Sync_M_L_I, Sync_L_O, Sync_M_L_O)
   - Camera from android, Notes with obsidian ignore patterns
 - Unique device IDs per host, certs from sops-nix
@@ -441,12 +441,14 @@ systemConstants = {
   - VM variant: 4 GB RAM, 8 cores, 10 GB disk, shared directory
 
 #### 5.4.10 Databases (alma only)
-- **PostgreSQL 16:** Port 5432, pgvector extension, n8n user/db
-- **Redis:** Port 6379, password-protected
+- **PostgreSQL 16**, provisioned by the Roundcube module (no dedicated databases module):
+  - `enable = true`, `roundcube` database/role ensured by the roundcube module
+  - Peer auth on the unix socket, no TCP listener (`enableTCPIP` off), nothing exposed on 5432
+- **Redis:** none on the host (mailserver's separate `redis-rspamd` instance remains)
 
 #### 5.4.11 Oink (alma)
 - Dynamic DNS updater — creates DNS records for subdomains
-- Used by: AdGuard Home, Headscale, Gitea, SearXNG, Karakeep, Syncthing, Radicale, WebDAV, N8N, OpenCode, DeGoog, LLaMA, mta-sts
+- Used by: AdGuard Home, Headscale, Gitea, SearXNG, Karakeep, Radicale, WebDAV, N8N, OpenCode, DeGoog, LLaMA, OmniRoute, mta-sts
 
 #### 5.4.12 Filen Sync (alma)
 - Continuous bidirectional sync from local dirs to Filen cloud:
@@ -505,7 +507,7 @@ Highly customized KDL config including:
   - `Mod+B` → Zen browser, `Mod+Shift+B` → acer-battery-toggle
   - `Mod+W` → Bitwarden
   - `Mod+E` → Nemo file manager
-  - `Mod+S` → Noctalia launcher in `/fs` live-file-search mode (replaced kitty+fzf script)
+  - `Mod+S` → Noctalia launcher in `/fs` live-file-search mode
   - `Mod+Y` → Yazi (terminal file manager)
   - `Mod+D / Mod+Space` → Noctalia launcher
   - `Mod+V` → Clipboard manager
@@ -586,7 +588,7 @@ Primary coding assistant configuration:
 
 - **Providers:** `opencode` (default), `nvidia` (key from sops), fallback `oc-sdk-zen` / `deepseek-v4-flash-free`
 - **Default model:** `deepseek-v4-flash-free`, thinking level medium, dark theme
-- **Packages:** `pi-web-access`, `pi-observational-memory` (pi-mcp-adapter and pi-subagents npm package removed — subagents is now a local extension)
+- **Packages:** `pi-web-access`, `pi-observational-memory`; subagents handled by a local extension
 - **Local extensions** (`.pi/agent/extensions/`):
   - `herdr-subagents/` — managed sub-agents: main agent gets `subagent` (spawn+wait), `subagent_abort`, `subagents_list`; sub-agents get report/note tools and can never spawn. Identified via `HERDR_*` env + role marker; registry under `~/.cache/pi-subagents`; dead-agent sweeps, 8-max active, abort timeout support
   - `question.ts` — interactive question tool (options list + free-text "Type something." entry)
@@ -616,15 +618,17 @@ Primary coding assistant configuration:
 - Currently: nixos (uvx mcp-nixos)
 - Alma: nginx proxy at `mcp.example.com`
 
-### 7.5 N8N (alma + aspire7)
+### 7.5 N8N (alma)
 - Workflow automation (Quadlet container)
 - Webhook URL: `https://n8n.example.com/`
-- PostgreSQL-backed, debug logging
-- Full external module support
+- Storage: embedded SQLite on the Filen mount (`/mnt/filen/Alma/services/n8n`) — no Postgres/Redis dependency
+- Full external module support, debug logging
+- Container port published on `127.0.0.1` only (nginx TLS vhost is the sole entry point)
 
 ### 7.6 DeGoog (alma)
 - Proxy for migrating off Google services
 - Quadlet container at `degoog.example.com` (behind Tinyauth)
+- Container port published on `127.0.0.1` only
 
 ### 7.7 Agent Zero (alma)
 - AI agent framework (Quadlet container)
@@ -642,6 +646,12 @@ Primary coding assistant configuration:
 - **Playwright browsers from nixpkgs** (`PLAYWRIGHT_BROWSERS_PATH` → `pkgs.playwright-driver.browsers`, Chromium + headless shell only) instead of CDN downloads that don't run on NixOS
 - PyPI playwright pinned to the release matching nixpkgs' browser revisions (1.61.0); venv reinstalls when nixpkgs bumps playwright
 - `[cookies]` extra (rookiepy) requires Python ≤ 3.12, hence `uv tool install --python 3.12`
+
+### 7.10 OmniRoute (alma)
+- Unified AI gateway (Quadlet container, `diegosouzapw/omniroute:latest`)
+- Data persisted to the synced podman dir (`Sync_L_O/podman/omniroute`)
+- Container port published on `127.0.0.1` only; clients use `https://omniroute.example.com` (nginx TLS vhost, no Tinyauth — API-key auth is omniroute's own)
+- pi coding agent consumes it through the `omniroute-pi-ext-integration` extension
 
 ---
 
@@ -661,7 +671,7 @@ Primary coding assistant configuration:
 - oh-my-posh with atomic theme
 - Same alias set as Zsh
 
-**herdr** (terminal workspace manager — replaced zellij):
+**herdr** (terminal workspace manager):
 - Fully Nix-managed config (`programs.herdr`, `~/.config/herdr/config.toml`), onboarding prompts off
 - **Prefix `F12`**, tmux/zellij-style keybindings: `prefix+[/]` previous/next workspace, `prefix+,` rename, `prefix+&` close, `prefix+c` new tab, vim/hjkl pane focus, `prefix+v`/`prefix+-` splits, `prefix+z` zoom, `prefix+r` resize
 - Popups: `prefix+Alt+g` lazygit (80%), `prefix+Alt+b` btop (60%), `prefix+Alt+f` yazi (70%)
@@ -708,7 +718,7 @@ Primary coding assistant configuration:
   - No disk cache, media in memory only, downloads via temp dir, "always ask" for new mime types
   - Telemetry/studies/coverage/normandy/ping-centre all disabled; no sponsored content, no what's-new, no weather/topstories feeds
   - URL bar: search terms hidden, quick-suggest/weather/market/yelp/wikipedia gates off, no breach-alert pings
-  - DRM/EME disabled (`media.eme.enabled = false` — no Netflix/Prime DRM streaming), WebGL disabled, PDF.js disabled (external reader), new windows open as tabs, `resistFingerprinting` replaced by this granular set (RFP off)
+  - DRM/EME disabled (`media.eme.enabled = false` — no Netflix/Prime DRM streaming), WebGL disabled, PDF.js disabled (external reader), new windows open as tabs, granular prefs instead of `resistFingerprinting` (RFP off)
 - Note: an experimental source build with LibreWolf patches was added then reverted — the home module uses the zen-browser-flake beta package instead
 
 #### Chromium (secondary)
@@ -762,7 +772,7 @@ Primary coding assistant configuration:
 - Zoom, rotate
 
 ### 8.8 Newsboat (RSS Reader)
-- Config previously in `.secrets/newsboat_config` (removed — legacy git-crypt)
+- Config at `.config/newsboat/config`, managed by home-manager
 
 ### 8.9 Obsidian
 - Vaults: `General` and `rajasthan` in `Data/Sync_M_L_I_C/Notes/`
@@ -900,17 +910,11 @@ Built by modules, consumed by CI + hosts (see §16):
 
 ---
 
-## 14. Git History & Branches
+## 14. Git Workflow
 
-**Single-snapshot history (2026-08-12):** the repository's 1500+ commit history was deliberately rewritten and squashed for privacy before going public:
-
-- **All commit authors/committers** mapped to a neutral identity (`user <user@users.noreply.github.com>`) via `git-filter-repo` — filtering out name, email, and domain identifiers
-- **History squashed** into a single orphan commit `98ed134` — *"initial commit"* — snapshotting the current file tree (142 files, 106 .nix modules)
-- **All other branches deleted** locally and from GitHub; only `main` remains
-- **Local artifacts purged** — reflogs expired, stashes dropped, `git gc --prune=now`; `git fsck` reports zero unreachable objects
-- Pre-wipe state preserved in `/tmp/dotfiles-backup-20260812.bundle` (deletable once confirmed)
-
-Commit style going forward: Conventional Commits (`feat:`, `chore:`, `refactor:`, `fix:`, etc.)
+- **Single branch:** `main`, pushed to `github.com:npnpatidar/dotfiles`
+- **Commit style:** Conventional Commits (`feat:`, `fix:`, `refactor:`, `chore:`)
+- The user runs `git push`; agents generate commit messages only
 
 ---
 
@@ -926,7 +930,6 @@ Internet
   ├── adh.example.com (AdGuard Home — behind Tinyauth)
   ├── adh.example.com:853 (DNS-over-TLS — Android Private DNS)
   ├── searx.example.com (SearXNG — behind Tinyauth)
-  ├── syncthing.example.com (Syncthing GUI — behind Tinyauth)
   ├── karakeep.example.com (Karakeep)
   ├── n8n.example.com (n8n)
   ├── agento.example.com (Agent Zero)
@@ -945,6 +948,10 @@ Tailscale (100.64.0.0/24 via headscale)
   ├── aspire7.n (100.64.0.2 — laptop)
   ├── android.n (100.64.0.3 — phone)
   └── ipad.n (100.64.0.4 — tablet)
+
+Tailnet-only services (no public exposure):
+  ├── Syncthing GUI — http://<host>.n:8384 (firewall allows TCP 8384 on tailscale0 only)
+  └── Immich server (aspire7) — http://aspire7.n:2283 (Immich mobile app connects here directly)
 ```
 
 ---
@@ -997,87 +1004,28 @@ Home-manager modules declare `sops.secrets` directly. A `home.activation` script
 
 ---
 
-## 17. Snapshot Composition & History Reset
+## 17. How to Update This File
 
-> The history was reset to a single commit `98ed134 "initial commit"` (2026-08-12, see §14); the old tracking points (`b7a11d9`, `95ec59d`, `ac08d87`, `5f8368b`) no longer exist. The grouped notes below describe what the snapshot contains.
+Update from the live code and git log:
 
-### Terminal / Shell
-- **zellij removed, herdr integrated** as the terminal workspace manager (`modules/home/herdr.nix`): tmux/zellij-style F12 prefix keybindings, catppuccin theme with auto light/dark switch, lazygit/btop/yazi popups, session resume for agent panes; `h` alias added, `zl` alias dropped
-
-### AI / Agent Tooling
-- **pi coding agent** reworked:
-  - Packages trimmed to `pi-web-access` + `pi-observational-memory` (dropped pi-mcp-adapter, pi-subagents npm pkg, context-mode, pi-free)
-  - New local extensions: **herdr-subagents** (managed sub-agent spawn/abort/registry with race hardening and prompt pruning), **question tool** (options + free-text UI), **footer** (real context token counts)
-  - **Restricted sudo wrapper + zenity GUI askpass** (pi-sudo.sh); web-search now points at `http://alma.n:8056` with workflow none; default provider opencode, default model `deepseek-v4-flash-free`
-- **llama.cpp bumped to b10253** (tagged MCP release); **GPU/CUDA build option** (`home.llama.gpu`), perSystem `llama-cpp`/`llama-cpp-cuda` packages for CI caching; API key moved to `secrets/shared.yaml`; aspire7 now runs llama with CUDA 12.4 (sm_75)
-- **mcp module added to aspire7** (was alma-only)
-- **NotebookLM module added** (both hosts): uv-installed `notebooklm-py` with nixpkgs Playwright browsers, pinned PyPI playwright (1.61.0), python 3.12 venv
-- Agent can now manage system services via `sudo systemctl` (NOPASSWD allowlist)
-
-### Desktop (aspire7)
-- **Niri:** `Mod+S` → Noctalia `/fs` live-file-search (kitty+fzf script removed), `Mod+Shift+B` battery toggle, `Mod+W` Bitwarden, `Mod+F1` keybind cheatsheet, `Mod+N` notes panel, window-or-workspace focus/move for up/down, brightness keys when locked, **removable-media stack** (udisks2 + gvfs + udiskie automount)
-- **Noctalia overhaul:** plugins (notes, keybind-cheatsheet, live-file-search), desktop widgets (audio visualizer + weather), custom palette theme with m3-monochrome scheme, expanded template list, battery-threshold widget, external-IP panel item, fingerprint lockscreen option
-- **Acer battery health module** (new `hardware/acer-battery.nix`): out-of-tree acer-wmi-battery driver, ~80% charge-limit toggle with Noctalia notifications
-- **Power management** reworked: battery-level (<75%) trigger instead of AC detection, periodic 5-min timer, `auto-cpufreq --force` integration
-- **Zen Browser:** massive librewolf.cfg/arkenfox-parity privacy hardening (partitioning, no disk cache, telemetry off, EME/WebGL/PDF.js disabled, query stripping); source-build with LibreWolf patches added then reverted (flake/CI refs left dangling); **LibreWolf installed** and configured
-- **Neovim:** migrated to LazyVim via `lazyvim-nix` input — lang extras (nix/python/markdown/json/yaml) with nix-managed tool deps, shell + yamllint linters wired in
-- **Git:** `gh` CLI authenticated via sops `gh_token` template (`~/.config/gh/hosts.yml`)
-
-### Services (alma)
-- **AdGuard Home:** UI bound to loopback, admin user with committed bcrypt hash, declarative config, blocklists deduped ~3.6M→~1M rules (HaGeZi adblock lists only), DNSSEC + safe browsing enabled, explicit load-balanced upstreams, **DNS-over-TLS on TCP 853** for Android Private DNS
-- **Pocket ID / Tinyauth:** 30-day sessions; seed service now heals missing clients and **rotates stale secrets** (token-endpoint validation)
-- **Gitea:** OIDC setup idempotent + runs before gitea.service, `update-oauth` re-applies config; SSH hardening (MaxAuthTries 10, gitea user cleanup)
-- **Mail:** submission on 587, DKIM 2048-bit (selector `mail2`), **MTA-STS enforce policy** at mta-sts.example.com, rspamd independent DNS, fail2ban dovecot + postfix-sasl jails, roundcube watchdog disabled
-- **SearXNG:** engine curation (google cse weighted top, DDG/startpage disabled, junk explicitly off), request timeouts, default language `all`
-
-### System / Hosts
-- **Aspire7:** Magic SysRq enabled, `llama-cpp-cuda` + bitwarden-desktop packages, owner cachix substituter
-- **Alma:** python314 huggingface-hub, notebooklm
-- **Common packages:** busybox replaced with standard tools (procps, less, which, iputils, netcat-gnu, diffutils, vim, lsof, psmisc, tree, unzip, bc, net-tools, bind.dnsutils), tesseract hin+eng+osd, ripgrep
-- **Users:** restricted NOPASSWD sudo rules + `timestamp_timeout=0` (see §5.3)
-- **SSH:** dead `ralma` alias removed, KbdInteractiveAuthentication disabled, host SSH key rotated
-- **Secrets:** `gh_token` + `llama_cpp_api_key` added to shared.yaml, sops bumped to 3.13.3, obsolete `fill-sops-secrets.py` removed
-
-### CI
-- `ci-build.yaml` rebuilt as a **matrix of expensive package builds** pushed to owner.cachix.org; full system/home closures disabled (5 GB quota)
-
-### Removed
-- `modules/home/cryptomator.nix`, `modules/ai/pi-subagents` npm dependency (replaced by local extension), `scripts/fill-sops-secrets.py`, `pkgs/zen-browser-source/` (source-build experiment, reverted)
-
-### Additional capture: zen-browser cleanup & removable-media split
-
-- **CI:** zen-browser source-build matrix entry dropped (was building `packages.x86_64-linux.zen-browser-patched`, ~2-3 h on 16 cores)
-- **Flake:** `perSystem.packages.zen-browser-patched` removed from `flake.nix` — dangling refs from the reverted source-build experiment cleaned up
-- **Desktop (aspire7):** removable-media settings split out of `modules/display/niri.nix` into a dedicated `modules/display/removable-media.nix` — `udisks2` + `gvfs` + `upower` (system) and `udiskie` (home); `niri.nix` keeps only compositor config and the niri-docs-required packages (portal, wl-clipboard, qtwayland, xwayland-satellite, grim); module wired into aspire7 system + home lists
-
-### Post-snapshot changes
-
-None yet — the first post-snapshot commit will extend the history from `98ed134`.
-
----
-
-## 18. How to Update This File
-
-The repo history is a single snapshot (`98ed134`, see §14), so commit-diff-based updates no longer apply. Update from the live code:
-
-1. `git status` / `git diff` against the `98ed134` snapshot — identify changed files, read each changed module (`git diff HEAD -- <path>` or just `read` the current file) and verify against the *current* code
+1. `git log --oneline` since the commit noted in the header — identify changed files, read each changed module (`git diff <commit> -- <path>` or just `read` the current file) and verify against the *current* code
 2. Update the affected sections in place:
-   - New/removed modules → §3 inputs, §4 host module lists, §19 index
+   - New/removed modules → §3 inputs, §4 host module lists, §18 index
    - Changed module behavior → the corresponding §5/§6/§7/§8 subsection
-   - Secrets → §9; scripts → §10; CI → §12; patterns → §16; history/branches → §14
+   - Secrets → §9; scripts → §10; CI → §12; patterns → §16; git workflow → §14
    - Update the header (`Last updated:`, `Last commit tracked:`)
-3. Append a **grouped** summary (by area, not by commit) to §17 — only if notable; drop the summary if nothing user-visible changed
-4. Never re-list individual commits — the git history (fresh from `98ed134`) is the authoritative changelog
+3. Never re-list individual commits — `git log` is the authoritative changelog
 
 ---
 
-## 19. Complete .nix File Index (alphabetical)
+## 18. Complete .nix File Index (alphabetical)
 
-> Generated by sub-agent (w9:p1E) on 2026-08-12; updated 2026-08-12 (removable-media module). All relative paths of `.nix` files in this repo, one per line, sorted alphabetically (106 files).
+> Regenerated 2026-08-22 from `git ls-files "*.nix"` (108 files). All relative paths of `.nix` files in this repo, one per line, sorted alphabetically.
 
 flake.nix
 modules/ai/agent-zero.nix
 modules/ai/degoog.nix
+modules/ai/freebuff.nix
 modules/ai/llama.nix
 modules/ai/mcp.nix
 modules/ai/n8n.nix
@@ -1120,6 +1068,7 @@ modules/home/neovim.nix
 modules/home/newsboat.nix
 modules/home/nur.nix
 modules/home/obsidian.nix
+modules/home/omniroute.nix
 modules/home/onlyoffice.nix
 modules/home/rclone.nix
 modules/home/shell.nix
@@ -1141,7 +1090,6 @@ modules/pre-commit.nix
 modules/services/adguardhome.nix
 modules/services/containerization-aspire7.nix
 modules/services/containerization.nix
-modules/services/databases.nix
 modules/services/filen-sync.nix
 modules/services/gitea.nix
 modules/services/headscale.nix
@@ -1179,5 +1127,6 @@ modules/system/time-locale.nix
 modules/system/users-alma.nix
 modules/system/users.nix
 modules/treefmt.nix
+pkgs/freebuff.nix
 pkgs/sahityaFont.nix
 pkgs/xdm-app.nix
