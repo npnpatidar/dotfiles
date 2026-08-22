@@ -74,7 +74,7 @@ _: {
           enable = true;
           settings = {
             server = {
-              host = "0.0.0.0";
+              host = "127.0.0.1";
               port = 3000;
               base_url = "https://headscale.${domain_name}";
               cookie_secret_path = config.sops.secrets.headscale_cookie_secret.path;

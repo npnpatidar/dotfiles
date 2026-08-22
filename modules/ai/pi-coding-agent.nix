@@ -153,8 +153,8 @@ _: {
             pkgs.python3Minimal
           ];
           settings = {
-            defaultProvider = "nvidia";
-            defaultModel = "nvidia/nemotron-3-ultra-550b-a55b";
+            defaultProvider = "opencode";
+            defaultModel = "opencode/x-preview-f-free";
             # enabledModels = [ "*free*" ];
             defaultThinkingLevel = "medium";
             theme = "dark";

@@ -9,6 +9,12 @@ _: {
     services.nginx.virtualHosts."omniroute.${config.systemConstants.domain_name}" = {
       enableACME = true;
       forceSSL = true;
+      # Dashboard behind Tinyauth; OpenAI-compatible API stays key-authed.
+      enableTinyauth = true;
+      locations."/v1/" = {
+        proxyPass = "http://127.0.0.1:20128";
+        proxyWebsockets = true;
+      };
       locations."/" = {
         proxyPass = "http://127.0.0.1:20128";
         proxyWebsockets = true;
