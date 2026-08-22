@@ -21,6 +21,10 @@
       settings = {
         PasswordAuthentication = false;
         KbdInteractiveAuthentication = false;
+        PermitRootLogin = "no";
+        AllowUsers = [
+          "${config.systemConstants.default_user}"
+        ];
       };
     };
 

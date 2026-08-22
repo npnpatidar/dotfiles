@@ -9,10 +9,6 @@ _: {
         "fuse"
       ];
 
-      users.root.openssh.authorizedKeys.keys = [
-        config.systemConstants.user_ssh_key
-      ];
-
     };
   };
 }
