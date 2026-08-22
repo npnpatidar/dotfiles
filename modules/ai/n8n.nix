@@ -37,7 +37,7 @@ _: {
           N8N_PAYLOAD_SIZE_MAX = "20000";
           N8N_PROXY_HOPS = "1";
           N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS = "false";
-          N8N_LOG_LEVEL = "debug";
+          N8N_LOG_LEVEL = "info";
         };
         userns = "keep-id";
       };

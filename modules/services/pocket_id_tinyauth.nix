@@ -266,7 +266,6 @@ _: {
         description = "Seed Pocket ID with OIDC clients";
         after = [
           "pocket-id.service"
-          "agenix-install-secrets.service"
         ];
         wants = [ "pocket-id.service" ];
         wantedBy = [ "multi-user.target" ];

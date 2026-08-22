@@ -59,7 +59,7 @@
           PORT = "3003";
           CRAWLER_FULL_PAGE_SCREENSHOT = "true";
           CRAWLER_FULL_PAGE_ARCHIVE = "true";
-          DISABLE_SIGNUPS = "false";
+          DISABLE_SIGNUPS = "true";
           DISABLE_NEW_RELEASE_CHECK = "true";
         };
       };
