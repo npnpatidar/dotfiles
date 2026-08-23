@@ -55,7 +55,6 @@ _: {
       nodejs_latest
       pear-desktop
       # Binary tools from the llama.cpp overlay (CUDA build, matches home.llama.gpu)
-      llama-cpp-cuda
     ];
   };
 }
