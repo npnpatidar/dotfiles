@@ -203,10 +203,10 @@ _: {
 
             ## Service Management
             - User services: `systemctl --user <start|stop|restart|status|reload> <service>` — no sudo needed
-            - System services: `sudo systemctl <start|stop|restart|status|reload> <service>` — passwordless sudo is configured for exactly these subcommands; anything else (enable, kill, reboot, ...) will be denied
+            - System services: `sudo systemctl <start|stop|restart|status|reload> <service>` — passwordless sudo is configured for exactly these subcommands plus `sudo journalctl` (read-only logs); anything else (enable, kill, reboot, ...) will be denied
 
             ## Sudo & Passwords
-            - `sudo` is wrapped (~/.local/bin/sudo): allowlisted commands (systemctl subcommands, nixos-rebuild) never prompt; any other sudo command pops a GUI password dialog on the user's desktop, which only the user can fill. The password never enters your context, tool output, or any file — do not attempt to obtain it any other way.
+            - `sudo` is wrapped (~/.local/bin/sudo): allowlisted commands (systemctl subcommands, journalctl, nixos-rebuild) never prompt; any other sudo command pops a GUI password dialog on the user's desktop, which only the user can fill. The password never enters your context, tool output, or any file — do not attempt to obtain it any other way.
             - On headless hosts (alma) there is no dialog: non-allowlisted sudo fails with a clear error. Do not retry it; tell the user what command needs sudo so they can extend the NOPASSWD allowlist (modules/system/users.nix) or run it themselves.
             - NEVER type, echo, pipe (`-S`), store, or write a password anywhere.
 

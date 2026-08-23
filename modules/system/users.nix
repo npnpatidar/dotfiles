@@ -81,6 +81,17 @@
               command = "/run/current-system/sw/bin/systemctl reload *";
               options = [ "NOPASSWD" ];
             }
+            # Read-only log inspection (journalctl has no state-changing flags
+            # worth worrying about; output paging is handled by the agent).
+            {
+              command = "/run/current-system/sw/bin/journalctl *";
+              options = [ "NOPASSWD" ];
+            }
+            # `journalctl` without any arguments — `*` requires an argument
+            {
+              command = "/run/current-system/sw/bin/journalctl";
+              options = [ "NOPASSWD" ];
+            }
           ];
         }
       ];
