@@ -53,15 +53,6 @@
       removable-media
       filen-desktop
       kdeconnect
-      llama
-      {
-        home.llama.gpu = true;
-        nixpkgs.config = {
-          # Match modules/hardware/nvidia.nix (GTX 1650 = sm_75)
-          cudaVersion = "12.4";
-          cudaCapabilities = [ "7.5" ];
-        };
-      }
       mcp
       notebooklm
       noctalia

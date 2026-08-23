@@ -25,7 +25,6 @@
       rclone-mount
       filen-sync
       oink
-      llama
       n8n
       mcp
       degoog
@@ -40,7 +39,6 @@
     extraSpecialArgs = { inherit inputs; };
     modules = with config.flake.homeModules; [
       shared-modules
-      llama
       n8n
       mcp
       degoog
