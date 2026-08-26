@@ -6,12 +6,8 @@ _: {
         443
         80
         853 # DNS-over-TLS for Android Private DNS
+        46587 # public SSH (must stay open: no more tailscale fallback)
       ];
-    };
-    # required for tailscale exit-node (forward tailnet traffic out)
-    boot.kernel.sysctl = {
-      "net.ipv4.ip_forward" = 1;
-      "net.ipv6.conf.all.forwarding" = 1;
     };
   };
 }

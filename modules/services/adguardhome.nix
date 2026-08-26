@@ -57,7 +57,6 @@ _: {
             "@@||cas-bridge.xethub.hf.co^"
             "@@||hf.co^"
             "@@||huggingface.co^"
-            "@@||controlplane.tailscale.com^$important"
             "||speechs3proto2-pa.googleapis.com^"
           ];
           filters =
@@ -112,6 +111,21 @@ _: {
             protection_enabled = true;
             filtering_enabled = true;
             parental_enabled = true;
+            # Local DNS rewrites replacing tailscale MagicDNS: any
+            # "<host>.n" name resolves to the wireguard hub, so old habits
+            # like http://alma.n:8056 keep working on tunnel devices.
+            rewrites = [
+              {
+                enabled = true;
+                domain = "alma.n";
+                answer = "10.100.0.1";
+              }
+              {
+                enabled = true;
+                domain = "*.n";
+                answer = "10.100.0.1";
+              }
+            ];
             # Keep safe browsing consistent with parental (both block hosts are
             # configured below). Both send hash-prefix lookups to AdGuard's
             # API — a privacy tradeoff vs. pure local blocklists.
@@ -259,28 +273,38 @@ _: {
               "github.com"
             ];
           };
+          # Persistent clients so the dashboard shows friendly names instead
+          # of raw IPs. Identities AGH can actually see:
+          # - 10.100.0.x  wireguard peers (DNS = 10.100.0.1 inside the tunnel)
+          # - 127.0.0.1   alma itself + DoT users (nginx stream proxy on :853
+          #               terminates TLS locally, so their real IPs are lost)
+          # - 10.0.0.244  alma's own LAN IP (OCI VCN)
           clients.persistent = [
             {
-              name = "3";
-              ids = [ "100.64.0.3" ];
+              name = "alma";
+              ids = [
+                "10.100.0.1"
+                "127.0.0.1"
+                "10.0.0.244"
+              ];
               use_global_settings = true;
               use_global_blocked_services = true;
             }
             {
-              name = "2";
-              ids = [ "100.64.0.2" ];
+              name = "aspire7";
+              ids = [ "10.100.0.2" ];
               use_global_settings = true;
               use_global_blocked_services = true;
             }
             {
-              name = "1";
-              ids = [ "100.64.0.1" ];
+              name = "gt2";
+              ids = [ "10.100.0.3" ];
               use_global_settings = true;
               use_global_blocked_services = true;
             }
             {
-              name = "4";
-              ids = [ "100.64.0.4" ];
+              name = "ipad";
+              ids = [ "10.100.0.4" ];
               use_global_settings = true;
               use_global_blocked_services = true;
             }

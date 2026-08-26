@@ -5,7 +5,7 @@
     imports = with config.flake.nixosModules; [
       syncthing
       containerization
-      tailscale
+      wireguard
       inputs.quadlet-nix.nixosModules.quadlet
       nix
       users
@@ -35,6 +35,7 @@
       opencode
       pi-coding-agent
       freebuff
+      dsh
       common-packages
       omniroute
       inputs.sops-nix.homeManagerModules.sops

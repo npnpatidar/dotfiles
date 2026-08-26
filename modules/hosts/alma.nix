@@ -8,11 +8,10 @@
       users-alma
       networking-alma
       openssh-alma
-      tailscale-alma
+      wireguard-status
       nginx
       pocket_id_tinyauth
       adguardhome
-      headscale
       mail-server
       gitea
       searx

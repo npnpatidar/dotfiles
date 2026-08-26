@@ -124,14 +124,6 @@ _: {
           '["${ssoUrl}/api/oauth/callback/pocketid"]' "tinyauth" \
           "${ssoUrl}/api/oauth/callback/pocketid"
 
-        create_client "headscale" "headscale" \
-          '["https://headscale.${domain_name}/oidc/callback"]' "headscale" \
-          "https://headscale.${domain_name}/oidc/callback"
-
-        create_client "headplane" "headplane" \
-          '["https://headscale.${domain_name}/admin/oidc/callback"]' "headscale" \
-          "https://headscale.${domain_name}/admin/oidc/callback"
-
         create_client "gitea" "Gitea" \
           '["https://git.${domain_name}/user/oauth2/pocket-id/callback"]' "gitea" \
           "https://git.${domain_name}/user/oauth2/pocket-id/callback"

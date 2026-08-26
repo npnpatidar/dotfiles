@@ -69,8 +69,8 @@ _: {
 
       services = {
         # rspamd lookups (RBLs, DMARC, maps) go straight to unfiltered public
-        # resolvers instead of the system chain (Tailscale MagicDNS -> AdGuard
-        # Home), so a tailscale/AdGuard hiccup can't stall mail processing.
+        # resolvers instead of the system chain (AdGuard Home over wg0), so an
+        # AdGuard/VPN hiccup can't stall mail processing.
         rspamd.locals."dns.conf".text = ''
           nameservers = [ "9.9.9.9:53" "1.1.1.1:53" ];
         '';

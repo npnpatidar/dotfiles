@@ -34,8 +34,8 @@
       };
     };
 
-    # GUI reachable only over the tailnet; public interfaces stay blocked
+    # GUI reachable only over the VPN; public interfaces stay blocked
     # by the default firewall.
-    networking.firewall.interfaces."tailscale0".allowedTCPPorts = [ 8384 ];
+    networking.firewall.interfaces."wg0".allowedTCPPorts = [ 8384 ];
   };
 }
