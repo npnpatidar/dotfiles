@@ -60,6 +60,9 @@ _: {
           image = "ghcr.io/degoog-org/degoog:latest";
           publishPorts = [ "127.0.0.1:4444:4444" ];
           volumes = [ "${config.home.homeDirectory}/.local/share/degoog:/app/data" ];
+          # Join the shared bridge network (aardvark-dns handles resolution
+          # via the host's resolver chain — see modules/services/podman-network.nix).
+          networks = [ "services" ];
           environments = {
             TZ = "Asia/Kolkata";
           };

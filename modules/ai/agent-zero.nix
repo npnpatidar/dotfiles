@@ -21,6 +21,8 @@ _: {
       };
       containerConfig = {
         image = "agent0ai/agent-zero";
+        # Shared bridge network: aardvark-dns resolves via host's resolver chain.
+        networks = [ "services" ];
         volumes = [ "//${config.systemConstants.data_directory}/podman/agent0/:/a0" ];
         publishPorts = [ "127.0.0.1:7665:80" ];
         environments = {

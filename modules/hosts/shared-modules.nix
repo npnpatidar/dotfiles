@@ -28,6 +28,7 @@
       herdr
       yazi
       bat
+      bat
       core
       shell
       git
@@ -37,6 +38,7 @@
       freebuff
       common-packages
       omniroute
+      podman-network
       inputs.sops-nix.homeManagerModules.sops
       config.flake.modules.generic.systemConstants
     ];

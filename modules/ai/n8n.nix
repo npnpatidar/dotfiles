@@ -22,6 +22,8 @@ _: {
       };
       containerConfig = {
         image = "n8nio/n8n";
+        # Shared bridge network: aardvark-dns resolves via host's resolver chain.
+        networks = [ "services" ];
         publishPorts = [ "127.0.0.1:5678:5678" ];
         volumes = [ "/mnt/filen/Alma/services/n8n:/home/node/.n8n:Z" ];
         environments = {
