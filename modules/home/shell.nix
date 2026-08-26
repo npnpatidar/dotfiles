@@ -19,12 +19,14 @@ let
     "...." = "cd ../../..";
     code = "codium";
     nos = "nix --extra-experimental-features 'nix-command flakes' search nixpkgs";
-    ab = "cd ~/dotfiles/scripts && ~/dotfiles/scripts/apply-boot.sh";
-    as = "cd ~/dotfiles/scripts && ~/dotfiles/scripts/apply-system.sh";
-    ad = "cd ~/dotfiles/scripts && ~/dotfiles/scripts/apply-dry-build.sh";
-    at = "cd ~/dotfiles/scripts && ~/dotfiles/scripts/apply-test.sh";
-    hb = "cd ~/dotfiles/scripts && ~/dotfiles/scripts/apply-home-build.sh";
-    hs = "cd ~/dotfiles/scripts && ~/dotfiles/scripts/apply-home-switch.sh";
+    ab = "nixos-rebuild build --flake ~/dotfiles --show-trace";
+    abb = "sudo nixos-rebuild boot --flake ~/dotfiles --show-trace";
+    ad = "sudo nixos-rebuild dry-build --flake ~/dotfiles --show-trace";
+    at = "sudo nixos-rebuild test --flake ~/dotfiles --show-trace";
+    as = "sudo nixos-rebuild switch --flake ~/dotfiles --show-trace";
+    hb = "home-manager build --flake ~/dotfiles";
+    hs = "home-manager switch --flake ~/dotfiles";
+    us = "nix flake update --flake ~/dotfiles";
 
     lsa = "ls -a";
     lsl = "ls -l";

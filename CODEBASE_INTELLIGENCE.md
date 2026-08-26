@@ -901,15 +901,12 @@ Creation rules: `shared.yaml` encrypted for the admin key + both host keys; `alm
 | Script | Purpose |
 |--------|---------|
 | `apply-boot.sh` | `nixos-rebuild boot` for current host |
-| `apply-system.sh` | `nixos-rebuild switch` |
-| `apply-dry-build.sh` | `nixos-rebuild dry-build` (dry run) |
-| `apply-test.sh` | `nixos-rebuild test` (no activation) |
-| `apply-home-build.sh` | `home-manager build` |
-| `apply-home-switch.sh` | `home-manager switch` |
 | `apply-droid.sh` | `nix-on-droid switch` for phone |
 | `commit.sh` | Stages everything (`git add -A`), generates a Conventional Commits message via an OpenAI-compatible API (`OPENAI_API_KEY`/`OPENAI_BASE_URL`/`OPENAI_MODEL` from `.env`; staged diff truncated to 30 KB) and **commits automatically**; falls back to `nix-shell -p curl jq` when deps are missing |
 | `podman-images-update.sh` | Pull latest tags for every non-`<none>` image, then stop & start (not `podman restart`) containers whose ancestor matches (dedup'd) |
 | `update-system.sh` | `nix flake update --commit-lock-file` |
+
+Shell abbreviations/aliases (in `modules/home/shell.nix`): `ab` = build system, `ad` = dry-build, `at` = test, `as` = switch, `hb` = home-manager build, `hs` = home-manager switch.
 | `nerd-dictation/nerd-dictation.py` | Dictation punctuation/symbol replacement + trailing-space fix (auto-loaded into `~/.config/nerd-dictation/`) |
 | `sioyek/*.py` | Sioyek annotation management (embed, import, remove) |
 
