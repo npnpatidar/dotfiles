@@ -35,7 +35,6 @@
       opencode
       pi-coding-agent
       freebuff
-      dsh
       common-packages
       omniroute
       inputs.sops-nix.homeManagerModules.sops

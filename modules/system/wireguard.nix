@@ -110,12 +110,14 @@
         # Same tradeoff as the old tailscale override_local_dns=true: no tunnel,
         # no DNS.
         (mkIf (!isHub) {
-          networking.nameservers = [ cfg.hub.ip ];
-          networking.networkmanager.dns = "none";
+          networking = {
+            nameservers = [ cfg.hub.ip ];
+            networkmanager.dns = "none";
 
-          # Bootstrap: pin the endpoint in /etc/hosts so the tunnel can resolve
-          # its own hub before any DNS is reachable (chicken-and-egg).
-          networking.hosts."${cfg.hub.publicIp}" = [ cfg.endpoint ];
+            # Bootstrap: pin the endpoint in /etc/hosts so the tunnel can resolve
+            # its own hub before any DNS is reachable (chicken-and-egg).
+            hosts."${cfg.hub.publicIp}" = [ cfg.endpoint ];
+          };
         })
 
         # Hub: accept tunnels, trust wg traffic, and NAT clients out through the
