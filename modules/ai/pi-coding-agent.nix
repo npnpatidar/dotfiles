@@ -154,7 +154,7 @@ _: {
           ];
           settings = {
             defaultProvider = "opencode";
-            defaultModel = "opencode/x-preview-f-free";
+            defaultModel = "x-preview-f-free";
             # enabledModels = [ "*free*" ];
             defaultThinkingLevel = "medium";
             theme = "dark";
@@ -212,6 +212,7 @@ _: {
 
             ## Subagent Usage
             - The agent may autonomously decide to use subagents for tasks that would benefit from parallel execution, such as independent web searches, file operations, or build processes, without requiring explicit user request.
+            - use subagents extensively to accelerate the task completion.
             - Subagents are managed with self-awareness to avoid recursion and report results upon completion.
 
             ## Project Instructions
