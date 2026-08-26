@@ -44,6 +44,9 @@
               name = "alma";
               ip = "10.100.0.1";
               publicKey = "3MxjYu0BsJRe4jgEJ1c0dlxDN3Hlqr9fGF9/vib39RU=";
+              # Public address of the hub. Spokes pin this in /etc/hosts so the
+              # endpoint resolves before the tunnel (and AdGuard DNS) exists.
+              publicIp = "80.225.195.83";
             };
 
             peers = [
@@ -109,6 +112,10 @@
         (mkIf (!isHub) {
           networking.nameservers = [ cfg.hub.ip ];
           networking.networkmanager.dns = "none";
+
+          # Bootstrap: pin the endpoint in /etc/hosts so the tunnel can resolve
+          # its own hub before any DNS is reachable (chicken-and-egg).
+          networking.hosts."${cfg.hub.publicIp}" = [ cfg.endpoint ];
         })
 
         # Hub: accept tunnels, trust wg traffic, and NAT clients out through the
