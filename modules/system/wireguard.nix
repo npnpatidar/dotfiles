@@ -113,6 +113,8 @@
           networking = {
             nameservers = [ cfg.hub.ip ];
             networkmanager.dns = "none";
+            # Prevent NM from managing the wg interface; let the NixOS wireguard module control it.
+            networkmanager.unmanaged = [ "interface-name:wg0" ];
 
             # Bootstrap: pin the endpoint in /etc/hosts so the tunnel can resolve
             # its own hub before any DNS is reachable (chicken-and-egg).
