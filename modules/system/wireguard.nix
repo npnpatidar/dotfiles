@@ -72,12 +72,12 @@
           sops.secrets.wireguard_private_key.sopsFile = ../../secrets/${config.networking.hostName}.yaml;
 
           networking.wireguard.interfaces.${cfg.interface} = {
-            listenPort = cfg.port;
             privateKeyFile = config.sops.secrets.wireguard_private_key.path;
           }
           // (
             if isHub then
               {
+                listenPort = cfg.port;
                 ips = [ "${cfg.hub.ip}/24" ];
                 # Every spoke/client is a peer; /32 routes so the hub knows which
                 # tunnel each internal IP belongs to.
@@ -111,7 +111,11 @@
         # no DNS.
         (mkIf (!isHub) {
           networking = {
-            nameservers = [ cfg.hub.ip ];
+            nameservers = [
+              cfg.hub.ip
+              "1.1.1.1"
+              "8.8.8.8"
+            ];
             networkmanager.dns = "none";
             # Prevent NM from managing the wg interface; let the NixOS wireguard module control it.
             networkmanager.unmanaged = [ "interface-name:wg0" ];
