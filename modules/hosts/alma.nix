@@ -17,7 +17,6 @@
       searx
       syncthing-alma
       karakeep
-      hermes-agent
       overlays
       radicale
       webdav
@@ -27,7 +26,6 @@
       n8n
       mcp
       degoog
-      agent-zero
       opencode
       omniroute
       inputs.hermes-agent.nixosModules.default
@@ -41,7 +39,6 @@
       n8n
       mcp
       degoog
-      agent-zero
       alma-packages
       { programs.pi-coding-agent.sudoAskpass = false; }
     ];
