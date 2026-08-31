@@ -27,6 +27,7 @@ let
     hb = "home-manager build --flake ~/dotfiles";
     hs = "home-manager switch --flake ~/dotfiles";
     us = "nix flake update --flake ~/dotfiles";
+    ghb = "gh workflow run ci-build.yaml --repo npnpatidar/dotfiles";
 
     lsa = "ls -a";
     lsl = "ls -l";
