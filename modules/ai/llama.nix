@@ -1,59 +1,5 @@
-_:
-let
-  llamaCppOverlay = final: prev: {
-    llama-cpp = prev.llama-cpp.overrideAttrs (finalAttrs: rec {
-      # Tagged release with MCP support.
-      version = "0.2.0";
-      src = prev.fetchFromGitHub {
-        owner = "ggml-org";
-        repo = "llama.cpp";
-        rev = "bb4caa7540188872173c44d161602d9271386413"; # v0.2.0
-        hash = "sha256-6cK5BMCCEUWL+590+WbrRInH3eEnsZ/S5m71IIBgDsA=";
-        leaveDotGit = true;
-        postFetch = ''
-          git -C "$out" rev-parse --short HEAD > $out/COMMIT
-          find "$out" -name .git -print0 | xargs -0 rm -rf
-        '';
-      };
-      buildInputs = (finalAttrs.buildInputs or [ ]) ++ [ prev.curl ];
-      npmDepsHash = "sha256-2Q7XhaLAArmviOLdQsNbYTfdyDE5pW9lR26cRHEVl9k=";
-      # nixpkgs passes -DLLAMA_BUILD_NUMBER=<version> expecting a numeric
-      # b-number; upstream v0.2.x is semver and generates `int = 0.2.0`
-      # which fails to compile. Drop the flag so upstream's build-info.cmake
-      # default (0, no .git in the fixed-output src) is used instead.
-      cmakeFlags = builtins.filter (
-        f: !prev.lib.hasPrefix "-DLLAMA_BUILD_NUMBER=" f
-      ) finalAttrs.cmakeFlags;
-    });
-    llama-cpp-cuda = final.llama-cpp.override { cudaSupport = true; };
-  };
-in
-{
-  perSystem = { pkgs, system, ... }: {
-    # CPU build, exposed as .#llama-cpp for local use.
-    packages.llama-cpp = (pkgs.extend llamaCppOverlay).llama-cpp;
-
-    # CUDA build matching what the aspire7 home module produces
-    # (home.llama.gpu = true + nixpkgs.config cudaVersion/cudaCapabilities),
-    # so the store path is identical to the host's home-manager build
-    # and CI can pre-build/cache it for the machine.
-    # Uses pkgs.path (the same nixpkgs source the flake is pinned to).
-    packages.llama-cpp-cuda =
-      let
-        pkgsCuda = import pkgs.path {
-          inherit system;
-          config = {
-            allowUnfree = true;
-            cudaVersion = "12.4";
-            cudaCapabilities = [ "7.5" ];
-          };
-        };
-      in
-      (pkgsCuda.extend llamaCppOverlay).llama-cpp-cuda;
-  };
-
+_: {
   flake.nixosModules.llama = { config, ... }: {
-    nixpkgs.overlays = [ llamaCppOverlay ];
 
     services.nginx.virtualHosts."llama.${config.systemConstants.domain_name}" = {
       enableACME = true;
@@ -82,7 +28,6 @@ in
       options.home.llama.gpu = lib.mkEnableOption "CUDA build of llama.cpp for NVIDIA GPUs";
 
       config = {
-        nixpkgs.overlays = [ llamaCppOverlay ];
 
         systemd.user.services.llama-cpp = {
           Unit.Description = "LLaMA C++ server";

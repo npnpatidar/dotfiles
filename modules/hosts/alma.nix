@@ -29,6 +29,7 @@
       opencode
       omniroute
       inputs.hermes-agent.nixosModules.default
+      llama
     ];
   };
   flake.homeConfigurations."naresh@alma" = inputs.home-manager.lib.homeManagerConfiguration {

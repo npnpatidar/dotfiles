@@ -36,6 +36,7 @@
       opencode
       pi-coding-agent
       freebuff
+      llama
       common-packages
       omniroute
       podman-network
