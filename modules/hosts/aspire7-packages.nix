@@ -54,6 +54,9 @@ _: {
       bundler
       nodejs_latest
       pear-desktop
+      freeplane
+      freemind
+      drawio
       # Binary tools from the llama.cpp overlay (CUDA build, matches home.llama.gpu)
     ];
   };
