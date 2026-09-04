@@ -83,9 +83,9 @@ _: {
             (mkPlugin {
               id = "canvas-compact";
               repo = "npnpatidar/obsidian-canvas-compact";
-              version = "1.3.2";
-              mainJsHash = "0bc7yvggg8cbzmqjxd4ndw4330jcwn049ppsrh4yd7bbpqq03jvv";
-              manifestHash = "16jdg3zmyh5r9r4p4g9wn4jpv3x5z2ys7pmyrq02m41pwgxf6g50";
+              version = "1.3.3";
+              mainJsHash = "11sb0ya786sq4v8dbjzcwlbz6bj3bvlbni9mvf2j0y7pfwa9dp4g";
+              manifestHash = "0hvf0igqrkrzp322j47fdn4sfh1p39g6gjvw0kzrx1dyn0r1y2i9";
             })
           ];
         };
