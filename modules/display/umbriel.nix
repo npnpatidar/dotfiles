@@ -24,8 +24,6 @@ let
       prefer_no_csd = true;
       border_width = 2;
       corner_radius = 10;
-      border_focused = "#7c3aed";
-      border_unfocused = "#374151";
       blur = {
         enabled = true;
         passes = 2;
@@ -33,6 +31,11 @@ let
         noise = 0.03;
         saturation = 1.0;
       };
+    };
+
+    colors.border = {
+      focused = "#7c3aed";
+      unfocused = "#374151";
     };
 
     layout = {
@@ -154,33 +157,33 @@ let
       "Mod+KP_5" = "overview-toggle";
       "Mod+KP_Begin" = "overview-toggle";
 
-      # Focus
+      # Focus (or-workspace variants match niri's focus-window-or-workspace-*)
       "Mod+Left" = "window-focus-left";
       "Mod+Right" = "window-focus-right";
-      "Mod+Up" = "window-focus-up"; # niri: focus-window-or-workspace-up
-      "Mod+Down" = "window-focus-down";
+      "Mod+Up" = "window-focus-or-workspace-up";
+      "Mod+Down" = "window-focus-or-workspace-down";
       "Mod+KP_4" = "window-focus-left";
       "Mod+KP_6" = "window-focus-right";
-      "Mod+KP_8" = "window-focus-up";
-      "Mod+KP_2" = "window-focus-down";
+      "Mod+KP_8" = "window-focus-or-workspace-up";
+      "Mod+KP_2" = "window-focus-or-workspace-down";
       "Mod+KP_Left" = "window-focus-left";
       "Mod+KP_Right" = "window-focus-right";
-      "Mod+KP_Up" = "window-focus-up";
-      "Mod+KP_Down" = "window-focus-down";
+      "Mod+KP_Up" = "window-focus-or-workspace-up";
+      "Mod+KP_Down" = "window-focus-or-workspace-down";
 
-      # Move windows/columns
+      # Move windows/columns (or-workspace variants match niri's move-window-*-or-to-workspace-*)
       "Mod+Shift+Left" = "column-move-left";
       "Mod+Shift+Right" = "column-move-right";
-      "Mod+Shift+Up" = "window-move-up"; # niri: move-window-up-or-to-workspace-up
-      "Mod+Shift+Down" = "window-move-down";
+      "Mod+Shift+Up" = "window-move-or-workspace-up";
+      "Mod+Shift+Down" = "window-move-or-workspace-down";
       "Mod+Shift+KP_4" = "column-move-left";
-      "Mod+Shift+KP_8" = "window-move-up";
-      "Mod+Shift+KP_2" = "window-move-down";
+      "Mod+Shift+KP_8" = "window-move-or-workspace-up";
+      "Mod+Shift+KP_2" = "window-move-or-workspace-down";
       "Mod+Shift+KP_6" = "column-move-right";
       "Mod+Shift+KP_Left" = "column-move-left";
       "Mod+Shift+KP_Right" = "column-move-right";
-      "Mod+Shift+KP_Up" = "window-move-up";
-      "Mod+Shift+KP_Down" = "window-move-down";
+      "Mod+Shift+KP_Up" = "window-move-or-workspace-up";
+      "Mod+Shift+KP_Down" = "window-move-or-workspace-down";
 
       # Workspaces via Ctrl+arrows
       "Mod+Ctrl+Left" = "workspace-previous";
@@ -229,12 +232,12 @@ let
       "Mod+Shift+9" = "window-move-to-workspace:9";
 
       # Column consume/expel
-      "Mod+Alt+Right" = "window-expel-right";
-      "Mod+Alt+Left" = "window-consume-left";
-      "Mod+Alt+KP_6" = "window-expel-right";
-      "Mod+Alt+KP_4" = "window-consume-left";
-      "Mod+Alt+KP_Right" = "window-expel-right";
-      "Mod+Alt+KP_Left" = "window-consume-left";
+      "Mod+Alt+Right" = "window-consume-or-expel-right";
+      "Mod+Alt+Left" = "window-consume-or-expel-left";
+      "Mod+Alt+KP_6" = "window-consume-or-expel-right";
+      "Mod+Alt+KP_4" = "window-consume-or-expel-left";
+      "Mod+Alt+KP_Right" = "window-consume-or-expel-right";
+      "Mod+Alt+KP_Left" = "window-consume-or-expel-left";
 
       # Widths
       "Mod+R" = "window-cycle-width"; # niri: switch-preset-column-width
