@@ -95,10 +95,16 @@ _: {
           enable = true;
           hostName = "webmail.${config.systemConstants.domain_name}";
           extraConfig = ''
-            $config['smtp_server'] = "tls://${config.mailserver.fqdn}";
+            $config['smtp_server'] = "tls://127.0.0.1";
             $config['smtp_user'] = "%u";
             $config['smtp_pass'] = "%p";
-            $config['imap_host'] = "ssl://${config.mailserver.fqdn}:993";
+            $config['imap_host'] = "ssl://127.0.0.1:993";
+            $config['imap_conn_options'] = [
+              'ssl' => ['verify_peer' => false, 'verify_peer_name' => false, 'allow_self_signed' => true],
+            ];
+            $config['smtp_conn_options'] = [
+              'ssl' => ['verify_peer' => false, 'verify_peer_name' => false, 'allow_self_signed' => true],
+            ];
           '';
           package = pkgs.roundcube.withPlugins (plugins: [
             plugins.carddav
