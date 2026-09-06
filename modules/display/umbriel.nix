@@ -122,7 +122,7 @@ let
 
     keybinds = {
       # niri: Mod+Shift+Slash { show-hotkey-overlay; }
-      "Mod+Shift+Slash" = "cheatsheet-toggle";
+      "Mod+H" = "cheatsheet-toggle";
 
       # Windows
       "Mod+Q" = "window-close";
