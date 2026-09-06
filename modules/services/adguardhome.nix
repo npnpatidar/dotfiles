@@ -122,8 +122,8 @@ _: {
               }
               {
                 enabled = true;
-                domain = "*.n";
-                answer = "10.100.0.1";
+                domain = "aspire7.n";
+                answer = "10.100.0.2";
               }
             ];
             # Keep safe browsing consistent with parental (both block hosts are
