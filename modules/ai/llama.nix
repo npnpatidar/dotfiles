@@ -9,12 +9,6 @@ _: {
       };
     };
 
-    sops.secrets.llama_cpp_api_key = {
-      # shared.yaml is decryptable by all hosts (see .sops.yaml key groups)
-      sopsFile = ../../secrets/shared.yaml;
-      mode = "0600";
-      owner = "${config.systemConstants.default_user}";
-    };
   };
 
   flake.homeModules.llama =
@@ -29,6 +23,10 @@ _: {
 
       config = {
 
+        sops.secrets.llama_cpp_api_key = {
+          mode = "0600";
+        };
+
         systemd.user.services.llama-cpp = {
           Unit.Description = "LLaMA C++ server";
           Service = {
@@ -36,7 +34,7 @@ _: {
               lib.flatten [
                 "${(if config.home.llama.gpu then pkgs.llama-cpp-cuda else pkgs.llama-cpp)}/bin/llama-server"
                 "--host 0.0.0.0"
-                "--api-key-file /run/secrets/llama_cpp_api_key"
+                "--api-key-file ${config.sops.secrets.llama_cpp_api_key.path}"
                 "--port 11434"
                 "-c 65536"
                 "--mlock"
@@ -50,7 +48,6 @@ _: {
             KillSignal = "SIGINT";
             Environment = [
               "LLAMA_ARG_REASONING=off"
-              ''"LLAMA_ARG_CHAT_TEMPLATE_KWARGS={\"enable_thinking\":false}"''
             ];
           };
           Install.WantedBy = [ "default.target" ];
