@@ -71,6 +71,10 @@ let
 
     # Mirrors niri window-rule entries. app_id/title are regexes.
     window_rule = [
+      # All windows open maximized by default
+      {
+        default_maximize = true;
+      }
       {
         match.app_id = "^(zen-beta|firefox)$";
         match.title = "^Bitwarden";

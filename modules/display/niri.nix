@@ -29,6 +29,10 @@ let
     }
 
     window-rule {
+      open-maximized true
+    }
+
+    window-rule {
       match app-id=r#"^(zen-beta|firefox)$"# title=r#"^Bitwarden"#
       open-floating true
     }
