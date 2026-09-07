@@ -89,10 +89,10 @@ _: {
             # (spawns pi sub-agents in named herdr tabs with self-awareness,
             # non-recursion, single-task, report-and-terminate lifecycle);
             # sub-agent instances get report/note tools and no spawn tool.
-            ".pi/agent/extensions/herdr-subagents" = {
-              source = ./pi-subagents;
-              recursive = true;
-            };
+            # ".pi/agent/extensions/herdr-subagents" = {
+            # source = ./pi-subagents;
+            # recursive = true;
+            # };
 
             # sudo wrapper + askpass: the passwordless allowlist keeps NOPASSWD
             # paths (systemctl subcommands, nixos-rebuild) prompt-free; any other
@@ -153,8 +153,8 @@ _: {
             pkgs.python3Minimal
           ];
           settings = {
-            defaultProvider = "nvidia";
-            defaultModel = "nvidia/nemotron-3-ultra-550b-a55b";
+            defaultProvider = "omni";
+            defaultModel = "auto/best-free";
             # enabledModels = [ "*free*" ];
             defaultThinkingLevel = "medium";
             theme = "dark";
@@ -162,6 +162,7 @@ _: {
             packages = [
               "npm:pi-web-access"
               "git:github.com/md-riaz/omniroute-pi-ext-integration"
+              "npm:@luminascale/pi-shepherd"
             ];
 
             compaction = {
