@@ -26,6 +26,14 @@ _: {
     {
       imports = [ inputs.noctalia.homeModules.default ];
 
+      sops.secrets.mail_password = {
+        sopsFile = ../../secrets/alma.yaml;
+      };
+
+      sops.secrets.caldav_password = {
+        sopsFile = ../../secrets/alma.yaml;
+      };
+
       programs.noctalia = {
         enable = true;
         systemd.enable = false;
@@ -211,13 +219,15 @@ _: {
 
           calendar = {
             enabled = true;
-            account.personal_rajedu = {
+            account.personal = {
               calendars = [ ];
               name = "Personal";
               provider = "custom";
               server_url = "https://cal.${config.systemConstants.domain_name}";
               type = "caldav";
               username = "naresh@${config.systemConstants.domain_name}";
+              credential_source = "file";
+              password_file = config.sops.secrets.caldav_password.path;
             };
           };
 
