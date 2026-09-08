@@ -26,6 +26,7 @@
       n8n
       mcp
       degoog
+      yamtrack
       opencode
       omniroute
       inputs.hermes-agent.nixosModules.default
@@ -40,6 +41,7 @@
       n8n
       mcp
       degoog
+      yamtrack
       alma-packages
       { programs.pi-coding-agent.sudoAskpass = false; }
     ];
