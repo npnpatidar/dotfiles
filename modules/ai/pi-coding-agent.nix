@@ -156,7 +156,7 @@ _: {
             defaultProvider = "omni";
             defaultModel = "auto/best-free";
             # enabledModels = [ "*free*" ];
-            defaultThinkingLevel = "medium";
+            defaultThinkingLevel = "high";
             theme = "dark";
             enableInstallTelemetry = false;
             packages = [
