@@ -19,7 +19,7 @@
           "https://zen-browser.cachix.org"
           "https://noctalia.cachix.org"
           "https://niri.cachix.org"
-          "https://cuda-maintainers.cachix.org"
+          "https://cache.nixos-cuda.org"
         ];
         trusted-public-keys = [
           "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
@@ -27,7 +27,7 @@
           "zen-browser.cachix.org-1:z/QLGrEkiBYF/7zoHX1Hpuv0B26QrmbVBSy9yDD2tSs="
           "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
           "niri.cachix.org-1:Wv0OmO7mTCuLCqXZff9iL4mQ5bMg2EbosB4rCnWZosg="
-          "cuda-maintainers.cachix.org-1:0dq3bujKpuEPMCX6U4WylrUDZ9JyUG0VpVZa7CNfq5E="
+          "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M="
         ];
       };
       optimise.automatic = true;

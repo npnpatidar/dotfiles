@@ -97,7 +97,7 @@ dotfiles/
 ### Cache substituters
 - `https://noctalia.cachix.org`
 - `https://niri.cachix.org`
-- `https://cuda-maintainers.cachix.org`
+- `https://cache.nixos-cuda.org`
 
 ### Outputs Structure
 
@@ -310,7 +310,7 @@ systemConstants = {
 - Trusted users: root + main user
 - FUSE with `userAllowOther` (user-owned rclone/gocryptfs mounts can use `-o allow_other`)
 - `allowUnfree = true`, `pnpm-9.15.9` as permitted insecure
-- **Substituters:** cache.nixos.org, owner.cachix.org (self-hosted CI cache), zen-browser, noctalia, niri, cuda-maintainers
+- **Substituters:** cache.nixos.org, owner.cachix.org (self-hosted CI cache), zen-browser, noctalia, niri, nixos-cuda
 
 #### Users
 - Main user: `user`
