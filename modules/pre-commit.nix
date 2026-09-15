@@ -7,6 +7,7 @@
       deadnix.enable = true;
       nixfmt.enable = true;
       statix.enable = true;
+      trufflehog.enable = true;
     };
   };
 }
