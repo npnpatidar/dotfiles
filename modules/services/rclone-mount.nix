@@ -48,6 +48,7 @@ _: {
           "npnpatidarCrypt"
           "naresh.alternateCrypt"
           "filen"
+          "npnpatidar"
         ]
       );
     };
