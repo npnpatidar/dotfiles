@@ -31,29 +31,10 @@ _: {
       programs.opencode = {
         enable = true;
         settings = {
-          model = "opencode/mimo-v2.5-free";
-          small_model = "opencode/deepseek-v4-flash";
           autoshare = false;
-          autoupdate = true;
           default_agent = "build";
 
           share = "manual";
-
-          mcp = {
-            nixos = {
-              type = "local";
-              command = [
-                "uvx"
-                "mcp-nixos"
-              ];
-              enabled = true;
-            };
-            context7 = {
-              type = "remote";
-              url = "https://mcp.context7.com/mcp";
-              enabled = true;
-            };
-          };
 
           permission = {
             tool = {
@@ -107,7 +88,6 @@ _: {
           };
 
           plugin = [
-            "oh-my-opencode"
           ];
 
           instructions = [
