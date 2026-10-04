@@ -11,11 +11,6 @@ _: {
       "npnpatidar.cachix.org-1:slDM+6A9sX+ETHd9PttkqYHimtAjJ065Lj7fN/TBmrQ="
     ];
 
-    services.journald.settings.Journal = {
-      SystemMaxUse = "500M";
-      MaxRetentionSec = "2week";
-    };
-
     system.autoUpgrade = {
       allowReboot = false;
       channel = "https://channels.nixos.org/nixos-unstable";

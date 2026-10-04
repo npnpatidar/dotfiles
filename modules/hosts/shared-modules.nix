@@ -12,6 +12,7 @@
       networking
       openssh
       time-locale
+      journald
       inputs.sops-nix.nixosModules.sops
       config.flake.modules.generic.systemConstants
     ];
