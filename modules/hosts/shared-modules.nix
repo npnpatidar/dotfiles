@@ -28,7 +28,6 @@
       herdr
       yazi
       bat
-      bat
       core
       shell
       git
@@ -36,9 +35,7 @@
       opencode
       pi-coding-agent
       freebuff
-      llama
       common-packages
-      omniroute
       podman-network
       inputs.sops-nix.homeManagerModules.sops
       config.flake.modules.generic.systemConstants

@@ -23,15 +23,8 @@
       rclone-mount
       filen-sync
       oink
-      n8n
-      mcp
       degoog
-      yamtrack
-      scrob
       opencode
-      omniroute
-      inputs.hermes-agent.nixosModules.default
-      llama
     ];
   };
   flake.homeConfigurations."naresh@alma" = inputs.home-manager.lib.homeManagerConfiguration {
@@ -39,11 +32,7 @@
     extraSpecialArgs = { inherit inputs; };
     modules = with config.flake.homeModules; [
       shared-modules
-      n8n
-      mcp
       degoog
-      yamtrack
-      scrob
       alma-packages
       { programs.pi-coding-agent.sudoAskpass = false; }
     ];
