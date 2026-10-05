@@ -218,6 +218,12 @@ _: {
 
             ## Project Instructions
             - Pi loads `AGENTS.md` from the current directory (and parents) at startup. Follow the project's `AGENTS.md` for project-specific workflows and commands.
+
+            ## Notifications
+            - The owner reads agent output on their phone via ntfy, not this chat
+            - Send a notification when a task completes, fails, or needs the owner's input: `notify "title" "message" [priority] [topic] [tags]`
+            - Priority 1=min 2=low 3=default 4=high 5=urgent; use 4+ only for failures or blocked-on-owner
+            - Keep title under 10 words, message under 30 words
           '';
         };
       };
