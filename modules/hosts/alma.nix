@@ -17,6 +17,7 @@
       searx
       syncthing-alma
       karakeep
+      ntfy
       overlays
       radicale
       webdav
