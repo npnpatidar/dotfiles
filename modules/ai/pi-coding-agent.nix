@@ -8,7 +8,6 @@ _: {
     }:
     let
       inherit (lib.hm.dag) entryAfter;
-      opencodeKeyFile = config.sops.secrets.opencode_api_key.path;
       nvidiaKeyFile = config.sops.secrets.nvidia_api_key.path;
       mistralKeyFile = config.sops.secrets.mistral_api_key.path;
     in
@@ -24,9 +23,6 @@ _: {
       config = {
         sops = {
           secrets = {
-            opencode_api_key = {
-              mode = "0600";
-            };
             nvidia_api_key = {
               mode = "0600";
             };
@@ -44,10 +40,6 @@ _: {
             rm -f "$tmp"
             echo "{" > "$tmp"
             first=1
-            if [ -f "${opencodeKeyFile}" ]; then
-              printf '%s  "opencode": { "type": "api_key", "key": "%s" }' "$([ "$first" -eq 1 ] && echo "" || echo ",")" "$(cat ${opencodeKeyFile})" >> "$tmp"
-              first=0
-            fi
             if [ -f "${nvidiaKeyFile}" ]; then
               printf '%s  "nvidia": { "type": "api_key", "key": "%s" }' "$([ "$first" -eq 1 ] && echo "" || echo ",")" "$(cat ${nvidiaKeyFile})" >> "$tmp"
               first=0
@@ -153,16 +145,15 @@ _: {
             pkgs.python3Minimal
           ];
           settings = {
-            defaultProvider = "omni";
-            defaultModel = "auto/best-free";
+            # defaultProvider = "omni";
+            # defaultModel = "auto/best-free";
             # enabledModels = [ "*free*" ];
             defaultThinkingLevel = "high";
             theme = "dark";
             enableInstallTelemetry = false;
             packages = [
               "npm:pi-web-access"
-              "git:github.com/md-riaz/omniroute-pi-ext-integration"
-              "npm:@luminascale/pi-shepherd"
+              "npm:pi-opencode-direct"
             ];
 
             compaction = {
