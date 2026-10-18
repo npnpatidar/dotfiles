@@ -41,6 +41,7 @@ in
       targets = {
         zen-browser.enable = false;
         neovim.enable = false;
+        yazi.enable = false; # yazi uses catppuccin-mocha flavor, set in modules/home/yazi.nix
         librewolf.profileNames = [ "default" ];
       };
     };

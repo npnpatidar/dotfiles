@@ -1,5 +1,5 @@
 _: {
-  flake.homeModules.yazi = { config, ... }: {
+  flake.homeModules.yazi = { config, pkgs, ... }: {
     programs.yazi = {
       shellWrapperName = "y";
       enable = true;
@@ -1107,6 +1107,18 @@ _: {
           cache_dir = "${config.xdg.cacheHome}";
         };
       };
+      theme.flavor = {
+        dark = "catppuccin-mocha";
+        light = "catppuccin-mocha";
+      };
+      flavors."catppuccin-mocha" =
+        (pkgs.fetchFromGitHub {
+          owner = "yazi-rs";
+          repo = "flavors";
+          rev = "1183892c904f7f0efdf4473e856ed308b7bea98d";
+          sha256 = "sha256-E1OUF1+mT0V3crVxkewG2Y7hRu8fO+0oRl6NlINmw+o=";
+        })
+        + "/catppuccin-mocha.yazi";
       enableZshIntegration = true;
       enableBashIntegration = true;
     };
