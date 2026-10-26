@@ -29,7 +29,6 @@ _: {
             server = {
               SSH_PORT = config.systemConstants.ssh_port;
               HTTP_PORT = 5654;
-              DOMAIN = "git.${config.systemConstants.domain_name}";
               ROOT_URL = "https://git.${config.systemConstants.domain_name}";
             };
             repository = {
