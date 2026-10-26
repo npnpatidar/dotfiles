@@ -129,8 +129,16 @@ _: {
       # phpfpm hardcodes WatchdogSec=15 for every pool; with vmail on the rclone
       # FUSE mount, transient IMAP/DB stalls exceed 15s and systemd kills the
       # FPM ("busy watchdog" restarts). Disable the watchdog for roundcube only:
-      # Restart=always still recovers from real crashes, and a brief stall no
-      # longer takes webmail down.
+      # Restart=always still recovers from real crashes, and a brief stall
+      # no longer takes webmail down.
       systemd.services."phpfpm-roundcube".serviceConfig.WatchdogSec = lib.mkForce 0;
+
+      # postfix-tlspol is socket-activated (RestrictAddressFamilies= blocks
+      # AF_UNIX, so the app can only listen on the fd passed by
+      # postfix-tlspol.socket). Without Requires=, a nixos-rebuild switch can
+      # start the service before the socket, and the socket then refuses to
+      # bind ("service already active"), leaving the service crash-looping.
+      # Requires= pulls the socket into the same transaction so it binds first.
+      systemd.services.postfix-tlspol.requires = [ "postfix-tlspol.socket" ];
     };
 }
