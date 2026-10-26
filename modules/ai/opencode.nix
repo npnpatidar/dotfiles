@@ -147,9 +147,10 @@ _: {
           environmentFile = "/run/secrets/opencode_password_web";
         };
 
-        tui = {
-          theme = lib.mkDefault "tokyonight";
-        };
+        # OpenCode 2 no longer reads tui.json; it uses cli.json, which the app
+        # manages itself. Stylix still sets programs.opencode.tui, which only
+        # produces a Home Manager warning on OpenCode 2, so clear it here.
+        tui = lib.mkForce { };
 
         context = ''
           # Global Agent Instructions
