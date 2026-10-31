@@ -56,8 +56,6 @@ _: {
             CAPACITY=100
           fi
 
-          TOTAL_CPUS=$(nproc)
-          HALF=$((TOTAL_CPUS / 2))
           IGPU_CARD="/sys/class/drm/card1"
 
           WIFI_IF=$(ls /sys/class/net/ 2>/dev/null | grep -E '^wl' | head -1)
@@ -68,10 +66,6 @@ _: {
           if [ "$CAPACITY" -ge 75 ]; then
             systemctl start immich-server immich-machine-learning  redis-immich|| true
             systemctl --user -M naresh@ start filen-desktop || true
-
-            for ((i=1; i<TOTAL_CPUS; i++)); do
-              [ -e "/sys/devices/system/cpu/cpu$i/online" ] && echo 1 > "/sys/devices/system/cpu/cpu$i/online" 2>/dev/null || true
-            done
 
             [ -n "$ETH_IF" ] && ip link set "$ETH_IF" up 2>/dev/null || true
             [ -n "$WIFI_IF" ] && iw dev "$WIFI_IF" set txpower auto 2>/dev/null || true
@@ -94,10 +88,6 @@ _: {
           else
             systemctl stop immich-server immich-machine-learning redis-immich|| true
             systemctl --user -M naresh@ stop filen-desktop || true
-
-            for ((i=HALF; i<TOTAL_CPUS; i++)); do
-              [ -e "/sys/devices/system/cpu/cpu$i/online" ] && echo 0 > "/sys/devices/system/cpu/cpu$i/online" 2>/dev/null || true
-            done
 
             [ -n "$ETH_IF" ] && ip link set "$ETH_IF" down 2>/dev/null || true
             [ -n "$WIFI_IF" ] && iw dev "$WIFI_IF" set txpower fixed 1000 2>/dev/null || true
@@ -124,8 +114,7 @@ _: {
       };
 
       services.udev.extraRules = ''
-        ACTION=="change", SUBSYSTEM=="power_supply", ATTR{type}=="Battery", ENV{POWER_SUPPLY_STATUS}=="Charging", RUN+="${pkgs.systemd}/bin/systemctl --no-block start power-supply-handler.service"
-        ACTION=="change", SUBSYSTEM=="power_supply", ATTR{type}=="Battery", ENV{POWER_SUPPLY_STATUS}=="Discharging", RUN+="${pkgs.systemd}/bin/systemctl --no-block start power-supply-handler.service"
+        ACTION=="change", SUBSYSTEM=="power_supply", ATTR{type}=="Mains", RUN+="${pkgs.systemd}/bin/systemctl --no-block start power-supply-handler.service"
       '';
 
       # Re-evaluate periodically so the 75% threshold is honored even between
