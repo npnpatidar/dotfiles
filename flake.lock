@@ -107,11 +107,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1785249552,
-        "narHash": "sha256-/+rSQbQO73nb9cotfUP/tjRhCrENfS3poFKTqQXu3FA=",
+        "lastModified": 1793548363,
+        "narHash": "sha256-VWL8Pxzj6eMgb7VocEk35sPf01UboLK1fNCcjaYsyCc=",
         "owner": "npnpatidar",
         "repo": "dictation",
-        "rev": "6a5fd2a8e045a5b29a62908b062a81c34f4bf31c",
+        "rev": "eccaa6f733b9adc877d1e6f41bcd8fc198b85022",
         "type": "github"
       },
       "original": {
