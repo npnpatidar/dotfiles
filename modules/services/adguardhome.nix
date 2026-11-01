@@ -11,11 +11,7 @@ _: {
       adguardhome = {
         enable = true;
         # Bind the web UI to loopback only (the nginx vhost proxies to it).
-        # Do NOT set settings.http for this — the module overrides it with
-        # http.address from host/port; setting it here is dead config that
-        # would otherwise leave the UI on 0.0.0.0.
-        host = "127.0.0.1";
-        port = 5380;
+        settings.http.address = "127.0.0.1:5380";
         # Fully declarative: the config file is regenerated from Nix on every
         # start, so UI edits are wiped on restart. Note the generated config
         # has no `users` — the UI is unauthenticated at the AdGuard level and
@@ -318,7 +314,7 @@ _: {
         forceSSL = true;
         enableTinyauth = true;
         locations."/" = {
-          proxyPass = "http://127.0.0.1:${toString config.services.adguardhome.port}";
+          proxyPass = "http://127.0.0.1:5380";
           proxyWebsockets = true;
         };
       };
