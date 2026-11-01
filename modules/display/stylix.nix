@@ -42,6 +42,7 @@ in
         zen-browser.enable = false;
         neovim.enable = false;
         yazi.enable = false; # yazi uses catppuccin-mocha flavor, set in modules/home/yazi.nix
+        rofi.enable = false; # rofi unused; upstream target still sets removed `programs.rofi.font`
         librewolf.profileNames = [ "default" ];
       };
     };
