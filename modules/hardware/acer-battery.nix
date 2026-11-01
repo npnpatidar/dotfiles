@@ -5,16 +5,23 @@ _: {
       kernelPackages = config.boot.kernelPackages;
       acer-wmi-battery = kernelPackages.kernel.stdenv.mkDerivation {
         name = "acer-wmi-battery-${kernelPackages.kernel.version}";
+        __structuredAttrs = true;
         src = pkgs.fetchzip {
           url = "https://github.com/frederik-h/acer-wmi-battery/archive/9f90d75cc9237aeed7964622d10dbdf4d2c7b518.tar.gz";
           hash = "sha256-CyKRpE3cnhEIFHc4Hal2PQUW7cd5k8+55S4QdSqGvNI=";
         };
         nativeBuildInputs = kernelPackages.kernel.moduleBuildDependencies;
-        buildPhase = ''
-          make -C ${kernelPackages.kernel.dev}/lib/modules/${kernelPackages.kernel.modDirVersion}/build M=$PWD modules
+        makeFlags = kernelPackages.kernelModuleMakeFlags;
+        postPatch = ''
+          substituteInPlace Makefile \
+            --replace-fail '/lib/modules/$(shell uname -r)/build' \
+              ${kernelPackages.kernel.dev}/lib/modules/${kernelPackages.kernel.modDirVersion}/build
         '';
         installPhase = ''
-          install -D -m 644 acer-wmi-battery.ko "$out/lib/modules/${kernelPackages.kernel.modDirVersion}/misc/acer-wmi-battery.ko"
+          runHook preInstall
+          make -C ${kernelPackages.kernel.dev}/lib/modules/${kernelPackages.kernel.modDirVersion}/build M=$PWD \
+            "''${makeFlags[@]}" INSTALL_MOD_PATH=$out INSTALL_MOD_DIR=misc DEPMOD=true modules_install
+          runHook postInstall
         '';
         enableParallelBuilding = true;
         meta = with pkgs.lib; {
