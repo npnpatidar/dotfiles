@@ -22,7 +22,7 @@ pkgs.stdenv.mkDerivation rec {
     gtk3
     lttng-ust
     stdenv.cc.cc
-    openssl_3
+    openssl
 
   ];
   runtimeDependencies = with pkgs; [
