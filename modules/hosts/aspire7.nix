@@ -63,7 +63,7 @@
       flatpak
       stylix
       inputs.stylix.homeModules.default
-      onlyoffice
+      euro-office
       zen-browser
       librewolf
       voxtype

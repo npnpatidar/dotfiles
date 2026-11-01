@@ -219,7 +219,7 @@ xdg / gtk                # MIME associations, GTK config
 kitty                    # Terminal emulator
 flatpak                  # Flatpak setup
 stylix                   # Stylix home theming + inputs.stylix.homeModules.default
-onlyoffice               # Office suite
+euro-office              # Office suite (Euro-Office desktop editors)
 zen-browser              # Primary browser
 voxtype                  # Voice-to-type (local ML)
 inputs.nix-index-database.homeModules.nix-index   # `nix-locate` integration
@@ -859,7 +859,7 @@ Free coding-agent CLI installed via `modules/ai/freebuff.nix` (part of shared-mo
 ### 8.10 Other Apps
 - **Kitty** terminal: FiraCode font, Noctalia theme, custom keybindings (splits), config.py from GitHub
 - **Geary** email: Dark theme override (`user-style.css`)
-- **OnlyOffice:** Default office suite
+- **Euro-Office:** Default office suite (`pkgs.euro-office-desktopeditors`, OnlyOffice fork)
 - **Bitwarden Desktop:** installed on aspire7 (floating window rule in Niri)
 - **Tesseract OCR:** enabled for `hin+eng+osd` (Devanagari + English) on both hosts
 - **Distrobox:** Ubuntu and Arch Linux containers via Podman
@@ -875,7 +875,7 @@ Free coding-agent CLI installed via `modules/ai/freebuff.nix` (part of shared-mo
   - Directories → Nemo
   - HTTP/HTML/web schemes → **LibreWolf**
   - Audio/Video → mpv
-  - Office docs incl. `text/csv` → OnlyOffice
+  - Office docs incl. `text/csv` → Euro-Office
 - Hidden desktop entries: btop, cups, ranger, Meld (org.gnome.Meld), gparted, fcitx5-configtool, Fcitx5 migrator + main entry, nvim
 - `VMSHARE` declared as an XDG user dir (`~/VMShare`, auto-created)
 - gtk.nix: `gtk.enable`, forces overwrite of `gtk-3.0/gtk.css` and `gtk-4.0/gtk.css` (for stylix-generated themes)
@@ -1166,7 +1166,7 @@ modules/home/newsboat.nix
 modules/home/nur.nix
 modules/home/obsidian.nix
 modules/home/omniroute.nix
-modules/home/onlyoffice.nix
+modules/home/euro-office.nix
 modules/home/rclone.nix
 modules/home/shell.nix
 modules/home/sioyek.nix

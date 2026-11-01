@@ -39,23 +39,23 @@ _: {
           "application/x-extension-xht" = [ "librewolf.desktop" ];
           "audio/*" = [ "mpv.desktop" ];
           "video/*" = [ "mpv.desktop" ];
-          "application/msword" = [ "onlyoffice-desktopeditors.desktop" ];
-          "application/vnd.ms-word.document.macroEnabled.12" = [ "onlyoffice-desktopeditors.desktop" ];
+          "application/msword" = [ "euro-office-euro-office.desktop" ];
+          "application/vnd.ms-word.document.macroEnabled.12" = [ "euro-office-euro-office.desktop" ];
           "application/vnd.openxmlformats-officedocument.wordprocessingml.document" = [
-            "onlyoffice-desktopeditors.desktop"
+            "euro-office-euro-office.desktop"
           ];
           "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" = [
-            "onlyoffice-desktopeditors.desktop"
+            "euro-office-euro-office.desktop"
           ];
-          "application/vnd.ms-excel" = [ "onlyoffice-desktopeditors.desktop" ];
+          "application/vnd.ms-excel" = [ "euro-office-euro-office.desktop" ];
           "application/vnd.openxmlformats-officedocument.presentationml.presentation" = [
-            "onlyoffice-desktopeditors.desktop"
+            "euro-office-euro-office.desktop"
           ];
-          "application/vnd.ms-powerpoint" = [ "onlyoffice-desktopeditors.desktop" ];
-          "application/vnd.oasis.opendocument.text" = [ "onlyoffice-desktopeditors.desktop" ];
-          "application/vnd.oasis.opendocument.spreadsheet" = [ "onlyoffice-desktopeditors.desktop" ];
-          "application/vnd.oasis.opendocument.presentation" = [ "onlyoffice-desktopeditors.desktop" ];
-          "text/csv" = [ "onlyoffice-desktopeditors.desktop" ];
+          "application/vnd.ms-powerpoint" = [ "euro-office-euro-office.desktop" ];
+          "application/vnd.oasis.opendocument.text" = [ "euro-office-euro-office.desktop" ];
+          "application/vnd.oasis.opendocument.spreadsheet" = [ "euro-office-euro-office.desktop" ];
+          "application/vnd.oasis.opendocument.presentation" = [ "euro-office-euro-office.desktop" ];
+          "text/csv" = [ "euro-office-euro-office.desktop" ];
         };
         associations.removed = {
           "application/pdf" = [ "Chromium.desktop" ];
