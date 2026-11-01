@@ -33,7 +33,7 @@ _: {
           users = [
             {
               name = "admin";
-              password = "$2b$10$.hBxmtbjbKaSVkq1.2UZk.rBK7GWitmeATFesnsOfgazxPeUBVcYO";
+              password = "$2b$10$R63fTMcARh.bmidSYIUSMOuhi8orN/SC.PT4q4PLo/.amN1NToVai";
             }
           ];
           dns = {
