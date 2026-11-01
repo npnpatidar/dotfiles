@@ -36,19 +36,28 @@ jobs:
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
           skipPush: true
       - id: build
+        env:
+          ATTR: ${{ matrix.attr }}
         run: |
+          set -euo pipefail
           SECONDS=0
-          echo "out=$(nix build --no-link --print-out-paths .#${{ matrix.attr }})" >> "$GITHUB_OUTPUT"
-          echo "::notice::Build duration: ${SECONDS}s for ${{ matrix.attr }}"
+          out="$(nix build --no-link --print-out-paths ".#${ATTR}")"
+          echo "out=${out}" >> "$GITHUB_OUTPUT"
+          echo "::notice::Build duration: ${SECONDS}s for ${ATTR}"
       - name: Push to Cachix (skip if unchanged)
         env:
           OUT: ${{ steps.build.outputs.out }}
         run: |
-          hash="$(basename "$OUT" | cut -d- -f1)"
+          set -euo pipefail
+          if [[ -z "${OUT}" ]]; then
+            echo "::error::Build step produced no output path"
+            exit 1
+          fi
+          hash="$(basename "${OUT}" | cut -d- -f1)"
           if curl -sf "https://npnpatidar.cachix.org/${hash}.narinfo" > /dev/null; then
             echo "::notice::${hash} already in cache - skipping push"
           else
-            cachix push npnpatidar "$OUT"
+            cachix push npnpatidar "${OUT}"
           fi
 
   # Targeted heavy packages (CUDA llama.cpp, NVIDIA modules, nvim plugins...)
@@ -97,17 +106,26 @@ jobs:
           authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
           skipPush: true
       - id: build
+        env:
+          ATTR: ${{ matrix.attr }}
         run: |
+          set -euo pipefail
           SECONDS=0
-          echo "out=$(nix build --no-link --print-out-paths .#${{ matrix.attr }})" >> "$GITHUB_OUTPUT"
-          echo "::notice::Build duration: ${SECONDS}s for ${{ matrix.attr }}"
+          out="$(nix build --no-link --print-out-paths ".#${ATTR}")"
+          echo "out=${out}" >> "$GITHUB_OUTPUT"
+          echo "::notice::Build duration: ${SECONDS}s for ${ATTR}"
       - name: Push to Cachix (skip if unchanged)
         env:
           OUT: ${{ steps.build.outputs.out }}
         run: |
-          hash="$(basename "$OUT" | cut -d- -f1)"
+          set -euo pipefail
+          if [[ -z "${OUT}" ]]; then
+            echo "::error::Build step produced no output path"
+            exit 1
+          fi
+          hash="$(basename "${OUT}" | cut -d- -f1)"
           if curl -sf "https://npnpatidar.cachix.org/${hash}.narinfo" > /dev/null; then
             echo "::notice::${hash} already in cache - skipping push"
           else
-            cachix push npnpatidar "$OUT"
+            cachix push npnpatidar "${OUT}"
           fi
