@@ -5,12 +5,18 @@
 #
 # Notes on the niri -> umbriel mapping:
 # - Mod+Q close / Mod+F maximize are redefined here (umbriel defaults differ).
-# - niri's per-window height binds have no equivalent (scrolling layout has no height presets).
-# - Alt+Tab app-filtered switching (niri recent-windows) and lid-close switch-events
-#   have no umbriel equivalent; Noctalia handles session actions instead.
+# - niri's per-window height binds map to umbriel's floating-window height actions
+#   (umbriel's scrolling layout has no height presets).
+# - Alt+Tab app-filtered switching (niri recent-windows) has no umbriel equivalent;
+#   Noctalia handles the session actions instead.
 let
   umbrielConfig = {
-    include.files = [ ];
+    include = {
+      files = [ ];
+      # Noctalia writes ~/.config/umbriel/noctalia.toml with theme colors.
+      # Optional, so a missing theme file never breaks startup.
+      optional.files = [ "noctalia.toml" ];
+    };
 
     general = {
       autostart = [ "noctalia" ];
@@ -18,6 +24,11 @@ let
       # niri: hotkey-overlay { skip-at-startup; }
       show_cheatsheet = false;
       focus_on_activate = false;
+    };
+
+    events = {
+      # niri: switch-events { lid-close { spawn "noctalia" "msg" "session" "lock-and-suspend"; } }
+      lid_close = "spawn noctalia msg session lock-and-suspend";
     };
 
     appearance = {
@@ -41,7 +52,7 @@ let
     layout = {
       mode = "scrolling";
       gap = 4;
-      width_presets = [
+      extent_presets = [
         0.2
         0.34
         0.5
@@ -49,7 +60,7 @@ let
         0.8
         0.98
       ];
-      scrolling.default_width_fraction = 0.5;
+      scrolling.default_extent_fraction = 0.5;
       scrolling.center_underfull_strip = true;
     };
 
@@ -58,6 +69,7 @@ let
         layout = "us";
         repeat_rate = 25;
         repeat_delay = 600;
+        numlock_toggle = true;
       };
       touchpad = {
         tap = true;
@@ -71,6 +83,11 @@ let
 
     # Mirrors niri window-rule entries. app_id/title are regexes.
     window_rule = [
+      # niri: window-rule { background-effect { blur true; xray false; } }
+      {
+        blur = true;
+        blur_optimized = true;
+      }
       # All windows open maximized by default
       {
         default_maximize = true;
@@ -87,32 +104,44 @@ let
       {
         match.title = "^Picture-in-Picture$";
         default_floating = true;
+        default_floating_size = {
+          width = 0.5;
+          height = 0.5;
+        };
       }
       {
         match.app_id = "^zen.*$";
         match.title = "^Library$";
         default_floating = true;
+        default_floating_size = {
+          width = 0.5;
+          height = 0.5;
+        };
       }
       {
         match.app_id = "^xdg-desktop-portal$";
         default_floating = true;
+        default_floating_size = {
+          width = 0.5;
+          height = 0.5;
+        };
       }
       # Required by umbriel for its own UIs (share picker) and Noctalia settings.
       {
         match.app_id = "^dev.noctalia.Noctalia$";
         default_floating = true;
-        default_size = [
-          1020
-          900
-        ];
+        default_floating_size_px = {
+          width = 1020;
+          height = 900;
+        };
       }
       {
         match.app_id = "^dev.noctalia.UmbrielSharePicker$";
         default_floating = true;
-        default_size = [
-          800
-          600
-        ];
+        default_floating_size_px = {
+          width = 800;
+          height = 600;
+        };
       }
     ];
 
@@ -127,34 +156,35 @@ let
     keybinds = {
       # niri: Mod+Shift+Slash { show-hotkey-overlay; }
       "Mod+H" = "cheatsheet-toggle";
+      "Mod+Shift+Slash" = "cheatsheet-toggle";
 
       # Windows
       "Mod+Q" = "window-close";
       "Mod+F" = "window-toggle-maximize"; # niri: maximize-column
       "Mod+J" = "window-toggle-floating";
-      # no umbriel equivalent for niri's switch-focus-between-floating-and-tiling (Mod+Shift+J)
+      "Mod+Shift+J" = "window-focus-switch-floating";
 
       # Launchers
-      "Mod+Return" = "spawn:kitty";
-      "Mod+T" = "spawn:kitty";
-      "Mod+B" = "spawn:zen-beta";
-      "Mod+Shift+B" = "spawn:acer-battery-toggle";
-      "Mod+E" = "spawn:nemo";
-      "Mod+S" = "spawn:noctalia msg panel-toggle launcher /fs";
-      "Mod+Y" = "spawn:kitty -e yazi";
-      "Mod+W" = "spawn:bitwarden";
+      "Mod+Return" = "spawn kitty";
+      "Mod+T" = "spawn kitty";
+      "Mod+B" = "spawn zen-beta";
+      "Mod+Shift+B" = "spawn acer-battery-toggle";
+      "Mod+E" = "spawn nemo";
+      "Mod+S" = "spawn noctalia msg panel-toggle launcher /fs";
+      "Mod+Y" = "spawn kitty -e yazi";
+      "Mod+W" = "spawn bitwarden";
 
       # Noctalia panels
-      "Mod+Escape" = "spawn:noctalia msg panel-toggle session";
-      "Mod+D" = "spawn:noctalia msg panel-toggle launcher";
-      "Mod+Space" = "spawn:noctalia msg panel-toggle launcher";
-      "Mod+V" = "spawn:noctalia msg panel-toggle clipboard";
-      "Mod+X" = "spawn:noctalia msg theme-mode-toggle";
-      "Mod+Shift+Ctrl+S" = "spawn:voxtype record toggle";
-      "Mod+Shift+S" = "spawn:bash -lc /home/naresh/.local/bin/dictation-toggle";
-      "Mod+Shift+Alt+S" = "spawn:bash -lc /home/naresh/.local/bin/hindi-dictation-toggle";
-      "Mod+F1" = "spawn:noctalia msg panel-toggle kenn/keybind-cheatsheet:cheatsheet";
-      "Mod+N" = "spawn:noctalia msg panel-toggle noctalia/notes:panel";
+      "Mod+Escape" = "spawn noctalia msg panel-toggle session";
+      "Mod+D" = "spawn noctalia msg panel-toggle launcher";
+      "Mod+Space" = "spawn noctalia msg panel-toggle launcher";
+      "Mod+V" = "spawn noctalia msg panel-toggle clipboard";
+      "Mod+X" = "spawn noctalia msg theme-mode-toggle";
+      "Mod+Shift+Ctrl+S" = "spawn voxtype record toggle";
+      "Mod+Shift+S" = "spawn bash -lc /home/naresh/.local/bin/dictation-toggle";
+      "Mod+Shift+Alt+S" = "spawn bash -lc /home/naresh/.local/bin/hindi-dictation-toggle";
+      "Mod+F1" = "spawn noctalia msg panel-toggle kenn/keybind-cheatsheet:cheatsheet";
+      "Mod+N" = "spawn noctalia msg panel-toggle noctalia/notes:panel";
 
       # Overview (niri: toggle-overview)
       "Mod+Tab" = "overview-toggle";
@@ -215,25 +245,25 @@ let
       "Mod+Shift+KP_Next" = "window-move-to-workspace-next";
 
       # Numbered workspaces
-      "Mod+1" = "workspace-switch:1";
-      "Mod+2" = "workspace-switch:2";
-      "Mod+3" = "workspace-switch:3";
-      "Mod+4" = "workspace-switch:4";
-      "Mod+5" = "workspace-switch:5";
-      "Mod+6" = "workspace-switch:6";
-      "Mod+7" = "workspace-switch:7";
-      "Mod+8" = "workspace-switch:8";
-      "Mod+9" = "workspace-switch:9";
+      "Mod+1" = "workspace-switch 1";
+      "Mod+2" = "workspace-switch 2";
+      "Mod+3" = "workspace-switch 3";
+      "Mod+4" = "workspace-switch 4";
+      "Mod+5" = "workspace-switch 5";
+      "Mod+6" = "workspace-switch 6";
+      "Mod+7" = "workspace-switch 7";
+      "Mod+8" = "workspace-switch 8";
+      "Mod+9" = "workspace-switch 9";
 
-      "Mod+Shift+1" = "window-move-to-workspace:1";
-      "Mod+Shift+2" = "window-move-to-workspace:2";
-      "Mod+Shift+3" = "window-move-to-workspace:3";
-      "Mod+Shift+4" = "window-move-to-workspace:4";
-      "Mod+Shift+5" = "window-move-to-workspace:5";
-      "Mod+Shift+6" = "window-move-to-workspace:6";
-      "Mod+Shift+7" = "window-move-to-workspace:7";
-      "Mod+Shift+8" = "window-move-to-workspace:8";
-      "Mod+Shift+9" = "window-move-to-workspace:9";
+      "Mod+Shift+1" = "window-move-to-workspace 1";
+      "Mod+Shift+2" = "window-move-to-workspace 2";
+      "Mod+Shift+3" = "window-move-to-workspace 3";
+      "Mod+Shift+4" = "window-move-to-workspace 4";
+      "Mod+Shift+5" = "window-move-to-workspace 5";
+      "Mod+Shift+6" = "window-move-to-workspace 6";
+      "Mod+Shift+7" = "window-move-to-workspace 7";
+      "Mod+Shift+8" = "window-move-to-workspace 8";
+      "Mod+Shift+9" = "window-move-to-workspace 9";
 
       # Column consume/expel
       "Mod+Alt+Right" = "window-consume-or-expel-right";
@@ -244,10 +274,12 @@ let
       "Mod+Alt+KP_Left" = "window-consume-or-expel-left";
 
       # Widths
-      "Mod+R" = "window-cycle-width"; # niri: switch-preset-column-width
-      "Mod+Equal" = "window-modify-width:0.1";
-      "Mod+Minus" = "window-modify-width:-0.1";
-      # niri's set-window-height binds dropped: scrolling layout has no height control.
+      "Mod+R" = "window-cycle-primary-extent"; # niri: switch-preset-column-width
+      "Mod+Equal" = "window-modify-primary-extent 0.1";
+      "Mod+Minus" = "window-modify-primary-extent -0.1";
+      # niri: set-window-height; umbriel only has height control for floating windows.
+      "Mod+Shift+Equal" = "window-modify-height-up 0.1";
+      "Mod+Shift+Minus" = "window-modify-height-down -0.1";
 
       # Scroll wheel navigation
       "Mod+WheelDown" = "window-focus-right";
@@ -258,20 +290,38 @@ let
       # Session
       "Ctrl+Alt+Delete" = "session-quit";
 
-      # Screenshots (via Noctalia; niri used built-in screenshot actions)
-      "Print" = "spawn:noctalia msg screenshot-fullscreen";
-      "Ctrl+Print" = "spawn:noctalia msg screenshot-region";
-      # no window-scoped screenshot command yet for Mod+Print
+      # Screenshots (via Noctalia; niri used built-in screenshot actions).
+      # niri copies every screenshot to the clipboard and saves it to disk,
+      # except Shift+Print which is clipboard-only.
+      "Print" = "spawn noctalia msg screenshot-fullscreen --copy-to-clipboard --save-to-file";
+      "Ctrl+Print" = "spawn noctalia msg screenshot-region --copy-to-clipboard --save-to-file";
+      "Shift+Print" = "spawn noctalia msg screenshot-fullscreen --copy-to-clipboard --no-save-to-file";
+      "Mod+Print" = "spawn noctalia msg screenshot-window --copy-to-clipboard --save-to-file";
 
-      # Media / brightness keys
-      "XF86AudioRaiseVolume" = "spawn:wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+";
-      "XF86AudioLowerVolume" = "spawn:wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-";
-      "XF86AudioMute" = "spawn:wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
-      "XF86Launch6" = "spawn:wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle";
-      "XF86TouchpadOff" = "spawn:sh -c \"notify-send 'Touchpad Off'\"";
-      "XF86TouchpadOn" = "spawn:sh -c \"notify-send 'Touchpad On'\"";
-      "XF86MonBrightnessUp" = "spawn:brightnessctl s 5%+";
-      "XF86MonBrightnessDown" = "spawn:brightnessctl s 5%-";
+      # Media / brightness keys (niri marks these allow-when-locked=true)
+      "XF86AudioRaiseVolume" = {
+        action = "spawn wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+";
+        allow_when_locked = true;
+      };
+      "XF86AudioLowerVolume" = {
+        action = "spawn wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-";
+        allow_when_locked = true;
+      };
+      "XF86AudioMute" = {
+        action = "spawn wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
+        allow_when_locked = true;
+      };
+      "XF86Launch6" = "spawn wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle";
+      "XF86TouchpadOff" = "spawn sh -c \"notify-send 'Touchpad Off'\"";
+      "XF86TouchpadOn" = "spawn sh -c \"notify-send 'Touchpad On'\"";
+      "XF86MonBrightnessUp" = {
+        action = "spawn brightnessctl s 5%+";
+        allow_when_locked = true;
+      };
+      "XF86MonBrightnessDown" = {
+        action = "spawn brightnessctl s 5%-";
+        allow_when_locked = true;
+      };
     };
   };
 in
