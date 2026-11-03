@@ -19,6 +19,7 @@
       karakeep
       ntfy
       overlays
+      llama
       radicale
       webdav
       rclone-mount
@@ -35,6 +36,11 @@
       shared-modules
       degoog
       alma-packages
+      llama
+      {
+        home.llama.model = "LiquidAI/LFM3-1.7B-GGUF";
+        home.llama.modelFile = "LFM3-1.7B-QAD-Q4_0.gguf";
+      }
       { programs.pi-coding-agent.sudoAskpass = false; }
     ];
   };

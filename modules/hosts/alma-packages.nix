@@ -12,6 +12,7 @@ _: {
       wireguard-tools
       dnsutils
       podman-compose
+      llama-cpp
     ];
   };
 }
