@@ -37,10 +37,9 @@
       degoog
       alma-packages
       llama
-      {
-        home.llama.model = "LiquidAI/LFM3-1.7B-GGUF";
-        home.llama.modelFile = "LFM3-1.7B-QAD-Q4_0.gguf";
-      }
+      # Router mode: started with no model argument, llama-server acts as a
+      # router that loads/unloads models listed in its download cache
+      # (LLAMA_CACHE, default ~/.cache/llama.cpp) on demand.
       { programs.pi-coding-agent.sudoAskpass = false; }
     ];
   };
