@@ -66,6 +66,7 @@ _: {
             # pi-web-access resolves its config dir via XDG_CONFIG_HOME (~/.config/pi),
             # NOT ~/.pi — writing here is what actually disables the search curator.
             ".config/pi/web-search.json".text = builtins.toJSON {
+              provider = "searxng";
               searxngBaseUrl = "http://alma.n:8056";
               commands.curator = false;
               autoOpenBrowser = false;
