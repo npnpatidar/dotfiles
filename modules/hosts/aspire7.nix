@@ -53,6 +53,11 @@
       removable-media
       filen-desktop
       kdeconnect
+      llama
+      # Router mode: started with no model argument, llama-server acts as a
+      # router that loads/unloads models listed in its download cache
+      # (LLAMA_CACHE, default ~/.cache/llama.cpp) on demand.
+      { home.llama.gpu = true; }
       mcp
       notebooklm
       noctalia
