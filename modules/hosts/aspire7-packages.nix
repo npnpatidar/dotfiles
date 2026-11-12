@@ -58,6 +58,9 @@ _: {
       freemind
       drawio
       llama-cpp-cuda
+      pdfcraft
+      wordcraft
+      gridcraft
       # Binary tools from the llama.cpp overlay (CUDA build, matches home.llama.gpu)
     ];
   };
