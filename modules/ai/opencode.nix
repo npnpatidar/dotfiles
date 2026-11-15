@@ -1,25 +1,45 @@
 _: {
-  flake.nixosModules.opencode = { config, ... }: {
-    sops.secrets.opencode_password_web = {
-      mode = "0600";
-      owner = "${config.systemConstants.default_user}";
-    };
+  flake.nixosModules.opencode =
+    { config, ... }:
+    {
+      # Value is a systemd-style assignment, e.g.
+      # `OPENCODE_SERVER_PASSWORD=...`. The opencode-server unit in the home
+      # module copies the value into OpenCode's own service config.
+      sops.secrets.opencode_password_web = {
+        mode = "0600";
+        owner = "${config.systemConstants.default_user}";
+      };
 
-    services.oink.domains = [
-      {
-        domain = "${config.systemConstants.domain_name}";
-        subdomain = "opencode";
-      }
-    ];
+      services.oink.domains = [
+        {
+          domain = "${config.systemConstants.domain_name}";
+          subdomain = "opencode";
+        }
+      ];
 
-    services.nginx.virtualHosts."opencode.${config.systemConstants.domain_name}" = {
-      enableACME = true;
-      forceSSL = true;
-      locations."/" = {
-        proxyPass = "http://127.0.0.1:4096";
+      services.nginx.virtualHosts."opencode.${config.systemConstants.domain_name}" = {
+        enableACME = true;
+        forceSSL = true;
+        locations."/" = {
+          # The background service the TUI/CLI already uses (see
+          # `opencode service status`). Proxying that same server keeps one set
+          # of sessions, events, and permission prompts for the terminal, the
+          # web UI, and the mobile app.
+          proxyPass = "http://127.0.0.1:49374";
+          # PTY terminals (`/api/pty/*/connect`) need the upgrade headers.
+          proxyWebsockets = true;
+          extraConfig = ''
+            # `/api/event` is server-sent events, so don't buffer it.
+            proxy_buffering off;
+            proxy_cache off;
+            proxy_read_timeout 1h;
+            proxy_send_timeout 1h;
+            # Image and file attachments are uploaded through this endpoint.
+            client_max_body_size 50m;
+          '';
+        };
       };
     };
-  };
 
   flake.homeModules.opencode =
     {
@@ -136,16 +156,11 @@ _: {
           };
         };
 
-        web = {
-          enable = false;
-          extraArgs = [
-            "--hostname"
-            "0.0.0.0"
-            "--port"
-            "4096"
-          ];
-          environmentFile = "/run/secrets/opencode_password_web";
-        };
+        # The terminal and the app must talk to the same server, otherwise
+        # sessions and live events do not line up. That server is OpenCode's
+        # own background service (used by the TUI/CLI), exposed through nginx,
+        # so no separate `opencode serve` unit is declared here.
+        web.enable = false;
 
         # OpenCode 2 no longer reads tui.json; it uses cli.json, which the app
         # manages itself. Stylix still sets programs.opencode.tui, which only
@@ -186,6 +201,43 @@ _: {
           - Priority 1=min 2=low 3=default 4=high 5=urgent; use 4+ only for failures or blocked-on-owner
           - Keep title under 10 words, message under 30 words
         '';
+      };
+
+      # Start the background service at boot, so the nginx vhost is reachable
+      # from the phone without opening a terminal first. The password is kept in
+      # sync with the sops secret, which is a `KEY=VALUE` line.
+      systemd.user.services.opencode-server = {
+        Unit = {
+          Description = "OpenCode background server";
+          After = [ "network.target" ];
+        };
+
+        Service = {
+          Type = "oneshot";
+          RemainAfterExit = true;
+          ExecStart = lib.getExe (
+            pkgs.writeShellApplication {
+              name = "opencode-server-start";
+              text = ''
+                line=$(head -n1 /run/secrets/opencode_password_web)
+                case "$line" in
+                  *=*) want=${"$"}{line#*=} ;;
+                  *) want=$line ;;
+                esac
+
+                have=$(${pkgs.opencode}/bin/opencode service get password 2>/dev/null || true)
+                if [ -n "$want" ] && [ "$want" != "$have" ]; then
+                  ${pkgs.opencode}/bin/opencode service set password "$want"
+                fi
+
+                exec ${pkgs.opencode}/bin/opencode service start
+              '';
+            }
+          );
+          # No ExecStop: the daemon belongs to OpenCode's own service manager,
+          # so stopping this unit must not kill the server a TUI is using.
+        };
+        Install.WantedBy = [ "default.target" ];
       };
 
       home.packages = with pkgs; [
