@@ -54,8 +54,9 @@ _: {
           autoshare = false;
           default_agent = "build";
 
-          # Restrict providers to OpenCode Go + NVIDIA. Deny-all first, then
-          # explicit allows (ordered statements, later allow overrides deny).
+          # Restrict providers to OpenCode Go, NVIDIA and the OpenCode Console.
+          # Deny-all first, then explicit allows (ordered statements, later
+          # allow overrides deny).
           policies = [
             {
               action = "provider.use";
@@ -72,7 +73,17 @@ _: {
               resource = "nvidia";
               effect = "allow";
             }
+            {
+              action = "provider.use";
+              resource = "opencode";
+              effect = "allow";
+            }
           ];
+
+          # Console catalog drifts; regenerate this snapshot with:
+          #   curl -s https://opencode.ai/inference/v1/models | python3 -c '...disable non-free...'
+          # (see git history for the snippet)
+          providers.opencode.models = builtins.fromJSON (builtins.readFile ./opencode-console-models.json);
 
           share = "manual";
 
