@@ -61,19 +61,24 @@ _: {
             # --- core general web ---
             # google cse is the best relevance here (bing fails on niche/coding
             # queries and tops results with weak matches), so weight it highest.
+            # rate caps spread requests so bulk automated querying doesn't trip
+            # upstream 429s and cascade into "Suspended: too many requests".
             {
               name = "google cse";
               disabled = false;
               weight = 2.0;
+              rate = "1/10s";
             }
             {
               name = "bing";
               disabled = false;
               weight = 1.0;
+              rate = "1/3s";
             }
             {
               name = "brave";
               weight = 1.5;
+              rate = "1/5s";
             }
             {
               name = "mojeek";
@@ -103,10 +108,12 @@ _: {
               shortcut = "w";
               base_url = "https://wikipedia.org/";
               weight = 0.5;
+              rate = "1/2s";
             }
             {
               name = "wikidata";
               weight = 0.5;
+              rate = "1/2s";
             }
             {
               name = "wolframalpha";
@@ -265,6 +272,21 @@ _: {
         enableACME = true;
         forceSSL = true;
         enableTinyauth = true;
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:8056";
+        };
+      };
+
+      # WireGuard-only, no SSO: automation clients on the VPN hit this directly
+      # (http://10.100.0.1:8080). wg0 is 10.100.0.1/24 so this never listens on
+      # the LAN interface.
+      nginx.virtualHosts."searx-wg.${config.systemConstants.domain_name}" = {
+        listen = [
+          {
+            addr = "10.100.0.1";
+            port = 8080;
+          }
+        ];
         locations."/" = {
           proxyPass = "http://127.0.0.1:8056";
         };
