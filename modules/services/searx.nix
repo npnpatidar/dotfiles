@@ -40,7 +40,9 @@ _: {
           };
           search = {
             autocomplete = "startpage";
-            safe_search = 0;
+            # safe_search=1 filters adult-content results, which leaked into
+            # bing-only degraded windows during automated queries.
+            safe_search = 1;
             # "all" avoids regional bias (en-IN surfaced Indian LinkedIn/college
             # noise in google cse results); agent queries want neutral results.
             default_lang = "all";
@@ -125,6 +127,7 @@ _: {
               name = "archwiki";
               engine = "archlinux";
               shortcut = "aw";
+              disabled = true; # persistent "parsing error" upstream
             }
             {
               name = "nixos wiki";
@@ -181,7 +184,7 @@ _: {
             }
             {
               name = "lib.rs";
-              disabled = false;
+              disabled = true; # blocks datacenter IPs: "access denied"
             }
             {
               name = "hackernews";
