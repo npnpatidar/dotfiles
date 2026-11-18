@@ -54,6 +54,26 @@ _: {
           autoshare = false;
           default_agent = "build";
 
+          # Restrict providers to OpenCode Go + NVIDIA. Deny-all first, then
+          # explicit allows (ordered statements, later allow overrides deny).
+          policies = [
+            {
+              action = "provider.use";
+              resource = "*";
+              effect = "deny";
+            }
+            {
+              action = "provider.use";
+              resource = "opencode-go";
+              effect = "allow";
+            }
+            {
+              action = "provider.use";
+              resource = "nvidia";
+              effect = "allow";
+            }
+          ];
+
           share = "manual";
 
           permission = {
