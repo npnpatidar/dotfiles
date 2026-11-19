@@ -83,7 +83,6 @@ dotfiles/
 | `stylix` | danth/stylix | System-wide theming |
 | `zen-browser` | 0xc000022070/zen-browser-flake | Zen browser (Firefox fork) |
 | `dictation` | owner/dictation (follows nixpkgs) | Voice dictation |
-| `hermes-agent` | NousResearch/hermes-agent | AI agent framework |
 | `quadlet-nix` | SEIAROTg/quadlet-nix | Declarative Podman containers |
 | `simple-nixos-mailserver` | gitlab:simple-nixos-mailserver/nixos-mailserver/main (follows nixpkgs) | Full mail server |
 | `nix-index-database` | Mic92/nix-index-database | `nix-locate` database |
@@ -149,7 +148,6 @@ yamtrack                # Media tracker (movies/TV/anime/manga/games/books)
 scrob                   # Media tracking app (Jellyfin/Plex/Emby -> Trakt-style lists)
 opencode                # AI coding agent web access
 omniroute               # Unified AI gateway (see §7.10)
-inputs.hermes-agent.nixosModules.default   # AI agent framework
 llama                   # LLM server (llama.cpp)
 ```
 
@@ -522,10 +520,6 @@ Dynamic DNS updater — creates DNS records for subdomains. The base module decl
 - Exposes `/mnt/filen/` with CRUD permissions
 - Auth via env file (`webdav_environment_file` sops secret → `{env}WEBDAV_USERNAME` / `{env}WEBDAV_PASSWORD`)
 
-#### 5.4.18 Hermes Agent (alma)
-- AI agent framework from NousResearch — imported via the upstream `inputs.hermes-agent.nixosModules.default`
-- Default model: `qwen/qwen3.5-122b-a10b` via NVIDIA
-- Messaging capabilities enabled
 
 #### 5.4.19 KDE Connect (aspire7)
 - Phone integration (notifications, clipboard, file transfer, remote input)
@@ -684,9 +678,6 @@ Primary coding assistant configuration:
 - Container port published on `127.0.0.1` only
 
 ### 7.7 Agent Zero (alma)
-- AI agent framework (Quadlet container, joins the shared `services` bridge network)
-- Accessible at `agento.example.com`
-- ⚠️ **Not in the alma host config** — the module file exists but `alma.nix` does not enable the `agent-zero` entry (the upstream `inputs.hermes-agent.nixosModules.default` covers the agent framework)
 
 ### 7.8 Voxtype (aspire7)
 - Local voice-to-type using ONNX runtime
@@ -976,7 +967,7 @@ Creation rules: `shared.yaml` encrypted for the admin key + both host keys; `alm
 ### `ci-build.yaml`
 - Manual trigger (workflow_dispatch); pushes to the `npnpatidar` Cachix cache (skip-if-unchanged via a narinfo check on the store-path hash)
 - **Full closure builds** (`build-system`): NixOS toplevel + home-manager activation for both aspire7 (x86_64) and alma (aarch64) — already-cached store-path hashes are skipped so re-runs only upload new derivations (cache-quota friendly)
-- **Targeted heavy packages** (`build-packages`): llama.cpp CPU (x86_64 + aarch64), llama.cpp CUDA (aspire7), karakeep (aarch64), hermes-agent (aarch64), NVIDIA userspace driver + kernel modules (aspire7), neovim plugins (x86_64 + aarch64)
+- **Targeted heavy packages** (`build-packages`): llama.cpp CPU (x86_64 + aarch64), llama.cpp CUDA (aspire7), karakeep (aarch64), NVIDIA userspace driver + kernel modules (aspire7), neovim plugins (x86_64 + aarch64)
 - Uses DeterminateSystems/nix-installer-action + cachix-action
 
 ### `lint.yaml`
@@ -1189,7 +1180,6 @@ modules/services/containerization-aspire7.nix
 modules/services/containerization.nix
 modules/services/filen-sync.nix
 modules/services/gitea.nix
-modules/services/hermes-agent.nix
 modules/services/immich.nix
 modules/services/karakeep.nix
 modules/services/kdeconnect.nix

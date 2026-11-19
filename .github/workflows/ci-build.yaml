@@ -81,9 +81,6 @@ jobs:
           - label: karakeep (aarch64 / alma)
             runner: ubuntu-24.04-arm
             attr: packages.aarch64-linux.karakeep
-          - label: hermes-agent (aarch64 / alma)
-            runner: ubuntu-24.04-arm
-            attr: nixosConfigurations.alma.config.services.hermes-agent.package
           - label: NVIDIA driver (userspace, aspire7)
             runner: ubuntu-latest
             attr: nixosConfigurations.aspire7.config.boot.kernelPackages.nvidiaPackages.production
