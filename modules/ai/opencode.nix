@@ -138,9 +138,6 @@ _: {
             ];
           };
 
-          plugin = [
-          ];
-
           instructions = [
             "~/.config/opencode/AGENTS.md"
           ];
@@ -204,6 +201,11 @@ _: {
           ## Output Style
           - Keep completion messages short and direct
           - After actions, report only a concise status and changed files
+
+          ## Locale
+          - Time zone is Asia/Kolkata (IST, UTC+05:30) — render all times/dates in IST
+          - Use Indian English spelling and INR (₹) for currency
+          - The system clock is already set to IST; never convert to other zones unless asked
 
           ## Git Rules
           - Never auto-commit or auto-push
@@ -269,6 +271,14 @@ _: {
           # so stopping this unit must not kill the server a TUI is using.
         };
         Install.WantedBy = [ "default.target" ];
+      };
+
+      # `/pricing` slash command (local plugin, versioned here rather than
+      # living only in ~/.config/opencode/plugins). Single self-contained file:
+      # the plugin loader cannot resolve relative imports and treats every
+      # *.ts in the plugins root as a plugin.
+      xdg.configFile."opencode/plugins/pricing.ts" = {
+        source = ./opencode-plugin-pricing/pricing.ts;
       };
 
       home.packages = with pkgs; [
