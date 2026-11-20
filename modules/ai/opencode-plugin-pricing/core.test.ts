@@ -74,8 +74,15 @@ const model = (id: string, inP: number, outP: number, cache: number, cap: number
   assert.match(body[1], /a-very-long-model-name-here-xx/)
   assert.ok(!/[│┌┐]/.test(out), "no box-drawing characters")
   assert.ok(lines.every((l) => !l.endsWith("  ")), "no trailing double spaces")
-  assert.ok(out.includes("pool now: rolling 10%  weekly 20%  monthly 30%  monthly resets 2026-12-17T13:16:47.000Z"))
+  assert.ok(out.includes("pool now: rolling 10%  weekly 20%  monthly 30%  monthly resets 17 Dec 2026 18:46 IST"))
   assert.match(out, /70% pool left ≈ 140,000 requests of this shape on b/, "capacity line with commas")
+}
+
+// --- render: unparseable reset time is passed through verbatim ---
+{
+  const rows = rank([model("m", 1, 1, 0, 10)], 100, 0, 10)
+  const out = renderTable(rows, { monthly: { percent: 5, resetsAt: "not-a-date" } }, 100, 0, 10)
+  assert.ok(out.includes("monthly resets not-a-date"), "raw timestamp kept")
 }
 
 // --- render without usage: no footer, no crash ---

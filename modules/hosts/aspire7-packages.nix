@@ -62,6 +62,7 @@ _: {
       wordcraft
       gridcraft
       opencode-desktop
+      (import ../../pkgs/browse.nix { inherit pkgs; })
       # Binary tools from the llama.cpp overlay (CUDA build, matches home.llama.gpu)
     ];
   };

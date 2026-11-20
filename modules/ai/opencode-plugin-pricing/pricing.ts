@@ -61,6 +61,22 @@ const commas = (n: number) => n.toLocaleString("en-US")
 const perRequest = (n: number) => "$" + n.toFixed(5)
 const percent = (n: number) => n.toFixed(5)
 
+/** Render an ISO timestamp as IST, passing anything unparseable through. */
+const resetTime = (iso: string) => {
+  const d = new Date(iso)
+  if (Number.isNaN(d.getTime())) return iso
+  const s = new Intl.DateTimeFormat("en-GB", {
+    timeZone: "Asia/Kolkata",
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  }).format(d)
+  return `${s.replace(",", "")} IST`
+}
+
 interface Column {
   h: string
   w: number
@@ -109,7 +125,7 @@ export function renderTable(rows: Row[], usage: Usage | undefined, inTok: number
       `weekly ${weekly?.percent ?? "?"}%`,
       `monthly ${monthly?.percent ?? "?"}%`,
     ]
-    if (monthly?.resetsAt) parts.push(`monthly resets ${monthly.resetsAt}`)
+    if (monthly?.resetsAt) parts.push(`monthly resets ${resetTime(monthly.resetsAt)}`)
     out.push(`pool now: ${parts.join("  ")}`)
 
     const cheapest = rows[0]
@@ -140,13 +156,15 @@ export default Plugin.define({
   id: "naresh.pricing",
   async setup(ctx) {
     let apiKey: string | undefined
-    try {
-      const conn = await ctx.integration.connection.active("opencode")
-      if (conn) {
+    for (const provider of ["opencode-go", "opencode"]) {
+      try {
+        const conn = await ctx.integration.connection.active(provider)
+        if (!conn) continue
         const cred = await ctx.integration.connection.resolve(conn)
         apiKey = (cred as any)?.apiKey ?? (cred as any)?.key
-      }
-    } catch {}
+        if (apiKey) break
+      } catch {}
+    }
 
     await ctx.command.transform((editor) => {
       editor.add({

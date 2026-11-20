@@ -11,6 +11,16 @@ _: {
         { id = "fnaicdffflnofjppbagibeoednhnbjhg"; }
         { id = "kgcjekpmcjjogibpjebkhaanilehneje"; }
         {
+          # OpenCode Browse: lets agents drive this browser (needs `browse`, see pkgs/browse.nix)
+          id = "mfnicocicmmlkpjnaffgihfjhdgjkdjg";
+          crxPath = builtins.fetchurl {
+            name = "opencode-browse.crx";
+            url = "https://clients2.google.com/service/update2/crx?response=redirect&prodversion=141.0&acceptformat=crx2,crx3&x=id%3Dmfnicocicmmlkpjnaffgihfjhdgjkdjg%26uc";
+            sha256 = "sha256-+RJH/KxrrWeD38EDb9tP8bm832J0yiilDWX/8XAGLu0=";
+          };
+          version = "0.1.5";
+        }
+        {
           id = "ocaahdebbfolfmndjeplogmgcagdmblk";
           crxPath = builtins.fetchurl {
             name = "chromium-web-store.crx";

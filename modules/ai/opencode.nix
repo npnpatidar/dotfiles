@@ -87,6 +87,16 @@ _: {
 
           share = "manual";
 
+          # `browse`: lets agents drive the real Chromium browser via the
+          # OpenCode Browse extension (see pkgs/browse.nix).
+          mcp.servers.browse = {
+            type = "local";
+            command = [
+              "browse"
+              "mcp"
+            ];
+          };
+
           permission = {
             tool = {
               "*" = "allow";

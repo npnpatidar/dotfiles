@@ -24,6 +24,7 @@
       printing
       flatpak
       appimage
+      opencode
       niri
       umbriel
       removable-media
