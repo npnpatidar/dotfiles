@@ -61,6 +61,7 @@ _: {
       pdfcraft
       wordcraft
       gridcraft
+      opencode-desktop
       # Binary tools from the llama.cpp overlay (CUDA build, matches home.llama.gpu)
     ];
   };
