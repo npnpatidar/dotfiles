@@ -17,6 +17,7 @@
       syncthing-aspire7
       containerization-aspire7
       immich
+      postgresql-18
       sound
       fonts
       bluetooth
