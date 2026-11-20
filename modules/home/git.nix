@@ -2,7 +2,6 @@ _: {
   flake.homeModules.git = { config, pkgs, ... }: {
     home.packages = with pkgs; [
       hub
-      meld
       git-graph
       lazygit
       gh
@@ -35,8 +34,11 @@ _: {
             dt = "difftool";
             l = "log --graph --abbrev-commit --decorate --date=relative --all";
           };
-          diff.tool = "meld";
-          difftool.prompt = false;
+          diff.tool = "difftastic";
+          difftool = {
+            prompt = false;
+            difftastic.cmd = ''difft "$LOCAL" "$REMOTE"'';
+          };
           init.defaultBranch = "main";
         };
       };

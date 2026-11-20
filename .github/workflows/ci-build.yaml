@@ -69,15 +69,12 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - label: llama.cpp CPU (x86_64)
-            runner: ubuntu-latest
-            attr: packages.x86_64-linux.llama-cpp
           - label: llama.cpp CUDA (aspire7)
             runner: ubuntu-latest
-            attr: packages.x86_64-linux.llama-cpp-cuda
+            attr: homeConfigurations."naresh@aspire7".config.home.llama.package
           - label: llama.cpp CPU (aarch64 / alma)
             runner: ubuntu-24.04-arm
-            attr: packages.aarch64-linux.llama-cpp
+            attr: homeConfigurations."naresh@alma".config.home.llama.package
           - label: karakeep (aarch64 / alma)
             runner: ubuntu-24.04-arm
             attr: packages.aarch64-linux.karakeep

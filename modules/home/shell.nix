@@ -36,7 +36,6 @@ let
     list-gen = "sudo nix-env --list-generations --profile /nix/var/nix/profiles/system";
     delete-gen = "sudo nix-env --delete-generations --profile /nix/var/nix/profiles/system";
     clear-boot = "sudo /run/current-system/bin/switch-to-configuration boot";
-    gdt = "meld .";
     fzf = "fzf --preview 'bat --color=always --style=numbers --line-range=:500 {}'";
     np = "nix-shell -p";
     y = "yazi";

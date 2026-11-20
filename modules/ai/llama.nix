@@ -57,9 +57,20 @@
           default = [ ];
           description = "Additional llama-server arguments.";
         };
+
+        package = lib.mkOption {
+          type = lib.types.package;
+          readOnly = true;
+          description = ''
+            llama.cpp package served by the user service. Exposed so CI can
+            build (and cache) the exact derivation each host uses.
+          '';
+        };
       };
 
       config = {
+
+        home.llama.package = llamaCpp;
 
         sops.secrets.llama_cpp_api_key = {
           mode = "0600";

@@ -748,8 +748,8 @@ Free coding-agent CLI installed via `modules/ai/freebuff.nix` (part of shared-mo
 
 ### 8.2 Git (`git.nix`)
 - **User:** GitHub account name / `systemConstants.git_email` (both resolved live from constants — not hardcoded literals)
-- **Diff:** difftastic (`side-by-side-show-both`, dark, always color); difftool meld, no prompt
-- **Tools:** lazygit, gh, hub, meld, git-graph, onefetch, git-lfs
+- **Diff:** difftastic (`side-by-side-show-both`, dark, always color); git `difftool` uses difftastic, no prompt
+- **Tools:** lazygit, gh, hub, git-graph, onefetch, git-lfs
 - **gh CLI auth:** `~/.config/gh/hosts.yml` generated from the sops `gh_token` secret (sops template, mode 0600, user = GitHub account name, git_protocol ssh)
 - **Aliases:** ci, co, s, aa, p, d, ds, dt, l
 - `init.defaultBranch = main`

@@ -77,11 +77,6 @@ _: {
           name = "ranger";
           settings.NoDisplay = "true";
         };
-        "org.gnome.Meld" = {
-          exec = "meld %F";
-          name = "Meld";
-          settings.NoDisplay = "true";
-        };
         "gparted" = {
           exec = "";
           name = "Gparted";
