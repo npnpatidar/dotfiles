@@ -7,8 +7,8 @@
 # - Mod+Q close / Mod+F maximize are redefined here (umbriel defaults differ).
 # - niri's per-window height binds map to umbriel's floating-window height actions
 #   (umbriel's scrolling layout has no height presets).
-# - Alt+Tab app-filtered switching (niri recent-windows) has no umbriel equivalent;
-#   Noctalia handles the session actions instead.
+# - niri's recent-windows list has no direct umbriel action; Alt+Tab uses
+#   window-focus-last and the other binds open Noctalia's window switcher.
 let
   umbrielConfig = {
     include = {
@@ -84,9 +84,11 @@ let
     # Mirrors niri window-rule entries. app_id/title are regexes.
     window_rule = [
       # niri: window-rule { background-effect { blur true; xray false; } }
+      # xray false = blur the live content behind a window, which is
+      # blur_optimized = false here; true would reuse the cached wallpaper blur.
       {
         blur = true;
-        blur_optimized = true;
+        blur_optimized = false;
       }
       # All windows open maximized by default
       {
@@ -150,13 +152,40 @@ let
         match.namespace = "^noctalia-(bar-.+|notification|dock|panel|attached-panel|osd|launcher-overlay|desktop-widget-.+)$";
         blur = true;
         blur_ignore_alpha = 0.5;
+        blur_popups = true;
+      }
+      # niri: layer-rule { match namespace="^noctalia-(background|launcher-overlay|dock)-.*$"; background-effect { blur true; xray false; } }
+      {
+        match.namespace = "^noctalia-(background|launcher-overlay|dock)-.*$";
+        blur = true;
+        blur_optimized = false;
       }
     ];
 
     keybinds = {
-      # niri: Mod+Shift+Slash { show-hotkey-overlay; }
+      # niri: Mod+H / Mod+Shift+Slash { show-hotkey-overlay; }
       "Mod+H" = "cheatsheet-toggle";
       "Mod+Shift+Slash" = "cheatsheet-toggle";
+
+      # niri recent-windows binds. Umbriel has no recent-window list action:
+      # Alt+Tab jumps to the previous window, the others open Noctalia's
+      # MRU window switcher (workspace-scoped where niri filtered by app-id).
+      "Alt+Tab" = {
+        action = "window-focus-last";
+        repeat = false;
+      };
+      "Alt+Shift+Tab" = {
+        action = "spawn noctalia msg window-switcher all reverse";
+        repeat = false;
+      };
+      "Alt+grave" = {
+        action = "spawn noctalia msg window-switcher workspace";
+        repeat = false;
+      };
+      "Alt+Shift+grave" = {
+        action = "spawn noctalia msg window-switcher workspace reverse";
+        repeat = false;
+      };
 
       # Windows
       "Mod+Q" = "window-close";
@@ -170,7 +199,8 @@ let
       "Mod+B" = "spawn zen-beta";
       "Mod+Shift+B" = "spawn acer-battery-toggle";
       "Mod+E" = "spawn nemo";
-      "Mod+S" = "spawn noctalia msg panel-toggle launcher /fs";
+      # Quotes preserve niri's trailing space in the launcher's initial query.
+      "Mod+S" = "spawn noctalia msg panel-toggle launcher '/fs '";
       "Mod+Y" = "spawn kitty -e yazi";
       "Mod+W" = "spawn bitwarden";
 
@@ -287,8 +317,8 @@ let
       "Mod+Shift+WheelDown" = "workspace-next";
       "Mod+Shift+WheelUp" = "workspace-previous";
 
-      # Session
-      "Ctrl+Alt+Delete" = "session-quit";
+      # Session — niri's quit exits immediately, so skip umbriel's confirmation.
+      "Ctrl+Alt+Delete" = "session-quit skip-confirmation";
 
       # Screenshots (via Noctalia; niri used built-in screenshot actions).
       # niri copies every screenshot to the clipboard and saves it to disk,
@@ -342,6 +372,7 @@ in
         pamixer
         wireplumber
         grim
+        nemo-with-extensions
       ];
     };
 

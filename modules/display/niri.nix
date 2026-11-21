@@ -115,6 +115,8 @@ let
     }
 
     binds {
+      // Mod+H matches the umbriel cheatsheet bind; keep both shortcuts in sync.
+      Mod+H { show-hotkey-overlay; }
       Mod+Shift+Slash { show-hotkey-overlay; }
 
       Mod+Q { close-window; }
