@@ -23,7 +23,7 @@ _: {
         ---
         address: 10.100.0.1
         port: 8476
-        behindProxy: false
+        behindProxy: true
         directory: ${config.systemConstants.home_directory}
         permissions: CRUD
         users:
@@ -70,10 +70,25 @@ _: {
         nginx.virtualHosts."dav.${config.systemConstants.domain_name}" = {
           enableACME = true;
           forceSSL = true;
-          locations."/" = {
-            proxyPass = "http://localhost:8475";
+          # One public entry point, two backends: /filen/ -> Filen share,
+          # /home/ -> home share (WireGuard peers only).
+          locations."/filen/" = {
+            proxyPass = "http://127.0.0.1:8475/";
             proxyWebsockets = true;
-            extraConfig = "client_max_body_size 1G;";
+            extraConfig = ''
+              client_max_body_size 1G;
+              proxy_set_header X-Forwarded-Prefix /filen;
+            '';
+          };
+          locations."/home/" = {
+            proxyPass = "http://127.0.0.1:8476/";
+            proxyWebsockets = true;
+            extraConfig = ''
+              allow 10.100.0.0/24;
+              deny all;
+              client_max_body_size 1G;
+              proxy_set_header X-Forwarded-Prefix /home;
+            '';
           };
         };
       };
