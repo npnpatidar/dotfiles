@@ -290,6 +290,9 @@ _: {
       xdg.configFile."opencode/plugins/pricing.ts" = {
         source = ./opencode-plugin-pricing/pricing.ts;
       };
+      xdg.configFile."opencode/pricing-usage.py" = {
+        source = ./opencode-plugin-pricing/usage.py;
+      };
 
       home.packages = with pkgs; [
         nixpkgs-fmt
