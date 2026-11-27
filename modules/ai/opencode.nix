@@ -134,8 +134,10 @@ _: {
 
           compaction = {
             auto = true;
-            prune = true;
-            reserved = 5000;
+            keep = {
+              tokens = 8000;
+            };
+            buffer = "25%";
           };
 
           watcher = {
