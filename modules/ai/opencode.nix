@@ -258,11 +258,13 @@ _: {
         };
 
         Service = {
-          Type = "oneshot";
-          RemainAfterExit = true;
-          ExecStart = lib.getExe (
+          # Run the server in the foreground so systemd supervises it: a oneshot
+          # + `opencode service start` reported "active (exited)" even when the
+          # daemon had died, leaving clients unable to connect with no restart.
+          Type = "simple";
+          ExecStartPre = lib.getExe (
             pkgs.writeShellApplication {
-              name = "opencode-server-start";
+              name = "opencode-server-password";
               text = ''
                 line=$(head -n1 /run/secrets/opencode_password_web)
                 case "$line" in
@@ -274,13 +276,14 @@ _: {
                 if [ -n "$want" ] && [ "$want" != "$have" ]; then
                   ${pkgs.opencode}/bin/opencode service set password "$want"
                 fi
-
-                exec ${pkgs.opencode}/bin/opencode service start
               '';
             }
           );
-          # No ExecStop: the daemon belongs to OpenCode's own service manager,
-          # so stopping this unit must not kill the server a TUI is using.
+          ExecStart = "${lib.getExe pkgs.opencode} serve --service";
+          Restart = "on-failure";
+          RestartSec = "5s";
+          KillSignal = "SIGTERM";
+          TimeoutStopSec = "30s";
         };
         Install.WantedBy = [ "default.target" ];
       };
