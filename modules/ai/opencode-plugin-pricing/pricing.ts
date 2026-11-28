@@ -154,9 +154,10 @@ export function estimateSpend(row: LocalUsage, models: any[]): number | null {
 }
 
 /** Render per-day, per-model local token usage with token-price estimates. */
-export function renderLocalUsage(rows: LocalUsage[], models: any[], days: number): string {
+export function renderLocalUsage(rows: LocalUsage[], models: any[], window: string | number): string {
   const out: string[] = []
-  out.push(`DAILY TOKEN USAGE (IST, last ${days} days; est$ = catalog token prices, Go pool actuals come from the meters above)`)
+  const label = typeof window === "number" ? `last ${window} days` : window
+  out.push(`DAILY TOKEN USAGE (IST, ${label}; est$ = catalog token prices, Go pool actuals come from the meters above)`)
   if (!rows.length) {
     out.push("  no local usage in this window")
     return out.join("\n")
@@ -333,7 +334,11 @@ export default Plugin.define({
           const profile = args[0] || DEFAULT_PROFILE
           const planArg = args[1]
           const plan = (planArg === "go-plus" || planArg === "go-teams" || planArg === "go" ? planArg : "go") as Plan
-          const days = Math.max(1, Math.min(30, parseInt(args[2] ?? "7", 10) || 7))
+          const windowArg = args[2] ?? "month"
+          const numericDays = Math.max(1, Math.min(30, parseInt(windowArg, 10) || 7))
+          const usageArg = windowArg === "month" ? "month" : String(numericDays)
+          const today = new Intl.DateTimeFormat("en-IN", { timeZone: "Asia/Kolkata", day: "numeric", month: "short" }).format(new Date())
+          const windowLabel = windowArg === "month" ? `this month (1–${today})` : `last ${numericDays} days`
           const [inTok, cacheTok, outTok] = profile.split("/").map((n: string) => parseInt(n, 10) || 0)
 
           const models = (await goGet("models")).data ?? []
@@ -344,14 +349,14 @@ export default Plugin.define({
 
           let local: LocalUsage[] = []
           try {
-            local = JSON.parse(execFileSync("python3", [LOCAL_USAGE_SCRIPT, String(days)], { encoding: "utf8", timeout: 20_000, maxBuffer: 10_000_000 }))
+            local = JSON.parse(execFileSync("python3", [LOCAL_USAGE_SCRIPT, usageArg], { encoding: "utf8", timeout: 20_000, maxBuffer: 10_000_000 }))
           } catch {}
 
           const rows = rank(models, inTok, cacheTok, outTok, plan)
           let table = rows.length
             ? renderTable(rows, usage, inTok, cacheTok, outTok, plan)
             : "No Go models with monthly caps found in the models response."
-          table += "\n\n" + renderLocalUsage(local, models, days)
+          table += "\n\n" + renderLocalUsage(local, models, windowLabel)
 
           await ctx.session.prompt({
             ...prompt,

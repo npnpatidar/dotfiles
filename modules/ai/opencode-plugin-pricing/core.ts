@@ -143,9 +143,10 @@ export function estimateSpend(row: LocalUsage, models: any[]): number | null {
 }
 
 /** Render per-day, per-model local token usage with token-price estimates. */
-export function renderLocalUsage(rows: LocalUsage[], models: any[], days: number): string {
+export function renderLocalUsage(rows: LocalUsage[], models: any[], window: string | number): string {
   const out: string[] = []
-  out.push(`DAILY TOKEN USAGE (IST, last ${days} days; est$ = catalog token prices, Go pool actuals come from the meters above)`)
+  const label = typeof window === "number" ? `last ${window} days` : window
+  out.push(`DAILY TOKEN USAGE (IST, ${label}; est$ = catalog token prices, Go pool actuals come from the meters above)`)
   if (!rows.length) {
     out.push("  no local usage in this window")
     return out.join("\n")

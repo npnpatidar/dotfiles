@@ -133,6 +133,7 @@ const model = (id: string, inP: number, outP: number, cache: number, cap: number
   assert.equal(estimateSpend({ ...rows[0], model: "unknown" }, models), null, "unknown model -> no estimate")
   const out = renderLocalUsage(rows, models, 7)
   assert.ok(out.includes("last 7 days"), "window in header")
+  assert.ok(renderLocalUsage(rows, models, "this month (1–24 Nov)").includes("this month (1–24 Nov)"), "custom window label")
   assert.ok(out.includes("22 Nov"), "day label")
   assert.ok(out.includes("go"), "provider tag")
   assert.ok(out.includes("$0.36"), "estimated spend row")

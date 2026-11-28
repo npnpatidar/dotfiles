@@ -3,7 +3,7 @@
 
 Read-only and fast: session_v2 holds compact per-session totals (the raw
 session_message blobs are multi-GB and far too slow for a slash command).
-Prints JSON to stdout. Usage: python3 pricing-usage.py [days]  (default 7)
+Prints JSON to stdout. Usage: python3 pricing-usage.py [days|month]  (default: month)
 
 Caveat: a session is attributed to its start day (IST) and last recorded model.
 """
@@ -16,12 +16,15 @@ import sqlite3
 import sys
 from zoneinfo import ZoneInfo
 
-DAYS = int(sys.argv[1]) if len(sys.argv) > 1 else 7
+DAYS = sys.argv[1] if len(sys.argv) > 1 else "month"
 DB = os.path.expanduser("~/.local/share/opencode/opencode.db")
 IST = ZoneInfo("Asia/Kolkata")
-since = int(
-    (dt.datetime.now(dt.timezone.utc) - dt.timedelta(days=DAYS)).timestamp() * 1000
-)
+now_ist = dt.datetime.now(IST)
+if DAYS == "month":
+    since_dt = now_ist.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+else:
+    since_dt = now_ist - dt.timedelta(days=int(DAYS))
+since = int(since_dt.astimezone(dt.timezone.utc).timestamp() * 1000)
 
 agg = collections.defaultdict(
     lambda: dict(
